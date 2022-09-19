@@ -1,43 +1,39 @@
 package Models.level;
 
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Functional class for generating a map with pseudo random amount of nodes in it. Takes a size parameter that represents
- * the border size of the map.
+ * the border size of the map. Generates a LevelMap with a random amount of nodes and edges connecting those. There is
+ * always a path from a starting coordinate to an end coordinate.
  */
 public class LevelMapGenerator {
 
-    private static final int NODE_TO_FLOOR_DECREMENT = 10; //TODO: fix for dynamic size
-    private static final int NODE_TO_CEILING_DECREMENT = 4;
-
     public static LevelMap generate(int size) {
-        int[][] nodeMatrix = placePathNodesFromStartToEnd(size);
-        LevelMap levelMap = new LevelMap();
-        levelMap.setNodeMatrix(nodeMatrix);
+        LevelMap levelMapWithPath = placePathNodesFromStartToEnd(size);
+        placeBranchingNodesInLevelMap(levelMapWithPath);
+        placeBranchingNodesInLevelMap(levelMapWithPath);
 
+        return levelMapWithPath;
+    }
 
+    private static LevelMap placePathNodesFromStartToEnd(int size) {
+        CardinalDirection borderForStartingNode = CardinalDirection.getRandomDirection();
+        CardinalDirection borderForEndingNode = CardinalDirection.getOpposite(borderForStartingNode);
+
+        int[] startingCoordinate = addNodeToBorderOn(borderForStartingNode, size);
+        int[] endingCoordinate = addNodeToBorderOn(borderForEndingNode, size);
+
+        int[][] mainNodePath = placeNodesBetweenStartAndEnd(size*size, startingCoordinate, endingCoordinate);
+
+        LevelMap levelMap = new LevelMap(mainNodePath, startingCoordinate, endingCoordinate, size);
+        levelMap.addCoordinatePath(mainNodePath);
 
         return levelMap;
     }
 
-    private static int generateMaxAmountOfNodes(int maxPossibleAmountOfNodes) {
-        return ThreadLocalRandom.current().nextInt(maxPossibleAmountOfNodes - NODE_TO_FLOOR_DECREMENT, maxPossibleAmountOfNodes - NODE_TO_CEILING_DECREMENT);
-    }
-
-    private static int[][] placePathNodesFromStartToEnd(int size) {
-        Direction2D borderForStartingNode = Direction2D.getRandomDirection();
-        int[] startingCoordinate = addNodeToBorderOnMatrix(borderForStartingNode, size);
-
-        Direction2D borderForEndingNode = Direction2D.getOpposite(borderForStartingNode);
-        int[] endingCoordinate = addNodeToBorderOnMatrix(borderForEndingNode, size);
-
-        int[][] nodeMatrix = placeNodesBetweenStartAndEndInMatrix(size, startingCoordinate, endingCoordinate);
-
-        return nodeMatrix;
-    }
-
-    private static int[] addNodeToBorderOnMatrix(Direction2D borderDirection, int sideLength){
+    private static int[] addNodeToBorderOn(CardinalDirection borderDirection, int sideLength){
         int x = 0;
         int y = 0;
 
@@ -65,47 +61,73 @@ public class LevelMapGenerator {
         return coordinate;
     }
 
-    private static int[][] placeNodesBetweenStartAndEndInMatrix(int size, int[] startingCoordinate, int[] endingCoordinate) {
-        boolean hasFoundExit = false;
+    private static int[][] placeNodesBetweenStartAndEnd(int maxAmountOfNodes, int[] startCoordinate, int[] endCoordinate) {
         int[] directionalVector = new int[2];
-        int[][] nodeMatrix = new int[size][size];
+        int[][] mainPath = new int[maxAmountOfNodes][2];
 
-        nodeMatrix[startingCoordinate[0]][startingCoordinate[1]] = 1;
+        int[] startingCoordinate = startCoordinate.clone();
+        int[] endingCoordinate = endCoordinate.clone();
 
-        for(int i = 0; i <= generateMaxAmountOfNodes(size*size); i++){
+        mainPath[0][0] = startingCoordinate[0];
+        mainPath[0][1] = startingCoordinate[1];
+
+        int i = 1;
+        for( ; i <= maxAmountOfNodes; i++){
             directionalVector[0] = startingCoordinate[0] - endingCoordinate[0];
             directionalVector[1] = startingCoordinate[1] - endingCoordinate[1];
 
             if (Math.abs(directionalVector[0]) > Math.abs(directionalVector[1])) {
                 if(directionalVector[0] > 0) {
-                    nodeMatrix[startingCoordinate[0] - 1][startingCoordinate[1]] = 1; //We walk "left".
+                    mainPath[i][0] = startingCoordinate[0] - 1; //We walk "left".
+                    mainPath[i][1] = startingCoordinate[1];
                     startingCoordinate[0]--;
                 } else {
-                    nodeMatrix[startingCoordinate[0] + 1][startingCoordinate[1]] = 1; //We walk "right".
+                    mainPath[i][0] = startingCoordinate[0] + 1; //We walk "right".
+                    mainPath[i][1] = startingCoordinate[1];
                     startingCoordinate[0]++;
                 }
             } else {
                 if(directionalVector[1] > 0) {
-                    nodeMatrix[startingCoordinate[0]][startingCoordinate[1] - 1] = 1; //We walk "up".
+                    mainPath[i][0] = startingCoordinate[0]; //We walk "up".
+                    mainPath[i][1] = startingCoordinate[1] - 1;
                     startingCoordinate[1]--;
                 } else {
-                    nodeMatrix[startingCoordinate[0]][startingCoordinate[1] + 1] = 1; //We walk "down".
+                    mainPath[i][0] = startingCoordinate[0]; //We walk "down".
+                    mainPath[i][1] = startingCoordinate[1] + 1;
                     startingCoordinate[1]++;
                 }
             }
 
             if(startingCoordinate[0] == endingCoordinate[0] && startingCoordinate[1] == endingCoordinate[1]){
-                hasFoundExit = true;
                 break;
             }
         }
 
-        if (hasFoundExit){
-            return nodeMatrix;
-        } else
-            return new int[size][size];
+        return  Arrays.copyOf(mainPath, i+1);
     }
 
-    private static void placeNodesInBranchesInMatrix() {
+    /*
+     * Takes a random node in the main path. Takes another random end node. Makes a path between them.
+     */
+    private static void placeBranchingNodesInLevelMap(LevelMap levelMap) {
+        int index = ThreadLocalRandom.current().nextInt(0, levelMap.getMainNodePathCoordinates().length);
+        int[] startCoordinate = levelMap.getMainNodePathCoordinates()[index];
+
+        int size = levelMap.getMapSize();
+        int[] endCoordinate = new int[2];
+
+        int indexY = ThreadLocalRandom.current().nextInt(0, size);
+        int indexX = ThreadLocalRandom.current().nextInt(0, size);
+
+        endCoordinate[0] = indexX;
+        endCoordinate[1] = indexY;
+
+        int[][] nodePath = placeNodesBetweenStartAndEnd(size*size, startCoordinate, endCoordinate);
+
+        levelMap.addCoordinatePath(nodePath);
+    }
+
+    private static LevelMap placeEdgesForMainPath(LevelMap levelMap){
+        return null;
     }
 }

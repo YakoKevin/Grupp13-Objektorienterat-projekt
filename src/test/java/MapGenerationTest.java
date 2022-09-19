@@ -8,9 +8,9 @@ public class MapGenerationTest {
 
     @Test
     public void doesLevelMapFunctionReturnALevelMap() {
-        byte size = 5;
+        byte size = 6;
         LevelMap levelMap = LevelMapGenerator.generate(size);
-        int[][] nodeMatrix = levelMap.getNodeMatrix();
+        int[][] nodeMatrix = levelMap.getMatrixOfMap();
         StringBuilder matrixString = new StringBuilder();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -18,7 +18,7 @@ public class MapGenerationTest {
             }
             matrixString.append("\n");
         }
-        System.out.println(matrixString.toString());
+        System.out.println(matrixString);
         assertNotNull(levelMap);
     }
 
