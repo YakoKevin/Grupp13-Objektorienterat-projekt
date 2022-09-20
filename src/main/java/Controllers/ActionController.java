@@ -20,11 +20,6 @@ public class ActionController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             gamePanel.movementInYAxis(-5);
             System.out.println("W");
@@ -41,5 +36,10 @@ public class ActionController implements KeyListener {
             gamePanel.movementInXAxis(5);
             System.out.println("D");
         }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

@@ -9,6 +9,7 @@ public class GameApp {
     public GameApp(){
         gamePanel = new GamePanel();
         gameView = new GameView(gamePanel);
+        gamePanel.setFocusable(true);
         gamePanel.requestFocus();
     }
 }
