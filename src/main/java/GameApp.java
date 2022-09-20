@@ -1,10 +1,14 @@
+import Views.GamePanel;
 import Views.GameView;
 
-
-// TEMPORÄRT KLASS NAMN
 public class GameApp {
 
-    public static void main(String[] args) {
-        GameView.start(args);
+    private GameView gameView;
+    private GamePanel gamePanel;
+
+    public GameApp(){
+        gamePanel = new GamePanel();
+        gameView = new GameView(gamePanel);
+        gamePanel.requestFocus();
     }
 }
