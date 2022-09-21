@@ -1,6 +1,6 @@
 package Controllers;
 
-import Views.GamePanel;
+import Models.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
