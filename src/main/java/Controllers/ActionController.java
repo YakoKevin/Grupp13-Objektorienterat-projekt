@@ -1,37 +1,45 @@
 package Controllers;
 
-import com.almasb.fxgl.app.GameApplication;
-import com.almasb.fxgl.app.GameSettings;
-import javafx.scene.input.KeyCode;
+import Models.GamePanel;
 
-import static com.almasb.fxgl.dsl.FXGL.inc;
-import static com.almasb.fxgl.dsl.FXGL.onKey;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class ActionController {
-/*
-    void listeners(){
-        @Override
-        protected void initInput() {
-            onKey(KeyCode.D, () -> {
-                player.translateX(5); // move right 5 pixels
-                inc("pixelsMoved", +5);
-            });
-            onKey(KeyCode.A, () -> {
-                player.translateX(-5); // move left 5 pixels
-                inc("pixelsMoved", +5);
-            });
+public class ActionController implements KeyListener {
 
-            onKey(KeyCode.W, () -> {
-                player.translateY(-5); // move up 5 pixels
-                inc("pixelsMoved", +5);
-            });
+    private GamePanel gamePanel;
 
-            onKey(KeyCode.S, () -> {
-                player.translateY(5); // move down 5 pixels
-                inc("pixelsMoved", +5);
-            });
+    public ActionController(GamePanel gamePanel){
+        this.gamePanel = gamePanel;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+            gamePanel.movementInYAxis(-5);
+            System.out.println("W");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_A) {
+            gamePanel.movementInXAxis(-5);
+            System.out.println("A");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_S) {
+            gamePanel.movementInYAxis(5);
+            System.out.println("S");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_D) {
+            gamePanel.movementInXAxis(5);
+            System.out.println("D");
         }
     }
 
- */
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }
