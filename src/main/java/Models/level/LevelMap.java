@@ -42,8 +42,8 @@ public class LevelMap {
         return mainNodePathCoordinates.clone();
     }
 
-    public int[][] getMapAsMatrix() {
-        return mapGraph.asMatrix();
+    public void placeDoorsAtNode(int x, int y, CardinalDirection... directionList){
+        mapGraph.placeDoorsAtNode(x, y, directionList);
     }
 
     public void addNode(int x, int y){
@@ -72,13 +72,32 @@ public class LevelMap {
         }
 
         private int[][] asMatrix(){
-            int[][] matrix = new int[size][size];
+            int[][] matrix = new int[size*2-1][size*2-1];
 
             for (MapNode node : nodes) {
-                matrix[node.coordinateX][node.coordinateY] = 1;
+                matrix[node.coordinateX*2][node.coordinateY*2] = 2;
+                for(CardinalDirection door : node.doors) {
+                    switch (door) {
+                        case EAST -> matrix[node.coordinateX*2 + 1][node.coordinateY*2] = 1;
+                        case NORTH -> matrix[node.coordinateX*2][node.coordinateY*2 - 1] = 1;
+                        case SOUTH -> matrix[node.coordinateX*2][node.coordinateY*2 + 1] = 1;
+                        case WEST -> matrix[node.coordinateX*2 - 1][node.coordinateY*2] = 1;
+                    }
+
+                }
             }
 
             return matrix;
+        }
+
+        public void placeDoorsAtNode(int x, int y, CardinalDirection... directionList){
+            for(MapNode node : nodes){
+                if(node.coordinateX == x && node.coordinateY == y) {
+                    for (CardinalDirection direction : directionList) {
+                        node.addDoorDirection(direction);
+                    }
+                }
+            }
         }
     }
 

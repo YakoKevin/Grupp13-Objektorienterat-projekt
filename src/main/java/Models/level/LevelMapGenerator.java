@@ -14,6 +14,7 @@ public class LevelMapGenerator {
         LevelMap levelMapWithPath = placePathNodesFromStartToEnd(size);
         placeBranchingNodesInLevelMap(levelMapWithPath);
         placeBranchingNodesInLevelMap(levelMapWithPath);
+        placeEdgesForMainPath(levelMapWithPath);
 
         return levelMapWithPath;
     }
@@ -128,6 +129,22 @@ public class LevelMapGenerator {
     }
 
     private static LevelMap placeEdgesForMainPath(LevelMap levelMap){
+        for(int i = 0; i < levelMap.getMainNodePathCoordinates().length - 1; i++) {
+            int[][] coord = levelMap.getMainNodePathCoordinates();
+            if(coord[i][0] + 1 == levelMap.getMainNodePathCoordinates()[i+1][0]){
+                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.EAST);
+                System.out.println("EAST door added");
+            } else if(coord[i][0] - 1 == levelMap.getMainNodePathCoordinates()[i+1][0]){
+                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.WEST);
+                System.out.println("WEST door added");
+            } else if(coord[i][1] + 1 == levelMap.getMainNodePathCoordinates()[i+1][1]){
+                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.SOUTH);
+                System.out.println("SOUTH door added");
+            } else if(coord[i][1] - 1 == levelMap.getMainNodePathCoordinates()[i+1][1]){
+                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.NORTH);
+                System.out.println("NORTH door added");
+            }
+        }
         return null;
     }
 }

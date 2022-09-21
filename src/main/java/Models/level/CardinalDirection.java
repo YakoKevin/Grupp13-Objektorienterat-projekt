@@ -32,4 +32,33 @@ public enum CardinalDirection {
         }
         return EAST;
     }
+
+
+    public static CardinalDirection getEastWestDirection(int start, int end) {
+        int diff = start - end;
+
+        if(diff < 0) {
+            return EAST;
+        }else
+            return WEST;
+    }
+
+    public static CardinalDirection getNorthSouthDirection(int start, int end) {
+        int diff = start - end;
+
+        if(diff < 0) {
+            return SOUTH;
+        } else
+            return NORTH;
+
+    }
+
+    public static int getAdditionToCoordinate(CardinalDirection cardinalDirection) {
+        switch (cardinalDirection) {
+            case SOUTH, EAST -> {
+                return 1;
+            }
+        }
+        return -1;
+    }
 }
