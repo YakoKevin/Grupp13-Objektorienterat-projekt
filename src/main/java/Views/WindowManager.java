@@ -2,6 +2,7 @@ package Views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 
 public class WindowManager {
 
@@ -19,6 +20,14 @@ public class WindowManager {
 
     public void addPanel(JPanel panel) {
         this.panel = panel;
+    }
+
+    public void addKeyListener(KeyListener listener) {
+        try {
+            this.panel.addKeyListener(listener);
+        } catch(NullPointerException e) {
+            System.err.println("[WindowManager]: Error! Tried to add KeyListener before JPanel");
+        }
     }
 
     public void createWindow() {
