@@ -1,19 +1,21 @@
 package Models;
 
-abstract public class CharacterModel {
+abstract public class Character {
     private double x,y;
     public double healthPoints;
     private double attackPoints;
     private int keyItem;
     private double movementSpeed;
+    private double attackRange;
 
-    public CharacterModel(double healthPoints, double attackPoints, int keyItem, double movementSpeed){
+    public Character(double healthPoints, double attackPoints, int keyItem, double movementSpeed, double attackRange){
         this.healthPoints=healthPoints;
         this.attackPoints=healthPoints;
         this.keyItem=keyItem;
         this.movementSpeed=movementSpeed;
         this.x=0;
         this.y=0;
+        this.attackRange = attackRange;
     }
 
     public double getX(){
@@ -35,6 +37,7 @@ abstract public class CharacterModel {
         return attackPoints;
     }
 
+    public void setHealthPoints(double hp){}
     public double getHealthPoints() {
         return healthPoints;
     }
@@ -46,4 +49,6 @@ abstract public class CharacterModel {
     public int getKeyItem() {
         return keyItem;
     }
+
+    public double getAttackRange(){return attackRange;}
 }

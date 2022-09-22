@@ -57,6 +57,10 @@ public class ActionController implements KeyListener {
         else if (e.getKeyCode() == KeyEvent.VK_D) {
             System.out.println("RELEASED D");
         }
+        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            System.out.println("Player attacking ");
+            // player.attack() liksom
+        }
         gamePanel.setMoving(false);
     }
 }
