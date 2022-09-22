@@ -3,18 +3,30 @@ package Models.level;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
+//TODO: Fix so that the rest utilizes Coordinate instead of int[]. Fix why < 4 in size is problematic.
+
 /**
  * Functional class for generating a map with pseudo random amount of nodes in it. Takes a size parameter that represents
  * the border size of the map. Generates a LevelMap with a random amount of nodes and edges connecting those. There is
  * always a path from a starting coordinate to an end coordinate.
  */
-public class LevelMapGenerator {
+public class SquareMap {
 
     public static LevelMap generate(int size) {
+        if(size < 4)
+        {
+            size = 4;
+        }
         LevelMap levelMapWithPath = placePathNodesFromStartToEnd(size);
         placeBranchingNodesInLevelMap(levelMapWithPath);
         placeBranchingNodesInLevelMap(levelMapWithPath);
-        placeEdgesForMainPath(levelMapWithPath);
+        placeBranchingNodesInLevelMap(levelMapWithPath);
+        placeBranchingNodesInLevelMap(levelMapWithPath);
+        placeBranchingNodesInLevelMap(levelMapWithPath);
+        placeBranchingNodesInLevelMap(levelMapWithPath);
+        placeBranchingNodesInLevelMap(levelMapWithPath);
+        placeEdgesForSortedPath(levelMapWithPath);
+        placeEdgesRandomlyForNodes(levelMapWithPath);
 
         return levelMapWithPath;
     }
@@ -104,7 +116,7 @@ public class LevelMapGenerator {
             }
         }
 
-        return  Arrays.copyOf(mainPath, i+1);
+        return  Arrays.copyOf(mainPath, i+1); //Trunking of the array to only have length of the path length.
     }
 
     /*
@@ -128,23 +140,49 @@ public class LevelMapGenerator {
         levelMap.addCoordinatePath(nodePath);
     }
 
-    private static LevelMap placeEdgesForMainPath(LevelMap levelMap){
+    private static void placeEdgesForSortedPath(LevelMap levelMap){
         for(int i = 0; i < levelMap.getMainNodePathCoordinates().length - 1; i++) {
             int[][] coord = levelMap.getMainNodePathCoordinates();
             if(coord[i][0] + 1 == levelMap.getMainNodePathCoordinates()[i+1][0]){
                 levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.EAST);
-                System.out.println("EAST door added");
             } else if(coord[i][0] - 1 == levelMap.getMainNodePathCoordinates()[i+1][0]){
                 levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.WEST);
-                System.out.println("WEST door added");
             } else if(coord[i][1] + 1 == levelMap.getMainNodePathCoordinates()[i+1][1]){
                 levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.SOUTH);
-                System.out.println("SOUTH door added");
             } else if(coord[i][1] - 1 == levelMap.getMainNodePathCoordinates()[i+1][1]){
                 levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.NORTH);
-                System.out.println("NORTH door added");
             }
         }
-        return null;
+    }
+
+    public static void placeEdgesRandomlyForNodes(LevelMap levelMap){
+        for(int i = 0; i < 15; i++){
+            Coordinate[] nodeCoordinates = levelMap.getNodesCoordinates();
+            int randomIndex = ThreadLocalRandom.current().nextInt(0, nodeCoordinates.length);
+            CardinalDirection randomDirection = CardinalDirection.getRandomDirection();
+            
+            switch (randomDirection) {
+                case WEST -> {
+                    if(nodeCoordinates[randomIndex].getX() != 0 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX() - 1, nodeCoordinates[randomIndex].getY())){
+                        levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
+                    }
+                }
+                case SOUTH -> {
+                    if(nodeCoordinates[randomIndex].getY() != levelMap.getMapSize() - 1 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX(), nodeCoordinates[randomIndex].getY() + 1)){
+                        levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
+                    }
+                }
+                case EAST -> {
+                    if(nodeCoordinates[randomIndex].getX() != levelMap.getMapSize() - 1 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX() + 1, nodeCoordinates[randomIndex].getY())){
+                        levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
+                    }
+                }
+                case NORTH -> {
+                    if(nodeCoordinates[randomIndex].getY() != 0 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX(), nodeCoordinates[randomIndex].getY() - 1)){
+                        levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
+                    }
+                }
+            }
+        }
     }
 }

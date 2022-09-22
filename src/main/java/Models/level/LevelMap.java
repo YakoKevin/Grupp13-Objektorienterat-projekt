@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+//TODO: Fix so that we have an coordinate object instead of int[]?
+
 /**
  * An object for containing a node matrix, a neighbor matrix and the coordinates for a start and a finish node.
  */
@@ -22,8 +24,11 @@ public class LevelMap {
         this.size = size;
     }
 
-    public int[][] getMatrixOfMap() {
-        return mapGraph.asMatrix();
+    public int[][] getMatrixOfMap(boolean withDoors) {
+        if(withDoors) {
+            return mapGraph.asMatrixBig();
+        } else
+            return mapGraph.asMatrixSmall();
     }
 
     public int getMapSize(){
@@ -42,8 +47,16 @@ public class LevelMap {
         return mainNodePathCoordinates.clone();
     }
 
+    public Coordinate[] getNodesCoordinates() {
+        return mapGraph.getNodesCoordinates();
+    }
+
     public void placeDoorsAtNode(int x, int y, CardinalDirection... directionList){
         mapGraph.placeDoorsAtNode(x, y, directionList);
+    }
+
+    public void placeDoorsAtNode(Coordinate coordinate, CardinalDirection... directionList){
+        mapGraph.placeDoorsAtNode(coordinate.getX(), coordinate.getY(), directionList);
     }
 
     public void addNode(int x, int y){
@@ -56,6 +69,15 @@ public class LevelMap {
         }
     }
 
+    public boolean getIfCoordinateIsNode(int x, int y) {
+        int[][] mapMatrix = getMatrixOfMap(false);
+        return mapMatrix[x][y] > 0;
+    }
+
+
+    /**
+     * A graph representing the map, holding nodes and useful methods.
+     */
     private class MapGraph {
         private final ArrayList<MapNode> nodes;
 
@@ -71,7 +93,7 @@ public class LevelMap {
             return nodes.size();
         }
 
-        private int[][] asMatrix(){
+        private int[][] asMatrixBig(){
             int[][] matrix = new int[size*2-1][size*2-1];
 
             for (MapNode node : nodes) {
@@ -90,6 +112,16 @@ public class LevelMap {
             return matrix;
         }
 
+        private int[][] asMatrixSmall(){
+            int[][] matrix = new int[size][size];
+
+            for (MapNode node : nodes) {
+                matrix[node.coordinateX][node.coordinateY] = 2;
+            }
+
+            return matrix;
+        }
+
         public void placeDoorsAtNode(int x, int y, CardinalDirection... directionList){
             for(MapNode node : nodes){
                 if(node.coordinateX == x && node.coordinateY == y) {
@@ -99,7 +131,18 @@ public class LevelMap {
                 }
             }
         }
+
+        public Coordinate[] getNodesCoordinates() {
+            Coordinate[] nodesCoordinates = new Coordinate[nodes.size()];
+
+            for (int i = 0; i < nodes.size(); i++){
+                Coordinate coordniate = new Coordinate(nodes.get(i).getCoordinateX(), nodes.get(i).getCoordinateY());
+                nodesCoordinates[i] = coordniate;
+            }
+            return nodesCoordinates;
+        }
     }
+
 
     /**
      * Node class for use with levelMap. Has coordinates but also direction of connected neighbours (doors).
@@ -122,6 +165,10 @@ public class LevelMap {
 
         private int getCoordinateY() {
             return coordinateY;
+        }
+
+        private Coordinate getCoordinate(){
+            return new Coordinate(coordinateX, coordinateY);
         }
 
         private void addDoorDirection(CardinalDirection doorDirection){
