@@ -1,3 +1,7 @@
+import Models.Engine;
+
+import javax.swing.*;
+
 // TEMPORÄRT KLASS NAMN
 public class GameMain {
 
@@ -7,6 +11,15 @@ public class GameMain {
         //GameView gameView = new GameView();
 
         //ActionController actionController = new ActionController(gameView);
+
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
+                Engine.init();
+                Engine.start();
+            }
+        });
 
     }
 }
