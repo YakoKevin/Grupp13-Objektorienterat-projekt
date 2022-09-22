@@ -1,10 +1,12 @@
 package Views;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class WindowManager {
 
     private JFrame frame;
+    private JPanel panel;
     public static final int WIDTH = 800;
     public static final int HEIGHT = 450;
 
@@ -15,7 +17,12 @@ public class WindowManager {
         this.frame.setResizable(false);
     }
 
+    public void addPanel(JPanel panel) {
+        this.panel = panel;
+    }
+
     public void createWindow() {
+        this.frame.add(panel);
         this.frame.setVisible(true);
     }
 }
