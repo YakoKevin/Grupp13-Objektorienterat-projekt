@@ -10,11 +10,12 @@ public class MainMenu extends GameState {
 
     private String[] optionsMenu;
     private static final String START_GAME = "Start Game!";
+    private static final String QUIT_GAME = "Quit game";
     private int selected;
 
     public MainMenu(GameStateManager manager) {
         super(manager);
-        this.optionsMenu = new String[] {START_GAME};
+        this.optionsMenu = new String[] {START_GAME, QUIT_GAME};
         this.selected = 0;
     }
 
@@ -47,6 +48,9 @@ public class MainMenu extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.optionsMenu[selected]) {
                     case START_GAME:
+                        break;
+                    case QUIT_GAME:
+                        System.exit(0);
                         break;
                 }
                 break;
