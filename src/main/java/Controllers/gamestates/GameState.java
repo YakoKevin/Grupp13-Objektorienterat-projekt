@@ -8,10 +8,7 @@ public abstract class GameState {
 
     protected GameState(GameStateManager manager) {
         this.gameStateManager = manager;
-        this.init();
     }
-
-    protected abstract void init();
 
     protected abstract void loop();
 

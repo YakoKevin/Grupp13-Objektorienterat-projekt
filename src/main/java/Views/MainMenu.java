@@ -7,13 +7,8 @@ import java.awt.*;
 
 public class MainMenu extends GameState {
 
-    protected MainMenu(GameStateManager manager) {
+    public MainMenu(GameStateManager manager) {
         super(manager);
-    }
-
-    @Override
-    protected void init() {
-
     }
 
     @Override
@@ -23,6 +18,7 @@ public class MainMenu extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
+        graphics.fillRect(0, 0, WindowManager.WIDTH, WindowManager.HEIGHT);
 
     }
 

@@ -24,15 +24,6 @@ public class GameStateManager {
         this.states.clear();
     }
 
-    public void init() {
-        try {
-            this.states.peek().init();
-        } catch(EmptyStackException e) {
-            System.err.println("[GameStateManager]: Error! GameState stack is empty!");
-            System.exit(-1);
-        }
-    }
-
     public void loop() {
         try {
             this.states.peek().loop();
