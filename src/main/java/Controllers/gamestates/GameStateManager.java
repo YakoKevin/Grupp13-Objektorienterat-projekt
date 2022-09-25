@@ -1,6 +1,7 @@
 package Controllers.gamestates;
 
 import java.awt.Graphics;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class GameStateManager {
@@ -24,22 +25,47 @@ public class GameStateManager {
     }
 
     public void init() {
+        try {
             this.states.peek().init();
+        } catch(EmptyStackException e) {
+            System.err.println("[GameStateManager]: Error! GameState stack is empty!");
+            System.exit(-1);
+        }
     }
 
     public void loop() {
+        try {
             this.states.peek().loop();
+        } catch(EmptyStackException e) {
+            System.err.println("[GameStateManager]: Error! GameState stack is empty!");
+            System.exit(-1);
+        }
     }
 
     public void render(Graphics graphics) {
+        try {
             this.states.peek().render(graphics);
+        } catch(EmptyStackException e) {
+            System.err.println("[GameStateManager]: Error! GameState stack is empty!");
+            System.exit(-1);
+        }
     }
 
     public void keyPressed(int keyCode) {
+        try {
             this.states.peek().keyPressed(keyCode);
+        } catch(EmptyStackException e) {
+            System.err.println("[GameStateManager]: Error! GameState stack is empty!");
+            System.exit(-1);
+        }
     }
 
     public void keyReleased(int keyCode) {
+        try {
             this.states.peek().keyReleased(keyCode);
+        } catch(EmptyStackException e) {
+            System.err.println("[GameStateManager]: Error! GameState stack is empty!");
+            System.exit(-1);
+        }
     }
 }
