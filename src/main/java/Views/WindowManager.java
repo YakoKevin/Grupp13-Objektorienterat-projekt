@@ -8,6 +8,7 @@ public class WindowManager {
 
     private JFrame frame;
     private JPanel panel;
+
     public static final int WIDTH = 800;
     public static final int HEIGHT = 450;
 
@@ -20,6 +21,9 @@ public class WindowManager {
 
     public void addPanel(JPanel panel) {
         this.panel = panel;
+        this.panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.panel.setFocusable(true);
+        this.panel.requestFocusInWindow();
     }
 
     public void addKeyListener(KeyListener listener) {
@@ -32,7 +36,8 @@ public class WindowManager {
     }
 
     public void createWindow() {
-        this.frame.add(panel);
+        this.frame.setContentPane(panel);
+        this.frame.pack();
         this.frame.setVisible(true);
     }
 }

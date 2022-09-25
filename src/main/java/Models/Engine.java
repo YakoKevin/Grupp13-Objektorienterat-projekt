@@ -1,15 +1,15 @@
 package Models;
 
 import Controllers.gamestates.GameStateManager;
+import Views.MainMenu;
 import Views.WindowManager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.*;
 
 public class Engine {
 
@@ -25,6 +25,7 @@ public class Engine {
     }
 
     public static void start() {
+        gameStateManager.stackState(new MainMenu(gameStateManager));
         windowManager.addPanel(new GameScreen());
         windowManager.addKeyListener(new Keyboard());
         windowManager.createWindow();

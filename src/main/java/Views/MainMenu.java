@@ -4,15 +4,17 @@ import Controllers.gamestates.GameState;
 import Controllers.gamestates.GameStateManager;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class MainMenu extends GameState {
 
     private String[] optionsMenu;
+    private static final String START_GAME = "Start Game!";
     private int selected;
 
     public MainMenu(GameStateManager manager) {
         super(manager);
-        this.optionsMenu = new String[] {"START_GAME"};
+        this.optionsMenu = new String[] {START_GAME};
         this.selected = 0;
     }
 
@@ -35,11 +37,22 @@ public class MainMenu extends GameState {
 
     @Override
     protected void keyPressed(int keyCode) {
-
+        switch(keyCode) {
+            case KeyEvent.VK_UP:
+                if(this.selected > 0) this.selected--;
+                break;
+            case KeyEvent.VK_DOWN:
+                if(this.selected < this.optionsMenu.length-1) this.selected++;
+                break;
+            case KeyEvent.VK_ENTER:
+                switch(this.optionsMenu[selected]) {
+                    case START_GAME:
+                        break;
+                }
+                break;
+        }
     }
 
     @Override
-    protected void keyReleased(int keyCode) {
-
-    }
+    protected void keyReleased(int keyCode) {}
 }
