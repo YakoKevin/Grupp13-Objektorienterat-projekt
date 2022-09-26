@@ -2,9 +2,16 @@ package General;
 
 import Models.GamePanel;
 import Views.GameView;
+import entities.EnemyBrain;
 import entities.Player;
+import entities.Skeleton;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class GameApp implements Runnable {
 
@@ -13,12 +20,14 @@ public class GameApp implements Runnable {
     private Thread gameThread;
     private final int MAX_FPS = 120;
     private final int MAX_UPS = 200;
+    private EnemyBrain enemyBrain;
 
     private Player player;
 
     public GameApp(){
         player = new Player(200, 200);
-
+        enemyBrain = new EnemyBrain();
+        enemyBrain.addEnemies();
         gamePanel = new GamePanel(this);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);
@@ -29,6 +38,7 @@ public class GameApp implements Runnable {
 
     public void render(Graphics g){
         player.render(g);
+        enemyBrain.draw(g);
     }
 
     private void startGameLoop(){
@@ -38,6 +48,7 @@ public class GameApp implements Runnable {
 
     public void update(){
         player.update();
+        enemyBrain.update();
     }
 
     @Override

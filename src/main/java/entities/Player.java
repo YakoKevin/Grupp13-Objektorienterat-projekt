@@ -1,7 +1,5 @@
 package entities;
 
-import Models.Character;
-import Models.Enemy;
 import Models.IObservable;
 import Models.IObserver;
 import utilz.Directions;
@@ -13,8 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import static utilz.Directions.*;
-import static utilz.Directions.DOWN;
 import static utilz.PlayerConstants.*;
 
 
@@ -22,7 +18,7 @@ public class Player extends Entity implements IObservable {
 
     private BufferedImage[][] animations;
     private int animationTick = 30;
-    private int animationIndex = 30;
+    private int animationIndex = 0;
     private int animationSpeed = 30;
     private int playerAction = IDLE;
     private int playerDirection = -1;
@@ -109,8 +105,6 @@ public class Player extends Entity implements IObservable {
             }
         } catch (IOException ignored) {
         }
-
-
     }
 
     public void update(){
