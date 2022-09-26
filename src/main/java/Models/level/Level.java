@@ -1,13 +1,29 @@
 package Models.level;
 
+import Models.level.room.Room;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 
-public interface Level {
+public abstract class Level{
+    protected Room currentRoom;
+    protected ArrayList<Room> allRooms;
 
-    int[][] getCurrentRoomAsMatrix();
+    protected final LevelMap levelMap;
 
-    Iterator<Coordinate> getCurrentRoomWalls();
+    protected Level(LevelMap levelMap) {
+        this.levelMap = levelMap;
+    }
 
-    Iterator<Coordinate> getCurrentRoomObstacles();
+    public int[][] getCurrentRoomAsMatrix(){
+        return currentRoom.getRoomAsMatrix();
+    }
 
+    public Iterator<Coordinate> getCurrentRoomWalls(){
+        return currentRoom.getWalls();
+    }
+
+    public Iterator<Coordinate> getCurrentRoomObstacles(){
+        return currentRoom.getObstacles();
+    }
 }
