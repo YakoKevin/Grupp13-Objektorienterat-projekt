@@ -1,5 +1,10 @@
+package General;
+
 import Models.GamePanel;
 import Views.GameView;
+import entities.Player;
+
+import java.awt.*;
 
 public class GameApp implements Runnable {
 
@@ -9,12 +14,21 @@ public class GameApp implements Runnable {
     private final int MAX_FPS = 120;
     private final int MAX_UPS = 200;
 
+    private Player player;
+
     public GameApp(){
-        gamePanel = new GamePanel();
+        player = new Player(200, 200);
+
+        gamePanel = new GamePanel(this);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         startGameLoop();
+
+    }
+
+    public void render(Graphics g){
+        player.render(g);
     }
 
     private void startGameLoop(){
@@ -23,7 +37,7 @@ public class GameApp implements Runnable {
     }
 
     public void update(){
-        gamePanel.updateGame();
+        player.update();
     }
 
     @Override
@@ -71,5 +85,9 @@ public class GameApp implements Runnable {
                 updates = 0;
             }
         }
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

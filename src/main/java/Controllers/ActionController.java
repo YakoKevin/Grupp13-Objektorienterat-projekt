@@ -23,22 +23,22 @@ public class ActionController implements KeyListener {
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_W) {
             //gamePanel.movementInYAxis(-5);
-            gamePanel.setPlayerDirection(UP);
+            gamePanel.getGameApp().getPlayer().setPlayerDirection(UP);
             System.out.println("W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             //gamePanel.movementInXAxis(-5);
-            gamePanel.setPlayerDirection(LEFT);
+            gamePanel.getGameApp().getPlayer().setPlayerDirection(LEFT);
             System.out.println("A");
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
            // gamePanel.movementInYAxis(5);
-            gamePanel.setPlayerDirection(DOWN);
+            gamePanel.getGameApp().getPlayer().setPlayerDirection(DOWN);
             System.out.println("S");
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             //gamePanel.movementInXAxis(5);
-            gamePanel.setPlayerDirection(RIGHT);
+            gamePanel.getGameApp().getPlayer().setPlayerDirection(RIGHT);
             System.out.println("D");
         }
     }
@@ -61,6 +61,6 @@ public class ActionController implements KeyListener {
             System.out.println("Player attacking ");
             // player.attack() liksom
         }
-        gamePanel.setMoving(false);
+        gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }
 }

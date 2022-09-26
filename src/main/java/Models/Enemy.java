@@ -1,5 +1,7 @@
 package Models;
 
+import entities.Player;
+
 import java.util.Observable;
 import java.util.Observer;
 public class Enemy extends Character implements Observer {
@@ -12,10 +14,10 @@ public class Enemy extends Character implements Observer {
 
 
     public static void update(Enemy ex, Enemy ey) {
-        Player p = new Player(); //tillfälligt
-        if(p.checkIfInRange(ex)==true){ // funktionen ska nog inte kallas så här
-            ex.setHealthPoints(ex.getHealthPoints()-p.getAttackPoints());
-        }
+        //Player p = new Player(); //tillfälligt
+        //if(p.checkIfInRange(ex)==true){ // funktionen ska nog inte kallas så här
+        //    ex.setHealthPoints(ex.getHealthPoints()-p.getAttackPoints());
+        //}
 
     }
 

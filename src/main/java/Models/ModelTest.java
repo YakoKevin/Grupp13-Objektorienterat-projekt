@@ -1,11 +1,7 @@
 package Models;
 
+import entities.Player;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import java.awt.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ModelTest {
     static Enemy enemy;
@@ -14,6 +10,6 @@ public class ModelTest {
     @BeforeAll
     public static void setup (){
         enemy = new Enemy();
-        player = new Player();
+        //player = new Player();
     }
 }
