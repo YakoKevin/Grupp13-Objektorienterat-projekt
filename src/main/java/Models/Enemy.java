@@ -19,6 +19,14 @@ public class Enemy extends Character implements Observer {
 
     }
 
+    boolean checkIfDead(){
+        if(true){
+
+        }
+
+        return false;
+    }
+
     @Override
     public void update(Observable o, Object arg) {
 

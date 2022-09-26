@@ -43,7 +43,6 @@ public class Player extends Character implements IObservable{
         double diffX = (enXPos - this.getX());
         double diffY = (enYPos - this.getY());
 
-
         double atkR = p.getAttackRange();
         System.out.println(atkR);
 
