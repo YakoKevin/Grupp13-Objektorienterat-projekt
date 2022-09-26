@@ -12,15 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class SquareMap {
 
-    public static LevelMap generate(int size) {
+    public static LevelMap generate(MapSize mapSize) {
+        int size = mapSize.toInt();
         if(size < 4)
         {
             size = 4;
         }
         LevelMap levelMapWithPath = placePathNodesFromStartToEnd(size);
-        placeBranchingNodesInLevelMap(levelMapWithPath);
-        placeBranchingNodesInLevelMap(levelMapWithPath);
-        placeBranchingNodesInLevelMap(levelMapWithPath);
         placeBranchingNodesInLevelMap(levelMapWithPath);
         placeBranchingNodesInLevelMap(levelMapWithPath);
         placeBranchingNodesInLevelMap(levelMapWithPath);
@@ -33,7 +31,7 @@ public class SquareMap {
 
     private static LevelMap placePathNodesFromStartToEnd(int size) {
         CardinalDirection borderForStartingNode = CardinalDirection.getRandomDirection();
-        CardinalDirection borderForEndingNode = CardinalDirection.getOpposite(borderForStartingNode);
+        CardinalDirection borderForEndingNode = borderForStartingNode.getOpposite();
 
         int[] startingCoordinate = addNodeToBorderOn(borderForStartingNode, size);
         int[] endingCoordinate = addNodeToBorderOn(borderForEndingNode, size);
@@ -83,11 +81,14 @@ public class SquareMap {
 
         mainPath[0][0] = startingCoordinate[0];
         mainPath[0][1] = startingCoordinate[1];
-
         int i = 1;
         for( ; i <= maxAmountOfNodes; i++){
             directionalVector[0] = startingCoordinate[0] - endingCoordinate[0];
             directionalVector[1] = startingCoordinate[1] - endingCoordinate[1];
+
+            if(startingCoordinate[0] == endingCoordinate[0] && startingCoordinate[1] == endingCoordinate[1]){
+                break;
+            }
 
             if (Math.abs(directionalVector[0]) > Math.abs(directionalVector[1])) {
                 if(directionalVector[0] > 0) {
@@ -109,10 +110,6 @@ public class SquareMap {
                     mainPath[i][1] = startingCoordinate[1] + 1;
                     startingCoordinate[1]++;
                 }
-            }
-
-            if(startingCoordinate[0] == endingCoordinate[0] && startingCoordinate[1] == endingCoordinate[1]){
-                break;
             }
         }
 
@@ -156,29 +153,30 @@ public class SquareMap {
     }
 
     public static void placeEdgesRandomlyForNodes(LevelMap levelMap){
-        for(int i = 0; i < 15; i++){
+        for(int i = 0; i < 25; i++){
             Coordinate[] nodeCoordinates = levelMap.getNodesCoordinates();
             int randomIndex = ThreadLocalRandom.current().nextInt(0, nodeCoordinates.length);
             CardinalDirection randomDirection = CardinalDirection.getRandomDirection();
-            
+            int[][] mapMatrix = levelMap.getMatrixOfMap(false);
+
             switch (randomDirection) {
                 case WEST -> {
-                    if(nodeCoordinates[randomIndex].getX() != 0 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX() - 1, nodeCoordinates[randomIndex].getY())){
+                    if(nodeCoordinates[randomIndex].getX() != 0 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX() - 1, nodeCoordinates[randomIndex].getY(), mapMatrix)){
                         levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
                     }
                 }
                 case SOUTH -> {
-                    if(nodeCoordinates[randomIndex].getY() != levelMap.getMapSize() - 1 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX(), nodeCoordinates[randomIndex].getY() + 1)){
+                    if(nodeCoordinates[randomIndex].getY() != levelMap.getMapSize() - 1 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX(), nodeCoordinates[randomIndex].getY() + 1, mapMatrix)){
                         levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
                     }
                 }
                 case EAST -> {
-                    if(nodeCoordinates[randomIndex].getX() != levelMap.getMapSize() - 1 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX() + 1, nodeCoordinates[randomIndex].getY())){
+                    if(nodeCoordinates[randomIndex].getX() != levelMap.getMapSize() - 1 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX() + 1, nodeCoordinates[randomIndex].getY(), mapMatrix)){
                         levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
                     }
                 }
                 case NORTH -> {
-                    if(nodeCoordinates[randomIndex].getY() != 0 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX(), nodeCoordinates[randomIndex].getY() - 1)){
+                    if(nodeCoordinates[randomIndex].getY() != 0 && levelMap.getIfCoordinateIsNode(nodeCoordinates[randomIndex].getX(), nodeCoordinates[randomIndex].getY() - 1, mapMatrix)){
                         levelMap.placeDoorsAtNode(nodeCoordinates[randomIndex], randomDirection);
                     }
                 }
