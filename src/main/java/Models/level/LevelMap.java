@@ -35,8 +35,8 @@ public class LevelMap {
         return size;
     }
 
-    public int[] getStartCoordinate() {
-        return startCoordinate.clone();
+    public Coordinate getStartCoordinate() {
+        return new Coordinate(startCoordinate[0], startCoordinate[1]);
     }
 
     public int[] getFinishCoordinate() {
@@ -64,13 +64,12 @@ public class LevelMap {
     }
 
     public void addCoordinatePath(int[][] path){
-        for (int[] i : path) {
-            mapGraph.addNode(new MapNode(i[0], i[1]));
+        for (int[] coordinate : path) {
+            mapGraph.addNode(new MapNode(coordinate[0], coordinate[1]));
         }
     }
 
-    public boolean getIfCoordinateIsNode(int x, int y) {
-        int[][] mapMatrix = getMatrixOfMap(false);
+    public boolean getIfCoordinateIsNode(int x, int y, int[][] mapMatrix) {
         return mapMatrix[x][y] > 0;
     }
 

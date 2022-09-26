@@ -20,5 +20,9 @@ public class Coordinate {
     public int[] getTuple() {
         return new int[]{x,y};
     }
+
+    public boolean equals(Coordinate coordinate){
+        return x == coordinate.getX() && y == coordinate.getY();
+    }
 }
 
