@@ -22,45 +22,51 @@ public class ActionController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_W) {
-            //gamePanel.movementInYAxis(-5);
-            gamePanel.getGameApp().getPlayer().setPlayerDirection(UP);
-            System.out.println("W");
+            gamePanel.getGameApp().getPlayer().setUp(true);
+            System.out.println("PRESSED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
-            //gamePanel.movementInXAxis(-5);
-            gamePanel.getGameApp().getPlayer().setPlayerDirection(LEFT);
-            System.out.println("A");
+            gamePanel.getGameApp().getPlayer().setRight(true);
+            System.out.println("PRESSED A");
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
-           // gamePanel.movementInYAxis(5);
-            gamePanel.getGameApp().getPlayer().setPlayerDirection(DOWN);
-            System.out.println("S");
+            gamePanel.getGameApp().getPlayer().setDown(true);
+            System.out.println("PRESSED S");
+
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
-            //gamePanel.movementInXAxis(5);
-            gamePanel.getGameApp().getPlayer().setPlayerDirection(RIGHT);
-            System.out.println("D");
+            gamePanel.getGameApp().getPlayer().setLeft(true);
+            System.out.println("PRESSED D");
+        }
+        else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            System.out.println("Player attacking ");
+            // player.attack() liksom
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_W) {
+    public void keyReleased(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.VK_W) {
+            gamePanel.getGameApp().getPlayer().setUp(false);
             System.out.println("RELEASED W");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_A) {
+        else if (event.getKeyCode() == KeyEvent.VK_A) {
+            gamePanel.getGameApp().getPlayer().setRight(false);
             System.out.println("RELEASED A");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_S) {
+        else if (event.getKeyCode() == KeyEvent.VK_S) {
+            gamePanel.getGameApp().getPlayer().setDown(false);
             System.out.println("RELEASED S");
+
         }
-        else if (e.getKeyCode() == KeyEvent.VK_D) {
+        else if (event.getKeyCode() == KeyEvent.VK_D) {
+            gamePanel.getGameApp().getPlayer().setLeft(false);
             System.out.println("RELEASED D");
         }
-        else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("Player attacking ");
             // player.attack() liksom
         }
-        gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
+        //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }
 }

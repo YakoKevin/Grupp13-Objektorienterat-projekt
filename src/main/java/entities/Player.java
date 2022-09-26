@@ -27,20 +27,16 @@ public class Player extends Entity implements IObservable {
     private int playerAction = IDLE;
     private int playerDirection = -1;
     private boolean moving = false;
+    private boolean left;
+    private boolean right;
+    private boolean up;
+    private boolean down;
+    private float playerSpeed = 2.0f;
 
     public Player(float x, float y){
         super(x, y);
         loadAnimations();
         //super(100,20,0,5, 10);
-    }
-
-    public void setPlayerDirection(int direction){
-        this.playerDirection = direction;
-        moving = true;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
     }
 
     private void updateAnimationTick() {
@@ -62,16 +58,26 @@ public class Player extends Entity implements IObservable {
     }
 
     private void updatePosition() {
-        if (moving){
-            if (playerDirection == LEFT)
-                x -= 1;
-            else if (playerDirection == UP)
-                y -= 1;
-            else if (playerDirection == RIGHT)
-                x += 1;
-            else if (playerDirection == DOWN)
-                y += 1;
+        moving = false;
+
+        if (left && !right) {
+            x += playerSpeed;
+            moving = true;
         }
+        else if (right && !left) {
+            x -= playerSpeed;
+            moving = true;
+        }
+
+        if (up && !down) {
+            y -= playerSpeed;
+            moving = true;
+        }
+        else if (down && !up) {
+            y += playerSpeed;
+            moving = true;
+        }
+
     }
 
     private void loadAnimations() {
@@ -92,9 +98,9 @@ public class Player extends Entity implements IObservable {
     }
 
     public void update(){
+        updatePosition();
         updateAnimationTick();
         setAnimation();
-        updatePosition();
     }
 
     public void render(Graphics g){
@@ -102,10 +108,37 @@ public class Player extends Entity implements IObservable {
 
     }
 
+    public boolean isLeft() {
+        return left;
+    }
 
+    public void setLeft(boolean left) {
+        this.left = left;
+    }
 
+    public boolean isRight() {
+        return right;
+    }
 
+    public void setRight(boolean right) {
+        this.right = right;
+    }
 
+    public boolean isUp() {
+        return up;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public void setDown(boolean down) {
+        this.down = down;
+    }
 
     List<IObserver> observers;
     //List<Enemy> enemies;
