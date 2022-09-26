@@ -3,9 +3,11 @@ package Models.level;
 import Models.level.room.RoomMapFunction;
 import Models.level.room.SimpleRoom;
 
+import java.util.ArrayList;
+
 
 public class SimpleLevel extends Level{
-    private final RoomMapFunction[] roomMapFunctions = {new SimpleRoom()};
+    private final ArrayList<RoomMapFunction> roomMapFunctions = new ArrayList<>();
 
     protected SimpleLevel(LevelMap levelMap) {
         super(levelMap);
@@ -13,8 +15,9 @@ public class SimpleLevel extends Level{
     }
 
     //TODO: test right now
-    protected void createRoom(Coordinate startingCoordinate){
+    @Override
+    protected void createRoom(Coordinate coordinate){
         currentRoom = new SimpleRoom().apply(0);
-        currentRoom.setCoordinate(startingCoordinate);
+        currentRoom.setCoordinate(coordinate);
     }
 }

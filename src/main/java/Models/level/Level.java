@@ -5,6 +5,9 @@ import Models.level.room.Room;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * A facade to the level module. For interacting with the level. Has rooms, the level map.
+ */
 public abstract class Level{
     protected Room currentRoom;
     protected ArrayList<Room> allRooms;
@@ -26,4 +29,6 @@ public abstract class Level{
     public Iterator<Coordinate> getCurrentRoomObstacles(){
         return currentRoom.getObstacles();
     }
+
+    protected abstract void createRoom(Coordinate coordinate);
 }
