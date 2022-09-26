@@ -12,12 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class SquareMapGenerator {
 
-    public static LevelMap generate(MapSize mapSize) {
-        int size = mapSize.toInt();
+    public static LevelMap generate(int size) {
         if(size < 4)
-        {
             size = 4;
-        }
+
         LevelMap levelMapWithPath = placePathNodesFromStartToEnd(size);
         placeBranchingNodesInLevelMap(levelMapWithPath);
         placeBranchingNodesInLevelMap(levelMapWithPath);
@@ -31,7 +29,7 @@ public class SquareMapGenerator {
 
     private static LevelMap placePathNodesFromStartToEnd(int size) {
         CardinalDirection borderForStartingNode = CardinalDirection.getRandomDirection();
-        CardinalDirection borderForEndingNode = borderForStartingNode.getOpposite();
+        CardinalDirection borderForEndingNode = borderForStartingNode.getOppositeDirection();
 
         int[] startingCoordinate = addNodeToBorderOn(borderForStartingNode, size);
         int[] endingCoordinate = addNodeToBorderOn(borderForEndingNode, size);
