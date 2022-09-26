@@ -39,7 +39,8 @@ public class ActionController implements KeyListener {
             System.out.println("PRESSED D");
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            System.out.println("Player attacking ");
+            gamePanel.getGameApp().getPlayer().setAttack(true);
+            System.out.println("PRESSED SPACE");
             // player.attack() liksom
         }
     }
@@ -64,7 +65,7 @@ public class ActionController implements KeyListener {
             System.out.println("RELEASED D");
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            System.out.println("Player attacking ");
+            System.out.println("RELEASED SPACE");
             // player.attack() liksom
         }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa

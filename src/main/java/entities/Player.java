@@ -27,6 +27,7 @@ public class Player extends Entity implements IObservable {
     private int playerAction = IDLE;
     private int playerDirection = -1;
     private boolean moving = false;
+    private boolean attacking = false;
     private boolean left;
     private boolean right;
     private boolean up;
@@ -45,16 +46,31 @@ public class Player extends Entity implements IObservable {
         if (animationTick >= animationSpeed){
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= getSpriteAmount(playerAction))
+            if (animationIndex >= getSpriteAmount(playerAction)){
                 animationIndex = 0;
+                attacking = false;
+            }
         }
     }
 
     private void setAnimation() {
+        int startAnimation = playerAction;
+
         if (moving)
             playerAction = RUNNING;
         else
             playerAction = IDLE;
+
+        if (attacking)
+            playerAction = ATTACK;
+
+        if (startAnimation != playerAction)
+            resetAnimationTick();
+    }
+
+    private void resetAnimationTick() {
+        animationIndex = 0;
+        animationTick = 0;
     }
 
     private void updatePosition() {
@@ -114,6 +130,10 @@ public class Player extends Entity implements IObservable {
         up = false;
         right = false;
         down = false;
+    }
+
+    public void setAttack(boolean attacking){
+        this.attacking = attacking;
     }
 
     public boolean isLeft() {
