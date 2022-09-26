@@ -87,6 +87,10 @@ public class GameApp implements Runnable {
         }
     }
 
+    public void windowFocusLost(){
+        player.resetDirectionBooleans();
+    }
+
     public Player getPlayer() {
         return player;
     }

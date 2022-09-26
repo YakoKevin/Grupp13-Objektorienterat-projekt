@@ -108,6 +108,14 @@ public class Player extends Entity implements IObservable {
 
     }
 
+    public void resetDirectionBooleans(){
+        System.out.println("TEST");
+        left = false;
+        up = false;
+        right = false;
+        down = false;
+    }
+
     public boolean isLeft() {
         return left;
     }
