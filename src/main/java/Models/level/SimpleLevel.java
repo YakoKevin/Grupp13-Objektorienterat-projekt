@@ -20,9 +20,9 @@ public class SimpleLevel implements Level {
     }
 
     //TODO: test right now
-    public void createRoom(Coordinate coordinate){
+    public void createRoom(Coordinate startingCoordinate){
         currentRoom = new SimpleRoom().apply(0);
-        currentRoom.setCoordinate(coordinate);
+        currentRoom.setCoordinate(startingCoordinate);
     }
 
     @Override

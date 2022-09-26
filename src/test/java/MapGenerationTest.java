@@ -1,6 +1,6 @@
 import Models.level.LevelMap;
 import Models.level.MapSize;
-import Models.level.SquareMap;
+import Models.level.SquareMapGenerator;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,7 +10,7 @@ public class MapGenerationTest {
     @Test
     public void doesLevelMapFunctionReturnALevelMapAndDrawALevel() {
         int size = MapSize.MEDIUM.toInt();
-        LevelMap levelMap = SquareMap.generate(MapSize.MEDIUM);
+        LevelMap levelMap = SquareMapGenerator.generate(MapSize.MEDIUM);
         int[][] nodeMatrix = levelMap.getMatrixOfMap(true);
         StringBuilder matrixString = new StringBuilder();
         for (int i = 0; i < size*2-1; i++) {
@@ -37,7 +37,7 @@ public class MapGenerationTest {
 
     @Test
     public void doesLevelMapHaveCorrectDimensions() {
-        LevelMap levelMap = SquareMap.generate(MapSize.MEDIUM);
+        LevelMap levelMap = SquareMapGenerator.generate(MapSize.MEDIUM);
         assertEquals(levelMap.getMapSize(), MapSize.MEDIUM.toInt());
     }
 }

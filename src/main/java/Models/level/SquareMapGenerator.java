@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * the border size of the map. Generates a LevelMap with a random amount of nodes and edges connecting those. There is
  * always a path from a starting coordinate to an end coordinate.
  */
-public class SquareMap {
+public class SquareMapGenerator {
 
     public static LevelMap generate(MapSize mapSize) {
         int size = mapSize.toInt();
