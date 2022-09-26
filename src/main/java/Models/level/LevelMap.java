@@ -3,6 +3,7 @@ package Models.level;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 //TODO: Fix so that we have an coordinate object instead of int[]?
 
@@ -57,6 +58,10 @@ public class LevelMap {
 
     public void placeDoorsAtNode(Coordinate coordinate, CardinalDirection... directionList){
         mapGraph.placeDoorsAtNode(coordinate.getX(), coordinate.getY(), directionList);
+    }
+
+    public Iterator<CardinalDirection> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
+        return mapGraph.getNodeDoors(nodeCoordinate);
     }
 
     public void addNode(int x, int y){
@@ -139,6 +144,14 @@ public class LevelMap {
                 nodesCoordinates[i] = coordniate;
             }
             return nodesCoordinates;
+        }
+
+        public Iterator<CardinalDirection> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
+            for (MapNode node : nodes){
+                if (nodeCoordinate.equals(node.getCoordinate()))
+                    return node.getDoorDirections();
+            }
+            throw new NoSuchElementException();
         }
     }
 
