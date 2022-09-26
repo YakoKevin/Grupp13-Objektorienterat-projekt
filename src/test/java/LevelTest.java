@@ -9,7 +9,7 @@ public class LevelTest {
     public void doesTheLevelHasWalls() {
         int size = MapSize.MEDIUM.toInt();
         LevelFactory levelFactory = new LevelFactory();
-        ILevel level = levelFactory.createSimpleLevel(MapSize.MEDIUM);
+        Level level = levelFactory.createSimpleLevel(MapSize.MEDIUM);
         assertNotNull(level);
 
         int[][] nodeMatrix = level.getCurrentRoomAsMatrix();

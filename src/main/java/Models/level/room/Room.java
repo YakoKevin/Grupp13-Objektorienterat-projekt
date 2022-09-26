@@ -6,6 +6,7 @@ package Models.level.room;
 import Models.level.Coordinate;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * A class representing a Rooms main construction: walls and obstacles (and perhaps more). Returns list of the
@@ -55,5 +56,13 @@ public abstract class Room implements RoomMapFunction {
 
     public void setCoordinate(Coordinate coordinate){
         this.coordinate = coordinate;
+    }
+
+    public Iterator<Coordinate> getWalls(){
+        return wallCoordinates.iterator();
+    }
+
+    public Iterator<Coordinate> getObstacles(){
+        return obstaclesCoordinates.iterator();
     }
 }

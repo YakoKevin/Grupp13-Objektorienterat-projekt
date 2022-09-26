@@ -5,10 +5,11 @@ import Models.level.room.RoomMapFunction;
 import Models.level.room.SimpleRoom;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class SimpleLevel implements ILevel{
+public class SimpleLevel implements Level {
     private Room currentRoom;
-    private ArrayList<Room> roomsVisitedInLevel;
+    private ArrayList<Room> allRooms;
 
     private final LevelMap levelMap;
     private final RoomMapFunction[] roomMapFunctions = {new SimpleRoom()};
@@ -24,7 +25,18 @@ public class SimpleLevel implements ILevel{
         currentRoom.setCoordinate(coordinate);
     }
 
+    @Override
     public int[][] getCurrentRoomAsMatrix(){
         return currentRoom.getRoomAsMatrix();
+    }
+
+    @Override
+    public Iterator<Coordinate> getCurrentRoomWalls(){
+        return currentRoom.getWalls();
+    }
+
+    @Override
+    public Iterator<Coordinate> getCurrentRoomObstacles(){
+        return currentRoom.getObstacles();
     }
 }
