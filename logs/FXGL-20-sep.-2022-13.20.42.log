@@ -37,10 +37,10 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 13:20:35.305 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
 13:20:35.306 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/ui/css/fxgl_dark.css
 13:20:35.347 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
-13:20:35.380 [FXGL Background Thread 1 ] DEBUG GameWorld            - GameApp world initialized
+13:20:35.380 [FXGL Background Thread 1 ] DEBUG GameWorld            - Controllers.General.GameApp world initialized
 13:20:35.434 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Physics world initialized: appHeight=800, physics.ppm=50,0
 13:20:35.434 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Using strategy: BRUTE_FORCE
-13:20:35.438 [FXGL Background Thread 1 ] DEBUG GameScene            - GameApp scene initialized: 800x800
+13:20:35.438 [FXGL Background Thread 1 ] DEBUG GameScene            - Controllers.General.GameApp scene initialized: 800x800
 13:20:35.450 [FXGL Background Thread 1 ] DEBUG FXGL.DefaultMenu     - createMenuBodyGameMenu()
 13:20:35.465 [FXGL Background Thread 1 ] DEBUG FXGL.DefaultMenu     - createOptionsMenu()
 13:20:35.476 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/textures/particles/smoke.png

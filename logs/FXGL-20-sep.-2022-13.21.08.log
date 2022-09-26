@@ -37,10 +37,10 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 13:21:03.113 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
 13:21:03.113 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/ui/css/fxgl_dark.css
 13:21:03.151 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
-13:21:03.187 [FXGL Background Thread 1 ] DEBUG GameWorld            - GameApp world initialized
+13:21:03.187 [FXGL Background Thread 1 ] DEBUG GameWorld            - Controllers.General.GameApp world initialized
 13:21:03.243 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Physics world initialized: appHeight=800, physics.ppm=50,0
 13:21:03.243 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Using strategy: BRUTE_FORCE
-13:21:03.246 [FXGL Background Thread 1 ] DEBUG GameScene            - GameApp scene initialized: 800x800
+13:21:03.246 [FXGL Background Thread 1 ] DEBUG GameScene            - Controllers.General.GameApp scene initialized: 800x800
 13:21:03.258 [FXGL Background Thread 1 ] DEBUG FXGL.DefaultMenu     - createMenuBodyGameMenu()
 13:21:03.274 [FXGL Background Thread 1 ] DEBUG FXGL.DefaultMenu     - createOptionsMenu()
 13:21:03.284 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/textures/particles/smoke.png
@@ -75,7 +75,7 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 13:21:03.477 [JavaFX Application Thread] DEBUG PhysicsWorld         - Clearing physics world
 13:21:03.478 [FXGL Background Thread 1 ] DEBUG FXGLApplication      - Initializing game
 13:21:03.481 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/ui/fonts/Courier-Prime.ttf
-13:21:03.495 [FXGL Background Thread 1 ] INFO  FXGLApplication      - GameApp initialization took: 0,016 sec
+13:21:03.495 [FXGL Background Thread 1 ] INFO  FXGLApplication      - Controllers.General.GameApp initialization took: 0,016 sec
 13:21:03.526 [JavaFX Application Thread] DEBUG FXGLApplication      - Registering font factories with UI factory
 13:21:03.528 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
 13:21:03.535 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
