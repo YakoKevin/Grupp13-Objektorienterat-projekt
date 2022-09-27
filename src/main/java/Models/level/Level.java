@@ -30,5 +30,17 @@ public abstract class Level{
         return currentRoom.getObstacles();
     }
 
+    public boolean isCoordinateInObstacle(Coordinate coordinate){
+        return currentRoom.isCoordinateInObstacle(coordinate);
+    }
+
+    public boolean isCoordinateInWall(Coordinate coordinate){
+        return currentRoom.isCoordinateInWall(coordinate);
+    }
+
+    public boolean isCoordinateInWallOrObstacle(Coordinate coordinate){
+        return currentRoom.isCoordinateInWallOrObstacle(coordinate);
+    }
+
     protected abstract void createRoom(Coordinate coordinate);
 }
