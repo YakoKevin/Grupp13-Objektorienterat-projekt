@@ -1,7 +1,5 @@
 package Views;
 
-import Models.GamePanel;
-
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;

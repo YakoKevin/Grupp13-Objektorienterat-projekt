@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public enum CardinalDirection {
     NORTH, EAST, SOUTH, WEST;
 
-    public CardinalDirection getOpposite(){
+    public CardinalDirection getOppositeDirection(){
         int ordinal = this.ordinal();
         int oppositeOrdinal = (ordinal + 2) % 4;
         return CardinalDirection.values()[oppositeOrdinal];
