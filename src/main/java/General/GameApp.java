@@ -19,8 +19,9 @@ public class GameApp implements Runnable {
     private Player player;
     private LevelManager levelManager;
 
+    // SKAPA EN KLASS MED DESSA
     public final static int TILES_DEFAULT_SIZE = 32;
-    public final static float SCALE = 1.0f;
+    public final static float SCALE = 1.3f;
     public final static int TILES_IN_WIDTH = 26;
     public final static int TILES_IN_HEIGHT = 14;
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
@@ -34,7 +35,7 @@ public class GameApp implements Runnable {
     public GameApp(){
         levelManager = new LevelManager(this);
         player = new Player(200, 200, 30, 100);
-        player.loadLevelData(levelManager.getCurrentLevel());
+        //player.loadLevelData(levelManager.getCurrentLevel());
         enemyBrain = new EnemyBrain();
         enemyBrain.addEnemies();
         gamePanel = new GamePanel(this);
