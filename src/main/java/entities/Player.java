@@ -3,6 +3,7 @@ package entities;
 import Models.IObservable;
 import Models.IObserver;
 import utilz.Directions;
+import utilz.LoadSave;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -29,9 +30,10 @@ public class Player extends Entity implements IObservable {
     private boolean up;
     private boolean down;
     private float playerSpeed = 2.0f;
+    private int[][] levelData;
 
-    public Player(float x, float y){
-        super(x, y);
+    public Player(float x, float y, int width, int height){
+        super(x, y, width, height);
         loadAnimations();
         //super(100,20,0,5, 10);
     }
@@ -93,29 +95,30 @@ public class Player extends Entity implements IObservable {
     }
 
     private void loadAnimations() {
+        BufferedImage image = LoadSave.GetSprite(LoadSave.PLAYER_SPRITE);
 
-        try (InputStream is = getClass().getResourceAsStream("/player_sprites3.png")) {
-            BufferedImage image = ImageIO.read(is);
-
-            animations = new BufferedImage[6][3];
-            for (int row = 0; row < animations.length; row++){
-                for (int column = 0; column < animations[row].length; column++){
-                    animations[row][column] = image.getSubimage(row*40, column*80, 30, 80);
-                }
+        animations = new BufferedImage[6][3];
+        for (int row = 0; row < animations.length; row++){
+            for (int column = 0; column < animations[row].length; column++){
+                animations[row][column] = image.getSubimage(row*40, column*80, 30, 80);
             }
-        } catch (IOException ignored) {
         }
+    }
+
+    public void loadLevelData(int[][] levelData){
+        this.levelData = levelData;
     }
 
     public void update(){
         updatePosition();
+        updateHitbox();
         updateAnimationTick();
         setAnimation();
     }
 
     public void render(Graphics g){
         g.drawImage(animations[playerAction][animationIndex], (int) x, (int)y, null);
-
+        drawHitbox(g);
     }
 
     public void resetDirectionBooleans(){

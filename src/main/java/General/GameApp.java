@@ -1,17 +1,12 @@
 package General;
 
-import Models.GamePanel;
+import Models.level.LevelManager;
+import Views.GamePanel;
 import Views.GameView;
 import entities.EnemyBrain;
 import entities.Player;
-import entities.Skeleton;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 
 public class GameApp implements Runnable {
 
@@ -21,11 +16,25 @@ public class GameApp implements Runnable {
     private final int MAX_FPS = 120;
     private final int MAX_UPS = 200;
     private EnemyBrain enemyBrain;
-
     private Player player;
+    private LevelManager levelManager;
+
+    public final static int TILES_DEFAULT_SIZE = 32;
+    public final static float SCALE = 1.0f;
+    public final static int TILES_IN_WIDTH = 26;
+    public final static int TILES_IN_HEIGHT = 14;
+    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
+
+
+
+
 
     public GameApp(){
-        player = new Player(200, 200);
+        levelManager = new LevelManager(this);
+        player = new Player(200, 200, 30, 100);
+        player.loadLevelData(levelManager.getCurrentLevel());
         enemyBrain = new EnemyBrain();
         enemyBrain.addEnemies();
         gamePanel = new GamePanel(this);
@@ -37,8 +46,10 @@ public class GameApp implements Runnable {
     }
 
     public void render(Graphics g){
-        player.render(g);
+        levelManager.draw(g);
         enemyBrain.draw(g);
+        player.render(g);
+
     }
 
     private void startGameLoop(){
@@ -49,6 +60,7 @@ public class GameApp implements Runnable {
     public void update(){
         player.update();
         enemyBrain.update();
+        levelManager.update();
     }
 
     @Override

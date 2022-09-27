@@ -1,5 +1,10 @@
 package Models.level;
 
+import General.GameApp;
+import utilz.LoadSave;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -24,6 +29,7 @@ public class LevelMap {
         this.finishCoordinate = finishCoordinate;
         this.size = size;
     }
+
 
     public int[][] getMatrixOfMap(boolean withDoors) {
         if(withDoors) {

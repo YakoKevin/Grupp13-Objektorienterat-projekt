@@ -1,10 +1,9 @@
 package Controllers;
 
-import Models.GamePanel;
+import Views.GamePanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import static utilz.Directions.*;
 
 public class ActionController implements KeyListener {
 

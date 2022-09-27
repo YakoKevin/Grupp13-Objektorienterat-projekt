@@ -11,6 +11,7 @@ import java.util.Iterator;
 public abstract class Level{
     protected Room currentRoom;
     protected ArrayList<Room> allRooms;
+    private int [][] levelData;
 
     protected final LevelMap levelMap;
 
