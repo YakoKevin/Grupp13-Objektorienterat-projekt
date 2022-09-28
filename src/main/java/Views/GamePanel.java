@@ -2,6 +2,7 @@ package Views;
 
 import Controllers.ActionController;
 import General.GameApp;
+import Views.KeyView;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import static utilz.PlayerConstants.*;
 import static utilz.Directions.*;
@@ -18,10 +20,16 @@ import static General.GameApp.GAME_WIDTH;
 public class GamePanel extends JPanel {
 
     private GameApp gameApp;
+    private KeyView keyView;
+
     public GamePanel(GameApp gameApp){
         addKeyListener(new ActionController(this));
         this.gameApp = gameApp;
         setPanelSize();
+        int width = 50;
+
+        KeyView keyView = new KeyView(width, -30, width, 30, 0);
+
     }
 
 
@@ -43,6 +51,9 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
 
         gameApp.render(g);
+
+        g.translate(this.keyView.getX(), this.keyView.getY());
+        this.keyView.paint(g);
 
     }
 
