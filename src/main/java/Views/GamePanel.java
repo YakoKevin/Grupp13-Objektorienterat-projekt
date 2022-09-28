@@ -52,8 +52,8 @@ public class GamePanel extends JPanel {
 
         gameApp.render(g);
 
-        g.translate(this.keyView.getX(), this.keyView.getY());
-        this.keyView.paint(g);
+        // g.translate(this.keyView.getX(), this.keyView.getY());
+        // this.keyView.paint(g);
 
     }
 
