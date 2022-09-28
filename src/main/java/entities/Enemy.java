@@ -46,11 +46,11 @@ public abstract class Enemy extends Entity implements Observer {
         return enemyState;
     }
 
-    public static void update(Enemy ex, Enemy ey) {
-        //Player p = new Player(); //tillfälligt
-        //if(p.checkIfInRange(ex)==true){ // funktionen ska nog inte kallas så här
-        //    ex.setHealthPoints(ex.getHealthPoints()-p.getAttackPoints());
-        //}
+    public static void update(Enemy enemy) {
+        Player p = new Player(0,0,0,0); //tillfälligt
+        if(p.checkIfInRange(enemy)==true){ // funktionen ska nog inte kallas så här
+            enemy.setHealthPoints(enemy.getHealthPoints()-p.getAttackPoints());
+        }
 
     }
 

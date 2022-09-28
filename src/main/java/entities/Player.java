@@ -31,6 +31,8 @@ public class Player extends Entity implements IObservable {
     private boolean down;
     private float playerSpeed = 2.0f;
     private int[][] levelData;
+    private double atkOffSetCoordX =0, atkOffSetCoordY =0;
+
 
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
@@ -91,6 +93,7 @@ public class Player extends Entity implements IObservable {
             y += playerSpeed;
             moving = true;
         }
+
 
     }
 
@@ -165,30 +168,46 @@ public class Player extends Entity implements IObservable {
         this.down = down;
     }
 
+    public void setAtkOffSetCoordX(double atkX){this.atkOffSetCoordX=atkX;}
+    public void setAtkOffSetCoordY(double atkY){this.atkOffSetCoordY=atkY;}
+    public
+
+
+
     List<IObserver> observers;
-    //List<Enemy> enemies;
 
-    boolean isAttacking=false;
-
-    public void setAttackArea(double coordX, double coordY){
-
-    }
-
-
-    public void attack(double coordX, double coordY){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
-        if(Directions.LEFT ==1){
-            //make hit area/rectangle to the left. Let's say 10x10. Hit area starts from character outwards, depth 10 and length 5 to the right and left. Array is ordered "clockwise" in the rectangle.
-
-
+    public void attack(){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
+        double coordX = this.getX();
+        double coordY = this.getY();
+        int hitBoxOffSet = 5; //ändra avstånd
+        if(isLeft() ==true){
+            coordX -= hitBoxOffSet; //beror på hur stor spelaren är
+            coordY -= hitBoxOffSet;
 
         }
+        else if(isRight()==true){
+            coordY -= hitBoxOffSet;
+        }
+        else if(isUp()==true){
+            coordX -= hitBoxOffSet;
+            coordY -= hitBoxOffSet;
 
-        if(Directions.RIGHT==1){}
-        if(Directions.UP==1){} //playerDirections?
-        if(Directions.DOWN==1){}
+        }
+        else if(isDown()==true){
+            coordX -= hitBoxOffSet;
+        }
+
+
+        //drawRect(int coordX, coordY, atkR, atkR);
+
         notifyObservers();
 
     }
+    public setAttackHitBox(double coordX,double coordY,double atkR, double atkR);
+    {
+
+    }
+
 
     public boolean checkIfInRange(Enemy enemy) { //just nu bara radie för att göra det lätt, men den ska så klart ta hänsyn till direction och en hitbox
         double enXPos = enemy.getX();
@@ -196,14 +215,18 @@ public class Player extends Entity implements IObservable {
         double diffX = (enXPos - this.getX());
         double diffY = (enYPos - this.getY());
 
+        boolean insideAttackRectangle=false;
 
-        double atkR = getAttackRange();
+        double atkR = this.getAttackRange();
         System.out.println(atkR);
 
         if (Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2)) < atkR) {
 
             return true;
         }
+        if()
+
+
         return false;
     }
 

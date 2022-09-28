@@ -1,6 +1,7 @@
 package Controllers;
 
 import Views.GamePanel;
+import entities.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -65,7 +66,7 @@ public class ActionController implements KeyListener {
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("RELEASED SPACE");
-            // player.attack() liksom
+
         }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }
