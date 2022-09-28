@@ -3,6 +3,7 @@ package Models.level.room;
 //TODO: Make sure all the game logic has the same referens to height and length so that no errors occur because of mis-
 // matched numbers!
 
+import Models.level.CardinalDirection;
 import Models.level.Coordinate;
 
 import java.util.ArrayList;
@@ -15,10 +16,13 @@ import java.util.Iterator;
 public abstract class Room implements RoomMapFunction {
     protected final int HEIGHT = 18;
     protected final int LENGTH = 30;
+    protected CardinalDirection entryDirection = CardinalDirection.WEST;
 
     protected Coordinate coordinate = new Coordinate(0,0);
     protected ArrayList<Coordinate> wallCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> obstaclesCoordinates = new ArrayList<>();
+
+
 
     public boolean isCoordinateInWall(Coordinate coordinate) {
         for (Coordinate coordinateWall : wallCoordinates) {
@@ -64,5 +68,13 @@ public abstract class Room implements RoomMapFunction {
 
     public Iterator<Coordinate> getObstacles(){
         return obstaclesCoordinates.iterator();
+    }
+
+    public void setEntryDirection(CardinalDirection entryDirection){
+        this.entryDirection = entryDirection;
+    }
+
+    public CardinalDirection getEntryDirection(){
+        return entryDirection;
     }
 }

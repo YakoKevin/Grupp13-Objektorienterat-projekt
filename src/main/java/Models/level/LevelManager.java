@@ -17,6 +17,7 @@ public class LevelManager {
         this.levelSprite = LoadSave.GetSprite(LoadSave.LEVEL_SPRITE);
         //importOutsideSprites();
     }
+
 /* IFALL VI SKA GÖRA TILE BASERD MAPP
     private void importOutsideSprites() {
         BufferedImage image = LoadSave.GetSprite(LoadSave.LEVEL_SPRITE);

@@ -1,15 +1,19 @@
 package Models.level.room;
 
+import Models.level.CardinalDirection;
 import Models.level.Coordinate;
+
+import java.util.Iterator;
 
 /**
  * A simple rectangular room with a size of 30x18. It has no obstacles or doors.
  */
-public class SimpleRoom extends Room {
+public class Cavern extends Room {
 
     @Override
-    public Room apply(Integer doors) {
+    public Room apply(Iterator<CardinalDirection> doors) {
         createWalls();
+        addDoors(doors);
         return this;
     }
 
@@ -29,5 +33,13 @@ public class SimpleRoom extends Room {
         x = HEIGHT -1;
         for (y = 0; y < LENGTH; y++)
             wallCoordinates.add(new Coordinate(x,y));
+    }
+
+    private void removeWalls(){
+
+    }
+
+    private void addDoors(Iterator<CardinalDirection> doors) {
+
     }
 }
