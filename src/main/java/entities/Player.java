@@ -1,5 +1,6 @@
 package entities;
 
+import Controllers.ActionController;
 import Models.IObservable;
 import Models.IObserver;
 import utilz.Directions;
@@ -7,6 +8,7 @@ import utilz.LoadSave;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,13 +33,29 @@ public class Player extends Entity implements IObservable {
     private boolean down;
     private float playerSpeed = 2.0f;
     private int[][] levelData;
+    private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
+    private Rectangle2D rect2D = new Rectangle2D.Double(getX(),getY(),100,100);
+
+    public double getAtkOffSetX(){ //kanske inte så fint
+        return atkOffSetCoordX;
+    }
+
+    public double getAtkOffSetY(){
+        return atkOffSetCoordY;
+    }
+
+
+    @Override
+    public double getAttackRange() {
+        return 20; //tillfälligt så här
+    }
 
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
         loadAnimations();
+        setHealthPoints(100);
         //super(100,20,0,5, 10);
     }
-
     private void updateAnimationTick() {
         animationTick++;
 
@@ -92,6 +110,7 @@ public class Player extends Entity implements IObservable {
             moving = true;
         }
 
+
     }
 
     private void loadAnimations() {
@@ -121,6 +140,7 @@ public class Player extends Entity implements IObservable {
         drawHitbox(g);
     }
 
+
     public void resetDirectionBooleans(){
         System.out.println("TEST");
         left = false;
@@ -131,6 +151,9 @@ public class Player extends Entity implements IObservable {
 
     public void setAttack(boolean attacking){
         this.attacking = attacking;
+    }
+    public boolean getAttack(){
+        return attacking;
     }
 
     public boolean isLeft() {
@@ -165,30 +188,79 @@ public class Player extends Entity implements IObservable {
         this.down = down;
     }
 
-    List<IObserver> observers;
-    //List<Enemy> enemies;
+    public void setAtkOffSetCoordX(double atkX){this.atkOffSetCoordX=atkX;}
+    public void setAtkOffSetCoordY(double atkY){this.atkOffSetCoordY=atkY;}
 
-    boolean isAttacking=false;
-
-    public void setAttackArea(double coordX, double coordY){
-
+    @Override
+    public void setHealthPoints(double hp) {
+        this.healthPoints=hp;
+    }
+    @Override
+    public double getHealthPoints() {
+        return this.healthPoints;
     }
 
-
-    public void attack(double coordX, double coordY){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
-        if(Directions.LEFT ==1){
-            //make hit area/rectangle to the left. Let's say 10x10. Hit area starts from character outwards, depth 10 and length 5 to the right and left. Array is ordered "clockwise" in the rectangle.
+    List<IObserver> iObservers;
+    Skeleton sk =new Skeleton(50,50); //tillfälligt
 
 
+    public void attack(){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
+        double playerWidth = 30; //Players storlek i x och// y
+        double playerHeight = 100;
 
+        if(ActionController.dir ==0){ //left
+            setAtkOffSetCoordX(this.getX()-playerHeight); //beror på hur stor spelaren är och riktning
+            setAtkOffSetCoordY(this.getY());
+            System.out.println("v");
         }
+        else if(ActionController.dir==2){
+            setAtkOffSetCoordX(this.getX()-playerWidth);
+            setAtkOffSetCoordY(this.getY()-playerHeight);
 
-        if(Directions.RIGHT==1){}
-        if(Directions.UP==1){} //playerDirections?
-        if(Directions.DOWN==1){}
-        notifyObservers();
+            System.out.println("u");
+        }
+        else if(ActionController.dir==3){
+            setAtkOffSetCoordX(getX()-playerWidth);
+            setAtkOffSetCoordY(getY()+playerHeight);
+            System.out.println("n");
+        }
+        else if(ActionController.dir==1){
+            setAtkOffSetCoordX(getX()+playerWidth);
+            setAtkOffSetCoordY(getY());
+            System.out.println("h");
+        }
+        else{setAtkOffSetCoordX(getX());
+            setAtkOffSetCoordY(getY());}
 
+        if(getAtkOffSetX()<0){setAtkOffSetCoordX(0);}
+        if(getAtkOffSetY()<0){setAtkOffSetCoordY(0);}
+        //drawRect(int coordX, coordY, atkR, atkR);
+
+        sk.update(this); //få till det med observer bara
+
+        //notifyObservers();
     }
+
+    public void drawAttackHitbox(Graphics g){
+        Graphics2D g2=(Graphics2D) g;
+        double atkX = getAtkOffSetX();
+        double atkY = getAtkOffSetY();
+        Rectangle2D rect = new Rectangle2D.Double(atkX,atkY,100,100);
+        g2.draw(rect);
+        setAttackRectangle(rect);
+    }
+    public void drawHP(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        String hpStr = Double.toString(getHealthPoints());
+        g2.drawString("HP: " + hpStr,10,10);
+    }
+    public void setAttackRectangle(Rectangle2D r){
+        rect2D=r;
+    }
+    public Rectangle2D getAttackRectangle(){
+        return this.rect2D;
+    }
+
 
     public boolean checkIfInRange(Enemy enemy) { //just nu bara radie för att göra det lätt, men den ska så klart ta hänsyn till direction och en hitbox
         double enXPos = enemy.getX();
@@ -196,30 +268,22 @@ public class Player extends Entity implements IObservable {
         double diffX = (enXPos - this.getX());
         double diffY = (enYPos - this.getY());
 
-
-        double atkR = getAttackRange();
-        System.out.println(atkR);
-
-        if (Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2)) < atkR) {
-
+        if(getAttackRectangle().contains(enXPos,enYPos)){
             return true;
         }
         return false;
     }
 
     public void addObserver(IObserver obs) {
-        observers.add(obs);
+        iObservers.add(obs);
     }
 
     public void removeObserver(IObserver obs) {
-        observers.remove(obs);
-
-
+        iObservers.remove(obs);
     }
 
-
     public void notifyObservers() {
-        for(IObserver IObserver: observers){
+        for(IObserver IObserver: iObservers){
             IObserver.update();
         }
 
