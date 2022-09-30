@@ -10,12 +10,13 @@ public class MainMenu extends GameState {
 
     private String[] optionsMenu;
     private static final String START_GAME = "Start Game!";
+    private static final String SCORE = "Score";
     private static final String QUIT_GAME = "Quit game";
     private int selected;
 
     public MainMenu(GameStateManager manager) {
         super(manager);
-        this.optionsMenu = new String[] {START_GAME, QUIT_GAME};
+        this.optionsMenu = new String[] {START_GAME,SCORE, QUIT_GAME};
         this.selected = 0;
     }
 
@@ -29,6 +30,7 @@ public class MainMenu extends GameState {
         graphics.setColor(new Color(30, 30, 70));
         graphics.fillRect(0, 0, WindowManager.WIDTH, WindowManager.HEIGHT);
 
+        graphics.setFont(new Font("Araial", Font.PLAIN, 25));
         for(int i=0;i<this.optionsMenu.length;i++) {
             if(i==this.selected) graphics.setColor(Color.GREEN);
             else graphics.setColor(Color.WHITE);
@@ -48,6 +50,8 @@ public class MainMenu extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.optionsMenu[selected]) {
                     case START_GAME:
+                        break;
+                    case SCORE:
                         break;
                     case QUIT_GAME:
                         System.exit(0);
