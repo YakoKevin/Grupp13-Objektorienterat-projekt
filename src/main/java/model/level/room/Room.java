@@ -3,8 +3,8 @@ package model.level.room;
 //TODO: Make sure all the game logic has the same referens to height and length so that no errors occur because of mis-
 // matched numbers!
 
-import model.level.CardinalDirection;
-import model.level.Coordinate;
+import utilz.CardinalDirection;
+import utilz.Coordinate;
 
 import java.util.ArrayList;
 import java.util.Iterator;

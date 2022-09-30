@@ -1,5 +1,7 @@
 import model.level.*;
 import org.junit.Test;
+import utilz.CardinalDirection;
+import utilz.Coordinate;
 
 import java.util.Iterator;
 
@@ -11,7 +13,7 @@ public class LevelTest {
     @Test
     public void doesRoomHaveEntryOppositeToWherePlayerWalkedIn() {
         LevelFactory levelFactory = new LevelFactory();
-        Level level = levelFactory.createCavern(4);
+        Level level = levelFactory.simpleLevel(4);
         for (CardinalDirection cardinalDirection : CardinalDirection.values()) {
             level.playerEnterRoom(new Coordinate(0,0), cardinalDirection);
             assertEquals(cardinalDirection.getOppositeDirection(), level.getCurrentRoomEntry());
@@ -22,7 +24,7 @@ public class LevelTest {
     @Test
     public void doesLevelCalculateIfCoordinateIsBlocked(){
         LevelFactory levelFactory = new LevelFactory();
-        Level level = levelFactory.createCavern(4);
+        Level level = levelFactory.simpleLevel(4);
         level.playerEnterRoom(new Coordinate(0,0), CardinalDirection.WEST);
         for(int i = 0; i < 30; i++){
             for (int j = 0; j < 18; j++){
@@ -46,7 +48,7 @@ public class LevelTest {
     public void drawRoom() {
         int size = 4;
         LevelFactory levelFactory = new LevelFactory();
-        Level level = levelFactory.createCavern(size);
+        Level level = levelFactory.simpleLevel(size);
         assertNotNull(level);
 
         int[][] nodeMatrix = level.getCurrentRoomAsMatrix();

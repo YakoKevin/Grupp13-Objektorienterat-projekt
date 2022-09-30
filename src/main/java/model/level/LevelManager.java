@@ -1,7 +1,7 @@
 package model.level;
 
 import general.GameApp;
-import utilz.LoadSave;
+import utilz.ImageServer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,7 +14,7 @@ public class LevelManager {
 
     public LevelManager(GameApp gameApp){
         this.gameApp = gameApp;
-        this.levelSprite = LoadSave.GetSprite(LoadSave.LEVEL_SPRITE);
+        this.levelSprite = ImageServer.getImage(ImageServer.Ids.LEVEL);
         //importOutsideSprites();
     }
 

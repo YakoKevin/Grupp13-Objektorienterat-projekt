@@ -1,5 +1,8 @@
 package model.level;
 
+import utilz.CardinalDirection;
+import utilz.Coordinate;
+
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -2,6 +2,8 @@ package model.level;
 
 import model.level.room.Room;
 import model.level.room.RoomMapFunction;
+import utilz.CardinalDirection;
+import utilz.Coordinate;
 
 import java.util.ArrayList;
 import java.util.Iterator;

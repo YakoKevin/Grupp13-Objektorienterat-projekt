@@ -1,6 +1,6 @@
 package model.level.room;
 
-import model.level.CardinalDirection;
+import utilz.CardinalDirection;
 
 import java.util.Iterator;
 import java.util.function.Function;

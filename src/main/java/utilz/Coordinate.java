@@ -1,4 +1,4 @@
-package model.level;
+package utilz;
 
 public class Coordinate {
     private final int x;

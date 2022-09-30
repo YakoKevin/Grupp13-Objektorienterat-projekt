@@ -3,7 +3,7 @@ package entity;
 import controller.ActionController;
 import model.IObservable;
 import model.IObserver;
-import utilz.LoadSave;
+import utilz.ImageServer;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -110,7 +110,7 @@ public class Player extends Entity implements IObservable {
     }
 
     private void loadAnimations() {
-        BufferedImage image = LoadSave.GetSprite(LoadSave.PLAYER_SPRITE);
+        BufferedImage image = ImageServer.getImage(ImageServer.Ids.PLAYER);
 
         animations = new BufferedImage[6][3];
         for (int row = 0; row < animations.length; row++){

@@ -33,7 +33,7 @@ public abstract class Entity {
 
     public Rectangle getHitbox() {
         return hitbox;
-    }
+    } //TODO: OBS borde inte returnera referensen till rectangle, borde kopiera ist!
 
     //private double x,y;
     public double healthPoints;

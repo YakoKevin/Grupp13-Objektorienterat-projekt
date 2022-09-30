@@ -1,7 +1,7 @@
 package model.level.room;
 
-import model.level.CardinalDirection;
-import model.level.Coordinate;
+import utilz.CardinalDirection;
+import utilz.Coordinate;
 
 import java.util.Iterator;
 

@@ -1,4 +1,4 @@
-package model.level;
+package utilz;
 
 import java.util.concurrent.ThreadLocalRandom;
 

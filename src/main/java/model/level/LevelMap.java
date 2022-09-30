@@ -1,5 +1,8 @@
 package model.level;
 
+import utilz.CardinalDirection;
+import utilz.Coordinate;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
