@@ -207,23 +207,23 @@ public class Player extends Entity implements IObservable {
         if(ActionController.dir ==0){ //left
             setAtkOffSetCoordX(this.getX()-playerHeight); //beror på hur stor spelaren är och riktning
             setAtkOffSetCoordY(this.getY());
-            System.out.println("v");
+           // System.out.println("v");
         }
         else if(ActionController.dir==2){
             setAtkOffSetCoordX(this.getX()-playerWidth);
             setAtkOffSetCoordY(this.getY()-playerHeight);
 
-            System.out.println("u");
+            //System.out.println("u");
         }
         else if(ActionController.dir==3){
             setAtkOffSetCoordX(getX()-playerWidth);
             setAtkOffSetCoordY(getY()+playerHeight);
-            System.out.println("n");
+            //System.out.println("n");
         }
         else if(ActionController.dir==1){
             setAtkOffSetCoordX(getX()+playerWidth);
             setAtkOffSetCoordY(getY());
-            System.out.println("h");
+            //System.out.println("h");
         }
         else{setAtkOffSetCoordX(getX());
             setAtkOffSetCoordY(getY());}
@@ -258,11 +258,9 @@ public class Player extends Entity implements IObservable {
     }
 
 
-    public boolean checkIfInRange(Enemy enemy) { //just nu bara radie för att göra det lätt, men den ska så klart ta hänsyn till direction och en hitbox
+    public boolean checkIfInRange(Enemy enemy) {
         double enXPos = enemy.getX();
         double enYPos = enemy.getY();
-        double diffX = (enXPos - this.getX());
-        double diffY = (enYPos - this.getY());
 
         if(getAttackRectangle().contains(enXPos,enYPos)){
             return true;

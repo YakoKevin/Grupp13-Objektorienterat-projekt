@@ -30,11 +30,9 @@ public class GameApp implements Runnable {
 
 
 
-
-
     public GameApp(){
         levelManager = new LevelManager(this);
-        player = new Player(200, 200, 30, 100);
+        player = new Player(100, 100, 30, 100);
         //player.loadLevelData(levelManager.getCurrentLevel());
         enemyBrain = new EnemyBrain();
         enemyBrain.addEnemies();
@@ -43,18 +41,16 @@ public class GameApp implements Runnable {
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         startGameLoop();
-
     }
 
     public void render(Graphics g){
         levelManager.draw(g);
         enemyBrain.draw(g);
         player.render(g);
-        if(gamePanel.getGameApp().getPlayer().getAttack()==true){
+        if(gamePanel.getGameApp().getPlayer().getAttack()==true){//fult
             player.drawAttackHitbox(g);
         }
         player.drawHP(g);
-
     }
 
     private void startGameLoop(){

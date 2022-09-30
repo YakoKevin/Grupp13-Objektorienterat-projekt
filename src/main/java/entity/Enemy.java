@@ -46,8 +46,9 @@ public abstract class Enemy extends Entity implements model.IObserver {
         System.out.print(this.getHealthPoints());
         if(p.checkIfInRange(this)==true){ // funktionen ska nog inte kallas så här
             this.setHealthPoints(this.getHealthPoints()-p.getAttackPoints());
+            System.out.println("Ouch");
         }
-        System.out.println(" + hejienemy" + this.getHealthPoints());
+        System.out.println(" EnemyHp" + this.getHealthPoints());
     }
 
 }
