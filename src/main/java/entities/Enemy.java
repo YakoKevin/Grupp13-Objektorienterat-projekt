@@ -1,13 +1,12 @@
 package entities;
 
-import Models.Character;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import static  utilz.EnemyConstants.*;
 
-public abstract class Enemy extends Entity implements Observer {
+public abstract class Enemy extends Entity implements Models.IObserver {
 
     private int animationIndex;
     private int enemyState;
@@ -46,16 +45,12 @@ public abstract class Enemy extends Entity implements Observer {
         return enemyState;
     }
 
-    public static void update(Enemy enemy) {
-        Player p = new Player(0,0,0,0); //tillfälligt
-        if(p.checkIfInRange(enemy)==true){ // funktionen ska nog inte kallas så här
-            enemy.setHealthPoints(enemy.getHealthPoints()-p.getAttackPoints());
+    public void update(Player p){
+        System.out.print(this.getHealthPoints());
+        if(p.checkIfInRange(this)==true){ // funktionen ska nog inte kallas så här
+            this.setHealthPoints(this.getHealthPoints()-p.getAttackPoints());
         }
-
+        System.out.println(" + hejienemy" + this.getHealthPoints());
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
 }
