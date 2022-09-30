@@ -1,6 +1,5 @@
 package model.level;
 
-//TODO: make singleton instances of all coordinates?
 public class Coordinate {
     private final int x;
     private final int y;
@@ -16,10 +15,6 @@ public class Coordinate {
 
     public int getY() {
         return y;
-    }
-
-    public int[] getTuple() {
-        return new int[]{x,y};
     }
 
     public boolean equals(Coordinate coordinate){

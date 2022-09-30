@@ -6,7 +6,18 @@ import java.util.concurrent.ThreadLocalRandom;
  * An enum for the cardinal directions. Also includes helper functions useful for directionality.
  */
 public enum CardinalDirection {
-    NORTH, EAST, SOUTH, WEST;
+    NORTH(0,-1),
+    EAST(1,0),
+    SOUTH(0,1),
+    WEST(0,-1);
+
+    private final int xOffset;
+    private final int yOffset;
+
+    CardinalDirection(int xOffset, int yOffset) {
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+    }
 
     public CardinalDirection getOppositeDirection(){
         int ordinal = this.ordinal();
@@ -16,23 +27,8 @@ public enum CardinalDirection {
 
     public static CardinalDirection getRandomDirection(){
         int randomInt = ThreadLocalRandom.current().nextInt(0, 5);
-        switch (randomInt) {
-            case 1 -> {
-                return SOUTH;
-            }
-            case 2 -> {
-                return WEST;
-            }
-            case 3 -> {
-                return NORTH;
-            }
-            case 4 -> {
-                return EAST;
-            }
-        }
-        return EAST;
+        return CardinalDirection.values()[randomInt];
     }
-
 
     public static CardinalDirection getEastWestDirection(int start, int end) {
         int diff = start - end;
