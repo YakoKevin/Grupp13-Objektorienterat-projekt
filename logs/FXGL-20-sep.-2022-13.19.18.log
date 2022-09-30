@@ -33,14 +33,14 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 13:19:11.436 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Scene size: 800.0 x 800.0
 13:19:11.436 [JavaFX Application Thread] DEBUG PrimaryStageWindow   - Stage size: 816.0 x 839.0
 13:19:11.445 [FXGL Background Thread 1 ] DEBUG Engine               - Initializing environment variables
-13:19:11.489 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class Views.GameView
+13:19:11.489 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - User app class for loading assets: class view.GameView
 13:19:11.489 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Applying CSS: fxgl_dark.css
 13:19:11.490 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/ui/css/fxgl_dark.css
 13:19:11.527 [FXGL Background Thread 1 ] DEBUG GameApplicationServi - Initializing application scenes
-13:19:11.562 [FXGL Background Thread 1 ] DEBUG GameWorld            - Controllers.General.GameApp world initialized
+13:19:11.562 [FXGL Background Thread 1 ] DEBUG GameWorld            - controller.general.GameApp world initialized
 13:19:11.617 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Physics world initialized: appHeight=800, physics.ppm=50,0
 13:19:11.617 [FXGL Background Thread 1 ] DEBUG PhysicsWorld         - Using strategy: BRUTE_FORCE
-13:19:11.621 [FXGL Background Thread 1 ] DEBUG GameScene            - Controllers.General.GameApp scene initialized: 800x800
+13:19:11.621 [FXGL Background Thread 1 ] DEBUG GameScene            - controller.general.GameApp scene initialized: 800x800
 13:19:11.634 [FXGL Background Thread 1 ] DEBUG FXGL.DefaultMenu     - createMenuBodyGameMenu()
 13:19:11.650 [FXGL Background Thread 1 ] DEBUG FXGL.DefaultMenu     - createOptionsMenu()
 13:19:11.659 [FXGL Background Thread 1 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/textures/particles/smoke.png
@@ -75,7 +75,7 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 13:19:11.870 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/ui/fonts/TerminalLandMono-Regular.otf
 13:19:11.872 [FXGL Background Thread 1 ] DEBUG FXGLApplication      - Initializing game
 13:19:11.875 [FXGL Background Thread 4 ] DEBUG FXGLAssetLoaderServi - Loading from file system: jar:file:/C:/Users/yakok/.m2/repository/com/github/almasb/fxgl/17.2/fxgl-17.2.jar!/fxglassets/ui/fonts/Courier-Prime.ttf
-13:19:11.882 [FXGL Background Thread 1 ] INFO  FXGLApplication      - Controllers.General.GameApp initialization took: 0,010 sec
+13:19:11.882 [FXGL Background Thread 1 ] INFO  FXGLApplication      - controller.general.GameApp initialization took: 0,010 sec
 13:19:11.917 [JavaFX Application Thread] DEBUG FXGLApplication      - Registering font factories with UI factory
 13:19:11.919 [JavaFX Application Thread] DEBUG Input                - Clearing active input actions
 13:19:11.925 [JavaFX Application Thread] DEBUG GameApplicationServi - Removing overlay from FXGLLoadingScene and adding to GameScene
@@ -169,7 +169,7 @@ Scene Factory: class com.almasb.fxgl.app.scene.SceneFactory
 13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - urlGithub: https://github.com/AlmasB/FXGL
 13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - urlLeaderboard: http://fxgl-top.herokuapp.com/
 13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - urlPOM: https://raw.githubusercontent.com/AlmasB/FXGL/release/README.md
-13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - userAppClass: class Views.GameView
+13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - userAppClass: class view.GameView
 13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - version: 1.0
 13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - versionCheckDays: 7
 13:19:14.807 [FXGL Background Thread 3 ] DEBUG Engine               - width: 800

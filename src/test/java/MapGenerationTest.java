@@ -1,6 +1,5 @@
-import Models.level.Coordinate;
-import Models.level.LevelMap;
-import Models.level.SquareMapGenerator;
+import model.level.LevelMap;
+import model.level.SquareMapGenerator;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
