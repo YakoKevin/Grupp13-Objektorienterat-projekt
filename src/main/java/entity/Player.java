@@ -32,6 +32,8 @@ public class Player extends Entity implements IObservable {
     private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
     private Rectangle2D rect2D = new Rectangle2D.Double(getX(),getY(),100,100);
 
+    private int keyCount;
+
     public double getAtkOffSetX(){ //kanske inte så fint
         return atkOffSetCoordX;
     }
@@ -50,6 +52,7 @@ public class Player extends Entity implements IObservable {
         super(x, y, width, height);
         loadAnimations();
         setHealthPoints(100);
+        this.keyCount = 0;
         //super(100,20,0,5, 10);
     }
     private void updateAnimationTick() {
@@ -249,6 +252,7 @@ public class Player extends Entity implements IObservable {
         Graphics2D g2 = (Graphics2D) g;
         String hpStr = Double.toString(getHealthPoints());
         g2.drawString("HP: " + hpStr,10,10);
+        g2.drawString("KEYS: " + this.keyCount, 10,30);
     }
     public void setAttackRectangle(Rectangle2D r){
         rect2D=r;
@@ -280,6 +284,10 @@ public class Player extends Entity implements IObservable {
         for(IObserver IObserver: iObservers){
             IObserver.update();
         }
+    }
 
+    public void addKey()
+    {
+        keyCount++;
     }
 }

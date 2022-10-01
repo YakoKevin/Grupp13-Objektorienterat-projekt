@@ -12,7 +12,8 @@ public enum ImageServer {
     ;
     public enum Ids {
         PLAYER("player_sprites3.png"),
-        LEVEL("bg_sprite2.png");
+        LEVEL("bg_sprite2.png"),
+        KEY("key_sprite.png");
         private String path;
 
         Ids(String path){

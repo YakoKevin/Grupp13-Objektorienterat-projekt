@@ -67,6 +67,13 @@ public abstract class Entity {
         this.y = y;
     }
 
+    public int getWidth() { return (int)width; }
+
+    public int getHeight()
+    {
+        return (int)height;
+    }
+
     public double getAttackPoints() {
         return attackPoints;
     }
