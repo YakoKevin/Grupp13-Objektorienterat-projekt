@@ -1,5 +1,6 @@
 package general;
 
+import entity.KeyItem;
 import model.level.LevelManager;
 import view.GamePanel;
 import view.GameView;
@@ -17,6 +18,7 @@ public class GameApp implements Runnable {
     private final int MAX_UPS = 200;
     private EnemyBrain enemyBrain;
     private Player player;
+    private KeyItem key;
     private LevelManager levelManager;
 
     // SKAPA EN KLASS MED DESSA
@@ -33,6 +35,7 @@ public class GameApp implements Runnable {
     public GameApp(){
         levelManager = new LevelManager(this);
         player = new Player(100, 100, 30, 100);
+        key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
         enemyBrain = new EnemyBrain();
         enemyBrain.addEnemies();
@@ -51,6 +54,7 @@ public class GameApp implements Runnable {
             player.drawAttackHitbox(g);
         }
         player.drawHP(g);
+        key.draw(g);
     }
 
     private void startGameLoop(){
@@ -62,6 +66,12 @@ public class GameApp implements Runnable {
         player.update();
         enemyBrain.update();
         levelManager.update();
+        boolean collision = key.isCollision((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
+        if(collision)
+        {
+            key.setNewPosition();
+            player.addKey();
+        }
     }
 
     @Override
