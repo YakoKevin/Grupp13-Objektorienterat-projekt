@@ -30,18 +30,25 @@ public class LevelTest {
             for (int j = 0; j < 18; j++){
                 Coordinate playerCoord = new Coordinate(i, j);
                 boolean blocked = level.isCoordinateInWallOrObstacle(playerCoord);
-                System.out.println(playerCoord.getX() + "," + playerCoord.getY());
-                for (Iterator<Coordinate> it = level.getCurrentRoomObstacles(); it.hasNext(); ) {
-                    Coordinate coordinate = it.next();
-                    assertEquals(blocked, coordinate.equals(playerCoord));
+                boolean blocked2 = false;
+                for (Iterator<Coordinate> obstaclesCoordinates = level.getCurrentRoomObstacles(); obstaclesCoordinates.hasNext(); ) {
+                    Coordinate coordinate = obstaclesCoordinates.next();
+                    if(coordinate.equals(playerCoord))
+                        blocked2 = true;
                 }
-                for (Iterator<Coordinate> it = level.getCurrentRoomWalls(); it.hasNext(); ) {
-                    Coordinate coordinate = it.next();
-                    System.out.println("COORD: " + coordinate.getX()+ "," + coordinate.getY());
-                    assertEquals(blocked, coordinate.equals(playerCoord));
+                for (Iterator<Coordinate> wallCoordinates = level.getCurrentRoomWalls(); wallCoordinates.hasNext(); ) {
+                    Coordinate coordinate = wallCoordinates.next();
+                    if(coordinate.equals(playerCoord))
+                        blocked2 = true;
                 }
+                assertEquals(blocked, blocked2);
             }
         }
+    }
+
+    @Test
+    public void doesRoomHaveCorrectNumberOfDoors(){
+
     }
 
     @Test

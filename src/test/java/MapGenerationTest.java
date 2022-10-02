@@ -6,24 +6,27 @@ import static org.junit.Assert.*;
 
 public class MapGenerationTest {
 
-
+    @Test
+    public void doesMapGeneratorNotReturnANullMap() {
+        for(int k = 1; k < 10; k++){
+            for (int i = 0; i < 10; i++) {
+                LevelMap levelMap = SquareMapGenerator.generate(k);
+                assertNotNull(levelMap);
+            }
+        }
+    }
 
     @Test
     public void doesLevelMapContainAMapWithNodes() {
         for(int k = 1; k < 10; k++){
             for (int i = 0; i < 10; i++) {
                 LevelMap levelMap = SquareMapGenerator.generate(k);
-                assertEquals(levelMap.getNodesCoordinates().length, 0);
+                assertNotEquals(0, levelMap.getNodesCoordinates().length);
             }
         }
     }
 
-    @Test
-    public void doesMapGeneratorNotReturnANullMap() {
-        int size = 4;
-        LevelMap levelMap = SquareMapGenerator.generate(size);
-        assertNotNull(levelMap);
-    }
+
 
     @Test
     public void drawMap(){

@@ -18,8 +18,6 @@ public enum ImageServer {
         Ids(String path){
             this.path = path;
         }
-
-
     }
 
     private static BufferedImage getSprite(String filePath) {

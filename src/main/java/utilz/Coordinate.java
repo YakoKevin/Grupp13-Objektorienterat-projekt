@@ -17,8 +17,12 @@ public class Coordinate {
         return y;
     }
 
-    public boolean equals(Coordinate coordinate){
-        return x == coordinate.getX() && y == coordinate.getY();
+    @Override
+    public boolean equals(Object coordinate) {
+        if (!super.equals(coordinate)) {
+            return coordinate instanceof Coordinate && x == ((Coordinate) coordinate).getX() && y == ((Coordinate) coordinate).getY();
+        } else
+            return true;
     }
 }
 
