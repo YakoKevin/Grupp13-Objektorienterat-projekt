@@ -26,7 +26,7 @@ public enum CardinalDirection {
     }
 
     public static CardinalDirection getRandomDirection(){
-        int randomInt = ThreadLocalRandom.current().nextInt(0, 5);
+        int randomInt = ThreadLocalRandom.current().nextInt(0, 4);
         return CardinalDirection.values()[randomInt];
     }
 

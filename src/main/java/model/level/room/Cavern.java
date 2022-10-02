@@ -39,7 +39,12 @@ public class Cavern extends Room {
 
     }
 
-    private void addDoors(Iterator<CardinalDirection> doors) {
-
+    private void addDoors(Iterator<CardinalDirection> doorsIt) {
+        for (Iterator<CardinalDirection> it = doorsIt; it.hasNext(); ) {
+            CardinalDirection doorDirection = it.next();
+            Door doorToAdd = Door.getDoorFromCardinalDirection(doorDirection);
+            if(doorToAdd != null)
+                doors.add(doorToAdd);
+        }
     }
 }

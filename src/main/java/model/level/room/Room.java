@@ -21,6 +21,7 @@ public abstract class Room implements RoomMapFunction {
     protected Coordinate coordinate = new Coordinate(0,0);
     protected ArrayList<Coordinate> wallCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> obstaclesCoordinates = new ArrayList<>();
+    protected ArrayList<Door> doors = new ArrayList<>();
 
 
 
