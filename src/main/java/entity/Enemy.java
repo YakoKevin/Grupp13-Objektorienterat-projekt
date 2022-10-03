@@ -1,20 +1,21 @@
 package entity;
 
 
-import static  utilz.EnemyConstants.*;
+import utilz.EntityStates;
+
+import static utilz.EntityStates.*;
+import static utilz.EntityStates.EnemyStates.*;
 
 public abstract class Enemy extends Entity implements model.IObserver {
 
-    //TODO: vi borde inte ha enemyType som en del av Enemy eftersom vi tar bort polymorfismen (det hade varit bättre om inget i koden är beroende på något sådant och att klasserna själva fixar det, tex skeleton eller ghost.)
     private int animationIndex;
-    private int enemyState;
-    private int enemyType;
     private int animationTick = 25;
     private int animationSpeed = 25;
 
-    public Enemy(float x, float y, int width, int height, int enemyType){
+    private EnemyStates enemyState = IDLE;
+
+    public Enemy(float x, float y, int width, int height){
         super(x, y, width, height);
-        this.enemyType = enemyType;
         this.setHealthPoints(50);
         //super(50,10,1,3,10);
     }
@@ -26,7 +27,7 @@ public abstract class Enemy extends Entity implements model.IObserver {
             animationTick = 0;
             animationIndex++;
 
-            if (animationIndex >= GetSpriteAmount(enemyType, enemyState)){
+            if (animationIndex >= enemyState.getAnimationSpriteAmount()){
                 animationIndex = 0;
             }
         }
@@ -40,7 +41,7 @@ public abstract class Enemy extends Entity implements model.IObserver {
         return animationIndex;
     }
 
-    public int getEnemyState(){
+    public EnemyStates getEnemyState(){
         return enemyState;
     }
 

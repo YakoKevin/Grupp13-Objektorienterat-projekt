@@ -17,7 +17,7 @@ public enum EntityStates {
         }
     }
 
-    public enum ENEMY{
+    public enum EnemyStates{
         IDLE(3),
         RUNNING(1),
         ATTACK(1),
@@ -26,7 +26,7 @@ public enum EntityStates {
 
         int animationSpriteAmount;
 
-        ENEMY(int animationSpriteAmount){
+        EnemyStates(int animationSpriteAmount){
             this.animationSpriteAmount = animationSpriteAmount;
         }
 
