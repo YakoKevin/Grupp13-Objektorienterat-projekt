@@ -4,17 +4,17 @@ import utilz.CardinalDirection;
 import utilz.Coordinate;
 
 import java.util.Iterator;
+import java.util.function.Function;
 
 /**
  * A simple rectangular room with a size of 30x18. It has no obstacles or doors.
  */
 public class Cavern extends Room {
 
-    @Override
-    public Room apply(Iterator<CardinalDirection> doors) {
+    public Cavern(Iterator<CardinalDirection> doors) {
+        super(doors);
         createWalls();
         addDoors(doors);
-        return this;
     }
 
     private void createWalls(){
@@ -35,10 +35,6 @@ public class Cavern extends Room {
             wallCoordinates.add(new Coordinate(x,y));
     }
 
-    private void removeWalls(){
-
-    }
-
     private void addDoors(Iterator<CardinalDirection> doorsIt) {
         for (Iterator<CardinalDirection> it = doorsIt; it.hasNext(); ) {
             CardinalDirection doorDirection = it.next();
@@ -46,5 +42,9 @@ public class Cavern extends Room {
             if(doorToAdd != null)
                 doors.add(doorToAdd);
         }
+    }
+
+    private void removeWalls(){
+
     }
 }

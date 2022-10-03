@@ -1,21 +1,18 @@
 package model.level;
 
 import model.level.room.Cavern;
+import model.level.room.RoomTypeFunction;
 
 
 public class SimpleLevel extends Level{
 
     protected SimpleLevel(LevelMap levelMap) {
         super(levelMap);
-        this.roomMapFunctions.add(new Cavern());
-
+        this.roomTypes.add(RoomTypes.cavern);
     }
 
-    //TODO: test right now, not final at all!
-    /*@Override/*
-    protected Room createRoom(Coordinate coordinate){
-        currentRoom = new SimpleRoom(CardinalDirection.WEST).apply(0);
-        currentRoom.setCoordinate(coordinate);
-        return room;
-    }*/
+    private enum RoomTypes{
+        ;
+        static private final RoomTypeFunction cavern = Cavern::new;
+    }
 }

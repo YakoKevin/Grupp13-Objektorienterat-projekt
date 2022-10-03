@@ -4,13 +4,11 @@ import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants;
 
-import java.util.ArrayList;
-
 public enum Door {
-    NORTH(0, GameConstants.Sizes.LENGTH.getSize()/2, CardinalDirection.NORTH),
-    EAST(GameConstants.Sizes.LENGTH.getSize(), GameConstants.Sizes.HEIGHT.getSize()/2, CardinalDirection.EAST),
-    SOUTH(GameConstants.Sizes.HEIGHT.getSize(), GameConstants.Sizes.LENGTH.getSize()/2, CardinalDirection.SOUTH),
-    WEST(0, GameConstants.Sizes.HEIGHT.getSize()/2, CardinalDirection.WEST);
+    NORTH(0, GameConstants.TileSizes.LENGTH.getSize()/2, CardinalDirection.NORTH),
+    EAST(GameConstants.TileSizes.LENGTH.getSize(), GameConstants.TileSizes.HEIGHT.getSize()/2, CardinalDirection.EAST),
+    SOUTH(GameConstants.TileSizes.HEIGHT.getSize(), GameConstants.TileSizes.LENGTH.getSize()/2, CardinalDirection.SOUTH),
+    WEST(0, GameConstants.TileSizes.HEIGHT.getSize()/2, CardinalDirection.WEST);
 
     Coordinate coordinate;
     CardinalDirection direction;

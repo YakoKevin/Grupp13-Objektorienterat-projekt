@@ -13,7 +13,7 @@ import java.util.Iterator;
  * A class representing a Rooms main construction: walls and obstacles (and perhaps more). Returns list of the
  * coordinates of those. It has a size of 30x18 tiles.
  */
-public abstract class Room implements RoomMapFunction {
+public abstract class Room{
     protected final int HEIGHT = 18;
     protected final int LENGTH = 30;
     protected CardinalDirection entryDirection = CardinalDirection.WEST;
@@ -24,6 +24,9 @@ public abstract class Room implements RoomMapFunction {
     protected ArrayList<Door> doors = new ArrayList<>();
 
 
+    public Room(Iterator<CardinalDirection> doors) {
+        super();
+    }
 
     public boolean isCoordinateInWall(Coordinate coordinate) {
         for (Coordinate coordinateWall : wallCoordinates) {

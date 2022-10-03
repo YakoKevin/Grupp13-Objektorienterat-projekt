@@ -1,7 +1,7 @@
 package model.level;
 
 import model.level.room.Room;
-import model.level.room.RoomMapFunction;
+import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
@@ -21,7 +21,7 @@ public abstract class Level{
     private int [][] levelData;
 
     protected final LevelMap levelMap;
-    protected final ArrayList<RoomMapFunction> roomMapFunctions = new ArrayList<>();
+    protected final ArrayList<RoomTypeFunction> roomTypes = new ArrayList<>();
 
     protected Level(LevelMap levelMap) {
         this.levelMap = levelMap;
@@ -61,8 +61,8 @@ public abstract class Level{
     }
 
     protected Room createRoom(Coordinate coordinate){
-        int index = ThreadLocalRandom.current().nextInt(0,roomMapFunctions.size());
+        int index = ThreadLocalRandom.current().nextInt(0, roomTypes.size());
         Iterator<CardinalDirection> doors = levelMap.getNodeDoors(coordinate);
-        return roomMapFunctions.get(index).apply(doors);
+        return roomTypes.get(index).apply(doors);
     }
 }
