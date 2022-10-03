@@ -77,8 +77,13 @@ public abstract class Entity {
     public double getAttackPoints() {
         return attackPoints;
     }
+    public void setAttackPoints(double atkP){
+        this.attackPoints=atkP;
+    }
 
-    public void setHealthPoints(double hp){}
+    public void setHealthPoints(double hp){
+        this.healthPoints=hp;
+    }
     public double getHealthPoints() {
         return healthPoints;
     }

@@ -51,7 +51,8 @@ public class Player extends Entity implements IObservable {
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
         loadAnimations();
-        setHealthPoints(100);
+        this.setAttackPoints(20);
+        this.healthPoints=100;
         this.keyCount = 0;
         //super(100,20,0,5, 10);
     }
@@ -141,7 +142,7 @@ public class Player extends Entity implements IObservable {
 
 
     public void resetDirectionBooleans(){
-        System.out.println("TEST");
+        //System.out.println("TEST");
         left = false;
         up = false;
         right = false;
@@ -190,15 +191,6 @@ public class Player extends Entity implements IObservable {
     public void setAtkOffSetCoordX(double atkX){this.atkOffSetCoordX=atkX;}
     public void setAtkOffSetCoordY(double atkY){this.atkOffSetCoordY=atkY;}
 
-    @Override
-    public void setHealthPoints(double hp) {
-        this.healthPoints=hp;
-    }
-    @Override
-    public double getHealthPoints() {
-        return this.healthPoints;
-    }
-
     List<IObserver> iObservers;
     Skeleton sk =new Skeleton(50,50); //tillfälligt
 
@@ -206,7 +198,7 @@ public class Player extends Entity implements IObservable {
     public void attack(){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
         double playerWidth = 30; //Players storlek i x och// y
         double playerHeight = 100;
-
+        //System.out.println("playerCoords: " + this.x+this.y);
         if(ActionController.dir ==0){ //left
             setAtkOffSetCoordX(this.getX()-playerHeight); //beror på hur stor spelaren är och riktning
             setAtkOffSetCoordY(this.getY());
@@ -233,8 +225,6 @@ public class Player extends Entity implements IObservable {
 
         if(getAtkOffSetX()<0){setAtkOffSetCoordX(0);}
         if(getAtkOffSetY()<0){setAtkOffSetCoordY(0);}
-        //drawRect(int coordX, coordY, atkR, atkR);
-
         sk.update(this); //få till det med observer bara
 
         //notifyObservers();
@@ -263,10 +253,18 @@ public class Player extends Entity implements IObservable {
 
 
     public boolean checkIfInRange(Enemy enemy) {
-        double enXPos = enemy.getX();
-        double enYPos = enemy.getY();
+        double enX = enemy.getX();
+        double enY = enemy.getY();
+        /*(x,y) is inside the rectangle with coordinates (x1,y1,x2,y2)
 
-        if(getAttackRectangle().contains(enXPos,enYPos)){
+        x <= x2 && x >= x1 && y <= y2 && y >= y1;
+*/
+        boolean check = enX<=100 && enX>= getAtkOffSetX() && enY <= 100 && enY>=getAtkOffSetY();
+        if(check==true){
+            return true;
+        }
+        //System.out.println("enemy coord: " +enX + enY);
+        if(getAttackRectangle().contains(enX,enY)){
             return true;
         }
         return false;

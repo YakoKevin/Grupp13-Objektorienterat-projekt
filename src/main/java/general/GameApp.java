@@ -50,7 +50,7 @@ public class GameApp implements Runnable {
         levelManager.draw(g);
         enemyBrain.draw(g);
         player.render(g);
-        if(gamePanel.getGameApp().getPlayer().getAttack()==true){//fult
+        if(player.getAttack()==true){
             player.drawAttackHitbox(g);
         }
         player.drawHP(g);

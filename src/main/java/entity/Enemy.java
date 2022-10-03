@@ -14,6 +14,7 @@ public abstract class Enemy extends Entity implements model.IObserver {
     public Enemy(float x, float y, int width, int height, int enemyType){
         super(x, y, width, height);
         this.enemyType = enemyType;
+        this.setHealthPoints(50);
         //super(50,10,1,3,10);
     }
 
@@ -43,12 +44,12 @@ public abstract class Enemy extends Entity implements model.IObserver {
     }
 
     public void update(Player p){
-        System.out.print(this.getHealthPoints());
+        //System.out.println(" EnemyHp" + this.getHealthPoints());
         if(p.checkIfInRange(this)==true){ // funktionen ska nog inte kallas så här
             this.setHealthPoints(this.getHealthPoints()-p.getAttackPoints());
-            System.out.println("Ouch");
+            //System.out.println("Ouch" + p.getAttackPoints());
         }
-        System.out.println(" EnemyHp" + this.getHealthPoints());
+        //System.out.println(" EnemyHp" + this.getHealthPoints());
     }
 
 }
