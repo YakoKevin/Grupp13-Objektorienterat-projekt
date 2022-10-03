@@ -5,6 +5,7 @@ import static  utilz.EnemyConstants.*;
 
 public abstract class Enemy extends Entity implements model.IObserver {
 
+    //TODO: vi borde inte ha enemyType som en del av Enemy eftersom vi tar bort polymorfismen (det hade varit bättre om inget i koden är beroende på något sådant och att klasserna själva fixar det, tex skeleton eller ghost.)
     private int animationIndex;
     private int enemyState;
     private int enemyType;

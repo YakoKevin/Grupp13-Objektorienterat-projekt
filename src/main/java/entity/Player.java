@@ -3,6 +3,7 @@ package entity;
 import controller.ActionController;
 import model.IObservable;
 import model.IObserver;
+import utilz.EntityStates;
 import utilz.ImageServer;
 
 import java.awt.*;
@@ -10,7 +11,8 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import static utilz.PlayerConstants.*;
+import static utilz.EntityStates.*;
+import static utilz.EntityStates.PlayerStates.*;
 
 
 public class Player extends Entity implements IObservable {
@@ -19,7 +21,8 @@ public class Player extends Entity implements IObservable {
     private int animationTick = 30;
     private int animationIndex = 0;
     private int animationSpeed = 30;
-    private int playerAction = IDLE;
+    private PlayerStates playerAction = IDLE;
+
     private int playerDirection = -1;
     private boolean moving = false;
     private boolean attacking = false;
@@ -62,7 +65,7 @@ public class Player extends Entity implements IObservable {
         if (animationTick >= animationSpeed){
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= getSpriteAmount(playerAction)){
+            if (animationIndex >= playerAction.getAnimationSpriteAmount()){
                 animationIndex = 0;
                 attacking = false;
             }
@@ -70,7 +73,7 @@ public class Player extends Entity implements IObservable {
     }
 
     private void setAnimation() {
-        int startAnimation = playerAction;
+        PlayerStates startAnimation = playerAction;
 
         if (moving)
             playerAction = RUNNING;
@@ -136,7 +139,7 @@ public class Player extends Entity implements IObservable {
     }
 
     public void render(Graphics g){
-        g.drawImage(animations[playerAction][animationIndex], (int) x, (int)y, null);
+        g.drawImage(animations[playerAction.ordinal()][animationIndex], (int) x, (int)y, null);
         drawHitbox(g);
     }
 
