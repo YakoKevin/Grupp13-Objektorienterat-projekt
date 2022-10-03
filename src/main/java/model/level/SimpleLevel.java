@@ -1,14 +1,14 @@
 package model.level;
 
+import entity.Player;
 import model.level.room.Cavern;
 import model.level.room.RoomTypeFunction;
 
 
 public class SimpleLevel extends Level{
 
-    protected SimpleLevel(LevelMap levelMap) {
-        super(levelMap);
-        this.roomTypes.add(RoomTypes.cavern);
+    protected SimpleLevel(LevelMap levelMap, Player player) {
+        super(levelMap, player, RoomTypes.cavern);
     }
 
     private enum RoomTypes{

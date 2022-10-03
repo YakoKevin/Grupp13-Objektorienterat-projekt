@@ -28,4 +28,31 @@ public enum GameConstants {
 
         public int getSize(){return size;}
     }
+
+    public enum GameSizes {
+        HEIGHT(TileSizes.HEIGHT.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize()),
+        WIDTH(TileSizes.LENGTH.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize());
+        int size;
+
+        GameSizes(int size){
+            this.size = size;
+        }
+
+        public int getSize() {
+            return size;
+        }
+    }
+
+    private enum GameScalingFactors {
+        TILE_SCALE_FACTOR(42); //1.3*32
+        int size;
+
+        GameScalingFactors(int size){
+            this.size = size;
+        }
+
+        public int getSize() {
+            return size;
+        }
+    }
 }

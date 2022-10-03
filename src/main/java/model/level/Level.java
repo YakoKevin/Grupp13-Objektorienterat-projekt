@@ -1,5 +1,6 @@
 package model.level;
 
+import entity.Player;
 import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
@@ -19,12 +20,17 @@ public abstract class Level{
     protected Room currentRoom;
     protected ArrayList<Room> allRooms;
     private int [][] levelData;
+    private Player player;
 
     protected final LevelMap levelMap;
-    protected final ArrayList<RoomTypeFunction> roomTypes = new ArrayList<>();
+    protected final RoomTypeFunction[] roomTypes;
 
-    protected Level(LevelMap levelMap) {
+    protected Level(LevelMap levelMap, Player player, RoomTypeFunction ... roomTypeFunctions) {
         this.levelMap = levelMap;
+        this.roomTypes = roomTypeFunctions;
+        this.player = player;
+
+        this.currentRoom = createRoom(levelMap.getStartCoordinate());
     }
 
     public int[][] getCurrentRoomAsMatrix(){
@@ -61,8 +67,8 @@ public abstract class Level{
     }
 
     protected Room createRoom(Coordinate coordinate){
-        int index = ThreadLocalRandom.current().nextInt(0, roomTypes.size());
+        int index = ThreadLocalRandom.current().nextInt(0, roomTypes.length);
         Iterator<CardinalDirection> doors = levelMap.getNodeDoors(coordinate);
-        return roomTypes.get(index).apply(doors);
+        return roomTypes[index].apply(doors);
     }
 }

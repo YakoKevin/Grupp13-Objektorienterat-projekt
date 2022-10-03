@@ -2,12 +2,10 @@ package view;
 
 import controller.ActionController;
 import general.GameApp;
+import utilz.GameConstants;
 
 import javax.swing.*;
 import java.awt.*;
-
-import static general.GameApp.GAME_HEIGHT;
-import static general.GameApp.GAME_WIDTH;
 
 public class GamePanel extends JPanel {
 
@@ -27,11 +25,11 @@ public class GamePanel extends JPanel {
 
     // Sets here, instead of view since it includes the border as well.
     private void setPanelSize() {
-        Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
+        Dimension size = new Dimension(GameConstants.GameSizes.WIDTH.getSize(), GameConstants.GameSizes.HEIGHT.getSize());
         //setMinimumSize(size);
         setPreferredSize(size);
         //setMaximumSize(size);
-        System.out.println("Size : " + GAME_WIDTH + " : " + GAME_HEIGHT);
+        System.out.println("Size : " + GameConstants.GameSizes.WIDTH.getSize() + " : " + GameConstants.GameSizes.HEIGHT.getSize());
     }
 
 
