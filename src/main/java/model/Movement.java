@@ -92,4 +92,12 @@ public class Movement {
     public void setDown(boolean down) {
         this.down = down;
     }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
 }

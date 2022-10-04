@@ -60,6 +60,7 @@ public class ActionController implements KeyListener {
             System.out.println("PRESSED SPACE");
             //gamePanel.getGameApp().getPlayer().setAttack(true);
             //gamePanel.getGameApp().getPlayer().attack();
+            Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet?
             attack.attack(coordinate);
             //attack.setAttack(true);
             //gamePanel.getGameApp().getPlayer().setAttack(true);
