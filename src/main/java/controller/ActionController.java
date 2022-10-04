@@ -1,6 +1,8 @@
 package controller;
 
+import model.Attack;
 import model.Movement;
+import utilz.Coordinate;
 import view.GamePanel;
 
 import java.awt.event.KeyEvent;
@@ -10,11 +12,14 @@ public class ActionController implements KeyListener {
 
     private GamePanel gamePanel;
     private Movement movement;
+    private Attack attack;
+    private Coordinate coordinate = new Coordinate(0,0); // FIXA COORDINATES, TILLFÄLLIGT FÖR ATT FÅ PROGRAMMET ATT KÖRA
     public static double dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
 
-    public ActionController(GamePanel gamePanel, Movement movement){
+    public ActionController(GamePanel gamePanel, Movement movement, Attack attack){
         this.gamePanel = gamePanel;
         this.movement = movement;
+        this.attack = attack;
     }
 
     @Override
@@ -50,11 +55,14 @@ public class ActionController implements KeyListener {
             dir=1;
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            gamePanel.getGameApp().getPlayer().setAttack(true);
+            //attack.setAttack(true);
+            //gamePanel.getGameApp().getPlayer().setAttack(true);
             System.out.println("PRESSED SPACE");
             //gamePanel.getGameApp().getPlayer().setAttack(true);
-            gamePanel.getGameApp().getPlayer().attack();
-            gamePanel.getGameApp().getPlayer().setAttack(true);
+            //gamePanel.getGameApp().getPlayer().attack();
+            attack.attack(coordinate);
+            //attack.setAttack(true);
+            //gamePanel.getGameApp().getPlayer().setAttack(true);
         }
     }
 
@@ -83,7 +91,8 @@ public class ActionController implements KeyListener {
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("RELEASED SPACE");
-            gamePanel.getGameApp().getPlayer().setAttack(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
+            //attack.setAttack(false);
+            //gamePanel.getGameApp().getPlayer().setAttack(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }

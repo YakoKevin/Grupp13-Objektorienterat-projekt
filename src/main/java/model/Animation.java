@@ -14,11 +14,11 @@ public class Animation {
     private int animationTick = 30;
     private int animationIndex = 0;
     private int animationSpeed = 30;
-    private boolean attacking = false;
     private EntityStates.PlayerStates playerAction = IDLE;
     private BufferedImage image;
     private Entity entity;
     public boolean moving = false;
+    public boolean attacking = false;
 
     public Animation(ImageServer.Ids imageServer, Entity entity){
         this.image = ImageServer.getImage(imageServer);

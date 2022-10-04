@@ -2,6 +2,7 @@ package general;
 
 import entity.KeyItem;
 import model.Animation;
+import model.Attack;
 import model.Movement;
 import model.level.Level;
 import model.level.LevelFactory;
@@ -34,6 +35,7 @@ public class GameApp implements Runnable {
     private LevelManager levelManager;
     private Movement movement;
     private Animation animation;
+    private Attack attack;
 
     // SKAPA EN KLASS MED DESSA
     /*
@@ -52,11 +54,12 @@ public class GameApp implements Runnable {
         player = new Player(100, 100, 30, 100);
         animation = new Animation(ImageServer.Ids.PLAYER, player);
         movement = new Movement(player, animation);
+        attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
         enemyBrain = new EnemyBrain();
         enemyBrain.addEnemies();
-        gamePanel = new GamePanel(this, movement);
+        gamePanel = new GamePanel(this, movement, attack);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
@@ -71,8 +74,8 @@ public class GameApp implements Runnable {
         enemyBrain.draw(g);
         player.render(g);
         animation.render(g);
-        if(player.getAttack()==true){
-            player.drawAttackHitbox(g);
+        if(animation.attacking){
+            attack.drawAttackHitbox(g);
         }
         player.drawHP(g);
         key.draw(g);

@@ -26,20 +26,6 @@ public class Player extends Entity implements IObservable, HostileAttacker {
 
     private int keyCount;
 
-    public double getAtkOffSetX(){ //kanske inte så fint
-        return atkOffSetCoordX;
-    }
-
-    public double getAtkOffSetY(){
-        return atkOffSetCoordY;
-    }
-
-
-    @Override
-    public double getAttackRange() {
-        return 20; //tillfälligt så här
-    }
-
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
         this.setAttackPoints(20);
@@ -61,78 +47,12 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     }
 
 
-
-
-    public void setAttack(boolean attacking){
-        this.attacking = attacking;
-    }
-
-    public boolean getAttack(){
-        return attacking;
-    }
-
-    public void setAtkOffSetCoordX(double atkX){this.atkOffSetCoordX=atkX;}
-
-    public void setAtkOffSetCoordY(double atkY){this.atkOffSetCoordY=atkY;}
-
     List<IObserver> iObservers;
-    Skeleton sk =new Skeleton(50,50); //tillfälligt
-
-
-    public void attack(){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
-        double playerWidth = 30; //Players storlek i x och// y
-        double playerHeight = 100;
-        //System.out.println("playerCoords: " + this.x+this.y);
-        if(ActionController.dir ==0){ //left
-            setAtkOffSetCoordX(this.getX()-playerHeight); //beror på hur stor spelaren är och riktning
-            setAtkOffSetCoordY(this.getY());
-           // System.out.println("v");
-        }
-        else if(ActionController.dir==2){
-            setAtkOffSetCoordX(this.getX()-playerWidth);
-            setAtkOffSetCoordY(this.getY()-playerHeight);
-
-            //System.out.println("u");
-        }
-        else if(ActionController.dir==3){
-            setAtkOffSetCoordX(getX()-playerWidth);
-            setAtkOffSetCoordY(getY()+playerHeight);
-            //System.out.println("n");
-        }
-        else if(ActionController.dir==1){
-            setAtkOffSetCoordX(getX()+playerWidth);
-            setAtkOffSetCoordY(getY());
-            //System.out.println("h");
-        }
-        else{setAtkOffSetCoordX(getX());
-            setAtkOffSetCoordY(getY());}
-
-        if(getAtkOffSetX()<0){setAtkOffSetCoordX(0);}
-        if(getAtkOffSetY()<0){setAtkOffSetCoordY(0);}
-        sk.update(this); //få till det med observer bara
-
-        //notifyObservers();
-    }
-
-    public void drawAttackHitbox(Graphics g){
-        Graphics2D g2=(Graphics2D) g;
-        double atkX = getAtkOffSetX();
-        double atkY = getAtkOffSetY();
-        Rectangle2D rect = new Rectangle2D.Double(atkX,atkY,100,100);
-        g2.draw(rect);
-        setAttackRectangle(rect);
-    }
     public void drawHP(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         String hpStr = Double.toString(getHealthPoints());
         g2.drawString("HP: " + hpStr,10,10);
         g2.drawString("KEYS: " + this.keyCount, 10,30);
-    }
-    public void setAttackRectangle(Rectangle2D r){
-        rect2D=r;
-    }
-    public Rectangle2D getAttackRectangle(){
-        return this.rect2D;
     }
 
 
@@ -143,14 +63,14 @@ public class Player extends Entity implements IObservable, HostileAttacker {
 
         x <= x2 && x >= x1 && y <= y2 && y >= y1;
 */
-        boolean check = enX<=100 && enX>= getAtkOffSetX() && enY <= 100 && enY>=getAtkOffSetY();
-        if(check==true){
-            return true;
-        }
+        //boolean check = enX<=100 && enX>= getAtkOffSetX() && enY <= 100 && enY>=getAtkOffSetY();
+        //if(check==true){
+         //   return true;
+       // }
         //System.out.println("enemy coord: " +enX + enY);
-        if(getAttackRectangle().contains(enX,enY)){
-            return true;
-        }
+       // if(getAttackRectangle().contains(enX,enY)){
+        ////    return true;
+       // }
         return false;
     }
 
