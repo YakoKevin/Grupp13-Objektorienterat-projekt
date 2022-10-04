@@ -26,10 +26,6 @@ public class Player extends Entity implements IObservable {
     private int playerDirection = -1;
     private boolean moving = false;
     private boolean attacking = false;
-    private boolean left;
-    private boolean right;
-    private boolean up;
-    private boolean down;
     private float playerSpeed = 2.0f;
     private int[][] levelData;
     private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
@@ -92,30 +88,6 @@ public class Player extends Entity implements IObservable {
         animationTick = 0;
     }
 
-    private void updatePosition() {
-        moving = false;
-
-        if (left && !right) {
-            x += playerSpeed;
-            moving = true;
-        }
-        else if (right && !left) {
-            x -= playerSpeed;
-            moving = true;
-        }
-
-        if (up && !down) {
-            y -= playerSpeed;
-            moving = true;
-        }
-        else if (down && !up) {
-            y += playerSpeed;
-            moving = true;
-        }
-
-
-    }
-
     private void loadAnimations() {
         BufferedImage image = ImageServer.getImage(ImageServer.Ids.PLAYER);
 
@@ -132,7 +104,6 @@ public class Player extends Entity implements IObservable {
     }
 
     public void update(){
-        updatePosition();
         updateHitbox();
         updateAnimationTick();
         setAnimation();
@@ -144,54 +115,18 @@ public class Player extends Entity implements IObservable {
     }
 
 
-    public void resetDirectionBooleans(){
-        //System.out.println("TEST");
-        left = false;
-        up = false;
-        right = false;
-        down = false;
-    }
+
 
     public void setAttack(boolean attacking){
         this.attacking = attacking;
     }
+
     public boolean getAttack(){
         return attacking;
     }
 
-    public boolean isLeft() {
-        return left;
-    }
-
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public void setRight(boolean right) {
-        this.right = right;
-    }
-
-    public boolean isUp() {
-        return up;
-    }
-
-    public void setUp(boolean up) {
-        this.up = up;
-    }
-
-    public boolean isDown() {
-        return down;
-    }
-
-    public void setDown(boolean down) {
-        this.down = down;
-    }
-
     public void setAtkOffSetCoordX(double atkX){this.atkOffSetCoordX=atkX;}
+
     public void setAtkOffSetCoordY(double atkY){this.atkOffSetCoordY=atkY;}
 
     List<IObserver> iObservers;

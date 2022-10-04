@@ -52,10 +52,10 @@ public abstract class Entity {
         this.attackRange = attackRange;
     }
 
-    public double getX(){
+    public float getX(){
         return x;
     }
-    public double getY(){
+    public float getY(){
         return y;
     }
 

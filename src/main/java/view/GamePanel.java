@@ -2,6 +2,7 @@ package view;
 
 import controller.ActionController;
 import general.GameApp;
+import model.Movement;
 import utilz.GameConstants;
 
 import javax.swing.*;
@@ -12,8 +13,8 @@ public class GamePanel extends JPanel {
     private GameApp gameApp;
     private KeyView keyView;
 
-    public GamePanel(GameApp gameApp){
-        addKeyListener(new ActionController(this));
+    public GamePanel(GameApp gameApp, Movement movement){
+        addKeyListener(new ActionController(this, movement));
         this.gameApp = gameApp;
         setPanelSize();
         int width = 50;

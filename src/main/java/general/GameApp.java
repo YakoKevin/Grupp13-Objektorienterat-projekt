@@ -1,6 +1,7 @@
 package general;
 
 import entity.KeyItem;
+import model.Movement;
 import model.level.Level;
 import model.level.LevelFactory;
 import model.level.LevelManager;
@@ -29,6 +30,7 @@ public class GameApp implements Runnable {
     private Player player;
     private KeyItem key;
     private LevelManager levelManager;
+    private Movement movement;
 
     // SKAPA EN KLASS MED DESSA
     /*
@@ -45,11 +47,12 @@ public class GameApp implements Runnable {
     public GameApp(){
         levelManager = new LevelManager(this);
         player = new Player(100, 100, 30, 100);
+        movement = new Movement(player);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
         enemyBrain = new EnemyBrain();
         enemyBrain.addEnemies();
-        gamePanel = new GamePanel(this);
+        gamePanel = new GamePanel(this, movement);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
@@ -77,6 +80,7 @@ public class GameApp implements Runnable {
 
     public void update(){
         player.update();
+        movement.update();
         enemyBrain.update();
         levelManager.update();
         boolean collision = key.isCollision((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
@@ -135,7 +139,7 @@ public class GameApp implements Runnable {
     }
 
     public void windowFocusLost(){
-        player.resetDirectionBooleans();
+        movement.resetDirectionBooleans();
     }
 
     public Player getPlayer() {
