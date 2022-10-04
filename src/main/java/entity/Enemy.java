@@ -2,33 +2,38 @@ package entity;
 
 
 import utilz.Coordinate;
-import utilz.EntityStates;
 
+import java.awt.*;
+
+import static utilz.EnemyConstants.GetSpriteAmount;
 import static utilz.EntityStates.*;
 import static utilz.EntityStates.EnemyStates.*;
 
 public abstract class Enemy extends Entity implements model.IObserver, Hostile {
 
     private int animationIndex;
+    private int enemyState;
+    private int enemyType;
     private int animationTick = 25;
     private int animationSpeed = 25;
 
-    private EnemyStates enemyState = IDLE;
+    //private EnemyStates enemyState = IDLE;
 
-    public Enemy(float x, float y, int width, int height){
+    public Enemy(float v, float x, float y, int width, int height){
         super(x, y, width, height);
+        this.enemyType = enemyType;
         this.setHealthPoints(50);
         //super(50,10,1,3,10);
     }
 
-    private void updateAnimationTick(){
+    protected void updateAnimationTick(){
         animationTick++;
 
         if(animationTick >= animationSpeed){
             animationTick = 0;
             animationIndex++;
 
-            if (animationIndex >= enemyState.getAnimationSpriteAmount()){
+            if (animationIndex >= GetSpriteAmount(enemyType, enemyState)){
                 animationIndex = 0;
             }
         }
@@ -42,7 +47,7 @@ public abstract class Enemy extends Entity implements model.IObserver, Hostile {
         return animationIndex;
     }
 
-    public EnemyStates getEnemyState(){
+    public int getEnemyState(){
         return enemyState;
     }
 
@@ -58,6 +63,17 @@ public abstract class Enemy extends Entity implements model.IObserver, Hostile {
     @Override
     public void checkIfAttacked(Coordinate start, Coordinate end) {
         //TODO: add the stuff here.
+    }
+
+    //Function to be added
+
+    public void followPlayer(int x,int y) {
+
+    }
+
+    public void paint(Graphics g) {
+        // TODO Auto-generated method stub
+
     }
 
 }

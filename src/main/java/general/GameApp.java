@@ -13,6 +13,7 @@ import view.GamePanel;
 import view.GameView;
 import entity.EnemyBrain;
 import entity.Player;
+import entity.Skeleton;
 
 import java.awt.*;
 
@@ -29,7 +30,8 @@ public class GameApp implements Runnable {
     private final int MAX_UPS = 200;
 
     //Inget av dessa borde finnas som en direkt referens här i GameApp - byt till att fråga currentLevel istället
-    private EnemyBrain enemyBrain;
+    //private EnemyBrain enemyBrain;
+    private Skeleton skel;
     private Player player;
     private KeyItem key;
     private LevelManager levelManager;
@@ -57,8 +59,9 @@ public class GameApp implements Runnable {
         attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
-        enemyBrain = new EnemyBrain();
-        enemyBrain.addEnemies();
+        skel=new Skeleton(50,50);
+        skel.loadEnemyImages();
+        skel.addEnemies();
         gamePanel = new GamePanel(this, movement, attack);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);
@@ -71,7 +74,8 @@ public class GameApp implements Runnable {
 
     public void render(Graphics g){
         levelManager.draw(g);
-        enemyBrain.draw(g);
+        //enemyBrain.draw(g);
+        skel.draw(g);
         player.render(g);
         animation.render(g);
         if(animation.attacking){
@@ -90,7 +94,8 @@ public class GameApp implements Runnable {
         player.update();
         movement.updatePosition();
         animation.update();
-        enemyBrain.update();
+        //enemyBrain.update();
+        skel.update();
         levelManager.update();
         boolean collision = key.isCollision((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
         if(collision)

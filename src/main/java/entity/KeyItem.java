@@ -40,8 +40,8 @@ public class KeyItem extends Entity implements model.IObserver {
 
     public void setNewPosition()
     {
-        double newX = Math.random()*1000;
-        double newY = Math.random()*500;
+        double newX = Math.random()*700;
+        double newY = Math.random()*450;
         this.setX((float)newX);
         this.setY((float)newY);
     }

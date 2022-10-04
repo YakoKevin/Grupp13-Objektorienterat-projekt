@@ -44,6 +44,11 @@ public class LevelManager {
 
     }
 
+    public int[][] getCurrentLevel() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
    // public Level getCurrentLevel(){
     //    return levelSprite;
    // }

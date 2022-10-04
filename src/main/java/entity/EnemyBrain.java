@@ -31,8 +31,8 @@ public class EnemyBrain {
     }
 
     private void drawSkeletons(Graphics g) {
-        for(Skeleton skeleton : skeletons)
-            g.drawImage(skeletonArray[skeleton.getEnemyState().ordinal()][skeleton.getAnimationIndex()], 200,200, null);
+        //for(Skeleton skeleton : skeletons)
+            //g.drawImage(skeletonArray[skeleton.getEnemyState().ordinal()][skeleton.getAnimationIndex()], 200,200, null);
     }
 
     private void loadEnemyImages() {
