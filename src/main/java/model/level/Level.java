@@ -1,5 +1,6 @@
 package model.level;
 
+import entity.Enemy;
 import entity.Player;
 import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
@@ -10,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
-//TODO: problem with accessing room! It might not have been instantiated since it is not a must from the childrens
-// constructors!
 
 /**
  * A facade to the level module. For interacting with the level and its rooms.
@@ -19,7 +18,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class Level{
     protected Room currentRoom;
     protected ArrayList<Room> allRooms;
-    private int [][] levelData;
     private Player player;
 
     protected final LevelMap levelMap;
@@ -70,5 +68,11 @@ public abstract class Level{
         int index = ThreadLocalRandom.current().nextInt(0, roomTypes.length);
         Iterator<CardinalDirection> doors = levelMap.getNodeDoors(coordinate);
         return roomTypes[index].apply(doors);
+    }
+
+    public void updateEnemies(){
+        for (Iterator<Enemy> it = currentRoom.getEnemies(); it.hasNext(); ) {
+            it.next().update();
+        }
     }
 }

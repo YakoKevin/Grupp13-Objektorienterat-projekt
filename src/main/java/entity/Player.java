@@ -9,18 +9,20 @@ import utilz.ImageServer;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 import static utilz.EntityStates.*;
 import static utilz.EntityStates.PlayerStates.*;
 
 
-public class Player extends Entity implements IObservable {
+public class Player extends Entity implements IObservable, HostileAttacker {
     private int playerDirection = -1;
     private boolean attacking = false;
     private int[][] levelData;
     private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
     private Rectangle2D rect2D = new Rectangle2D.Double(getX(),getY(),100,100);
+    private ArrayList<Hostile> hostiles = new ArrayList<>();
 
     private int keyCount;
 
@@ -169,5 +171,10 @@ public class Player extends Entity implements IObservable {
     public void addKey()
     {
         keyCount++;
+    }
+
+    @Override
+    public void addHostilesList(ArrayList<Hostile> hostile) {
+        this.hostiles = hostile;
     }
 }

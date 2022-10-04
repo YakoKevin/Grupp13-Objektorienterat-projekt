@@ -1,12 +1,13 @@
 package entity;
 
 
+import utilz.Coordinate;
 import utilz.EntityStates;
 
 import static utilz.EntityStates.*;
 import static utilz.EntityStates.EnemyStates.*;
 
-public abstract class Enemy extends Entity implements model.IObserver {
+public abstract class Enemy extends Entity implements model.IObserver, Hostile {
 
     private int animationIndex;
     private int animationTick = 25;
@@ -52,6 +53,11 @@ public abstract class Enemy extends Entity implements model.IObserver {
             //System.out.println("Ouch" + p.getAttackPoints());
         }
         //System.out.println(" EnemyHp" + this.getHealthPoints());
+    }
+
+    @Override
+    public void checkIfAttacked(Coordinate start, Coordinate end) {
+        //TODO: add the stuff here.
     }
 
 }

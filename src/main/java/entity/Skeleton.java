@@ -1,5 +1,7 @@
 package entity;
 
+import utilz.Coordinate;
+
 import static utilz.EnemyConstants.*;
 
 public class Skeleton extends Enemy{
@@ -8,5 +10,4 @@ public class Skeleton extends Enemy{
         super(x, y, 0, 0);
         setHealthPoints(50);
     }
-
 }

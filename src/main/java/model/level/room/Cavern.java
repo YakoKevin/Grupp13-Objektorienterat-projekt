@@ -1,21 +1,32 @@
 package model.level.room;
 
+import entity.Enemy;
+import entity.EnemyFactory;
+import entity.Hostile;
+import entity.Player;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.function.Function;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * A simple rectangular room with a size of 30x18. It has no obstacles or doors.
  */
 public class Cavern extends Room {
 
+    private int MIN_NUMBER_OF_ENEMIES;
+    private int MAX_NUMBER_OF_ENEMIES;
+
     public Cavern(Iterator<CardinalDirection> doors) {
-        super(doors);
+        super(doors, new EnemyFactory());
         createWalls();
         addDoors(doors);
+        addEnemies(enemyFactory);
     }
+
+
 
     private void createWalls(){
         int y = 0;
@@ -36,8 +47,8 @@ public class Cavern extends Room {
     }
 
     private void addDoors(Iterator<CardinalDirection> doorsIt) {
-        for (Iterator<CardinalDirection> it = doorsIt; it.hasNext(); ) {
-            CardinalDirection doorDirection = it.next();
+        while (doorsIt.hasNext()) {
+            CardinalDirection doorDirection = doorsIt.next();
             Door doorToAdd = Door.getDoorFromCardinalDirection(doorDirection);
             if(doorToAdd != null)
                 doors.add(doorToAdd);
@@ -46,5 +57,15 @@ public class Cavern extends Room {
 
     private void removeWalls(){
 
+    }
+
+    private void addEnemies(EnemyFactory enemyFactory) {
+        for (int i = 0; i <= ThreadLocalRandom.current().nextInt(MIN_NUMBER_OF_ENEMIES,MAX_NUMBER_OF_ENEMIES+1); i++) {
+            enemies.add(enemyFactory.createSkeleton());
+        }
+    }
+
+    private void givePlayerHostiles(Player player){
+        ArrayList<Hostile> hostiles = new ArrayList<>(enemies);
     }
 }

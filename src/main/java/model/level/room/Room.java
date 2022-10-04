@@ -3,6 +3,9 @@ package model.level.room;
 //TODO: Make sure all the game logic has the same referens to height and length so that no errors occur because of mis-
 // matched numbers!
 
+import entity.Enemy;
+import entity.EnemyFactory;
+import entity.Hostile;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
@@ -22,10 +25,12 @@ public abstract class Room{
     protected ArrayList<Coordinate> wallCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> obstaclesCoordinates = new ArrayList<>();
     protected ArrayList<Door> doors = new ArrayList<>();
+    protected ArrayList<Enemy> enemies = new ArrayList<>();
+    protected EnemyFactory enemyFactory;
 
 
-    public Room(Iterator<CardinalDirection> doors) {
-        super();
+    public Room(Iterator<CardinalDirection> doors, EnemyFactory enemyFactory) {
+        this.enemyFactory = enemyFactory;
     }
 
     public boolean isCoordinateInWall(Coordinate coordinate) {
@@ -80,5 +85,9 @@ public abstract class Room{
 
     public CardinalDirection getEntryDirection(){
         return entryDirection;
+    }
+
+    public Iterator<Enemy> getEnemies(){
+        return enemies.iterator();
     }
 }
