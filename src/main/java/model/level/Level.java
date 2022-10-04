@@ -67,7 +67,9 @@ public abstract class Level{
     protected Room createRoom(Coordinate coordinate){
         int index = ThreadLocalRandom.current().nextInt(0, roomTypes.length);
         Iterator<CardinalDirection> doors = levelMap.getNodeDoors(coordinate);
-        return roomTypes[index].apply(doors);
+        Room room = roomTypes[index].apply(doors);
+        room.givePlayerHostiles(player);
+        return room;
     }
 
     public void updateEnemies(){

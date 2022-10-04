@@ -64,8 +64,4 @@ public class Cavern extends Room {
             enemies.add(enemyFactory.createSkeleton());
         }
     }
-
-    private void givePlayerHostiles(Player player){
-        ArrayList<Hostile> hostiles = new ArrayList<>(enemies);
-    }
 }

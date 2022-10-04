@@ -6,6 +6,7 @@ package model.level.room;
 import entity.Enemy;
 import entity.EnemyFactory;
 import entity.Hostile;
+import entity.Player;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
@@ -89,5 +90,9 @@ public abstract class Room{
 
     public Iterator<Enemy> getEnemies(){
         return enemies.iterator();
+    }
+
+    public void givePlayerHostiles(Player player){
+        ArrayList<Hostile> hostiles = new ArrayList<>(enemies);
     }
 }
