@@ -1,5 +1,6 @@
 package model;
 
+import entity.Entity;
 import entity.Player;
 
 public class Movement {
@@ -10,37 +11,39 @@ public class Movement {
     private boolean up;
     private boolean down;
     private float playerSpeed = 2.0f;
-    private Player player;
+    private Entity entity;
     private float x;
     private float y;
+    private Animation animation;
 
-    public Movement(Player player){
-        this.player = player;
+    public Movement(Entity entity, Animation animation){
+        this.entity = entity;
+        this.animation = animation;
     }
 
-    private void updatePosition() {
-        moving = false;
+    public void updatePosition() {
+        animation.moving = false;
 
         if (left && !right) {
-            x = player.getX() + playerSpeed;
-            player.setX(x);
-            moving = true;
+            x = entity.getX() + playerSpeed;
+            entity.setX(x);
+            animation.moving = true;
         }
         else if (right && !left) {
-            x = player.getX() - playerSpeed;
-            player.setX(x);
-            moving = true;
+            x = entity.getX() - playerSpeed;
+            entity.setX(x);
+            animation.moving = true;
         }
 
         if (up && !down) {
-            y = player.getY() - playerSpeed;
-            player.setY(y);
-            moving = true;
+            y = entity.getY() - playerSpeed;
+            entity.setY(y);
+            animation.moving = true;
         }
         else if (down && !up) {
-            y = player.getY() + playerSpeed;
-            player.setY(y);
-            moving = true;
+            y = entity.getY() + playerSpeed;
+            entity.setY(y);
+            animation.moving = true;
         }
 
 
@@ -54,9 +57,9 @@ public class Movement {
         down = false;
     }
 
-    public void update(){
-        updatePosition();
-    }
+    //public void update(){
+   //     updatePosition();
+    //}
 
     public boolean isLeft() {
         return left;

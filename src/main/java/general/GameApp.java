@@ -1,11 +1,13 @@
 package general;
 
 import entity.KeyItem;
+import model.Animation;
 import model.Movement;
 import model.level.Level;
 import model.level.LevelFactory;
 import model.level.LevelManager;
 import utilz.GameConstants;
+import utilz.ImageServer;
 import view.GamePanel;
 import view.GameView;
 import entity.EnemyBrain;
@@ -31,6 +33,7 @@ public class GameApp implements Runnable {
     private KeyItem key;
     private LevelManager levelManager;
     private Movement movement;
+    private Animation animation;
 
     // SKAPA EN KLASS MED DESSA
     /*
@@ -47,7 +50,8 @@ public class GameApp implements Runnable {
     public GameApp(){
         levelManager = new LevelManager(this);
         player = new Player(100, 100, 30, 100);
-        movement = new Movement(player);
+        animation = new Animation(ImageServer.Ids.PLAYER, player);
+        movement = new Movement(player, animation);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
         enemyBrain = new EnemyBrain();
@@ -66,6 +70,7 @@ public class GameApp implements Runnable {
         levelManager.draw(g);
         enemyBrain.draw(g);
         player.render(g);
+        animation.render(g);
         if(player.getAttack()==true){
             player.drawAttackHitbox(g);
         }
@@ -80,7 +85,8 @@ public class GameApp implements Runnable {
 
     public void update(){
         player.update();
-        movement.update();
+        movement.updatePosition();
+        animation.update();
         enemyBrain.update();
         levelManager.update();
         boolean collision = key.isCollision((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());

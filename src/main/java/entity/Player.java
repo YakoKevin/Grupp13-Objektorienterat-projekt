@@ -16,17 +16,8 @@ import static utilz.EntityStates.PlayerStates.*;
 
 
 public class Player extends Entity implements IObservable {
-
-    private BufferedImage[][] animations;
-    private int animationTick = 30;
-    private int animationIndex = 0;
-    private int animationSpeed = 30;
-    private PlayerStates playerAction = IDLE;
-
     private int playerDirection = -1;
-    private boolean moving = false;
     private boolean attacking = false;
-    private float playerSpeed = 2.0f;
     private int[][] levelData;
     private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
     private Rectangle2D rect2D = new Rectangle2D.Double(getX(),getY(),100,100);
@@ -49,54 +40,10 @@ public class Player extends Entity implements IObservable {
 
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
-        loadAnimations();
         this.setAttackPoints(20);
         this.healthPoints=100;
         this.keyCount = 0;
         //super(100,20,0,5, 10);
-    }
-    private void updateAnimationTick() {
-        animationTick++;
-
-        if (animationTick >= animationSpeed){
-            animationTick = 0;
-            animationIndex++;
-            if (animationIndex >= playerAction.getAnimationSpriteAmount()){
-                animationIndex = 0;
-                attacking = false;
-            }
-        }
-    }
-
-    private void setAnimation() {
-        PlayerStates startAnimation = playerAction;
-
-        if (moving)
-            playerAction = RUNNING;
-        else
-            playerAction = IDLE;
-
-        if (attacking)
-            playerAction = ATTACK;
-
-        if (startAnimation != playerAction)
-            resetAnimationTick();
-    }
-
-    private void resetAnimationTick() {
-        animationIndex = 0;
-        animationTick = 0;
-    }
-
-    private void loadAnimations() {
-        BufferedImage image = ImageServer.getImage(ImageServer.Ids.PLAYER);
-
-        animations = new BufferedImage[6][3];
-        for (int row = 0; row < animations.length; row++){
-            for (int column = 0; column < animations[row].length; column++){
-                animations[row][column] = image.getSubimage(row*40, column*80, 30, 80);
-            }
-        }
     }
 
     public void loadLevelData(int[][] levelData){
@@ -105,12 +52,9 @@ public class Player extends Entity implements IObservable {
 
     public void update(){
         updateHitbox();
-        updateAnimationTick();
-        setAnimation();
     }
 
     public void render(Graphics g){
-        g.drawImage(animations[playerAction.ordinal()][animationIndex], (int) x, (int)y, null);
         drawHitbox(g);
     }
 
