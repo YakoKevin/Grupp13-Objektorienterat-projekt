@@ -65,7 +65,7 @@ public class Attack {
 
         if(getAtkOffSetX()<0){setAtkOffSetCoordX(0);}
         if(getAtkOffSetY()<0){setAtkOffSetCoordY(0);}
-        sk.checkIfAttacked(coordinate, coordinate); //få till det med observer bara, byt ut coordinate
+        sk.checkedIfIsAttacked(coordinate, coordinate); //få till det med observer bara, byt ut coordinate
 
         //notifyObservers();
     }

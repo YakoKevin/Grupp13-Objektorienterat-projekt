@@ -10,12 +10,12 @@ import static utilz.EntityStates.*;
 import static utilz.EntityStates.EnemyStates.*;
 
 public abstract class Enemy extends Entity implements model.IObserver, Hostile {
-
     private int animationIndex;
     private int enemyState;
     private int enemyType;
     private int animationTick = 25;
     private int animationSpeed = 25;
+
 
     //private EnemyStates enemyState = IDLE;
 
@@ -55,20 +55,34 @@ public abstract class Enemy extends Entity implements model.IObserver, Hostile {
         //System.out.println(" EnemyHp" + this.getHealthPoints());
         if(p.checkIfInRange(this)==true){ // funktionen ska nog inte kallas så här
             this.setHealthPoints(this.getHealthPoints()-p.getAttackPoints());
+            if(this.healthPoints<=0){
+                System.out.println("Monster slain");
+                this.setAlive(false);
+            }
             //System.out.println("Ouch" + p.getAttackPoints());
         }
         //System.out.println(" EnemyHp" + this.getHealthPoints());
     }
 
     @Override
-    public void checkIfAttacked(Coordinate start, Coordinate end) {
+    public void checkedIfIsAttacked(Coordinate start, Coordinate end) {
+
+
         //TODO: add the stuff here.
     }
 
     //Function to be added
 
     public void followPlayer(int x,int y) {
-
+        //simpel följ-efter-metod
+        if(x<this.x){
+            this.x--;
+        }
+        else x++;
+        if(y<this.y){
+            this.y--;
+        }
+        else this.y++;
     }
 
     public void paint(Graphics g) {

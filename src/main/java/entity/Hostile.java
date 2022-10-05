@@ -4,5 +4,5 @@ import utilz.Coordinate;
 
 public interface Hostile {
 
-    void checkIfAttacked(Coordinate start, Coordinate end);
+    void checkedIfIsAttacked(Coordinate start, Coordinate end);
 }
