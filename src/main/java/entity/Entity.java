@@ -7,6 +7,7 @@ public abstract class Entity {
     protected float y;
     protected int width, height;
     protected Rectangle hitbox;
+    protected boolean isAlive;
 
     public Entity(float x, float y, int width, int height){
         this.x = x;
@@ -32,7 +33,7 @@ public abstract class Entity {
     }
 
     public Rectangle getHitbox() {
-        return hitbox;
+        return this.hitbox;
     } //TODO: OBS borde inte returnera referensen till rectangle, borde kopiera ist!
 
     //private double x,y;
@@ -50,6 +51,7 @@ public abstract class Entity {
         this.x=0;
         this.y=0;
         this.attackRange = attackRange;
+        this.isAlive = true;
     }
 
     public float getX(){
@@ -97,4 +99,11 @@ public abstract class Entity {
     }
 
     public double getAttackRange(){return attackRange;}
+    public boolean getAlive(){
+        return this.isAlive;
+    }
+    protected void setAlive(boolean aliveStatus){
+        this.isAlive=aliveStatus;
+    }
+
 }

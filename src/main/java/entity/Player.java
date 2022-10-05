@@ -5,7 +5,7 @@ import model.IObservable;
 import model.IObserver;
 import utilz.EntityStates;
 import utilz.ImageServer;
-
+import model.level.Level;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -23,6 +23,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
     private Rectangle2D rect2D = new Rectangle2D.Double(getX(),getY(),100,100);
     private ArrayList<Hostile> hostiles = new ArrayList<>();
+    private Skeleton sk= new Skeleton(50,50);
 
     private int keyCount;
 
@@ -40,6 +41,10 @@ public class Player extends Entity implements IObservable, HostileAttacker {
 
     public void update(){
         updateHitbox();
+        if(checkIfHitByAttacker(sk)==true){ //kanske inte är härifrån som man kollar detta
+            this.setHealthPoints(this.getHealthPoints()-sk.getAttackPoints());
+        }
+
     }
 
     public void render(Graphics g){
@@ -72,6 +77,25 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         ////    return true;
        // }
         return false;
+    }
+
+    //Method checks if attacker has walked into player, i.e. their hitboxes allign
+    public boolean checkIfHitByAttacker(Enemy en){ //ska vara en lista med enemies som kommer från level här sen
+        double lPx = this.getX(); //think two rectangles, top left and bottom right coordinates for player and enemy
+        double lPy = this.getY();
+        double lEx = en.getX();
+        double lEy= en.getY();
+        double rPx = this.getX()+this.getWidth();
+        double rEx = lEx + en.getWidth();
+        double rEy = lEy + en.getHeight(); //kan nog städa upp variablerna lite här och (kanske namnge annorlunda)
+
+        if(lPx > rEx||lEx>rPx){ //if any rectangle is on the left side of the other one
+            return false;
+        }
+        if(rEx>lPx||rEy>lEy){
+            return false;
+        }
+        return true;
     }
 
     public void addObserver(IObserver obs) {
