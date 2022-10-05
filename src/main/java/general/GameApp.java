@@ -54,7 +54,8 @@ public class GameApp implements Runnable {
     public GameApp(){
         levelManager = new LevelManager(this);
         player = new Player(100, 100, 30, 100);
-        animation = new Animation(ImageServer.Ids.PLAYER, player);
+        //animation = new Animation(ImageServer.Ids.PLAYER, player);
+
         movement = new Movement(player, animation);
         attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
@@ -62,7 +63,7 @@ public class GameApp implements Runnable {
         skel=new Skeleton(50,50);
         skel.loadEnemyImages();
         skel.addEnemies();
-        gamePanel = new GamePanel(this, movement, attack);
+        gamePanel = new GamePanel(this, player.getMovement(), attack);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
@@ -77,8 +78,8 @@ public class GameApp implements Runnable {
         //enemyBrain.draw(g);
         skel.draw(g);
         player.render(g);
-        animation.render(g);
-        if(animation.attacking){
+        //animation.render(g);
+        if(player.isAttacking()){
             attack.drawAttackHitbox(g);
         }
         player.drawHP(g);
@@ -92,8 +93,8 @@ public class GameApp implements Runnable {
 
     public void update(){
         player.update();
-        movement.updatePosition();
-        animation.update();
+        //movement.updatePosition();
+        //animation.update();
         //enemyBrain.update();
         skel.update();
         levelManager.update();

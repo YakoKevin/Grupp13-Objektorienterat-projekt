@@ -1,8 +1,10 @@
 package entity;
 
 import controller.ActionController;
+import model.Animation;
 import model.IObservable;
 import model.IObserver;
+import model.Movement;
 import utilz.EntityStates;
 import utilz.ImageServer;
 
@@ -25,12 +27,16 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private ArrayList<Hostile> hostiles = new ArrayList<>();
 
     private int keyCount;
+    Animation animation;
+    Movement movement;
 
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
         this.setAttackPoints(20);
         this.healthPoints=100;
         this.keyCount = 0;
+        animation = new Animation(ImageServer.Ids.PLAYER, this);
+        movement = new Movement(this, animation);
         //super(100,20,0,5, 10);
     }
 
@@ -38,12 +44,19 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         this.levelData = levelData;
     }
 
+    public Movement getMovement() {
+        return movement;
+    }
+
     public void update(){
         updateHitbox();
+        movement.updatePosition();
+        animation.update();
     }
 
     public void render(Graphics g){
         drawHitbox(g);
+        animation.render(g);
     }
 
 
@@ -86,6 +99,10 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         for(IObserver IObserver: iObservers){
             IObserver.update();
         }
+    }
+
+    public boolean isAttacking() {
+        return attacking;
     }
 
     public void addKey()
