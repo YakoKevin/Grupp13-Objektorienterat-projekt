@@ -78,6 +78,11 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         else if(this.y==yy && this.y<yy+10) {
             setHealthPoints(getHealthPoints()-5);
         }
+        if(getHealthPoints()<=0) {
+            JOptionPane.showMessageDialog(null, "Do You want to try again??",
+                    "Game Over", JOptionPane.YES_NO_CANCEL_OPTION);
+            System.exit(0);
+        }
     }
 
     public void render(Graphics g){
