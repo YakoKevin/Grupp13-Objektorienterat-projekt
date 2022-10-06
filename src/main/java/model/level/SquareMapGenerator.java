@@ -35,10 +35,10 @@ public enum SquareMapGenerator {
         CardinalDirection borderForStartingNode = CardinalDirection.getRandomDirection();
         CardinalDirection borderForEndingNode = borderForStartingNode.getOppositeDirection();
 
-        int[] startingCoordinate = addNodeToBorderOn(borderForStartingNode, size);
-        int[] endingCoordinate = addNodeToBorderOn(borderForEndingNode, size);
+        Coordinate startingCoordinate = addNodeToBorderOn(borderForStartingNode, size);
+        Coordinate endingCoordinate = addNodeToBorderOn(borderForEndingNode, size);
 
-        int[][] mainNodePath = placeNodesBetweenStartAndEnd(size*size, startingCoordinate, endingCoordinate);
+        Coordinate[] mainNodePath = placeNodesBetweenStartAndEnd(size*size, startingCoordinate, endingCoordinate);
 
         LevelMap levelMap = new LevelMap(mainNodePath, startingCoordinate, endingCoordinate, size);
         levelMap.addCoordinatePath(mainNodePath);
@@ -46,11 +46,11 @@ public enum SquareMapGenerator {
         return levelMap;
     }
 
-    private static int[] addNodeToBorderOn(CardinalDirection borderDirection, int sideLength){
+    private static Coordinate addNodeToBorderOn(CardinalDirection borderDirection, int sideLength){
         int x = 0;
         int y = 0;
 
-        int[] coordinate = new int[2];
+        //int[] coordinate = new int[2];
 
         switch (borderDirection) {
             case NORTH -> {
@@ -68,54 +68,43 @@ public enum SquareMapGenerator {
                 y = ThreadLocalRandom.current().nextInt(0, sideLength);
             }
         }
+        /*
         coordinate[0] = x;
-        coordinate[1] = y;
+        coordinate[1] = y;*/
 
-        return coordinate;
+        return new Coordinate(x, y);
     }
 
-    private static int[][] placeNodesBetweenStartAndEnd(int maxAmountOfNodes, int[] startCoordinate, int[] endCoordinate) {
-        int[] directionalVector = new int[2];
-        int[][] mainPath = new int[maxAmountOfNodes][2];
+    private static Coordinate[] placeNodesBetweenStartAndEnd(int maxAmountOfNodes, Coordinate startCoordinate, Coordinate endCoordinate) {
+        Coordinate currentCoordinate = startCoordinate.copy();
+        Coordinate[] mainPath = new Coordinate[maxAmountOfNodes];
+        mainPath[0] = currentCoordinate;
 
-        int[] startingCoordinate = startCoordinate.clone();
-        int[] endingCoordinate = endCoordinate.clone();
-
-        mainPath[0][0] = startingCoordinate[0];
-        mainPath[0][1] = startingCoordinate[1];
         int i = 1;
-        for( ; i <= maxAmountOfNodes; i++){
-            directionalVector[0] = startingCoordinate[0] - endingCoordinate[0];
-            directionalVector[1] = startingCoordinate[1] - endingCoordinate[1];
+        for( ; i < maxAmountOfNodes; i++){
+            Coordinate directionality = new Coordinate(currentCoordinate.getX() - endCoordinate.getX(), currentCoordinate.getY() - endCoordinate.getY());
 
-            if(startingCoordinate[0] == endingCoordinate[0] && startingCoordinate[1] == endingCoordinate[1]){
+            if(currentCoordinate.equals(endCoordinate)){
                 break;
             }
 
-            if (Math.abs(directionalVector[0]) > Math.abs(directionalVector[1])) {
-                if(directionalVector[0] > 0) {
-                    mainPath[i][0] = startingCoordinate[0] - 1; //We walk "left".
-                    mainPath[i][1] = startingCoordinate[1];
-                    startingCoordinate[0]--;
+            if (Math.abs(directionality.getX()) > Math.abs(directionality.getY())) {
+                if(directionality.getX() > 0) {
+                    mainPath[i] = currentCoordinate.left(); //We walk "left"
                 } else {
-                    mainPath[i][0] = startingCoordinate[0] + 1; //We walk "right".
-                    mainPath[i][1] = startingCoordinate[1];
-                    startingCoordinate[0]++;
+                    mainPath[i] = currentCoordinate.right(); //We walk "right"
                 }
             } else {
-                if(directionalVector[1] > 0) {
-                    mainPath[i][0] = startingCoordinate[0]; //We walk "up".
-                    mainPath[i][1] = startingCoordinate[1] - 1;
-                    startingCoordinate[1]--;
+                if(directionality.getY() > 0) {
+                    mainPath[i] = currentCoordinate.up(); //We walk "up".
                 } else {
-                    mainPath[i][0] = startingCoordinate[0]; //We walk "down".
-                    mainPath[i][1] = startingCoordinate[1] + 1;
-                    startingCoordinate[1]++;
+                    mainPath[i] = currentCoordinate.down(); //We walk "down".
                 }
             }
+            currentCoordinate = mainPath[i];
         }
 
-        return  Arrays.copyOf(mainPath, i+1); //Trunking of the array to only have length of the path length.
+        return  Arrays.copyOf(mainPath, i); //Trunking of the array to only have length of the path length.
     }
 
     /*
@@ -123,33 +112,32 @@ public enum SquareMapGenerator {
      */
     private static void placeBranchingNodesInLevelMap(LevelMap levelMap) {
         int index = ThreadLocalRandom.current().nextInt(0, levelMap.getMainNodePathCoordinates().length);
-        int[] startCoordinate = levelMap.getMainNodePathCoordinates()[index];
+        Coordinate startCoordinate = levelMap.getMainNodePathCoordinates()[index];
 
         int size = levelMap.getMapSize();
-        int[] endCoordinate = new int[2];
+        //int[] endCoordinate = new int[2];
 
-        int indexY = ThreadLocalRandom.current().nextInt(0, size);
-        int indexX = ThreadLocalRandom.current().nextInt(0, size);
+        int randomX = ThreadLocalRandom.current().nextInt(0, size);
+        int randomY = ThreadLocalRandom.current().nextInt(0, size);
 
-        endCoordinate[0] = indexX;
-        endCoordinate[1] = indexY;
+        Coordinate endCoordinate = new Coordinate(randomX, randomY);
 
-        int[][] nodePath = placeNodesBetweenStartAndEnd(size*size, startCoordinate, endCoordinate);
+        Coordinate[] nodePath = placeNodesBetweenStartAndEnd(size*size, startCoordinate, endCoordinate);
 
         levelMap.addCoordinatePath(nodePath);
     }
 
     private static void placeEdgesForSortedPath(LevelMap levelMap){
         for(int i = 0; i < levelMap.getMainNodePathCoordinates().length - 1; i++) {
-            int[][] coord = levelMap.getMainNodePathCoordinates();
-            if(coord[i][0] + 1 == levelMap.getMainNodePathCoordinates()[i+1][0]){
-                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.EAST);
-            } else if(coord[i][0] - 1 == levelMap.getMainNodePathCoordinates()[i+1][0]){
-                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.WEST);
-            } else if(coord[i][1] + 1 == levelMap.getMainNodePathCoordinates()[i+1][1]){
-                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.SOUTH);
-            } else if(coord[i][1] - 1 == levelMap.getMainNodePathCoordinates()[i+1][1]){
-                levelMap.placeDoorsAtNode(coord[i][0], coord[i][1], CardinalDirection.NORTH);
+            Coordinate[] coordinates = levelMap.getMainNodePathCoordinates();
+            if(coordinates[i].getX() + 1 == levelMap.getMainNodePathCoordinates()[i+1].getX()){
+                levelMap.placeDoorsAtNode(coordinates[i].getX(), coordinates[i].getY(), CardinalDirection.EAST);
+            } else if(coordinates[i].getX() - 1 == levelMap.getMainNodePathCoordinates()[i+1].getX()){
+                levelMap.placeDoorsAtNode(coordinates[i].getX(), coordinates[i].getY(), CardinalDirection.WEST);
+            } else if(coordinates[i].getY() + 1 == levelMap.getMainNodePathCoordinates()[i+1].getY()){
+                levelMap.placeDoorsAtNode(coordinates[i].getX(), coordinates[i].getY(), CardinalDirection.SOUTH);
+            } else if(coordinates[i].getY() - 1 == levelMap.getMainNodePathCoordinates()[i+1].getY()){
+                levelMap.placeDoorsAtNode(coordinates[i].getX(), coordinates[i].getY(), CardinalDirection.NORTH);
             }
         }
     }

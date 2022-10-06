@@ -24,5 +24,22 @@ public class Coordinate {
         } else
             return true;
     }
+
+    public Coordinate copy(){
+        return new Coordinate(this.x, this.y);
+    }
+
+    public Coordinate left(){
+        return new Coordinate(x - 1, y);
+    }
+    public Coordinate right(){
+        return new Coordinate(x + 1, y);
+    }
+    public Coordinate up(){
+        return new Coordinate(x, y - 1);
+    }
+    public Coordinate down(){
+        return new Coordinate(x, y + 1);
+    }
 }
 

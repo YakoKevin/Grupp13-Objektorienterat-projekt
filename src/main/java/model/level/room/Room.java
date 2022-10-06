@@ -94,5 +94,6 @@ public abstract class Room{
 
     public void givePlayerHostiles(Player player){
         ArrayList<Hostile> hostiles = new ArrayList<>(enemies);
+        player.addHostilesList(hostiles);
     }
 }

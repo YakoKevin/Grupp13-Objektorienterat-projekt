@@ -15,12 +15,12 @@ import java.util.NoSuchElementException;
  */
 public class LevelMap {
     private final MapGraph mapGraph;
-    private final int[][] mainNodePathCoordinates;
-    private final int[] startCoordinate;
-    private final int[] finishCoordinate;
+    private final Coordinate[] mainNodePathCoordinates;
+    private final Coordinate startCoordinate;
+    private final Coordinate finishCoordinate;
     private final int size;
 
-    public LevelMap(int[][] mainNodePathCoordinates, int[] startCoordinate, int[] finishCoordinate, int size){
+    public LevelMap(Coordinate[] mainNodePathCoordinates, Coordinate startCoordinate, Coordinate finishCoordinate, int size){
         this.mapGraph = new MapGraph();
         this.mainNodePathCoordinates = mainNodePathCoordinates;
         this.startCoordinate = startCoordinate;
@@ -41,19 +41,19 @@ public class LevelMap {
     }
 
     public Coordinate getStartCoordinate() {
-        return new Coordinate(startCoordinate[0], startCoordinate[1]);
+        return startCoordinate;
     }
 
-    public int[] getFinishCoordinate() {
-        return finishCoordinate.clone();
+    public Coordinate getFinishCoordinate() {
+        return finishCoordinate;
     }
 
-    public int[][] getMainNodePathCoordinates() {
+    public Coordinate[] getMainNodePathCoordinates() {
         return mainNodePathCoordinates.clone();
     }
 
     public Coordinate[] getNodesCoordinates() {
-        return mapGraph.getNodesCoordinates();
+        return mapGraph.getNodesCoordinates().clone();
     }
 
     public void placeDoorsAtNode(int x, int y, CardinalDirection... directionList){
@@ -68,13 +68,9 @@ public class LevelMap {
         return mapGraph.getNodeDoors(nodeCoordinate);
     }
 
-    public void addNode(int x, int y){
-        mapGraph.addNode(new MapNode(x, y));
-    }
-
-    public void addCoordinatePath(int[][] path){
-        for (int[] coordinate : path) {
-            mapGraph.addNode(new MapNode(coordinate[0], coordinate[1]));
+    public void addCoordinatePath(Coordinate[] path){
+        for (Coordinate coordinate : path) {
+            mapGraph.addNode(new MapNode(coordinate.copy()));
         }
     }
 
@@ -105,13 +101,13 @@ public class LevelMap {
             int[][] matrix = new int[size*2-1][size*2-1];
 
             for (MapNode node : nodes) {
-                matrix[node.coordinateX*2][node.coordinateY*2] = 2;
+                matrix[node.coordinate.getX()*2][node.coordinate.getY()*2] = 2;
                 for(CardinalDirection door : node.doors) {
                     switch (door) {
-                        case EAST -> matrix[node.coordinateX*2 + 1][node.coordinateY*2] = 1;
-                        case NORTH -> matrix[node.coordinateX*2][node.coordinateY*2 - 1] = 1;
-                        case SOUTH -> matrix[node.coordinateX*2][node.coordinateY*2 + 1] = 1;
-                        case WEST -> matrix[node.coordinateX*2 - 1][node.coordinateY*2] = 1;
+                        case EAST -> matrix[node.coordinate.getX()*2 + 1][node.coordinate.getY()*2] = 1;
+                        case NORTH -> matrix[node.coordinate.getX()*2][node.coordinate.getY()*2 - 1] = 1;
+                        case SOUTH -> matrix[node.coordinate.getX()*2][node.coordinate.getY()*2 + 1] = 1;
+                        case WEST -> matrix[node.coordinate.getX()*2 - 1][node.coordinate.getY()*2] = 1;
                     }
 
                 }
@@ -124,7 +120,7 @@ public class LevelMap {
             int[][] matrix = new int[size][size];
 
             for (MapNode node : nodes) {
-                matrix[node.coordinateX][node.coordinateY] = 2;
+                matrix[node.coordinate.getX()][node.coordinate.getY()] = 2;
             }
 
             return matrix;
@@ -132,7 +128,7 @@ public class LevelMap {
 
         public void placeDoorsAtNode(int x, int y, CardinalDirection... directionList){
             for(MapNode node : nodes){
-                if(node.coordinateX == x && node.coordinateY == y) {
+                if(node.coordinate.getX() == x && node.coordinate.getY() == y) {
                     for (CardinalDirection direction : directionList) {
                         node.addDoorDirection(direction);
                     }
@@ -144,8 +140,8 @@ public class LevelMap {
             Coordinate[] nodesCoordinates = new Coordinate[nodes.size()];
 
             for (int i = 0; i < nodes.size(); i++){
-                Coordinate coordniate = new Coordinate(nodes.get(i).getCoordinateX(), nodes.get(i).getCoordinateY());
-                nodesCoordinates[i] = coordniate;
+                Coordinate coordinate = nodes.get(i).getCoordinate().copy();
+                nodesCoordinates[i] = coordinate;
             }
             return nodesCoordinates;
         }
@@ -164,27 +160,17 @@ public class LevelMap {
      * Node class for use with levelMap. Has coordinates but also direction of connected neighbours (doors).
      */
     private class MapNode {
-        private final int coordinateX;
-        private final int coordinateY;
+        private final Coordinate coordinate;
 
         private final HashSet<CardinalDirection> doors;
 
-        private MapNode(int coordinateX, int coordinateY) {
-            this.coordinateX = coordinateX;
-            this.coordinateY = coordinateY;
+        private MapNode(Coordinate coordinate) {
+            this.coordinate = coordinate;
             this.doors = new HashSet<>();
         }
 
-        private int getCoordinateX() {
-            return coordinateX;
-        }
-
-        private int getCoordinateY() {
-            return coordinateY;
-        }
-
         private Coordinate getCoordinate(){
-            return new Coordinate(coordinateX, coordinateY);
+            return coordinate;
         }
 
         private void addDoorDirection(CardinalDirection doorDirection){

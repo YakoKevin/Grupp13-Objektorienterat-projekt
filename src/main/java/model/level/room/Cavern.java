@@ -16,8 +16,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Cavern extends Room {
 
-    private int MIN_NUMBER_OF_ENEMIES;
-    private int MAX_NUMBER_OF_ENEMIES;
+    private int MIN_NUMBER_OF_ENEMIES = 0;
+    private int MAX_NUMBER_OF_ENEMIES = 4;
 
     public Cavern(Iterator<CardinalDirection> doors) {
         super(doors, new EnemyFactory());
@@ -25,8 +25,6 @@ public class Cavern extends Room {
         addDoors(doors);
         addEnemies(enemyFactory);
     }
-
-
 
     private void createWalls(){
         int y = 0;
@@ -63,5 +61,9 @@ public class Cavern extends Room {
         for (int i = 0; i <= ThreadLocalRandom.current().nextInt(MIN_NUMBER_OF_ENEMIES,MAX_NUMBER_OF_ENEMIES+1); i++) {
             enemies.add(enemyFactory.createSkeleton());
         }
+    }
+
+    private void addObstacles() {
+        
     }
 }
