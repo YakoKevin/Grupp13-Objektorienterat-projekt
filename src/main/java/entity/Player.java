@@ -13,6 +13,10 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import model.Animation;
+import entity.Hostile;
+
+import javax.swing.*;
 
 import static utilz.EntityStates.*;
 import static utilz.EntityStates.PlayerStates.*;
@@ -26,6 +30,8 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private Rectangle2D rect2D = new Rectangle2D.Double(getX(),getY(),100,100);
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private Skeleton sk= new Skeleton(50,50);
+
+    private int skelX=0,skelY=0;
 
     private int keyCount;
     Animation animation;
@@ -50,6 +56,8 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     }
 
     public void update(){
+        skelX=Skeleton.cx;
+        skelY=Skeleton.cy;
         updateHitbox();
         if(checkIfHitByAttacker(sk)==true){ //kanske inte är härifrån som man kollar detta
             this.setHealthPoints(this.getHealthPoints()-sk.getAttackPoints());
@@ -57,6 +65,19 @@ public class Player extends Entity implements IObservable, HostileAttacker {
 
         movement.updatePosition();
         animation.update();
+
+        animation.updateAnimationTick();
+        animation.setAnimation();
+        checkAttack(skelX,skelX);
+    }
+
+    private void checkAttack(int xx,int yy) {
+        if(this.x==xx && this.x<xx+10) {
+            setHealthPoints(getHealthPoints()-5);
+        }
+        else if(this.y==yy && this.y<yy+10) {
+            setHealthPoints(getHealthPoints()-5);
+        }
     }
 
     public void render(Graphics g){

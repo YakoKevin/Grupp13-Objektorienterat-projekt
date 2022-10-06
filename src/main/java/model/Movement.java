@@ -24,6 +24,13 @@ public class Movement {
     public void updatePosition() {
         animation.moving = false;
 
+        if(this.x>477 && this.x<539) {
+            if(this.y>191 && this.y<223) {
+//        		moving = false;
+//        		return;
+            }
+        }
+
         if (left && !right) {
             x = entity.getX() + playerSpeed;
             entity.setX(x);

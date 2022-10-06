@@ -26,7 +26,7 @@ public class Animation {
         loadAnimations();
     }
 
-    private void updateAnimationTick() {
+    public void updateAnimationTick() {
         animationTick++;
 
         if (animationTick >= animationSpeed){
@@ -39,7 +39,7 @@ public class Animation {
         }
     }
 
-    private void setAnimation() {
+    public void setAnimation() {
         EntityStates.PlayerStates startAnimation = playerAction;
 
         if (moving)
