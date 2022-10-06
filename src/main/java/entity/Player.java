@@ -34,6 +34,8 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private int skelX=0,skelY=0;
 
     private int keyCount;
+    private static int scoreCount;
+
     Animation animation;
     Movement movement;
 
@@ -95,8 +97,11 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     public void drawHP(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         String hpStr = Double.toString(getHealthPoints());
+        g2.setFont(new Font("Araial", Font.BOLD, 12));
+        g2.setColor(new Color(255, 0, 70));
         g2.drawString("HP: " + hpStr,10,10);
         g2.drawString("KEYS: " + this.keyCount, 10,30);
+        g2.drawString("SCORE: " + scoreCount, 10,50);
     }
 
 
