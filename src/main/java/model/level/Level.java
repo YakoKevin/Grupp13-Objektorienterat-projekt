@@ -62,6 +62,7 @@ public abstract class Level{
 
     public void update(){
         player.update();
+        player.updatePosition();
         for (Iterator<Enemy> it = currentRoom.getEnemies(); it.hasNext(); ) {
             it.next().update();
         }
@@ -93,6 +94,10 @@ public abstract class Level{
         Room room = roomTypes[index].apply(doors);
         room.givePlayerHostiles(player);
         return room;
+    }
+
+    public void resetPlayerDirectionBooleans(){
+        player.resetDirectionBooleans();
     }
 
 }

@@ -48,7 +48,7 @@ public class GameApp implements Runnable {
         firstSetup();
 
         levelManager = new LevelManager(this);
-        player = new Player(100, 100, 30, 100);
+        //player = new Player(100, 100, 30, 100);
         key = new KeyItem(450, 350, 40, 40);
         player.loadLevelData(levelManager.getCurrentLevel());
         skel=new Skeleton(50,50);
@@ -158,6 +158,7 @@ public class GameApp implements Runnable {
 
     public Player setupPlayer(){
         Player player = new Player(EntitySetup.PLAYER.getHitBoxWidth(), EntitySetup.PLAYER.getHitBoxHeight(), EntitySetup.PLAYER.getWidth(), EntitySetup.PLAYER.getHeight());
+        this.player = player;
         animation = new Animation(ImageServer.Ids.PLAYER, player);
         movement = new Movement(player, animation);
         attack = new Attack(animation);

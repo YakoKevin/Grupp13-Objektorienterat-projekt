@@ -1,9 +1,6 @@
 package entity;
 
-import model.Animation;
-import model.IObservable;
-import model.IObserver;
-import model.Movement;
+import model.*;
 import utilz.ImageServer;
 import controller.ActionController;
 
@@ -152,6 +149,13 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         g2.drawString("SCORE: " + scoreCount, 10,50);
     }
 
+    public void updatePosition(){
+        movement.updatePosition();
+    }
+
+    public void resetDirectionBooleans(){
+        movement.resetDirectionBooleans();
+    }
 
     public boolean checkIfInRange(Enemy enemy) {
         double enX = enemy.getX();
