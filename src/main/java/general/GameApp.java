@@ -7,7 +7,8 @@ import model.Movement;
 import model.level.Level;
 import model.level.LevelFactory;
 import model.level.LevelManager;
-import utilz.GameConstants;
+import utilz.EntitySetup;
+import utilz.GameConstants.*;
 import utilz.ImageServer;
 import view.GamePanel;
 import view.GameView;
@@ -26,8 +27,8 @@ public class GameApp implements Runnable {
     private GameView gameView;
     private GamePanel gamePanel;
     private Thread gameThread;
-    private final int MAX_FPS = 120;
-    private final int MAX_UPS = 200;
+    private final int MAX_FPS = RefreshRate.MAX_FPS.getRate();
+    private final int MAX_UPS = RefreshRate.MAX_UPS.getRate();
 
     //Inget av dessa borde finnas som en direkt referens här i GameApp - byt till att fråga currentLevel istället
     //private EnemyBrain enemyBrain;
@@ -35,41 +36,30 @@ public class GameApp implements Runnable {
     private Player player;
     private KeyItem key;
     private LevelManager levelManager;
+
+    //TODO: lägg dessa i Player så att level har lätt tillgång till dem, eller någonstans där de passar. Borde nog inte
+    // ligga GameApp.
     private Movement movement;
     private Animation animation;
     private Attack attack;
 
-    // SKAPA EN KLASS MED DESSA
-    /*
-    public final static int TILES_DEFAULT_SIZE = 32;
-    public final static float SCALE = 1.3f;
-    public final static int TILES_IN_WIDTH = 26;
-    public final static int TILES_IN_HEIGHT = 14;
-    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
-    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;*/
-
-
 
     public GameApp(){
+        firstSetup();
+
         levelManager = new LevelManager(this);
         player = new Player(100, 100, 30, 100);
-        //animation = new Animation(ImageServer.Ids.PLAYER, player);
-
-        movement = new Movement(player, animation);
-        attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
-        //player.loadLevelData(levelManager.getCurrentLevel());
+        player.loadLevelData(levelManager.getCurrentLevel());
         skel=new Skeleton(50,50);
         skel.loadEnemyImages();
         skel.addEnemies();
-        gamePanel = new GamePanel(this, player.getMovement(), attack);
+        gamePanel = new GamePanel(this, movement, attack);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
 
 
-        firstSetup();
         startGameLoop();
     }
 
@@ -77,13 +67,14 @@ public class GameApp implements Runnable {
         levelManager.draw(g);
         //enemyBrain.draw(g);
         skel.draw(g);
-        player.render(g);
-        //animation.render(g);
-        if(player.isAttacking()){
+        player.draw(g);
+        animation.render(g);
+        /*if(player.isAttacking()){
             attack.drawAttackHitbox(g);
-        }
-        player.drawHP(g);
+        }*/
+        //player.drawHP(g);
         key.draw(g);
+        currentLevel.drawEntities(g);
     }
 
     private void startGameLoop(){
@@ -93,17 +84,19 @@ public class GameApp implements Runnable {
 
     public void update(){
         player.update();
-        //movement.updatePosition();
+        movement.updatePosition();
         //animation.update();
         //enemyBrain.update();
         skel.update();
         levelManager.update();
-        boolean collision = key.isCollision((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
+        /*boolean collision = key.isCollision((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
         if(collision)
         {
             key.setNewPosition();
             player.addKey();
-        }
+        }*/
+        currentLevel.update();
+        animation.update();
     }
 
     @Override
@@ -157,16 +150,21 @@ public class GameApp implements Runnable {
         movement.resetDirectionBooleans();
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     private void firstSetup(){
-        Player player = new Player(100, 100, 30, 100);
+        Player player = setupPlayer();
+
         setupLevel(player);
     }
 
+    public Player setupPlayer(){
+        Player player = new Player(EntitySetup.PLAYER.getHitBoxWidth(), EntitySetup.PLAYER.getHitBoxHeight(), EntitySetup.PLAYER.getWidth(), EntitySetup.PLAYER.getHeight());
+        animation = new Animation(ImageServer.Ids.PLAYER, player);
+        movement = new Movement(player, animation);
+        attack = new Attack(animation);
+        return player;
+    }
+
     private void setupLevel(Player player){
-        currentLevel = levelFactory.simpleLevel(GameConstants.LevelSizes.MEDIUM.getSize(), player);
+        currentLevel = levelFactory.simpleLevel(LevelSizes.MEDIUM.getSize(), player);
     }
 }

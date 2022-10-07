@@ -9,9 +9,9 @@ public abstract class Entity {
     protected Rectangle hitbox;
     protected boolean isAlive;
 
-    public Entity(float x, float y, int width, int height){
-        this.x = x;
-        this.y = y;
+    public Entity(float hitBoxX, float hitBoxY, int width, int height){
+        this.x = hitBoxX;
+        this.y = hitBoxY;
         this.width = width;
         this.height = height;
 
@@ -24,12 +24,12 @@ public abstract class Entity {
     }
 
     private void inititateHitbox() {
-        hitbox = new Rectangle((int)x, (int)y, width, height);
+        hitbox = new Rectangle((int) x, (int) y, width, height);
     }
 
     protected void updateHitbox(){
-        hitbox.x = (int)x;
-        hitbox.y = (int)y;
+        hitbox.x = (int) x;
+        hitbox.y = (int) y;
     }
 
     public Rectangle getHitbox() {
@@ -48,8 +48,8 @@ public abstract class Entity {
         this.attackPoints=healthPoints;
         this.keyItem=keyItem;
         this.movementSpeed=movementSpeed;
-        this.x=0;
-        this.y=0;
+        this.x =0;
+        this.y =0;
         this.attackRange = attackRange;
         this.isAlive = true;
     }

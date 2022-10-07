@@ -25,6 +25,7 @@ public class Skeleton extends Enemy implements ActionListener{
     static int cx=420,cy=120;
     int velX=2,velY=2;
     Timer t=new Timer(5,this);
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -63,9 +64,6 @@ public class Skeleton extends Enemy implements ActionListener{
         skeletons.add(new Skeleton(400,400));
     }
 
-    public void draw(Graphics g){
-        paint(g);
-    }
     public void loadEnemyImages() {
         try (InputStream is = getClass().getResourceAsStream("/skeleton_sprites.png")) {
             BufferedImage image = ImageIO.read(is);

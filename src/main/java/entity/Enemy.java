@@ -1,13 +1,9 @@
 package entity;
 
 
-import utilz.Coordinate;
-
 import java.awt.*;
 
 import static utilz.EnemyConstants.GetSpriteAmount;
-import static utilz.EntityStates.*;
-import static utilz.EntityStates.EnemyStates.*;
 
 public abstract class Enemy extends Entity implements model.IObserver, Hostile {
     private int animationIndex;
@@ -37,6 +33,10 @@ public abstract class Enemy extends Entity implements model.IObserver, Hostile {
                 animationIndex = 0;
             }
         }
+    }
+
+    public void draw(Graphics g){
+        paint(g);
     }
 
     public void update(){

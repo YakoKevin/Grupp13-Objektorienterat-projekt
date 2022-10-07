@@ -35,7 +35,7 @@ public class KeyItem extends Entity implements model.IObserver {
 
     public void draw(Graphics g)
     {
-        g.drawImage(keySprite, (int)x, (int)y, null);
+        g.drawImage(keySprite, (int) x, (int) y, null);
     }
 
     public void setNewPosition()

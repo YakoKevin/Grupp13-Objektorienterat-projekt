@@ -134,7 +134,8 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         }
     }
 
-    public void render(Graphics g){
+    public void draw(Graphics g){
+        drawHP(g);
         drawHitbox(g);
         animation.render(g);
     }
