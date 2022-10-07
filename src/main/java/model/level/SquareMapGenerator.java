@@ -68,10 +68,6 @@ public enum SquareMapGenerator {
                 y = ThreadLocalRandom.current().nextInt(0, sideLength);
             }
         }
-        /*
-        coordinate[0] = x;
-        coordinate[1] = y;*/
-
         return new Coordinate(x, y);
     }
 
@@ -106,20 +102,14 @@ public enum SquareMapGenerator {
 
         return  Arrays.copyOf(mainPath, i); //Trunking of the array to only have length of the path length.
     }
-
-    /*
-     * Takes a random node in the main path. Takes another random end node. Makes a path between them.
-     */
     private static void placeBranchingNodesInLevelMap(LevelMap levelMap) {
+        int size = levelMap.getMapSize();
+
         int index = ThreadLocalRandom.current().nextInt(0, levelMap.getMainNodePathCoordinates().length);
         Coordinate startCoordinate = levelMap.getMainNodePathCoordinates()[index];
 
-        int size = levelMap.getMapSize();
-        //int[] endCoordinate = new int[2];
-
         int randomX = ThreadLocalRandom.current().nextInt(0, size);
         int randomY = ThreadLocalRandom.current().nextInt(0, size);
-
         Coordinate endCoordinate = new Coordinate(randomX, randomY);
 
         Coordinate[] nodePath = placeNodesBetweenStartAndEnd(size*size, startCoordinate, endCoordinate);

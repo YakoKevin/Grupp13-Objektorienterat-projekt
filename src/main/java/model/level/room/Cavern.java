@@ -1,28 +1,24 @@
 package model.level.room;
 
-import entity.Enemy;
 import entity.EnemyFactory;
-import entity.Hostile;
-import entity.Player;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
+//TODO: add method to remove obstacles in the way of doors
+
 /**
- * A simple rectangular room with a size of 30x18. It has no obstacles or doors.
+ * A simple rectangular room with doors and obstacles and enemies.
  */
 public class Cavern extends Room {
 
-    private int MIN_NUMBER_OF_ENEMIES = 0;
-    private int MAX_NUMBER_OF_ENEMIES = 4;
-
-    public Cavern(Iterator<CardinalDirection> doors) {
+    public Cavern(Iterator<Door> doors) {
         super(doors, new EnemyFactory());
         createWalls();
         addDoors(doors);
+        addObstacles();
         addEnemies(enemyFactory);
     }
 
@@ -31,25 +27,22 @@ public class Cavern extends Room {
         for (int x = 0; x < HEIGHT; x++)
             wallCoordinates.add(new Coordinate(x,y));
 
-        y = LENGTH -1;
+        y = WIDTH -1;
         for (int x = 0; x < HEIGHT; x++)
             wallCoordinates.add(new Coordinate(x,y));
 
         int x = 0;
-        for (y = 0; y < LENGTH; y++)
+        for (y = 0; y < WIDTH; y++)
             wallCoordinates.add(new Coordinate(x,y));
 
         x = HEIGHT -1;
-        for (y = 0; y < LENGTH; y++)
+        for (y = 0; y < WIDTH; y++)
             wallCoordinates.add(new Coordinate(x,y));
     }
 
-    private void addDoors(Iterator<CardinalDirection> doorsIt) {
+    private void addDoors(Iterator<Door> doorsIt) {
         while (doorsIt.hasNext()) {
-            CardinalDirection doorDirection = doorsIt.next();
-            Door doorToAdd = Door.getDoorFromCardinalDirection(doorDirection);
-            if(doorToAdd != null)
-                doors.add(doorToAdd);
+            doors.add(doorsIt.next());
         }
     }
 
@@ -58,12 +51,35 @@ public class Cavern extends Room {
     }
 
     private void addEnemies(EnemyFactory enemyFactory) {
-        for (int i = 0; i <= ThreadLocalRandom.current().nextInt(MIN_NUMBER_OF_ENEMIES,MAX_NUMBER_OF_ENEMIES+1); i++) {
+        for (int i = 0; i <= Constants.getRandomEnemiesAmount(); i++) {
             enemies.add(enemyFactory.createSkeleton());
         }
     }
 
     private void addObstacles() {
-        
+        for (int i = 0; i < Constants.getRandomObstaclesAmount(); i++){
+            Coordinate randomCoordinate = Coordinate.randomCoordinate(1,1, WIDTH-1, HEIGHT-1);
+            obstaclesCoordinates.add(randomCoordinate);
+        }
+    }
+
+    private enum Constants{
+        MIN_NUMBER_OF_ENEMIES(0),
+        MAX_NUMBER_OF_ENEMIES(4),
+        MIN_NUMBER_OF_OBSTACLES(5),
+        MAX_NUMBER_OF_OBSTACLES(10);
+        int amount;
+
+        private Constants(int amount){
+            this.amount = amount;
+        }
+
+        static int getRandomEnemiesAmount(){
+            return ThreadLocalRandom.current().nextInt(Constants.MIN_NUMBER_OF_ENEMIES.amount,Constants.MAX_NUMBER_OF_ENEMIES.amount+1);
+        }
+
+        static int getRandomObstaclesAmount(){
+            return ThreadLocalRandom.current().nextInt(Constants.MIN_NUMBER_OF_OBSTACLES.amount,Constants.MAX_NUMBER_OF_OBSTACLES.amount+1);
+        }
     }
 }

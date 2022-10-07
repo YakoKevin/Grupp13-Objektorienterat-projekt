@@ -1,5 +1,7 @@
 package utilz;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Coordinate {
     private final int x;
     private final int y;
@@ -40,6 +42,10 @@ public class Coordinate {
     }
     public Coordinate down(){
         return new Coordinate(x, y + 1);
+    }
+
+    public static Coordinate randomCoordinate(int xBoundLower, int yBoundLower, int xBoundUpper, int yBoundUpper){
+        return new Coordinate(ThreadLocalRandom.current().nextInt(xBoundLower,xBoundUpper+1), ThreadLocalRandom.current().nextInt(yBoundLower,yBoundUpper+1));
     }
 }
 

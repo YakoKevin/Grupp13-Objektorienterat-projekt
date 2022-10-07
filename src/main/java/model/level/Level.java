@@ -2,6 +2,7 @@ package model.level;
 
 import entity.Enemy;
 import entity.Player;
+import model.level.room.Door;
 import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
@@ -47,6 +48,10 @@ public abstract class Level{
         return currentRoom.getEntryDirection();
     }
 
+    public Iterator<Door> getCurrentRoomDoors(){
+        return currentRoom.getDoors();
+    }
+
     public boolean isCoordinateInObstacle(Coordinate coordinate){
         return currentRoom.isCoordinateInObstacle(coordinate);
     }
@@ -66,7 +71,7 @@ public abstract class Level{
 
     protected Room createRoom(Coordinate coordinate){
         int index = ThreadLocalRandom.current().nextInt(0, roomTypes.length);
-        Iterator<CardinalDirection> doors = levelMap.getNodeDoors(coordinate);
+        Iterator<Door> doors = levelMap.getNodeDoors(coordinate);
         Room room = roomTypes[index].apply(doors);
         room.givePlayerHostiles(player);
         return room;

@@ -5,10 +5,10 @@ import utilz.Coordinate;
 import utilz.GameConstants;
 
 public enum Door {
-    NORTH(0, GameConstants.TileSizes.LENGTH.getSize()/2, CardinalDirection.NORTH),
-    EAST(GameConstants.TileSizes.LENGTH.getSize(), GameConstants.TileSizes.HEIGHT.getSize()/2, CardinalDirection.EAST),
-    SOUTH(GameConstants.TileSizes.HEIGHT.getSize(), GameConstants.TileSizes.LENGTH.getSize()/2, CardinalDirection.SOUTH),
-    WEST(0, GameConstants.TileSizes.HEIGHT.getSize()/2, CardinalDirection.WEST);
+    NORTH(0, GameConstants.RoomMapSizes.WIDTH.getSize()/2, CardinalDirection.NORTH),
+    EAST(GameConstants.RoomMapSizes.WIDTH.getSize()-1, GameConstants.RoomMapSizes.HEIGHT.getSize()/2, CardinalDirection.EAST),
+    SOUTH(GameConstants.RoomMapSizes.HEIGHT.getSize()-1, GameConstants.RoomMapSizes.WIDTH.getSize()/2, CardinalDirection.SOUTH),
+    WEST(0, GameConstants.RoomMapSizes.HEIGHT.getSize()/2, CardinalDirection.WEST);
 
     Coordinate coordinate;
     CardinalDirection direction;

@@ -1,5 +1,6 @@
 package model.level;
 
+import model.level.room.Door;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
@@ -64,7 +65,7 @@ public class LevelMap {
         mapGraph.placeDoorsAtNode(coordinate.getX(), coordinate.getY(), directionList);
     }
 
-    public Iterator<CardinalDirection> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
+    public Iterator<Door> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
         return mapGraph.getNodeDoors(nodeCoordinate);
     }
 
@@ -102,7 +103,7 @@ public class LevelMap {
 
             for (MapNode node : nodes) {
                 matrix[node.coordinate.getX()*2][node.coordinate.getY()*2] = 2;
-                for(CardinalDirection door : node.doors) {
+                for(Door door : node.doors) {
                     switch (door) {
                         case EAST -> matrix[node.coordinate.getX()*2 + 1][node.coordinate.getY()*2] = 1;
                         case NORTH -> matrix[node.coordinate.getX()*2][node.coordinate.getY()*2 - 1] = 1;
@@ -146,10 +147,10 @@ public class LevelMap {
             return nodesCoordinates;
         }
 
-        public Iterator<CardinalDirection> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
+        public Iterator<Door> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
             for (MapNode node : nodes){
                 if (nodeCoordinate.equals(node.getCoordinate()))
-                    return node.getDoorDirections();
+                    return node.getDoors();
             }
             throw new NoSuchElementException();
         }
@@ -162,11 +163,10 @@ public class LevelMap {
     private class MapNode {
         private final Coordinate coordinate;
 
-        private final HashSet<CardinalDirection> doors;
+        private final ArrayList<Door> doors = new ArrayList<>();
 
         private MapNode(Coordinate coordinate) {
             this.coordinate = coordinate;
-            this.doors = new HashSet<>();
         }
 
         private Coordinate getCoordinate(){
@@ -174,10 +174,10 @@ public class LevelMap {
         }
 
         private void addDoorDirection(CardinalDirection doorDirection){
-            doors.add(doorDirection);
+            doors.add(Door.getDoorFromCardinalDirection(doorDirection));
         }
 
-        private Iterator<CardinalDirection> getDoorDirections(){
+        private Iterator<Door> getDoors(){
             return doors.iterator();
         }
 

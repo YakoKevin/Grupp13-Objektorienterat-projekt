@@ -9,6 +9,7 @@ import entity.Hostile;
 import entity.Player;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.GameConstants.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,8 +19,8 @@ import java.util.Iterator;
  * coordinates of those. It has a size of 30x18 tiles.
  */
 public abstract class Room{
-    protected final int HEIGHT = 18;
-    protected final int LENGTH = 30;
+    protected final int HEIGHT = RoomMapSizes.HEIGHT.getSize();
+    protected final int WIDTH = RoomMapSizes.WIDTH.getSize();
     protected CardinalDirection entryDirection = CardinalDirection.WEST;
 
     protected Coordinate coordinate = new Coordinate(0,0);
@@ -30,7 +31,7 @@ public abstract class Room{
     protected EnemyFactory enemyFactory;
 
 
-    public Room(Iterator<CardinalDirection> doors, EnemyFactory enemyFactory) {
+    public Room(Iterator<Door> doors, EnemyFactory enemyFactory) {
         this.enemyFactory = enemyFactory;
     }
 
@@ -55,7 +56,7 @@ public abstract class Room{
     }
 
     public int[][] getRoomAsMatrix() {
-        int[][] matrix = new int[HEIGHT][LENGTH];
+        int[][] matrix = new int[HEIGHT][WIDTH];
 
         for (Coordinate coordinate : wallCoordinates) {
             matrix[coordinate.getX()][coordinate.getY()] = 2;
@@ -63,6 +64,10 @@ public abstract class Room{
 
         for (Coordinate coordinate : obstaclesCoordinates) {
             matrix[coordinate.getY()][coordinate.getX()] = 2;
+        }
+
+        for (Door door : doors) {
+            matrix[door.coordinate.getY()][door.coordinate.getX()] = 8;
         }
 
         return matrix;
@@ -78,6 +83,10 @@ public abstract class Room{
 
     public Iterator<Coordinate> getObstacles(){
         return obstaclesCoordinates.iterator();
+    }
+
+    public Iterator<Door> getDoors(){
+        return doors.iterator();
     }
 
     public void setEntryDirection(CardinalDirection entryDirection){
