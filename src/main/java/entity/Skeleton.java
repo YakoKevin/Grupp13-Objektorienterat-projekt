@@ -22,7 +22,7 @@ public class Skeleton extends Enemy implements ActionListener{
     int n=10;
     public BufferedImage[][] skeletonArray;
     public ArrayList<Skeleton> skeletons = new ArrayList<>();
-    int cx=20,cy=20;
+    static int cx=420,cy=120;
     int velX=2,velY=2;
     Timer t=new Timer(5,this);
     @Override
@@ -32,6 +32,7 @@ public class Skeleton extends Enemy implements ActionListener{
         // THis is the position of skeleton image which is to be draw
         for(Skeleton skeleton : skeletons) {
             g.drawImage(skeletonArray[skeleton.getEnemyState()][skeleton.getAnimationIndex()], cx,cy, null);
+            g.drawRect(478, 192, 60, 30);
         }
         t.start();
     }

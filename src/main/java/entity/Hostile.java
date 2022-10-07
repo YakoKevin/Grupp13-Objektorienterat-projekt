@@ -1,8 +1,8 @@
 package entity;
+import java.awt.*;
 
-import utilz.Coordinate;
 
 public interface Hostile {
 
-    void checkedIfIsAttacked(Coordinate start, Coordinate end);
+    void checkedIfIsAttacked(Rectangle r, double atkD);
 }

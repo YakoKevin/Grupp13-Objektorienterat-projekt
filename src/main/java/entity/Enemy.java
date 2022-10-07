@@ -50,7 +50,7 @@ public abstract class Enemy extends Entity implements model.IObserver, Hostile {
     public int getEnemyState(){
         return enemyState;
     }
-
+/*
     public void update(Player p){
         //System.out.println(" EnemyHp" + this.getHealthPoints());
         if(p.checkIfInRange(this)==true){ // funktionen ska nog inte kallas så här
@@ -62,11 +62,12 @@ public abstract class Enemy extends Entity implements model.IObserver, Hostile {
             //System.out.println("Ouch" + p.getAttackPoints());
         }
         //System.out.println(" EnemyHp" + this.getHealthPoints());
-    }
+    }*/
 
-    @Override
-    public void checkedIfIsAttacked(Coordinate start, Coordinate end) {
-
+    public void checkedIfIsAttacked(Rectangle playerAtkRect, double atkP) {
+        if(playerAtkRect.contains(this.hitbox)){
+            this.setHealthPoints(this.getHealthPoints()-atkP);
+        }
 
         //TODO: add the stuff here.
     }
