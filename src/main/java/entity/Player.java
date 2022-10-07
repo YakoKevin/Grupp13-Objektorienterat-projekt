@@ -9,6 +9,8 @@ import controller.ActionController;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private Rectangle atkRect = new Rectangle((int)getX(),(int)getY(),100,100);
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private Skeleton sk= new Skeleton(50,50);
+    static int index=0;
+    static String data[][]=new String[50][3];
+    static String rank="1";
 
     private int skelX=0,skelY=0;
 
@@ -32,11 +37,16 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     Animation animation;
     Movement movement;
 
+    public int getScoreCount(){
+        return scoreCount;
+    }
+
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
         this.setAttackPoints(20);
         this.healthPoints=100;
         this.keyCount = 0;
+        scoreCount=0;
         animation = new Animation(ImageServer.Ids.PLAYER, this);
         movement = new Movement(this, animation);
         //super(100,20,0,5, 10);
@@ -79,8 +89,47 @@ public class Player extends Entity implements IObservable, HostileAttacker {
             setHealthPoints(getHealthPoints()-5);
         }
         if(getHealthPoints()<=0) {
+            /*
             JOptionPane.showMessageDialog(null, "Do You want to try again??",
                     "Game Over", JOptionPane.YES_NO_CANCEL_OPTION);
+            System.exit(0);
+            */
+            int a=JOptionPane.showConfirmDialog(null,"Game Over!!!\nYour Score is: "+ getScoreCount() +"\nDo You want to try again??");
+            data[index][0]=rank;
+            data[index][1]=String.valueOf(getScoreCount());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            System.out.println(dtf.format(now));
+            data[index][2]=dtf.format(now);
+            index++;
+            String temp1 = "";
+            for(int i=0;i<data.length && data[i][0]!=null;i++) {
+                for (int j = i+1; j < data.length && data[j][0]!=null; j++) {
+                    System.out.println(Integer.parseInt(data[i][1]));
+// 						System.out.println(Integer.parseInt(data[1][1]));
+                    System.out.println(data.length);
+                    if(Integer.parseInt(data[i][1]) > Integer.parseInt(data[j][1])) {
+                        // For Score
+                        temp1 = data[i][1];
+                        data[i][1] = data[j][1];
+                        data[j][1] = temp1;
+                        // For time
+                        temp1 = data[i][2];
+                        data[i][2] = data[j][2];
+                        data[j][2] = temp1;
+                    }
+                }
+            }
+            if(a==JOptionPane.YES_OPTION){
+
+            }
+            if(a==JOptionPane.NO_OPTION){
+
+            }
+            if(a==JOptionPane.CANCEL_OPTION){
+                System.exit(0);
+            }
+
             System.exit(0);
         }
     }
@@ -159,6 +208,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     public void addKey()
     {
         keyCount++;
+        scoreCount+=10;
     }
 
 
