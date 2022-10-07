@@ -71,7 +71,6 @@ public class Attack {
     }
 
     public void setAtkOffSetCoordX(double atkX){this.atkOffSetCoordX=atkX;}
-
     public void setAtkOffSetCoordY(double atkY){this.atkOffSetCoordY=atkY;}
 
     public void setAttackRectangle(Rectangle2D r){
