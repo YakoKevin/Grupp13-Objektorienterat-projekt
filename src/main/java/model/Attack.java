@@ -31,32 +31,32 @@ public class Attack {
         return atkOffSetCoordY;
     }
 
-    public void attack(Coordinate coordinate){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
+    public void attack(Coordinate coordinate, int dir){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
         atkOffSetCoordX = coordinate.getX();
         atkOffSetCoordY = coordinate.getY();
         animation.attacking = true;
 
-        double playerWidth = 30; //Players storlek i x och// y
-        double playerHeight = 100;
+        double width = 30; //Players storlek i x och// y
+        double height = 100;
         //System.out.println("playerCoords: " + this.x+this.y);
-        if(ActionController.dir ==0){ //left
-            setAtkOffSetCoordX(coordinate.getX()-playerHeight); //beror på hur stor spelaren är och riktning
+        if(dir ==0){ //left
+            setAtkOffSetCoordX(coordinate.getX()-height); //beror på hur stor spelaren är och riktning
             setAtkOffSetCoordY(coordinate.getY());
             // System.out.println("v");
         }
-        else if(ActionController.dir==2){
-            setAtkOffSetCoordX(coordinate.getX()-playerWidth);
-            setAtkOffSetCoordY(coordinate.getY()-playerHeight);
+        else if(dir==2){
+            setAtkOffSetCoordX(coordinate.getX()-width);
+            setAtkOffSetCoordY(coordinate.getY()-height);
 
             //System.out.println("u");
         }
-        else if(ActionController.dir==3){
-            setAtkOffSetCoordX(coordinate.getX()-playerWidth);
-            setAtkOffSetCoordY(coordinate.getY()+playerHeight);
+        else if(dir==3){
+            setAtkOffSetCoordX(coordinate.getX()-width);
+            setAtkOffSetCoordY(coordinate.getY()+height);
             //System.out.println("n");
         }
-        else if(ActionController.dir==1){
-            setAtkOffSetCoordX(coordinate.getX()+playerWidth);
+        else if(dir==1){
+            setAtkOffSetCoordX(coordinate.getX()+width);
             setAtkOffSetCoordY(coordinate.getY());
             //System.out.println("h");
         }
@@ -68,10 +68,6 @@ public class Attack {
         sk.checkedIfIsAttacked(coordinate, coordinate); //få till det med observer bara, byt ut coordinate
 
         //notifyObservers();
-    }
-
-    public double getAttackRange() {
-        return 20; //tillfälligt så här
     }
 
     public void setAtkOffSetCoordX(double atkX){this.atkOffSetCoordX=atkX;}

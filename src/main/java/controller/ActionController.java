@@ -14,7 +14,7 @@ public class ActionController implements KeyListener {
     private Movement movement;
     private Attack attack;
     private Coordinate coordinate = new Coordinate(0,0); // FIXA COORDINATES, TILLFÄLLIGT FÖR ATT FÅ PROGRAMMET ATT KÖRA
-    public static double dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
+    private int dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
 
     public ActionController(GamePanel gamePanel, Movement movement, Attack attack){
         this.gamePanel = gamePanel;
@@ -61,7 +61,7 @@ public class ActionController implements KeyListener {
             //gamePanel.getGameApp().getPlayer().setAttack(true);
             //gamePanel.getGameApp().getPlayer().attack();
             Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet?
-            attack.attack(coordinate);
+            attack.attack(coordinate, dir);
             //attack.setAttack(true);
             //gamePanel.getGameApp().getPlayer().setAttack(true);
         }
