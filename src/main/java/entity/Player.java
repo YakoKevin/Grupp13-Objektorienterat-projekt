@@ -1,25 +1,18 @@
 package entity;
 
-import controller.ActionController;
 import model.Animation;
 import model.IObservable;
 import model.IObserver;
 import model.Movement;
-import utilz.EntityStates;
 import utilz.ImageServer;
-import model.level.Level;
+import controller.ActionController;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
-import model.Animation;
-import entity.Hostile;
 
 import javax.swing.*;
-
-import static utilz.EntityStates.*;
-import static utilz.EntityStates.PlayerStates.*;
 
 
 public class Player extends Entity implements IObservable, HostileAttacker {
@@ -27,7 +20,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private boolean attacking = false;
     private int[][] levelData;
     private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
-    private Rectangle2D rect2D = new Rectangle2D.Double(getX(),getY(),100,100);
+    private Rectangle atkRect = new Rectangle((int)getX(),(int)getY(),100,100);
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private Skeleton sk= new Skeleton(50,50);
 
@@ -61,8 +54,13 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         skelX=Skeleton.cx;
         skelY=Skeleton.cy;
         updateHitbox();
-        if(checkIfHitByAttacker(sk)==true){ //kanske inte är härifrån som man kollar detta
+        /*if(checkIfHitByAttacker(sk)==true){ //kanske inte är härifrån som man kollar detta
             this.setHealthPoints(this.getHealthPoints()-sk.getAttackPoints());
+        }*/
+
+        if(attacking){
+            setPlayerAttackRectangle();
+            sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(),this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
         }
 
         movement.updatePosition();
@@ -73,7 +71,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         checkAttack(skelX,skelX);
     }
 
-    private void checkAttack(int xx,int yy) {
+    private void checkAttack(int xx,int yy) { //borde vara enemy's och player's hitbox-rektanglar som parametrar
         if(this.x==xx && this.x<xx+10) {
             setHealthPoints(getHealthPoints()-5);
         }
@@ -124,14 +122,12 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     }
 
     //Method checks if attacker has walked into player, i.e. their hitboxes allign
-    public boolean checkIfHitByAttacker(Enemy en){ //ska vara en lista med enemies som kommer från level här sen
+    public boolean checkIfHitByAttacker(double lEx, double lEy, double width, double height){ //ska vara en lista med enemies som kommer från level här sen
         double lPx = this.getX(); //think two rectangles, top left and bottom right coordinates for player and enemy
         double lPy = this.getY();
-        double lEx = en.getX();
-        double lEy= en.getY();
         double rPx = this.getX()+this.getWidth();
-        double rEx = lEx + en.getWidth();
-        double rEy = lEy + en.getHeight(); //kan nog städa upp variablerna lite här och (kanske namnge annorlunda)
+        double rEx = lEx + width;
+        double rEy = lEy + height; //kan nog städa upp variablerna lite här och (kanske namnge annorlunda)
 
         if(lPx > rEx||lEx>rPx){ //if any rectangle is on the left side of the other one
             return false;
@@ -164,6 +160,41 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     {
         keyCount++;
     }
+
+
+    public Rectangle getPlayerAttackRectangle(){ //dessa två klasser ska nog vara allmänna så att enemy också kan använda
+        return this.atkRect;
+    }
+    public void setPlayerAttackRectangle(){
+        int d = ActionController.dir;
+        int atkX= (int)this.x;
+        int atkY= (int)this.y;
+
+        if(d ==0){ //left
+            atkX-=this.height; //beror på hur stor spelaren är och riktning
+            // System.out.println("v");
+        }
+        else if(d==2){
+            atkX -= this.getWidth();
+            atkY -= this.getHeight();
+
+            //System.out.println("u");
+        }
+        else if(d==3){
+            atkX -=this.getWidth();
+            atkY +=this.getHeight();
+
+            //System.out.println("n");
+        }
+        else if(d==1){
+            atkX += getWidth();
+
+            //System.out.println("h");
+        }
+        Rectangle r = new Rectangle (atkX,atkY, 100,100);
+        this.atkRect= r;
+    }
+
 
     @Override
     public void addHostilesList(ArrayList<Hostile> hostile) {

@@ -14,7 +14,7 @@ public class ActionController implements KeyListener {
     private Movement movement;
     private Attack attack;
     private Coordinate coordinate = new Coordinate(0,0); // FIXA COORDINATES, TILLFÄLLIGT FÖR ATT FÅ PROGRAMMET ATT KÖRA
-    private int dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
+    public static int dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
 
     public ActionController(GamePanel gamePanel, Movement movement, Attack attack){
         this.gamePanel = gamePanel;
