@@ -35,7 +35,7 @@ public class GameView extends JFrame { // TEMPORÄRT NAMN
 
             @Override
             public void windowLostFocus(WindowEvent e) {
-                gamePanel.getGameApp().windowFocusLost(); // TODO: FIX THIS
+                //gamePanel.getGameApp().windowFocusLost(); // TODO: FIX THIS
 
             }
         });

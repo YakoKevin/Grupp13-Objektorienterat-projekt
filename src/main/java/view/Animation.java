@@ -15,12 +15,13 @@ public class Animation {
     private int animationIndex = 0;
     private int animationSpeed = 30;
     private EntityStates.PlayerStates playerAction = IDLE;
+
     private BufferedImage image;
     private Entity entity;
     public boolean moving = false;
     public boolean attacking = false;
 
-    public Animation(ImageServer.Ids imageServer, Entity entity){
+    public Animation(ImageServer.Ids imageServer, Entity entity){// TODO: Logik i klassen? Separera det då!!
         this.image = ImageServer.getImage(imageServer);
         this.entity = entity;
         loadAnimations();
@@ -67,11 +68,6 @@ public class Animation {
             }
         }
     }
-
-    //public void update(){
-    //    updateAnimationTick();
-    //    setAnimation();
-    //}
 
     public void render(Graphics g){
         g.drawImage(animations[playerAction.ordinal()][animationIndex], (int) entity.getX(), (int) entity.getY(), null);

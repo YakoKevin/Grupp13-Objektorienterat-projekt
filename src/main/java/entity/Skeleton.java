@@ -66,6 +66,7 @@ public class Skeleton extends Enemy implements ActionListener{
     public void draw(Graphics g){
         paint(g);
     }
+    /*
     public void loadEnemyImages() {
         try (InputStream is = getClass().getResourceAsStream("/skeleton_sprites.png")) {
             BufferedImage image = ImageIO.read(is);
@@ -80,6 +81,8 @@ public class Skeleton extends Enemy implements ActionListener{
         }
     }
 
+
+     */
     public void update() {
 //    	System.out.println(x + " === "+ y);
         updateAnimationTick();

@@ -31,6 +31,7 @@ public class GameApp {
     private LevelManager levelManager;
     private Movement movement;
     private Animation animation;
+    private Animation animationEnemy;
     private Attack attack;
 
     private UpdateFrame updateFrame;
@@ -60,10 +61,13 @@ public class GameApp {
         attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
-        skel=new Skeleton(50,50);
-        skel.loadEnemyImages();
+        skel=new Skeleton(200,200);
+        //skel.loadEnemyImages();
         skel.addEnemies();
-        gamePanel = new GamePanel(this, movement, attack, updateFrame, fpsUpdater, player, animation); // FIXA REFERENCES...
+        animationEnemy = new Animation(ImageServer.Ids.ENEMY, skel); // TODO: Vi behöver en factory, då kan vi få det att fungera mycket mer abstrakt.
+                                                                      // Just nu är detta bara för att testa MVC men detta måste fixas!
+
+        gamePanel = new GamePanel(this, movement, attack, updateFrame, fpsUpdater, player, animation, animationEnemy); // FIXA REFERENCES...
         fpsUpdater = new FPSUpdater(gamePanel);
 
         gameView = new GameView(gamePanel, updateFrame);

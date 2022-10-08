@@ -22,13 +22,14 @@ public class GamePanel extends JPanel {
 
     private Movement movement;
     private Animation animation;
+    private Animation animationEnemy;
     protected Rectangle hitbox; // Debugging purposes
 
     BufferedImage playerImage;
     Entity player;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
 
-    public GamePanel(GameApp gameApp, Movement movement, Attack attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Entity player, Animation animation){
+    public GamePanel(GameApp gameApp, Movement movement, Attack attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Entity player, Animation animation, Animation animationEnemy){
         addKeyListener(new ActionController(this, movement, attack));
         this.gameApp = gameApp;
         setPanelSize();
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel {
         playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
         this.player = player;
         this.animation = animation;
+        this.animationEnemy = animationEnemy;
         this.movement = movement;
         inititateHitbox();
 
@@ -74,6 +76,10 @@ public class GamePanel extends JPanel {
     public void update(){
         animation.updateAnimationTick();
         animation.setAnimation();
+
+        animationEnemy.updateAnimationTick();
+        animationEnemy.setAnimation();
+
         movement.updatePosition();
 
         updateHitbox();
@@ -92,13 +98,6 @@ public class GamePanel extends JPanel {
 
     protected void render(Graphics g){
         animation.render(g);
+        animationEnemy.render(g);
     }
-
-    public GameApp getGameApp() {
-        return gameApp;
-    }
-
-
-
-
 }
