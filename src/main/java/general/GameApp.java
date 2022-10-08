@@ -38,16 +38,15 @@ public class GameApp implements Runnable {
     private Attack attack;
 
     // SKAPA EN KLASS MED DESSA
-    /*
     public final static int TILES_DEFAULT_SIZE = 32;
     public final static float SCALE = 1.3f;
     public final static int TILES_IN_WIDTH = 26;
     public final static int TILES_IN_HEIGHT = 14;
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
-    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;*/
+    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 
-
+    private final Object lock = new Object();
 
     public GameApp(){
         levelManager = new LevelManager(this);
@@ -87,6 +86,22 @@ public class GameApp implements Runnable {
     private void startGameLoop(){
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public  void pauseThread() throws InterruptedException
+    {
+        synchronized(lock){
+            lock.wait();
+        }
+    }
+    public  void resumeThread()
+    {
+        synchronized(lock)
+        {
+//        	gameThread.notify();
+            lock.notify();
+//            lock.
+        }
     }
 
     public void update(){
