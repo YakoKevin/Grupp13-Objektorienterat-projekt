@@ -87,10 +87,6 @@ public class GameApp {
         movement.resetDirectionBooleans();
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     private void firstSetup(){
         Player player = new Player(100, 100, 30, 100);
         setupLevel(player);
