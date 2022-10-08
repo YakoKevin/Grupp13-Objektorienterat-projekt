@@ -2,12 +2,12 @@ package utilz;
 
 public enum GameConstants {
     ;
-    public enum TileSizes {
-        LENGTH(30),
-        HEIGHT(18);
+    public enum RoomMapSizes {
+        WIDTH(20),
+        HEIGHT(12);
         int size;
 
-        TileSizes(int size){
+        RoomMapSizes(int size){
             this.size = size;
         }
 
@@ -30,8 +30,8 @@ public enum GameConstants {
     }
 
     public enum GameSizes {
-        HEIGHT(TileSizes.HEIGHT.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize()),
-        WIDTH(TileSizes.LENGTH.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize());
+        HEIGHT(RoomMapSizes.HEIGHT.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize()),
+        WIDTH(RoomMapSizes.WIDTH.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize());
         int size;
 
         GameSizes(int size){
@@ -53,6 +53,20 @@ public enum GameConstants {
 
         public int getSize() {
             return size;
+        }
+    }
+
+    public enum RefreshRate {
+        MAX_FPS(120),
+        MAX_UPS(200);
+        int refreshRate;
+
+        RefreshRate(int refreshRate){
+            this.refreshRate = refreshRate;
+        }
+
+        public int getRate(){
+            return this.refreshRate;
         }
     }
 }
