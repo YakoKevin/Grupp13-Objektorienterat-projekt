@@ -1,7 +1,7 @@
 package model;
 
 import entity.Entity;
-import entity.Player;
+import view.Animation;
 
 public class Movement {
     private boolean moving = false;

@@ -1,9 +1,9 @@
 package model;
 
-import controller.ActionController;
-import entity.Entity;
 import entity.Skeleton;
+import general.IObserver;
 import utilz.Coordinate;
+import view.Animation;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

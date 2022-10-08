@@ -1,15 +1,14 @@
 package entity;
 
 import general.GameMain;
-import model.Animation;
-import model.IObservable;
-import model.IObserver;
+import view.Animation;
+import general.IObservable;
+import general.IObserver;
 import model.Movement;
 import utilz.ImageServer;
 import controller.ActionController;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -75,10 +74,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         }
 
         movement.updatePosition();
-        animation.update();
 
-        animation.updateAnimationTick();
-        animation.setAnimation();
         checkAttack(skelX,skelX);
     }
 

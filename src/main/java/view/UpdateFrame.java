@@ -1,59 +1,32 @@
 package view;
 
-import controller.ActionController;
 import entity.Entity;
 import entity.Player;
-import general.GameApp;
-import model.Attack;
-import model.Movement;
-import utilz.GameConstants;
 import utilz.ImageServer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class GamePanel extends JPanel {
-
-
-    private GameApp gameApp;
-    private KeyView keyView;
-    private FPSUpdater fpsUpdater;
-
-    private Animation animation;
+public class UpdateFrame extends JPanel {
     protected Rectangle hitbox; // Debugging purposes
 
     BufferedImage playerImage;
     Entity player;
+    Animation animation;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
 
-    public GamePanel(GameApp gameApp, Movement movement, Attack attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Entity player, Animation animation){
-        addKeyListener(new ActionController(this, movement, attack));
-        this.gameApp = gameApp;
-        setPanelSize();
-        int width = 50;
+    // make more generic
+    public UpdateFrame(Entity player, Animation animation){
+        this.setDoubleBuffered(true);
+        this.setPreferredSize(new Dimension(100, 100));
+        this.setBackground(Color.green);
+
         playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
         this.player = player;
         this.animation = animation;
         inititateHitbox();
-
-        KeyView keyView = new KeyView(width, -30, width, 30, 0);
-
-        this.fpsUpdater = fpsUpdater;
-        //startGameLoop();
-
     }
-
-
-    // Sets here, instead of view since it includes the border as well.
-    private void setPanelSize() {
-        Dimension size = new Dimension(GameConstants.GameSizes.WIDTH.getSize(), GameConstants.GameSizes.HEIGHT.getSize());
-        //setMinimumSize(size);
-        setPreferredSize(size);
-        //setMaximumSize(size);
-        System.out.println("Size : " + GameConstants.GameSizes.WIDTH.getSize() + " : " + GameConstants.GameSizes.HEIGHT.getSize());
-    }
-
     // Debugging purposes
     protected void drawHitbox(Graphics g){
         g.setColor(Color.PINK);
@@ -84,7 +57,7 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         levelManager.draw(g);
         drawHitbox(g);
-        //g.drawImage(playerImage, (int)player.getX(), (int)player.getY(), null);
+        g.drawImage(playerImage, (int)player.getX(), (int)player.getY(), null);
 
         render(g);
 
@@ -93,12 +66,5 @@ public class GamePanel extends JPanel {
     protected void render(Graphics g){
         animation.render(g);
     }
-
-    public GameApp getGameApp() {
-        return gameApp;
-    }
-
-
-
 
 }

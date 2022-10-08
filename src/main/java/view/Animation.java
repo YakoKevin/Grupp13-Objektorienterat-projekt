@@ -1,4 +1,4 @@
-package model;
+package view;
 
 import entity.Entity;
 import utilz.EntityStates;
@@ -68,10 +68,10 @@ public class Animation {
         }
     }
 
-    public void update(){
-        updateAnimationTick();
-        setAnimation();
-    }
+    //public void update(){
+    //    updateAnimationTick();
+    //    setAnimation();
+    //}
 
     public void render(Graphics g){
         g.drawImage(animations[playerAction.ordinal()][animationIndex], (int) entity.getX(), (int) entity.getY(), null);
