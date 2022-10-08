@@ -3,12 +3,11 @@ package entity;
 import general.GameMain;
 import model.*;
 import utilz.CardinalDirection;
-import utilz.Coordinate;
 import utilz.ImageServer;
 import controller.ActionController;
 
+
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import javax.swing.*;
 
 public class Player extends Entity implements IObservable, HostileAttacker {
     private int playerDirection = -1;
-    private boolean attacking = false;
+    private boolean attackMode = false;
     private int[][] levelData;
     //private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
     private Rectangle atkRect = new Rectangle((int)getX(),(int)getY(),100,100);
@@ -62,6 +61,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     }
 
     public void update(){
+
         skelX=Skeleton.cx;
         skelY=Skeleton.cy;
         updateHitbox();
@@ -69,13 +69,16 @@ public class Player extends Entity implements IObservable, HostileAttacker {
             this.setHealthPoints(this.getHealthPoints()-sk.getAttackPoints());
         }*/
 
-        if(attacking){
-
-            setDirection(ActionController.dir);
+        if(attackMode==true){
+            //animation.attacking=true;
 
             //(new Coordinate((int)this.x,(int)this.y), this.dir);
+
             setPlayerAttackRectangle();
-            sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(),this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
+            for(int i =0; i<hostiles.size();i++) {
+                hostiles.get(i).checkedIfIsAttacked(this.getPlayerAttackRectangle(),this.getAttackPoints());
+                sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(), this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
+            }
         }
 
         movement.updatePosition();
@@ -206,8 +209,11 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         }
     }
 
-    public boolean isAttacking() {
-        return attacking;
+    public boolean getAttackMode() {
+        return this.attackMode;
+    }
+    public void setAttackMode(boolean atkM){
+        this.attackMode=atkM;
     }
 
     public void addKey()
@@ -255,4 +261,14 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;
     }
+
+
+
+    public void drawAttackRectangle(Graphics g, int x, int y, int w, int h) {
+        g.setColor(Color.red);
+        g.drawRect(x,y,w,h);
+    }
+
+
+
 }

@@ -21,6 +21,8 @@ public abstract class Level{
     protected ArrayList<Room> allRooms;
     private Player player;
 
+
+
     protected final LevelMap levelMap;
     protected final RoomTypeFunction[] roomTypes;
 
@@ -28,9 +30,12 @@ public abstract class Level{
         this.levelMap = levelMap;
         this.roomTypes = roomTypeFunctions;
         this.player = player;
+        this.player = new Player(100, 100, 30, 100);
+
 
         this.currentRoom = createRoom(levelMap.getStartCoordinate());
     }
+
 
     public int[][] getCurrentRoomAsMatrix(){
         return currentRoom.getRoomAsMatrix();
@@ -82,4 +87,9 @@ public abstract class Level{
             it.next().update();
         }
     }
+
+    public Player getPlayer() {
+        return this.player;
+    } //behöver ett objekt
+
 }

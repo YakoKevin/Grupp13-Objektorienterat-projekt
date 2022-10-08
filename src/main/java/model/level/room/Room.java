@@ -1,6 +1,6 @@
 package model.level.room;
 
-//TODO: Make sure all the game logic has the same referens to height and length so that no errors occur because of mis-
+//TODO: Make sure all the game logic has the same references to height and length so that no errors occur because of mis-
 // matched numbers!
 
 import entity.Enemy;

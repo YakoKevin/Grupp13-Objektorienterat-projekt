@@ -7,7 +7,9 @@ import model.Movement;
 import model.level.Level;
 import model.level.LevelFactory;
 import model.level.LevelManager;
+import utilz.Coordinate;
 import utilz.GameConstants;
+import view.AttackView;
 import view.GamePanel;
 import view.GameView;
 import entity.Player;
@@ -29,6 +31,7 @@ public class GameApp implements Runnable {
 
     //Inget av dessa borde finnas som en direkt referens här i GameApp - byt till att fråga currentLevel istället
     //private EnemyBrain enemyBrain;
+
     private Skeleton skel;
     private Player player;
     private KeyItem key;
@@ -54,8 +57,9 @@ public class GameApp implements Runnable {
         player = new Player(100, 100, 30, 100);
         //animation = new Animation(ImageServer.Ids.PLAYER, player);
 
+
         movement = new Movement(player, animation);
-        attack = new Attack(animation);
+        //attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
         skel=new Skeleton(50,50);
@@ -72,14 +76,21 @@ public class GameApp implements Runnable {
     }
 
     public void render(Graphics g){
+        AttackView view = new AttackView();
         levelManager.draw(g);
         //enemyBrain.draw(g);
         skel.draw(g);
         player.render(g);
         //animation.render(g);
-        if(player.isAttacking()){
-            attack.drawAttackHitbox(g);
+
+        view.drawAttackRectangle(g, (int)player.getX(),(int)player.getY(),player.getWidth(),player.getHeight()); //tillfällig hitbox runt spelaren
+        if(player.getAttackMode()==true){
+            Coordinate c = new Coordinate((int)player.getX(),(int)player.getY());
+            c = Attack.getAttackCoordinate(c,player.getDirection());
+            view.drawAttackRectangle(g,c.getX(),c.getY(),player.getHeight(),player.getHeight());
+            player.setAttackMode(false);
         }
+
         player.drawHP(g);
         key.draw(g);
     }
@@ -156,7 +167,7 @@ public class GameApp implements Runnable {
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
     private void firstSetup(){

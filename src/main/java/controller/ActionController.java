@@ -1,6 +1,6 @@
 package controller;
 
-import entity.Player;
+
 import model.Attack;
 import model.Movement;
 import utilz.CardinalDirection;
@@ -19,6 +19,7 @@ public class ActionController implements KeyListener {
     public static CardinalDirection dir;
     //public static int dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
 
+
     public ActionController(GamePanel gamePanel, Movement movement, Attack attack){
         this.gamePanel = gamePanel;
         this.movement = movement;
@@ -36,6 +37,7 @@ public class ActionController implements KeyListener {
             //gamePanel.getGameApp().getPlayer().setUp(true);
             movement.setUp(true);
             dir=CardinalDirection.NORTH;
+
             //System.out.println("PRESSED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
@@ -54,6 +56,7 @@ public class ActionController implements KeyListener {
             //gamePanel.getGameApp().getPlayer().setLeft(true);
             movement.setLeft(true);
             //System.out.println("PRESSED D");
+
             dir=CardinalDirection.EAST;
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -62,11 +65,21 @@ public class ActionController implements KeyListener {
             //System.out.println("PRESSED SPACE");
             //gamePanel.getGameApp().getPlayer().setAttack(true);
             //gamePanel.getGameApp().getPlayer().attack();
+            //player.isAttacking=true;
+            gamePanel.getGameApp().getPlayer().setAttackMode(true);
+
+            //Level.getPlayer().setAttackMode(true);
             Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
-            attack.attack(coordinate, dir);
+            //System.out.println("x och y player ActionController: " + movement.getX()+" och " + movement.getY());
+
+            attack.getAttackCoordinate(coordinate, dir);
+
+
             //attack.setAttack(true);
             //gamePanel.getGameApp().getPlayer().setAttack(true);
         }
+        gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
+        //Level.getPlayer().setDirection(dir); //behöver ett objekt här
     }
 
     @Override
@@ -93,7 +106,8 @@ public class ActionController implements KeyListener {
             //System.out.println("RELEASED D");
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            System.out.println("RELEASED SPACE");
+            //System.out.println("RELEASED SPACE");
+
             //attack.setAttack(false);
             //gamePanel.getGameApp().getPlayer().setAttack(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
