@@ -8,10 +8,8 @@ import model.level.Level;
 import model.level.LevelFactory;
 import model.level.LevelManager;
 import utilz.GameConstants;
-import utilz.ImageServer;
 import view.GamePanel;
 import view.GameView;
-import entity.EnemyBrain;
 import entity.Player;
 import entity.Skeleton;
 

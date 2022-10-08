@@ -1,7 +1,9 @@
 package controller;
 
+import entity.Player;
 import model.Attack;
 import model.Movement;
+import utilz.CardinalDirection;
 import utilz.Coordinate;
 import view.GamePanel;
 
@@ -14,7 +16,8 @@ public class ActionController implements KeyListener {
     private Movement movement;
     private Attack attack;
     private Coordinate coordinate = new Coordinate(0,0); // FIXA COORDINATES, TILLFÄLLIGT FÖR ATT FÅ PROGRAMMET ATT KÖRA
-    public static int dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
+    public static CardinalDirection dir;
+    //public static int dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
 
     public ActionController(GamePanel gamePanel, Movement movement, Attack attack){
         this.gamePanel = gamePanel;
@@ -32,35 +35,34 @@ public class ActionController implements KeyListener {
         if (event.getKeyCode() == KeyEvent.VK_W) {
             //gamePanel.getGameApp().getPlayer().setUp(true);
             movement.setUp(true);
-            dir=2;
-            System.out.println("PRESSED W");
+            dir=CardinalDirection.NORTH;
+            //System.out.println("PRESSED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             //gamePanel.getGameApp().getPlayer().setRight(true);
             movement.setRight(true);
-            System.out.println("PRESSED A");
-            dir=0;
+            //System.out.println("PRESSED A");
+            dir = CardinalDirection.WEST;
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             //gamePanel.getGameApp().getPlayer().setDown(true);
             movement.setDown(true);
-            dir=3;
-            System.out.println("PRESSED S");
-
+            dir=CardinalDirection.SOUTH;
+            //System.out.println("PRESSED S");
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             //gamePanel.getGameApp().getPlayer().setLeft(true);
             movement.setLeft(true);
-            System.out.println("PRESSED D");
-            dir=1;
+            //System.out.println("PRESSED D");
+            dir=CardinalDirection.EAST;
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             //attack.setAttack(true);
             //gamePanel.getGameApp().getPlayer().setAttack(true);
-            System.out.println("PRESSED SPACE");
+            //System.out.println("PRESSED SPACE");
             //gamePanel.getGameApp().getPlayer().setAttack(true);
             //gamePanel.getGameApp().getPlayer().attack();
-            Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet?
+            Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
             attack.attack(coordinate, dir);
             //attack.setAttack(true);
             //gamePanel.getGameApp().getPlayer().setAttack(true);
@@ -72,23 +74,23 @@ public class ActionController implements KeyListener {
         if (event.getKeyCode() == KeyEvent.VK_W) {
             //gamePanel.getGameApp().getPlayer().setUp(false);
             movement.setUp(false);
-            System.out.println("RELEASED W");
+            //System.out.println("RELEASED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             //gamePanel.getGameApp().getPlayer().setRight(false);
             movement.setRight(false);
-            System.out.println("RELEASED A");
+            //System.out.println("RELEASED A");
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             //gamePanel.getGameApp().getPlayer().setDown(false);
             movement.setDown(false);
-            System.out.println("RELEASED S");
+            //System.out.println("RELEASED S");
 
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             //gamePanel.getGameApp().getPlayer().setLeft(false);
             movement.setLeft(false);
-            System.out.println("RELEASED D");
+            //System.out.println("RELEASED D");
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             System.out.println("RELEASED SPACE");
