@@ -1,5 +1,6 @@
 package entity;
 
+import general.GameMain;
 import model.Animation;
 import model.IObservable;
 import model.IObserver;
@@ -121,7 +122,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
                 }
             }
             if(a==JOptionPane.YES_OPTION){
-
+                GameMain.reset();
             }
             if(a==JOptionPane.NO_OPTION){
 
