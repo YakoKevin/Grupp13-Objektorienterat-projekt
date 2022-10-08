@@ -75,5 +75,6 @@ public class Animation {
 
     public void render(Graphics g){
         g.drawImage(animations[playerAction.ordinal()][animationIndex], (int) entity.getX(), (int) entity.getY(), null);
+
     }
 }

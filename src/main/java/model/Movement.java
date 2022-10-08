@@ -23,6 +23,7 @@ public class Movement {
 
     public void updatePosition() {
         animation.moving = false;
+        System.out.println(entity.getX());
 
         if(this.x>477 && this.x<539) {
             if(this.y>191 && this.y<223) {
@@ -45,7 +46,7 @@ public class Movement {
         if (up && !down) {
             y = entity.getY() - playerSpeed;
             entity.setY(y);
-            animation.moving = true;
+            //animation.moving = true;
         }
         else if (down && !up) {
             y = entity.getY() + playerSpeed;

@@ -20,6 +20,7 @@ public class GamePanel extends JPanel {
     private KeyView keyView;
     private FPSUpdater fpsUpdater;
 
+    private Movement movement;
     private Animation animation;
     protected Rectangle hitbox; // Debugging purposes
 
@@ -35,13 +36,13 @@ public class GamePanel extends JPanel {
         playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
         this.player = player;
         this.animation = animation;
+        this.movement = movement;
         inititateHitbox();
 
         KeyView keyView = new KeyView(width, -30, width, 30, 0);
 
         this.fpsUpdater = fpsUpdater;
         //startGameLoop();
-
     }
 
 
@@ -73,14 +74,13 @@ public class GamePanel extends JPanel {
     public void update(){
         animation.updateAnimationTick();
         animation.setAnimation();
+        movement.updatePosition();
 
         updateHitbox();
 
     }
     @Override
     protected void paintComponent(Graphics g){
-        System.out.println("TEST");
-
         super.paintComponent(g);
         levelManager.draw(g);
         drawHitbox(g);

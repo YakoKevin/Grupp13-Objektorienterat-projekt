@@ -52,7 +52,6 @@ public class UpdateFrame extends JPanel {
     }
     @Override
     protected void paintComponent(Graphics g){
-        System.out.println("TEST");
 
         super.paintComponent(g);
         levelManager.draw(g);

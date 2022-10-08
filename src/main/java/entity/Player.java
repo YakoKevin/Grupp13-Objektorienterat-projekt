@@ -47,7 +47,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         this.healthPoints=100;
         this.keyCount = 0;
         scoreCount=0;
-        animation = new Animation(ImageServer.Ids.PLAYER, this);
+        //animation = new Animation(ImageServer.Ids.PLAYER, this);
         movement = new Movement(this, animation);
         //super(100,20,0,5, 10);
     }

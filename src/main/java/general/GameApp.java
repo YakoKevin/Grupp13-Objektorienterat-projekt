@@ -63,7 +63,7 @@ public class GameApp {
         skel=new Skeleton(50,50);
         skel.loadEnemyImages();
         skel.addEnemies();
-        gamePanel = new GamePanel(this, player.getMovement(), attack, updateFrame, fpsUpdater, player, animation);
+        gamePanel = new GamePanel(this, movement, attack, updateFrame, fpsUpdater, player, animation); // FIXA REFERENCES...
         fpsUpdater = new FPSUpdater(gamePanel);
 
         gameView = new GameView(gamePanel, updateFrame);
