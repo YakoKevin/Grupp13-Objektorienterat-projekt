@@ -2,7 +2,9 @@ package view;
 
 import controller.gamestates.GameState;
 import controller.gamestates.GameStateManager;
+import general.GameApp;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -50,9 +52,24 @@ public class MainMenu extends GameState {
             case KeyEvent.VK_ENTER:
                 switch(this.optionsMenu[selected]) {
                     case START_GAME:
+                        GameApp game = new GameApp();
                         break;
+                        
                     case SCORE:
+                        JFrame jf=new JFrame("Score-Board");
+                        jf.setVisible(true);
+                        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        jf.setSize(300,400);
+                        String data[][]={ {"","",""},
+                                {"","",""},
+                                {"","",""}};
+                        String column[]={"Rank #","Score","Time"};
+                        JTable jt=new JTable(data,column);
+                        jt.setBounds(30,40,200,300);
+                        JScrollPane sp=new JScrollPane(jt);
+                        jf.add(sp);
                         break;
+
                     case QUIT_GAME:
                         System.exit(0);
                         break;

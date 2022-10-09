@@ -15,7 +15,7 @@ import java.util.Random;
 import static general.GameApp.GAME_HEIGHT;
 import static general.GameApp.GAME_WIDTH;
 
-class aTask extends SwingWorker<Void,String> {
+class Pause extends SwingWorker<Void,String> {
 
     @Override
     protected Void doInBackground() throws Exception {
@@ -32,7 +32,7 @@ public class GamePanel extends JPanel {
 
     private GameApp gameApp;
     private KeyView keyView;
-    private aTask t;
+    private Pause pause;
 
     public GamePanel(GameApp gameApp, Movement movement, Attack attack){
         addKeyListener(new ActionController(this, movement, attack));
@@ -51,7 +51,7 @@ public class GamePanel extends JPanel {
         jb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                (t=new aTask()).execute();
+                (pause = new Pause()).execute();
                 try {
                     gameApp.pauseThread();
                 } catch (InterruptedException e1) {
@@ -64,8 +64,8 @@ public class GamePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(t!=null) {
-                        t.cancel(true);
+                    if(pause != null) {
+                        pause.cancel(true);
                         jb.setEnabled(true);
                         jb1.setEnabled(false);
                         gameApp.resumeThread();
