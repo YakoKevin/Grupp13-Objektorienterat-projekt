@@ -1,4 +1,4 @@
-package model;
+package general;
 
 public interface IObserver {
     //public void update(IObservable obs, Object obj);

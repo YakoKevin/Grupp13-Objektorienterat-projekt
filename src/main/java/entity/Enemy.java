@@ -1,15 +1,13 @@
 package entity;
 
 
-import utilz.Coordinate;
+import general.IObserver;
 
 import java.awt.*;
 
 import static utilz.EnemyConstants.GetSpriteAmount;
-import static utilz.EntityStates.*;
-import static utilz.EntityStates.EnemyStates.*;
 
-public abstract class Enemy extends Entity implements model.IObserver, Hostile {
+public abstract class Enemy extends Entity implements IObserver, Hostile {
     private int animationIndex;
     private int enemyState;
     private int enemyType;

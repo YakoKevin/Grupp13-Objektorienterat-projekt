@@ -1,13 +1,17 @@
 package view;
 
 import controller.ActionController;
+import entity.Entity;
+import entity.Player;
 import general.GameApp;
 import model.Attack;
 import model.Movement;
 import utilz.GameConstants;
+import utilz.ImageServer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
@@ -30,15 +34,33 @@ class Pause extends SwingWorker<Void,String> {
 
 public class GamePanel extends JPanel {
 
+
     private GameApp gameApp;
     private KeyView keyView;
+    private FPSUpdater fpsUpdater;
+
+    private Movement movement;
+    private Animation animation;
+    private Animation animationEnemy;
+    protected Rectangle hitbox; // Debugging purposes
     private Pause pause;
 
-    public GamePanel(GameApp gameApp, Movement movement, Attack attack){
+    BufferedImage playerImage;
+    Entity player;
+    LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
+    private final Object lock = new Object(); // TODO: Ska det verkligen vara object?
+
+    public GamePanel(GameApp gameApp, Movement movement, Attack attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Entity player, Animation animation, Animation animationEnemy){
         addKeyListener(new ActionController(this, movement, attack));
         this.gameApp = gameApp;
         setPanelSize();
         int width = 50;
+        playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
+        this.player = player; //TODO: ALLT MED ENTITIES MÅSTE FLYTTAS
+        this.animation = animation;
+        this.animationEnemy = animationEnemy;
+        this.movement = movement;
+        inititateHitbox();
 
         JButton jb=new JButton("Pause");
         jb.setBackground(Color.BLUE);
@@ -48,12 +70,13 @@ public class GamePanel extends JPanel {
         jb1.setBackground(Color.BLUE);
         jb1.setBounds(600, 300, 80, 30);
         this.add(jb1);
-        jb.addActionListener(new ActionListener() {
+
+        jb.addActionListener(new ActionListener() { // TODO: fixa variabel namnen jb och jb1
             @Override
             public void actionPerformed(ActionEvent e) {
                 (pause = new Pause()).execute();
                 try {
-                    gameApp.pauseThread();
+                    pauseThread();
                 } catch (InterruptedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -68,7 +91,7 @@ public class GamePanel extends JPanel {
                         pause.cancel(true);
                         jb.setEnabled(true);
                         jb1.setEnabled(false);
-                        gameApp.resumeThread();
+                        resumeThread();
                     }
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
@@ -79,9 +102,25 @@ public class GamePanel extends JPanel {
 
         KeyView keyView = new KeyView(width, -30, width, 30, 0);
 
+        this.fpsUpdater = fpsUpdater;
+        //startGameLoop();
+    }
+    public  void pauseThread() throws InterruptedException
+    {
+        synchronized(lock){
+            lock.wait();
+        }
     }
 
-
+    public  void resumeThread()
+    {
+        synchronized(lock)
+        {
+//        	gameThread.notify();
+            lock.notify();
+//            lock.
+        }
+    }
     // Sets here, instead of view since it includes the border as well.
     private void setPanelSize() {
         Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
@@ -91,22 +130,42 @@ public class GamePanel extends JPanel {
         System.out.println("Size : " + GAME_WIDTH + " : " + GAME_HEIGHT);
     }
 
-
-    public void updateGame(){
-
+    // Debugging purposes, will be removed
+    protected void drawHitbox(Graphics g){
+        g.setColor(Color.PINK);
+        g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+    }
+    // TODO: Move to seperate Hitbox class
+    private void inititateHitbox() {
+        hitbox = new Rectangle((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
     }
 
-    public void paintComponent(Graphics g){
+    // TODO: Move to seperate Hitbox class
+    protected void updateHitbox(){
+        hitbox.x = (int)player.getX();
+        hitbox.y = (int)player.getY();
+    }
+
+    public void update(){
+        animation.updateAnimationTick();
+        animation.setAnimation();
+        animationEnemy.updateAnimationTick();
+        animationEnemy.setAnimation();
+        movement.updatePosition();
+
+        updateHitbox();
+    }
+    @Override
+    protected void paintComponent(Graphics g){
         super.paintComponent(g);
+        levelManager.draw(g);
+        drawHitbox(g);
 
-        gameApp.render(g);
-
-        // g.translate(this.keyView.getX(), this.keyView.getY());
-        // this.keyView.paint(g);
-
+        render(g);
     }
 
-    public GameApp getGameApp() {
-        return gameApp;
+    protected void render(Graphics g){
+        animation.render(g);
+        animationEnemy.render(g);
     }
 }
