@@ -66,6 +66,10 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
         if(playerAtkRect.contains(this.hitbox)){
             this.setHealthPoints(this.getHealthPoints()-atkP);
         }
+        if(this.getHealthPoints()<=0){
+            this.setAlive(false);
+            System.out.println("Enemy dead");
+        }
 
         //TODO: add the stuff here.
     }

@@ -1,5 +1,7 @@
 package entity;
 
+import utilz.CardinalDirection;
+
 import java.awt.*;
 
 public abstract class Entity {
@@ -8,12 +10,14 @@ public abstract class Entity {
     protected int width, height;
     protected Rectangle hitbox;
     protected boolean isAlive;
+    protected CardinalDirection dir;
 
     public Entity(float x, float y, int width, int height){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.dir = CardinalDirection.EAST;
 
         inititateHitbox();
     }
@@ -90,6 +94,12 @@ public abstract class Entity {
         return healthPoints;
     }
 
+    public void setDirection(CardinalDirection d){
+        this.dir = d;
+    }
+    public CardinalDirection getDirection(){
+        return this.dir;
+    }
     public double getMovementSpeed() {
         return movementSpeed;
     }
