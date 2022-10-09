@@ -48,6 +48,7 @@ public class GamePanel extends JPanel {
     BufferedImage playerImage;
     Entity player;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
+    private final Object lock = new Object(); // TODO: Ska det verkligen vara object?
 
     public GamePanel(GameApp gameApp, Movement movement, Attack attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Entity player, Animation animation, Animation animationEnemy){
         addKeyListener(new ActionController(this, movement, attack));
@@ -55,7 +56,7 @@ public class GamePanel extends JPanel {
         setPanelSize();
         int width = 50;
         playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
-        this.player = player;
+        this.player = player; //TODO: ALLT MED ENTITIES MÅSTE FLYTTAS
         this.animation = animation;
         this.animationEnemy = animationEnemy;
         this.movement = movement;
@@ -69,12 +70,13 @@ public class GamePanel extends JPanel {
         jb1.setBackground(Color.BLUE);
         jb1.setBounds(600, 300, 80, 30);
         this.add(jb1);
+
         jb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 (pause = new Pause()).execute();
                 try {
-                    gameApp.pauseThread();
+                    pauseThread();
                 } catch (InterruptedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -89,7 +91,7 @@ public class GamePanel extends JPanel {
                         pause.cancel(true);
                         jb.setEnabled(true);
                         jb1.setEnabled(false);
-                        gameApp.resumeThread();
+                        resumeThread();
                     }
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
@@ -103,8 +105,22 @@ public class GamePanel extends JPanel {
         this.fpsUpdater = fpsUpdater;
         //startGameLoop();
     }
+    public  void pauseThread() throws InterruptedException
+    {
+        synchronized(lock){
+            lock.wait();
+        }
+    }
 
-
+    public  void resumeThread()
+    {
+        synchronized(lock)
+        {
+//        	gameThread.notify();
+            lock.notify();
+//            lock.
+        }
+    }
     // Sets here, instead of view since it includes the border as well.
     private void setPanelSize() {
         Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);

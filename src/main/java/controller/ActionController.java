@@ -2,6 +2,7 @@ package controller;
 
 import model.Attack;
 import model.Movement;
+import utilz.CardinalDirection;
 import utilz.Coordinate;
 import view.GamePanel;
 
@@ -44,7 +45,7 @@ public class ActionController implements KeyListener {
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             movement.setDown(true);
-            dir=CardinalDirection.SOUTH;
+            dir= CardinalDirection.SOUTH;
             //System.out.println("PRESSED S");
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
@@ -54,14 +55,7 @@ public class ActionController implements KeyListener {
             dir=CardinalDirection.EAST;
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            //attack.setAttack(true);
-            //gamePanel.getGameApp().getPlayer().setAttack(true);
-            //System.out.println("PRESSED SPACE");
-            //gamePanel.getGameApp().getPlayer().setAttack(true);
-            //gamePanel.getGameApp().getPlayer().attack();
-            //player.isAttacking=true;
-            gamePanel.getGameApp().getPlayer().setAttackMode(true);
-
+            //gamePanel.getGameApp().getPlayer().setAttackMode(true); TODO: SORRY MEN MÅSTE!
             //Level.getPlayer().setAttackMode(true);
             Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
             //System.out.println("x och y player ActionController: " + movement.getX()+" och " + movement.getY());
@@ -75,7 +69,7 @@ public class ActionController implements KeyListener {
             //Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet?
             //attack.attack(coordinate, dir);
         }
-        gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
+        //gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
         //Level.getPlayer().setDirection(dir); //behöver ett objekt här
     }
 
