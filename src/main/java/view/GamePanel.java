@@ -71,7 +71,7 @@ public class GamePanel extends JPanel {
         jb1.setBounds(600, 300, 80, 30);
         this.add(jb1);
 
-        jb.addActionListener(new ActionListener() {
+        jb.addActionListener(new ActionListener() { // TODO: fixa variabel namnen jb och jb1
             @Override
             public void actionPerformed(ActionEvent e) {
                 (pause = new Pause()).execute();
@@ -130,17 +130,17 @@ public class GamePanel extends JPanel {
         System.out.println("Size : " + GAME_WIDTH + " : " + GAME_HEIGHT);
     }
 
-    // Debugging purposes
+    // Debugging purposes, will be removed
     protected void drawHitbox(Graphics g){
         g.setColor(Color.PINK);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
-    // Debugging purposes
+    // TODO: Move to seperate Hitbox class
     private void inititateHitbox() {
-        hitbox = new Rectangle((int)player.getX(), (int)player.getY(), 200, 200);
+        hitbox = new Rectangle((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
     }
 
-    // Debugging purposes
+    // TODO: Move to seperate Hitbox class
     protected void updateHitbox(){
         hitbox.x = (int)player.getX();
         hitbox.y = (int)player.getY();
@@ -149,24 +149,19 @@ public class GamePanel extends JPanel {
     public void update(){
         animation.updateAnimationTick();
         animation.setAnimation();
-
         animationEnemy.updateAnimationTick();
         animationEnemy.setAnimation();
-
         movement.updatePosition();
 
         updateHitbox();
-
     }
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         levelManager.draw(g);
         drawHitbox(g);
-        //g.drawImage(playerImage, (int)player.getX(), (int)player.getY(), null);
 
         render(g);
-
     }
 
     protected void render(Graphics g){

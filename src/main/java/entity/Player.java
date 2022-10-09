@@ -37,8 +37,6 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private int keyCount;
     private static int scoreCount;
 
-    Animation animation;
-    Movement movement;
 
     public int getScoreCount(){
         return scoreCount;
@@ -51,8 +49,6 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         this.keyCount = 0;
         scoreCount=0;
         //animation = new Animation(ImageServer.Ids.PLAYER, this);
-        movement = new Movement(this, animation);
-
         //super(100,20,0,5, 10);
     }
 
@@ -60,10 +56,9 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         this.levelData = levelData;
     }
 
-    public Movement getMovement() {
-        return movement;
-    }
-
+    // TODO: BORT FRÅN PLAYER! VI HAR EN UPDATE METOD I GAMEPANEL SOM SKA ANVÄNDAS FÖR SÅNT HÄR
+    // TODO: Player ska representera en Player, sen ska vi ha instanser av Attack o sånt.
+    // TODO: I UML språk blir det då, Player HAS an Attack. Vilket är det vi vill uppnå.
     public void update(){
 
         skelX=Skeleton.cx;
@@ -85,11 +80,11 @@ public class Player extends Entity implements IObservable, HostileAttacker {
             }
         }
 
-        movement.updatePosition();
 
         checkAttack(skelX,skelX);
     }
 
+    // TODO: BORT FRÅN PLAYER!
     private void checkAttack(int xx,int yy) { //borde vara enemy's och player's hitbox-rektanglar som parametrar
         if(this.x==xx && this.x<xx+10) {
             setHealthPoints(getHealthPoints()-5);
@@ -141,11 +136,6 @@ public class Player extends Entity implements IObservable, HostileAttacker {
 
             System.exit(0);
         }
-    }
-
-    public void render(Graphics g){
-        drawHitbox(g);
-        animation.render(g);
     }
 
 

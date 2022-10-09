@@ -25,17 +25,18 @@ public class Skeleton extends Enemy implements ActionListener{
     static int cx=420,cy=120;
     int velX=2,velY=2;
     Timer t=new Timer(5,this);
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2=(Graphics2D) g;
+    //@Override
+   // public void paint(Graphics g) { // TODO: DETTA MÅSTE BORT från Skelly!  Kommenterar bort, förstör jag koden så får vi fixa!
+        //super.paint(g);
+        //Graphics2D g2=(Graphics2D) g;
         // THis is the position of skeleton image which is to be draw
-        for(Skeleton skeleton : skeletons) {
-            g.drawImage(skeletonArray[skeleton.getEnemyState()][skeleton.getAnimationIndex()], cx,cy, null);
-            g.drawRect(478, 192, 60, 30);
-        }
-        t.start();
-    }
+        //for(Skeleton skeleton : skeletons) {
+        //    g.drawImage(skeletonArray[skeleton.getEnemyState()][skeleton.getAnimationIndex()], cx,cy, null);
+        //    g.drawRect(478, 192, 60, 30);
+        //}
+       // t.start();
+
+    //}
     public void actionPerformed(ActionEvent e) {
         if(cx<20 || cx>700) {
             velX= -velX;
@@ -49,56 +50,13 @@ public class Skeleton extends Enemy implements ActionListener{
         JPanel p=new JPanel();
         p.repaint();
     }
-    public Skeleton() {
-        super(0, 0, 0, 0, SKELETON);
-//        loadEnemyImages();
-//        addEnemies();
-    }
 
     public Skeleton(float x, float y){
         super(x, y, 0, 0, SKELETON);
     }
-    //temporärt public tills vi har fungerande rum metod
+    //temporärt public tills vi har fungerande rum metod o factory
     public void addEnemies() {
         skeletons.add(new Skeleton(400,400));
     }
 
-    public void draw(Graphics g){
-        paint(g);
-    }
-    /*
-    public void loadEnemyImages() {
-        try (InputStream is = getClass().getResourceAsStream("/skeleton_sprites.png")) {
-            BufferedImage image = ImageIO.read(is);
-
-            skeletonArray = new BufferedImage[6][3];
-            for (int row = 0; row < skeletonArray.length; row++){
-                for (int column = 0; column < skeletonArray[row].length; column++){
-                    skeletonArray[row][column] = image.getSubimage(row*100, column*100, 60, 100);
-                }
-            }
-        } catch (IOException ignored) {
-        }
-    }
-
-
-     */
-    public void update() {
-//    	System.out.println(x + " === "+ y);
-        updateAnimationTick();
-
-//    	float x=(float) getX();
-//    	float y=(float) getY();
-//    	System.out.println(x+"                          "+y);
-//    	EnemyBrain.loadEnemyImages();
-//    	while(true) {
-//    		setX(x+450000);
-//    		setY(y+540000);
-//    	}
-    }
-
-    /*public Skeleton(float x, float y) {
-        super(x, y, 0, 0);
-        setHealthPoints(50);
-    }*/
 }
