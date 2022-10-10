@@ -66,7 +66,7 @@ public class ActionController implements KeyListener {
             //gamePanel.getGameApp().getPlayer().setAttack(true);
             //gamePanel.getGameApp().getPlayer().attack();
             //player.isAttacking=true;
-            gamePanel.getGameApp().getPlayer().setAttackMode(true);
+            gamePanel.getGameApp().getPlayer().setAttackMode(true); //fult
 
             //Level.getPlayer().setAttackMode(true);
             Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
@@ -74,11 +74,10 @@ public class ActionController implements KeyListener {
 
             attack.getAttackCoordinate(coordinate, dir);
 
-
             //attack.setAttack(true);
             //gamePanel.getGameApp().getPlayer().setAttack(true);
         }
-        gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
+        gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt, fult
         //Level.getPlayer().setDirection(dir); //behöver ett objekt här
     }
 

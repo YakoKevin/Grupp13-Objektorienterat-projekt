@@ -38,7 +38,6 @@ public class Attack {
         }
         //if utanför rutan också, vet inte vad den ska har för storlek
 
-
         Coordinate c = new Coordinate(atkOffSetX,atkOffSetY);
         //notifyObservers();
         return c;
