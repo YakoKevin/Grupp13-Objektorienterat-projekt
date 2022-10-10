@@ -5,9 +5,9 @@ import utilz.Coordinate;
 import utilz.GameConstants;
 
 public enum Door {
-    NORTH(0, GameConstants.RoomMapSizes.WIDTH.getSize()/2, CardinalDirection.NORTH),
+    NORTH(GameConstants.RoomMapSizes.WIDTH.getSize()/2, 0, CardinalDirection.NORTH),
     EAST(GameConstants.RoomMapSizes.WIDTH.getSize()-1, GameConstants.RoomMapSizes.HEIGHT.getSize()/2, CardinalDirection.EAST),
-    SOUTH(GameConstants.RoomMapSizes.HEIGHT.getSize()-1, GameConstants.RoomMapSizes.WIDTH.getSize()/2, CardinalDirection.SOUTH),
+    SOUTH(GameConstants.RoomMapSizes.WIDTH.getSize()/2, GameConstants.RoomMapSizes.HEIGHT.getSize()-1, CardinalDirection.SOUTH),
     WEST(0, GameConstants.RoomMapSizes.HEIGHT.getSize()/2, CardinalDirection.WEST);
 
     Coordinate coordinate;
