@@ -3,21 +3,27 @@ package utilz;
 public enum EntitySetup {
     PLAYER(100, 100, 30, 100),
     SKELETON(100, 100, 30, 100);
+    Coordinate startingCoordinate;
     int hitBoxWidth;
     int hitBoxHeight;
-    int width;
-    int height;
 
-    EntitySetup(int hitBoxWidth, int hitBoxHeight, int width, int height){
+    EntitySetup(int startX, int startY, int hitBoxWidth, int hitBoxHeight){
+        this.startingCoordinate = new Coordinate(startX, startY);
         this.hitBoxWidth = hitBoxWidth;
         this.hitBoxHeight = hitBoxHeight;
-        this.width = width;
-        this.height = height;
     }
 
-    public int getHeight() {
-        return height;
+    public Coordinate getStartCoordinate() {
+        return startingCoordinate;
     }
+
+    public int getStartX(){
+        return startingCoordinate.getX();
+    };
+
+    public int getStartY(){
+        return startingCoordinate.getY();
+    };
 
     public int getHitBoxHeight() {
         return hitBoxHeight;
@@ -25,9 +31,5 @@ public enum EntitySetup {
 
     public int getHitBoxWidth() {
         return hitBoxWidth;
-    }
-
-    public int getWidth() {
-        return width;
     }
 }

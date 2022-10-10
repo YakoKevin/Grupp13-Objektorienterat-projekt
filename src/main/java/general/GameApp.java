@@ -1,6 +1,6 @@
 package general;
 
-import entity.KeyItem;
+import entity.*;
 import model.Attack;
 import model.Movement;
 import model.level.Level;
@@ -9,9 +9,6 @@ import utilz.Coordinate;
 import utilz.GameConstants;
 import utilz.ImageServer;
 import view.*;
-import entity.EnemyBrain;
-import entity.Player;
-import entity.Skeleton;
 
 import java.awt.*;
 
@@ -19,6 +16,7 @@ public class GameApp {
 
     private LevelFactory levelFactory = new LevelFactory();
     private Level currentLevel;
+    private PlayerFactory playerFactory = new PlayerFactory();
 
 
     private GameView gameView;
@@ -82,7 +80,7 @@ public class GameApp {
     }
 
     private void firstSetup(){
-        Player player = new Player(100, 100, 30, 100);
+        Player player = playerFactory.createPlayer();;
         setupLevel(player);
     }
 
