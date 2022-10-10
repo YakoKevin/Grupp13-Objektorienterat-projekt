@@ -1,9 +1,7 @@
 package entity;
 
 import utilz.Coordinate;
-import static utilz.EnemyConstants.*;
 
-import static utilz.EnemyConstants.*;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -52,7 +50,7 @@ public class Skeleton extends Enemy implements ActionListener{
     }
 
     public Skeleton(float x, float y){
-        super(x, y, 0, 0, SKELETON);
+        super(x, y, 0, 0, 0);
     }
     //temporärt public tills vi har fungerande rum metod o factory
     public void addEnemies() {

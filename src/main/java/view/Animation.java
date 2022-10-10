@@ -40,6 +40,8 @@ public class Animation {
         }
     }
 
+    //TODO: inte super viktigt, men borde gå att ta bort boolean:en för moving eftersom vi har enums för player state så
+    // slipper vi denna if-sats radda.
     public void setAnimation() {
         EntityStates.PlayerStates startAnimation = playerAction;
 

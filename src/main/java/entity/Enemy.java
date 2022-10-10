@@ -2,10 +2,10 @@ package entity;
 
 
 import general.IObserver;
+import utilz.EntityStates.*;
 
 import java.awt.*;
 
-import static utilz.EnemyConstants.GetSpriteAmount;
 
 public abstract class Enemy extends Entity implements IObserver, Hostile {
     private int animationIndex;
@@ -24,6 +24,7 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
         //super(50,10,1,3,10);
     }
 
+
     protected void updateAnimationTick(){
         animationTick++;
 
@@ -31,7 +32,7 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
             animationTick = 0;
             animationIndex++;
 
-            if (animationIndex >= GetSpriteAmount(enemyType, enemyState)){
+            if (animationIndex >= EnemyStates.IDLE.getAnimationSpriteAmount()){
                 animationIndex = 0;
             }
         }
