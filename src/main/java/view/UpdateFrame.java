@@ -56,6 +56,8 @@ public class UpdateFrame extends JPanel {
 
         super.paintComponent(g);
         levelManager.draw(g);
+        drawUI(g);
+        System.out.println("t h");
         //drawHitbox(g);
         g.drawImage(playerImage, (int)player.getX(), (int)player.getY(), null);
         if(player.getAttackMode()==true){
@@ -66,9 +68,17 @@ public class UpdateFrame extends JPanel {
             c = atkM.getAttackCoordinate(c,this.player.getDirection());
             atkV.drawAttackRectangle(g,c.getX(),c.getY(),100,100);
         }
-
         render(g);
 
+    }
+
+    public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
+        String hpStr = Double.toString(player.getHealthPoints());
+        g.setFont(new Font("Araial", Font.BOLD, 12));
+        g.setColor(new Color(255, 0, 70));
+        g.drawString("HP: " + hpStr,10,10);
+        g.drawString("Keys: " + player.getKeyCount(), 10,30);
+        g.drawString("Score: " + player.getScoreCount(), 10,50);
     }
 
     protected void render(Graphics g){

@@ -71,8 +71,9 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
             this.setAlive(false);
             System.out.println("Enemy dead");
         }
-
+        // stuff added
         //TODO: add the stuff here.
+
     }
 
     //Function to be added

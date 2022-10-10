@@ -37,12 +37,13 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     private int skelX=0,skelY=0;
 
     private int keyCount;
-    private static int scoreCount;
+    private int scoreCount;
 
 
     public int getScoreCount(){
-        return scoreCount;
+        return this.scoreCount;
     }
+    public int getKeyCount(){return this.keyCount;}
 
     public Player(float x, float y, int width, int height){
         super(x, y, width, height);
@@ -148,15 +149,6 @@ public class Player extends Entity implements IObservable, HostileAttacker {
 
 
     List<IObserver> iObservers;
-    public void drawHP(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        String hpStr = Double.toString(getHealthPoints());
-        g2.setFont(new Font("Araial", Font.BOLD, 12));
-        g2.setColor(new Color(255, 0, 70));
-        g2.drawString("HP: " + hpStr,10,10);
-        g2.drawString("KEYS: " + this.keyCount, 10,30);
-        g2.drawString("SCORE: " + scoreCount, 10,50);
-    }
 
 /*
     public boolean checkIfInRange(Enemy enemy) {
@@ -255,7 +247,6 @@ public class Player extends Entity implements IObservable, HostileAttacker {
         this.atkRect= r;
     }
 
-
     @Override
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;
@@ -263,14 +254,5 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     public ArrayList getHostilesList(){
         return this.hostiles;
     }
-
-
-
-    public void drawAttackRectangle(Graphics g, int x, int y, int w, int h) {
-        g.setColor(Color.red);
-        g.drawRect(x,y,w,h);
-    }
-
-
 
 }

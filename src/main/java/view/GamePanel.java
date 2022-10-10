@@ -162,17 +162,15 @@ public class GamePanel extends JPanel {
             }*/
         }
 
-        player.setAttackMode(false);
-
         updateHitbox();
+        player.setAttackMode(false); //ska vara timer
     }
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         levelManager.draw(g);
         drawHitbox(g);
-
-
+        drawUI(g);
         if(player.getAttackMode()==true){
             AttackView atkV = new AttackView();
             AttackModel atkM = new AttackModel();
@@ -180,13 +178,22 @@ public class GamePanel extends JPanel {
             c = atkM.getAttackCoordinate(c,this.player.getDirection());
             atkV.drawAttackRectangle(g,c.getX(),c.getY(),100,100);
         }
-
-
         render(g);
     }
 
     protected void render(Graphics g){
         animation.render(g);
         animationEnemy.render(g);
+    }
+
+    public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
+        String hpStr = Double.toString(player.getHealthPoints());
+        g.setFont(new Font("Araial", Font.BOLD, 12));
+        g.setColor(new Color(255, 0, 70));
+        g.drawString("HP: " + hpStr,10,10);
+        g.setColor(Color.YELLOW);
+        g.drawString("Keys: " + player.getKeyCount(), 10,30);
+        g.setColor(Color.WHITE);
+        g.drawString("Score: " + player.getScoreCount(), 10,50);
     }
 }
