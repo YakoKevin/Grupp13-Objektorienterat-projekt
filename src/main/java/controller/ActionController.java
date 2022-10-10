@@ -1,6 +1,5 @@
 package controller;
 
-
 import model.Attack;
 import model.Movement;
 import utilz.CardinalDirection;
@@ -34,50 +33,43 @@ public class ActionController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_W) {
-            //gamePanel.getGameApp().getPlayer().setUp(true);
             movement.setUp(true);
             dir=CardinalDirection.NORTH;
 
             //System.out.println("PRESSED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
-            //gamePanel.getGameApp().getPlayer().setRight(true);
             movement.setRight(true);
             //System.out.println("PRESSED A");
             dir = CardinalDirection.WEST;
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
-            //gamePanel.getGameApp().getPlayer().setDown(true);
             movement.setDown(true);
-            dir=CardinalDirection.SOUTH;
+            dir= CardinalDirection.SOUTH;
             //System.out.println("PRESSED S");
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
-            //gamePanel.getGameApp().getPlayer().setLeft(true);
             movement.setLeft(true);
             //System.out.println("PRESSED D");
 
             dir=CardinalDirection.EAST;
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            //attack.setAttack(true);
-            //gamePanel.getGameApp().getPlayer().setAttack(true);
-            //System.out.println("PRESSED SPACE");
-            //gamePanel.getGameApp().getPlayer().setAttack(true);
-            //gamePanel.getGameApp().getPlayer().attack();
-            //player.isAttacking=true;
-            gamePanel.getGameApp().getPlayer().setAttackMode(true); //fult
-
+            //gamePanel.getGameApp().getPlayer().setAttackMode(true); TODO: SORRY MEN MÅSTE!
             //Level.getPlayer().setAttackMode(true);
             Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
             //System.out.println("x och y player ActionController: " + movement.getX()+" och " + movement.getY());
 
             attack.getAttackCoordinate(coordinate, dir);
 
+
             //attack.setAttack(true);
             //gamePanel.getGameApp().getPlayer().setAttack(true);
+            //System.out.println("PRESSED SPACE");
+            //Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet?
+            //attack.attack(coordinate, dir);
         }
-        gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt, fult
+        //gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
         //Level.getPlayer().setDirection(dir); //behöver ett objekt här
     }
 

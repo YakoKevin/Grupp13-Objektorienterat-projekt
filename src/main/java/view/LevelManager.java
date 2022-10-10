@@ -1,4 +1,4 @@
-package model.level;
+package view;
 
 import general.GameApp;
 import utilz.ImageServer;
@@ -8,12 +8,10 @@ import java.awt.image.BufferedImage;
 
 // TEMPORÄRT !
 public class LevelManager {
-    private GameApp gameApp;
     private BufferedImage levelSprite;
     private int[][] levelData;
 
-    public LevelManager(GameApp gameApp){
-        this.gameApp = gameApp;
+    public LevelManager(){
         this.levelSprite = ImageServer.getImage(ImageServer.Ids.LEVEL);
         //importOutsideSprites();
     }
@@ -49,7 +47,7 @@ public class LevelManager {
         return null;
     }
 
-   // public Level getCurrentLevel(){
+    // public Level getCurrentLevel(){
     //    return levelSprite;
-   // }
+    // }
 }

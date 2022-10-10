@@ -2,10 +2,11 @@ package entity;
 
 import java.awt.image.BufferedImage;
 
+import general.IObserver;
 import utilz.ImageServer;
 import java.awt.*;
 
-public class KeyItem extends Entity implements model.IObserver {
+public class KeyItem extends Entity implements IObserver {
 
     private BufferedImage keySprite;
 

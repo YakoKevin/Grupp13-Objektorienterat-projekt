@@ -1,10 +1,16 @@
 package model;
 
-import utilz.Coordinate;
+import controller.ActionController;
+import entity.Entity;
+import entity.Skeleton;
 import utilz.CardinalDirection;
+import utilz.Coordinate;
 
+import java.awt.*;
+import java.awt.geom.Rectangle2D;
+import java.util.List;
 
-public class Attack {
+public class Attack { // TODO: STATIC METOD?
     public static Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
         int atkOffSetX = coordinate.getX();
         int atkOffSetY = coordinate.getY();
@@ -22,7 +28,7 @@ public class Attack {
 
             //System.out.println("u");
         }
-        else if(dir==CardinalDirection.SOUTH){
+        else if(dir== CardinalDirection.SOUTH){
             atkOffSetX-=width;
             atkOffSetY+=height;
         }

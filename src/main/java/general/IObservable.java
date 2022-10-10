@@ -1,4 +1,4 @@
-package model;
+package general;
 
 public interface IObservable {
     //List<Enemy> enemies = new ArrayList<>();
