@@ -5,7 +5,7 @@ import utilz.CardinalDirection;
 import java.awt.*;
 
 public abstract class Entity {
-    protected float x;
+    protected float x; //TODO: gör om till Coordinate ist.
     protected float y;
     protected int width, height;
     protected Rectangle hitbox;
@@ -31,7 +31,7 @@ public abstract class Entity {
         hitbox = new Rectangle((int)x, (int)y, width, height);
     }
 
-    protected void updateHitbox(){
+    protected void updateHitbox(){ //TODO: Viktigt - måste göra varje update() för att undvika fel.
         hitbox.x = (int)x;
         hitbox.y = (int)y;
     }
@@ -42,10 +42,10 @@ public abstract class Entity {
 
     //private double x,y;
     public double healthPoints;
-    private double attackPoints;
+    private double attackPoints; //TODO: borde vara i Attack inte i entity
     private int keyItem;
     private double movementSpeed;
-    private double attackRange;
+    private double attackRange; //TODO: borde vara i Attack inte i entity
 
     public Entity(double healthPoints, double attackPoints, int keyItem, double movementSpeed, double attackRange){
         this.healthPoints=healthPoints;
@@ -116,4 +116,5 @@ public abstract class Entity {
         this.isAlive=aliveStatus;
     }
 
+    //TODO: update() metod borde finnas i denna klass för att uppdatera logik.
 }
