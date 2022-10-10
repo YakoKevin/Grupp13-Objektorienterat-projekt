@@ -1,6 +1,7 @@
 package controller;
 
-import model.Attack;
+import entity.Player;
+import model.AttackModel;
 import model.Movement;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
@@ -13,16 +14,19 @@ public class ActionController implements KeyListener {
 
     private GamePanel gamePanel;
     private Movement movement;
-    private Attack attack;
+    private AttackModel attack;
     private Coordinate coordinate = new Coordinate(0,0); // FIXA COORDINATES, TILLFÄLLIGT FÖR ATT FÅ PROGRAMMET ATT KÖRA
     public static CardinalDirection dir;
-    //public static int dir; //tillfällig för att veta åt vilket håll spelaren står (0=A,1=D,2=W,3=S)
+    private Player player;
 
 
-    public ActionController(GamePanel gamePanel, Movement movement, Attack attack){
+
+
+    public ActionController(GamePanel gamePanel, Movement movement, AttackModel attack, Player player){
         this.gamePanel = gamePanel;
         this.movement = movement;
         this.attack = attack;
+        this.player = player;
     }
 
     @Override
@@ -57,10 +61,14 @@ public class ActionController implements KeyListener {
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             //gamePanel.getGameApp().getPlayer().setAttackMode(true); TODO: SORRY MEN MÅSTE!
             //Level.getPlayer().setAttackMode(true);
+
+            player.setAttackMode(true);
             Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
             //System.out.println("x och y player ActionController: " + movement.getX()+" och " + movement.getY());
 
-            attack.getAttackCoordinate(coordinate, dir);
+            AttackModel atk = new AttackModel();
+            atk.getAttackCoordinate(coordinate, dir);
+
 
 
             //attack.setAttack(true);
@@ -69,6 +77,7 @@ public class ActionController implements KeyListener {
             //Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet?
             //attack.attack(coordinate, dir);
         }
+        player.setDirection(dir);
         //gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
         //Level.getPlayer().setDirection(dir); //behöver ett objekt här
     }

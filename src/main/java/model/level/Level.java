@@ -30,9 +30,6 @@ public abstract class Level{
         this.levelMap = levelMap;
         this.roomTypes = roomTypeFunctions;
         this.player = player;
-        this.player = new Player(100, 100, 30, 100);
-
-
         this.currentRoom = createRoom(levelMap.getStartCoordinate());
     }
 

@@ -1,7 +1,8 @@
 package view;
 
-import entity.Entity;
 import entity.Player;
+import model.AttackModel;
+import utilz.Coordinate;
 import utilz.ImageServer;
 
 import javax.swing.*;
@@ -12,12 +13,12 @@ public class UpdateFrame extends JPanel {
     protected Rectangle hitbox; // Debugging purposes
 
     BufferedImage playerImage;
-    Entity player;
+    Player player;
     Animation animation;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
 
     // make more generic
-    public UpdateFrame(Entity player, Animation animation){
+    public UpdateFrame(Player player, Animation animation){
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(100, 100));
         this.setBackground(Color.green);
@@ -55,8 +56,16 @@ public class UpdateFrame extends JPanel {
 
         super.paintComponent(g);
         levelManager.draw(g);
-        drawHitbox(g);
+        //drawHitbox(g);
         g.drawImage(playerImage, (int)player.getX(), (int)player.getY(), null);
+        if(player.getAttackMode()==true){
+            //System.out.println("defgrtxz ");
+            AttackView atkV = new AttackView();
+            AttackModel atkM = new AttackModel();
+            Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
+            c = atkM.getAttackCoordinate(c,this.player.getDirection());
+            atkV.drawAttackRectangle(g,c.getX(),c.getY(),100,100);
+        }
 
         render(g);
 

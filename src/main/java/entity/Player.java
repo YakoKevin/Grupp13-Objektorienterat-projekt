@@ -9,6 +9,8 @@ import model.*;
 import utilz.CardinalDirection;
 import utilz.ImageServer;
 import controller.ActionController;
+import view.AttackView;
+import view.UpdateFrame;
 
 
 import java.awt.*;
@@ -59,30 +61,36 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     // TODO: BORT FRÅN PLAYER! VI HAR EN UPDATE METOD I GAMEPANEL SOM SKA ANVÄNDAS FÖR SÅNT HÄR
     // TODO: Player ska representera en Player, sen ska vi ha instanser av Attack o sånt.
     // TODO: I UML språk blir det då, Player HAS an Attack. Vilket är det vi vill uppnå.
-    public void update(){
+    public void update() {
 
-        skelX=Skeleton.cx;
-        skelY=Skeleton.cy;
+        skelX = Skeleton.cx;
+        skelY = Skeleton.cy;
         updateHitbox();
         /*if(checkIfHitByAttacker(sk)==true){ //kanske inte är härifrån som man kollar detta
             this.setHealthPoints(this.getHealthPoints()-sk.getAttackPoints());
         }*/
 
-        if(attackMode==true){
+
+        /*if(attackMode==true){
+
+            System.out.println("atak");
             //animation.attacking=true;
 
             //(new Coordinate((int)this.x,(int)this.y), this.dir);
 
+
             setPlayerAttackRectangle();
             for(int i =0; i<hostiles.size();i++) {
+
                 hostiles.get(i).checkedIfIsAttacked(this.getPlayerAttackRectangle(),this.getAttackPoints());
-                sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(), this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
-            }
-        }
+                //sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(), this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
+
+        }}*/
 
 
-        checkAttack(skelX,skelX);
+        //checkAttack(skelX,skelX);
     }
+
 
     // TODO: BORT FRÅN PLAYER!
     private void checkAttack(int xx,int yy) { //borde vara enemy's och player's hitbox-rektanglar som parametrar
@@ -251,6 +259,9 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     @Override
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;
+    }
+    public ArrayList getHostilesList(){
+        return this.hostiles;
     }
 
 

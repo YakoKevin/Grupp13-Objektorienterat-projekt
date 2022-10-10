@@ -1,12 +1,12 @@
 package view;
 
 import controller.ActionController;
-import entity.Entity;
+import entity.Enemy;
 import entity.Player;
 import general.GameApp;
-import model.Attack;
+import model.AttackModel;
 import model.Movement;
-import utilz.GameConstants;
+import utilz.Coordinate;
 import utilz.ImageServer;
 
 import javax.swing.*;
@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static general.GameApp.GAME_HEIGHT;
@@ -46,12 +47,13 @@ public class GamePanel extends JPanel {
     private Pause pause;
 
     BufferedImage playerImage;
-    Entity player;
+    Player player;
+    //Entity player;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
     private final Object lock = new Object(); // TODO: Ska det verkligen vara object?
 
-    public GamePanel(GameApp gameApp, Movement movement, Attack attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Entity player, Animation animation, Animation animationEnemy){
-        addKeyListener(new ActionController(this, movement, attack));
+    public GamePanel(GameApp gameApp, Movement movement, AttackModel attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Player player, Animation animation, Animation animationEnemy){
+        addKeyListener(new ActionController(this, movement, attack, player));
         this.gameApp = gameApp;
         setPanelSize();
         int width = 50;
@@ -152,6 +154,15 @@ public class GamePanel extends JPanel {
         animationEnemy.updateAnimationTick();
         animationEnemy.setAnimation();
         movement.updatePosition();
+        if(player.getAttackMode()==true){
+           player.getHostilesList();
+           /* for(int i =0; i<hostiles.size();i++) {
+                hostiles.get(i).checkedIfIsAttacked(this.getPlayerAttackRectangle(),this.getAttackPoints()); //hostiles är bara object, skulle behöva vara enemy
+                //sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(), this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
+            }*/
+        }
+
+        player.setAttackMode(false);
 
         updateHitbox();
     }
@@ -160,6 +171,16 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         levelManager.draw(g);
         drawHitbox(g);
+
+
+        if(player.getAttackMode()==true){
+            AttackView atkV = new AttackView();
+            AttackModel atkM = new AttackModel();
+            Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
+            c = atkM.getAttackCoordinate(c,this.player.getDirection());
+            atkV.drawAttackRectangle(g,c.getX(),c.getY(),100,100);
+        }
+
 
         render(g);
     }

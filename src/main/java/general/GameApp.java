@@ -1,19 +1,14 @@
 package general;
 
-import entity.KeyItem;
-import model.Attack;
+import entity.*;
+import entity.Player;
+import model.AttackModel;
 import model.Movement;
 import model.level.Level;
 import model.level.LevelFactory;
-import utilz.Coordinate;
 import utilz.GameConstants;
 import utilz.ImageServer;
 import view.*;
-import entity.EnemyBrain;
-import entity.Player;
-import entity.Skeleton;
-
-import java.awt.*;
 
 public class GameApp {
 
@@ -37,7 +32,7 @@ public class GameApp {
     private Movement movement;
     private Animation animation;
     private Animation animationEnemy;
-    private Attack attack;
+    private AttackModel attack;
 
     private UpdateFrame updateFrame;
     private FPSUpdater fpsUpdater;
@@ -56,6 +51,7 @@ public class GameApp {
     public GameApp(){
         //levelManager = new LevelManager();
         player = new Player(100, 100, 30, 100);
+
         animation = new Animation(ImageServer.Ids.PLAYER, player);
         updateFrame = new UpdateFrame(player, animation);
         movement = new Movement(player, animation);
@@ -64,6 +60,8 @@ public class GameApp {
         //player.loadLevelData(levelManager.getCurrentLevel());
         skel=new Skeleton(200,200);
 
+        //EnemyFactory enemyFactory = new EnemyFactory();
+        //enemyFactory.createSkeleton();
         //skel.loadEnemyImages();
         skel.addEnemies();
         animationEnemy = new Animation(ImageServer.Ids.ENEMY, skel); // TODO: Vi behöver en factory, då kan vi få det att fungera mycket mer abstrakt.
@@ -82,11 +80,12 @@ public class GameApp {
     }
 
     private void firstSetup(){
-        Player player = new Player(100, 100, 30, 100);
+        //Player player = new Player(100, 100, 30, 100);
         setupLevel(player);
     }
 
     private void setupLevel(Player player){
         currentLevel = levelFactory.simpleLevel(GameConstants.LevelSizes.MEDIUM.getSize(), player);
     }
+
 }

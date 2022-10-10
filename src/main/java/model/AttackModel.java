@@ -10,8 +10,8 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-public class Attack { // TODO: STATIC METOD?
-    public static Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
+public class AttackModel { //
+    public Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
         int atkOffSetX = coordinate.getX();
         int atkOffSetY = coordinate.getY();
         //animation.attacking = true;
@@ -37,7 +37,7 @@ public class Attack { // TODO: STATIC METOD?
         }
 
         if(atkOffSetX<0){
-            atkOffSetY=0;
+            atkOffSetX=0;
         }
         if(atkOffSetY<0){
             atkOffSetY=0;
