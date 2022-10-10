@@ -5,7 +5,9 @@ public enum EntityStates {
     public enum PlayerStates{
         IDLE(3),
         RUNNING(1),
-        ATTACK(1);
+        ATTACK(1),
+        HIT(1),
+        DEAD(1);
         int animationSpriteAmount;
 
         PlayerStates(int animationSpriteAmount){
