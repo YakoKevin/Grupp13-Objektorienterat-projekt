@@ -2,11 +2,13 @@ package model.level;
 
 import entity.Enemy;
 import entity.Player;
+import entity.PlayerFactory;
 import model.level.room.Door;
 import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import static utilz.EntitySetup.PLAYER;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,8 +22,6 @@ public abstract class Level{
     protected Room currentRoom;
     protected ArrayList<Room> allRooms;
     private Player player;
-
-
 
     protected final LevelMap levelMap;
     protected final RoomTypeFunction[] roomTypes;
@@ -67,6 +67,8 @@ public abstract class Level{
     }
 
     public void playerEnterRoom(Coordinate coordinate, CardinalDirection doorDirection){
+        if(currentRoom != null)
+            allRooms.add(currentRoom);
         currentRoom = createRoom(coordinate);
         currentRoom.setEntryDirection(doorDirection.getOppositeDirection());
     }
@@ -79,10 +81,19 @@ public abstract class Level{
         return room;
     }
 
-    public void updateEnemies(){
+    public void update(){
+        updateEnemies();
+        updatePlayer();
+    }
+
+    private void updateEnemies(){
         for (Iterator<Enemy> it = currentRoom.getEnemies(); it.hasNext(); ) {
             it.next().update();
         }
+    }
+
+    private void updatePlayer(){
+        player.update();
     }
 
     public Player getPlayer() {
