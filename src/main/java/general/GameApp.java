@@ -10,10 +10,14 @@ import utilz.GameConstants;
 import utilz.ImageServer;
 import view.*;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameApp {
 
     private LevelFactory levelFactory = new LevelFactory();
     private Level currentLevel;
+    Timer timer;
 
 
     private GameView gameView;
@@ -24,7 +28,6 @@ public class GameApp {
 
     //TODO: Inget av dessa borde finnas som en direkt referens här i GameApp - byt till att fråga currentLevel istället
     //private EnemyBrain enemyBrain;
-
     private Skeleton skel;
     private Player player;
     private KeyItem key;
@@ -64,15 +67,21 @@ public class GameApp {
         //enemyFactory.createSkeleton();
         //skel.loadEnemyImages();
         skel.addEnemies();
-        animationEnemy = new Animation(ImageServer.Ids.ENEMY, skel); // TODO: Vi behöver en factory, då kan vi få det att fungera mycket mer abstrakt.
-        gamePanel = new GamePanel(this, movement, attack, updateFrame, fpsUpdater, player, animation, animationEnemy); // FIXA REFERENCES...
-        fpsUpdater = new FPSUpdater(gamePanel);
-        gameView = new GameView(gamePanel, updateFrame);
-        gamePanel.setFocusable(true);
-        gamePanel.requestFocus();
-        fpsUpdater.startGameLoop();
+        animationEnemy = new Animation(ImageServer.Ids.ENEMY, skel);
+        //**********Allt ovan borde bort.***************
+
 
         firstSetup();
+        fpsUpdater.startGameLoop(); //TODO: fixa med namn så att det är tydligt att det är bara View den uppdaterar
+        timer.schedule(new GameTicker(), 100);
+    }
+
+    /**
+     * The main logic updater.
+     */
+    public void gameTick(){
+        currentLevel.tick();
+        //TODO: lägga till mer?
     }
 
     public void windowFocusLost(){
@@ -80,12 +89,27 @@ public class GameApp {
     }
 
     private void firstSetup(){
-        //Player player = new Player(100, 100, 30, 100);
+        setupView();
         setupLevel(player);
+    }
+
+    //TODO: REMOVE ALL NEED FOR MOVEMENT, ATTACK osv. Borde kunna hämta all från level ist.
+    private void setupView(){
+        gamePanel = new GamePanel(this, movement, attack, updateFrame, fpsUpdater, player, animation, animationEnemy); // FIXA REFERENCES...
+        fpsUpdater = new FPSUpdater(gamePanel);
+        gameView = new GameView(gamePanel, updateFrame);
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocus();
     }
 
     private void setupLevel(Player player){
         currentLevel = levelFactory.simpleLevel(GameConstants.LevelSizes.MEDIUM.getSize(), player);
     }
 
+    public class GameTicker extends TimerTask {
+        @Override
+        public void run() {
+            gameTick();
+        }
+    }
 }

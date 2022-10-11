@@ -81,7 +81,7 @@ public abstract class Level{
         return room;
     }
 
-    public void update(){
+    public void tick(){
         updateEnemies();
         updatePlayer();
     }
