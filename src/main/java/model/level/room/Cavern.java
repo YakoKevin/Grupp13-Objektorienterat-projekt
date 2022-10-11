@@ -70,7 +70,7 @@ public class Cavern extends Room {
         MAX_NUMBER_OF_OBSTACLES(10);
         int amount;
 
-        private Constants(int amount){
+        Constants(int amount){
             this.amount = amount;
         }
 

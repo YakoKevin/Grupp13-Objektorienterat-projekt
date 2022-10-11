@@ -15,6 +15,7 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
     private int animationTick = 25;
     private int animationSpeed = 25;
 
+    private ArrayList<Friendly> friendlies = new ArrayList<>();
 
     //private EnemyStates enemyState = IDLE;
 
@@ -105,8 +106,8 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
     }
 
     @Override
-    public void addFrendliesList(ArrayList<Hostile> hostile) {
-
+    public void addFrendliesList(ArrayList<Friendly> friendlies) {
+        this.friendlies = friendlies;
     }
 
 }
