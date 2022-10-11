@@ -45,7 +45,7 @@ public class Player extends Entity implements IObservable, HostileAttacker {
     }
     public int getKeyCount(){return this.keyCount;}
 
-    public Player(float x, float y, int width, int height){
+    public Player(int x, int y, int width, int height){
         super(x, y, width, height);
         this.setAttackPoints(20);
         this.healthPoints=100;
