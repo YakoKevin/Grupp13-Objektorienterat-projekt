@@ -16,16 +16,16 @@ public class Movement {
     private float y;
     private Animation animation;
 
-    public Movement(Entity entity, Animation animation){
+    public Movement(){/*
         this.entity = entity;
-        this.animation = animation;
+        this.animation = animation;*/
     }
 
-    public void updatePosition() {
+    public void updatePosition() { //TODO: retunera en ny Coordinate ist. och kalla på denna metod från entitin ist.
         animation.moving = false;
         //System.out.println(entity.getX());
 
-        if(this.x>477 && this.x<539) {
+        if(this.x>477 && this.x<539) { //TODO: vad är dessa för specifika siffror?
             if(this.y>191 && this.y<223) {
 //        		moving = false;
 //        		return;

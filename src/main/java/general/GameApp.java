@@ -54,7 +54,7 @@ public class GameApp {
 
         animation = new Animation(ImageServer.Ids.PLAYER, player);
         updateFrame = new UpdateFrame(player, animation);
-        movement = new Movement(player, animation);
+        movement = new Movement();
         //attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());

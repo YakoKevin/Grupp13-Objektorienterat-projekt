@@ -1,23 +1,26 @@
 package entity;
 
 import utilz.CardinalDirection;
+import utilz.Coordinate;
 
 import java.awt.*;
 
 public abstract class Entity {
-    protected float x; //TODO: gör om till Coordinate ist.
-    protected float y;
+    protected int x; //TODO: ta bort dessa två och gör så allt använder position ist.
+    protected int y;
+    protected Coordinate position = new Coordinate(0,0);
     protected int width, height;
     protected Rectangle hitbox;
     protected boolean isAlive;
     protected CardinalDirection dir;
 
-    public Entity(float x, float y, int width, int height){
+    public Entity(int x, int y, int width, int height){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.dir = CardinalDirection.EAST;
+        this.position = new Coordinate(x, y);
 
         inititateHitbox();
     }
@@ -66,12 +69,12 @@ public abstract class Entity {
     }
 
     public void setX(float x) {
-        this.x = x;
-    }
+        this.x = (int)x;
+    } //TODO: Borde inte finnas, vi använder ju Movement för detta!
 
     public void setY(float y) {
-        this.y = y;
-    }
+        this.y = (int)y;
+    } //TODO: Borde inte finnas, vi använder ju Movement för detta!
 
     public int getWidth() { return (int)width; }
 

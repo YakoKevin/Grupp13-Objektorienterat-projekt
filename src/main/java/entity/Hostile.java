@@ -1,8 +1,9 @@
 package entity;
 import java.awt.*;
+import java.util.ArrayList;
 
 
-public interface Hostile {
+public interface Hostile extends Attacklable{
 
-    void checkedIfIsAttacked(Rectangle r, double atkD);
+    void addFrendliesList(ArrayList<Hostile> hostile);
 }

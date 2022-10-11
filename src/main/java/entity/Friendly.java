@@ -1,8 +1,8 @@
 package entity;
 
 import java.util.ArrayList;
-//TODO: ta bort
-public interface HostileAttacker {
+
+public interface Friendly extends Attacklable{
 
     void addHostilesList(ArrayList<Hostile> hostile);
 }

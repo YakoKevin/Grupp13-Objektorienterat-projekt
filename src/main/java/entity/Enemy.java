@@ -5,6 +5,7 @@ import general.IObserver;
 import utilz.EntityStates.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public abstract class Enemy extends Entity implements IObserver, Hostile {
@@ -17,7 +18,7 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
 
     //private EnemyStates enemyState = IDLE;
 
-    public Enemy(float v, float x, float y, int width, int height){
+    public Enemy(int v, int x, int y, int width, int height){ //TODO: den som vet: gör bättre variabelnamn!
         super(x, y, width, height);
         this.enemyType = enemyType;
         this.setHealthPoints(50);
@@ -25,7 +26,7 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
     }
 
 
-    protected void updateAnimationTick(){
+    protected void updateAnimationTick(){ //TODO: ta bort
         animationTick++;
 
         if(animationTick >= animationSpeed){
@@ -38,13 +39,21 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
         }
     }
 
+    //TODO: lägg här allt som ska hända när logiken i fienden ska göras. Ska EnemyBrain hantera detta tro?
+    public void tick(){
+        //TODO: lägg till att gå,
+        //TODO: lägg till att slå
+        //TODO: lägg till att ...?
+        //TODO: ELLER anropa EnemyBrain.tick() kankse, om vi fixar den klassen dvs.?
+    }
+
     public void update(){
         updateAnimationTick();
     }
 
     public int getAnimationIndex(){
         return animationIndex;
-    }
+    } //TODO: TA bort
 
     public int getEnemyState(){
         return enemyState;
@@ -63,7 +72,7 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
         //System.out.println(" EnemyHp" + this.getHealthPoints());
     }*/
 
-    public void checkedIfIsAttacked(Rectangle playerAtkRect, double atkP) {
+    public void hit(Rectangle playerAtkRect, double atkP) {
         if(playerAtkRect.contains(this.hitbox)){
             this.setHealthPoints(this.getHealthPoints()-atkP);
         }
@@ -90,8 +99,13 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
         else this.y++;
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g) { //TODO: TA BORT
         // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addFrendliesList(ArrayList<Hostile> hostile) {
 
     }
 
