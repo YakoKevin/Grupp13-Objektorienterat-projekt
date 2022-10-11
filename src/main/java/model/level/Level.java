@@ -1,6 +1,7 @@
 package model.level;
 
 import entity.Enemy;
+import entity.Friendly;
 import entity.Player;
 import entity.PlayerFactory;
 import model.level.room.Door;
@@ -78,6 +79,7 @@ public abstract class Level{
         Iterator<Door> doors = levelMap.getNodeDoors(coordinate);
         Room room = roomTypes[index].apply(doors);
         room.givePlayerHostiles(player);
+        //room.giveEnemiesFriendly(player); //TODO: add when Player2 is Player
         return room;
     }
 
@@ -88,12 +90,12 @@ public abstract class Level{
 
     private void updateEnemies(){
         for (Iterator<Enemy> it = currentRoom.getEnemies(); it.hasNext(); ) {
-            it.next().update();
+            it.next().tick();
         }
     }
 
     private void updatePlayer(){
-        player.update();
+        //player.tick(); //TODO: change when Player2 is Player
     }
 
     public Player getPlayer() {

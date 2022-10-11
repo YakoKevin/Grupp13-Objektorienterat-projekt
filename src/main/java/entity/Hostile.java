@@ -5,5 +5,5 @@ import java.util.ArrayList;
 
 public interface Hostile extends Attacklable{
 
-    void addFrendliesList(ArrayList<Friendly> friendlies);
+    void addFriendly(Friendly friendly);
 }

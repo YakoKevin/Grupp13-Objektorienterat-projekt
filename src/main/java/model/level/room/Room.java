@@ -3,10 +3,7 @@ package model.level.room;
 //TODO: Make sure all the game logic has the same references to height and length so that no errors occur because of mis-
 // matched numbers!
 
-import entity.Enemy;
-import entity.EnemyFactory;
-import entity.Hostile;
-import entity.Player;
+import entity.*;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants.*;
@@ -104,5 +101,11 @@ public abstract class Room{
     public void givePlayerHostiles(Player player){
         ArrayList<Hostile> hostiles = new ArrayList<>(enemies);
         player.addHostilesList(hostiles);
+    }
+
+    public void giveEnemiesFriendly(Friendly friendly){
+        for(Enemy enemy : enemies){
+            enemy.addFriendly(friendly);
+        }
     }
 }

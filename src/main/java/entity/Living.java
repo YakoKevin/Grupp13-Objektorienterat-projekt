@@ -23,6 +23,8 @@ public abstract class Living extends Entity{
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
     public abstract void attack();
 
+    public abstract void tick();
+
     //TODO: fixa till vad som behövs. Ska ActionController kalla denna tro?
     public void updateMovement(){
         movement.updatePosition();
