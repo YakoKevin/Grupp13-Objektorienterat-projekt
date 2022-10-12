@@ -48,12 +48,8 @@ public class AttackModel { //
         //notifyObservers();
         return c;
     }
-/*
-    public void drawAttackHitbox(Graphics g){
+    public Rectangle getAttackRectangle (Coordinate c, int atkR) {
+        return new Rectangle(c.getX(),c.getY(),atkR,atkR);
+    }
 
-        Rectangle rect = new Rectangle(atkOffSetX,atkOffSetY,100,100);
-
-        g.drawRect(atkOffSetX,atkOffSetY,100,100);
-        setAttackRectangle(rect);
-    }*/
 }

@@ -1,258 +1,49 @@
 package entity;
 
-import general.GameMain;
-import view.Animation;
-import general.IObservable;
-import general.IObserver;
-import model.Movement;
-import model.*;
-import utilz.CardinalDirection;
-import utilz.ImageServer;
-import controller.ActionController;
-import view.AttackView;
-import view.UpdateFrame;
-
+import model.AttackModel;
+import utilz.Coordinate;
 
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.*;
-
-
-public class Player extends Entity implements IObservable, HostileAttacker {
-    private int playerDirection = -1;
-    private boolean attackMode = false;
-    private int[][] levelData;
-    //private double atkOffSetCoordX = this.getX(), atkOffSetCoordY = this.getY();
-    private Rectangle atkRect = new Rectangle((int)getX(),(int)getY(),100,100);
+public class Player extends Living implements Friendly{
+    private int keys;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
-    private Skeleton sk= new Skeleton(50,50);
-    static int index=0;
-    static String data[][]=new String[50][3];
-    static String rank="1";
+    private Coordinate c;
+    private boolean attackMode = false;
 
-    private int skelX=0,skelY=0;
-
-    private int keyCount;
-    private int scoreCount;
-
-
-    public int getScoreCount(){
-        return this.scoreCount;
-    }
-    public int getKeyCount(){return this.keyCount;}
-
-    public Player(int x, int y, int width, int height){
-        super(x, y, width, height);
+    public Player(Coordinate startCoordinate, int width, int height) {
+        super(startCoordinate, width, height);
+        this.setHealthPoints(100);
         this.setAttackPoints(20);
-        this.healthPoints=100;
-        this.keyCount = 0;
-        scoreCount=0;
-        //animation = new Animation(ImageServer.Ids.PLAYER, this);
-        //super(100,20,0,5, 10);
     }
+    private AttackModel atkM = new AttackModel();
 
-    public void loadLevelData(int[][] levelData){
-        this.levelData = levelData;
-    }
-
-    // TODO: BORT FRÅN PLAYER! VI HAR EN UPDATE METOD I GAMEPANEL SOM SKA ANVÄNDAS FÖR SÅNT HÄR
-    // TODO: Player ska representera en Player, sen ska vi ha instanser av Attack o sånt.
-    // TODO: I UML språk blir det då, Player HAS an Attack. Vilket är det vi vill uppnå.
-    public void update() {
-
-        skelX = Skeleton.cx;
-        skelY = Skeleton.cy;
-        updateHitbox();
-        /*if(checkIfHitByAttacker(sk)==true){ //kanske inte är härifrån som man kollar detta
-            this.setHealthPoints(this.getHealthPoints()-sk.getAttackPoints());
-        }*/
-
-
-        /*if(attackMode==true){
-
-            System.out.println("atak");
-            //animation.attacking=true;
-
-            //(new Coordinate((int)this.x,(int)this.y), this.dir);
-
-
-            setPlayerAttackRectangle();
-            for(int i =0; i<hostiles.size();i++) {
-
-                hostiles.get(i).checkedIfIsAttacked(this.getPlayerAttackRectangle(),this.getAttackPoints());
-                //sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(), this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
-
-        }}*/
-
-
-        //checkAttack(skelX,skelX);
-    }
-
-
-    // TODO: BORT FRÅN PLAYER!
-    private void checkAttack(int xx,int yy) { //borde vara enemy's och player's hitbox-rektanglar som parametrar
-        if(this.x==xx && this.x<xx+10) {
-            setHealthPoints(getHealthPoints()-5);
-        }
-        else if(this.y==yy && this.y<yy+10) {
-            setHealthPoints(getHealthPoints()-5);
-        }
-        if(getHealthPoints()<=0) {
-            /*
-            JOptionPane.showMessageDialog(null, "Do You want to try again??",
-                    "Game Over", JOptionPane.YES_NO_CANCEL_OPTION);
-            System.exit(0);
-            */
-            int a=JOptionPane.showConfirmDialog(null,"Game Over!!!\nYour Score is: "+ getScoreCount() +"\nDo You want to try again??");
-            data[index][0]=rank;
-            data[index][1]=String.valueOf(getScoreCount());
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            System.out.println(dtf.format(now));
-            data[index][2]=dtf.format(now);
-            index++;
-            String temp1 = "";
-            for(int i=0;i<data.length && data[i][0]!=null;i++) { //vad gör den här loopen?
-                for (int j = i+1; j < data.length && data[j][0]!=null; j++) {
-                    System.out.println(Integer.parseInt(data[i][1]));
-// 						System.out.println(Integer.parseInt(data[1][1]));
-                    System.out.println(data.length);
-                    if(Integer.parseInt(data[i][1]) > Integer.parseInt(data[j][1])) {
-                        // For Score
-                        temp1 = data[i][1];
-                        data[i][1] = data[j][1];
-                        data[j][1] = temp1;
-                        // For time
-                        temp1 = data[i][2];
-                        data[i][2] = data[j][2];
-                        data[j][2] = temp1;
-                    }
-                }
-            }
-            if(a==JOptionPane.YES_OPTION){
-                GameMain.reset();
-            }
-            if(a==JOptionPane.NO_OPTION){
-
-            }
-            if(a==JOptionPane.CANCEL_OPTION){
-                System.exit(0);
-            }
-
-            System.exit(0);
+    //Denna är ju den som ActionController ska anropar på.
+    public void attack(){
+        c = new Coordinate((int)this.getX(),(int)this.getY());
+        atkM.getAttackCoordinate(c, this.dir);
+        Rectangle r = atkM.getAttackRectangle(c,this.width); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
+        for(Hostile hostile : hostiles){
+            hostile.gettingHit(r, this.getAttackPoints());
         }
     }
 
+    @Override
+    public void tick() {
 
-    List<IObserver> iObservers;
-
-/*
-    public boolean checkIfInRange(Enemy enemy) {
-        double enX = enemy.getX();
-        double enY = enemy.getY();
-        /*(x,y) is inside the rectangle with coordinates (x1,y1,x2,y2)
-
-        x <= x2 && x >= x1 && y <= y2 && y >= y1;
-
-        //boolean check = enX<=100 && enX>= getAtkOffSetX() && enY <= 100 && enY>=getAtkOffSetY();
-        //if(check==true){
-         //   return true;
-       // }
-        //System.out.println("enemy coord: " +enX + enY);
-       // if(getAttackRectangle().contains(enX,enY)){
-        ////    return true;
-       // }
-        return false;
-    }*/
-
-    //Method checks if attacker has walked into player, i.e. their hitboxes allign
-    public boolean checkIfHitByAttacker(double lEx, double lEy, double width, double height){ //ska vara en lista med enemies som kommer från level här sen
-        double lPx = this.getX(); //think two rectangles, top left and bottom right coordinates for player and enemy
-        double lPy = this.getY();
-        double rPx = this.getX()+this.getWidth();
-        double rEx = lEx + width;
-        double rEy = lEy + height; //kan nog städa upp variablerna lite här och (kanske namnge annorlunda)
-
-        if(lPx > rEx||lEx>rPx){ //if any rectangle is on the left side of the other one
-            return false;
-        }
-        if(rEx>lPx||rEy>lEy){
-            return false;
-        }
-        return true;
     }
 
-    public void addObserver(IObserver obs) {
-        iObservers.add(obs);
-    }
+    //Denna metod anropar enemy (som har en lista med Friendlies), för att slå Player (Friendly).
 
-    public void removeObserver(IObserver obs) {
-        iObservers.remove(obs);
-    }
-
-    public void notifyObservers() {
-        for(IObserver IObserver: iObservers){
-            IObserver.update();
-        }
-    }
-
-    public boolean getAttackMode() {
+    public boolean getAttackMode() { // ska kanske vara state
         return this.attackMode;
     }
     public void setAttackMode(boolean atkM){
         this.attackMode=atkM;
     }
 
-    public void addKey()
-    {
-        keyCount++;
-        scoreCount+=10;
-    }
-
-
-    public Rectangle getPlayerAttackRectangle(){ //dessa två klasser ska nog vara allmänna så att enemy också kan använda
-        return this.atkRect;
-    }
-    public void setPlayerAttackRectangle(){
-        CardinalDirection d=ActionController.dir;
-        int atkX= (int)this.x;
-        int atkY= (int)this.y;
-
-        if(d == CardinalDirection.WEST){ //left
-            atkX-=this.height; //beror på hur stor spelaren är och riktning
-            // System.out.println("v");
-        }
-        else if(d==CardinalDirection.NORTH){
-            atkX -= this.getWidth();
-            atkY -= this.getHeight();
-
-            //System.out.println("u");
-        }
-        else if(d==CardinalDirection.SOUTH){
-            atkX -=this.getWidth();
-            atkY +=this.getHeight();
-
-            //System.out.println("n");
-        }
-        else if(d==CardinalDirection.EAST){
-            atkX += getWidth();
-
-            //System.out.println("h");
-        }
-        Rectangle r = new Rectangle (atkX,atkY, 100,100);
-        this.atkRect= r;
-    }
-
-    @Override
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;
     }
-    public ArrayList getHostilesList(){
-        return this.hostiles;
-    }
-
 }

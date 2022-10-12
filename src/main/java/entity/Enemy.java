@@ -2,6 +2,8 @@ package entity;
 
 
 import general.IObserver;
+import model.AttackModel;
+import utilz.Coordinate;
 import utilz.EntityStates.*;
 
 import java.awt.*;
@@ -14,16 +16,25 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
     private int enemyType;
     private int animationTick = 25;
     private int animationSpeed = 25;
+    private AttackModel atkM = new AttackModel();
+    private Coordinate c;
 
     private ArrayList<Friendly> friendlies = new ArrayList<>();
 
     //private EnemyStates enemyState = IDLE;
 
-    public Enemy(int v, int x, int y, int width, int height){ //TODO: den som vet: gör bättre variabelnamn!
+    public Enemy(int v, int x, int y, int width, int height){ //TODO: den som vet: gör bättre variabelnamn!... Vad är int v?
         super(x, y, width, height);
-        this.enemyType = enemyType;
-        this.setHealthPoints(50);
-        //super(50,10,1,3,10);
+    }
+
+    public void attack (){ // attack ska
+        c = new Coordinate((int)this.getX(),(int)this.getY());
+        atkM.getAttackCoordinate(c, this.dir);
+        Rectangle atkR = atkM.getAttackRectangle(c,60); // Har gjort den lite mindre bara så att enemy inte ska bli omöjlig att träffa
+        for(Friendly friendly : friendlies){
+            //friendlies.gettingHit(atkR, 0);
+            // den identifierar ej friendlies som player, så går ej att komma åt den metoden.
+        }
     }
 
 
@@ -52,39 +63,14 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
         updateAnimationTick();
     }
 
-    public int getAnimationIndex(){
-        return animationIndex;
-    } //TODO: TA bort
+    //public int getAnimationIndex(){
+     //   return animationIndex;
+    //} //TODO: TA bort
 
     public int getEnemyState(){
         return enemyState;
     }
-/*
-    public void update(Player p){
-        //System.out.println(" EnemyHp" + this.getHealthPoints());
-        if(p.checkIfInRange(this)==true){ // funktionen ska nog inte kallas så här
-            this.setHealthPoints(this.getHealthPoints()-p.getAttackPoints());
-            if(this.healthPoints<=0){
-                System.out.println("Monster slain");
-                this.setAlive(false);
-            }
-            //System.out.println("Ouch" + p.getAttackPoints());
-        }
-        //System.out.println(" EnemyHp" + this.getHealthPoints());
-    }*/
 
-    public void hit(Rectangle playerAtkRect, double atkP) {
-        if(playerAtkRect.contains(this.hitbox)){
-            this.setHealthPoints(this.getHealthPoints()-atkP);
-        }
-        if(this.getHealthPoints()<=0){
-            this.setAlive(false);
-            System.out.println("Enemy dead");
-        }
-        // stuff added
-        //TODO: add the stuff here.
-
-    }
 
     //Function to be added
 
@@ -100,14 +86,9 @@ public abstract class Enemy extends Entity implements IObserver, Hostile {
         else this.y++;
     }
 
-    public void paint(Graphics g) { //TODO: TA BORT
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public void addFrendliesList(ArrayList<Friendly> friendlies) {
         this.friendlies = friendlies;
     }
+
 
 }

@@ -154,13 +154,7 @@ public class GamePanel extends JPanel {
         animationEnemy.updateAnimationTick();
         animationEnemy.setAnimation();
         movement.updatePosition();
-        if(player.getAttackMode()==true){
-           player.getHostilesList();
-           /* for(int i =0; i<hostiles.size();i++) {
-                hostiles.get(i).checkedIfIsAttacked(this.getPlayerAttackRectangle(),this.getAttackPoints()); //hostiles är bara object, skulle behöva vara enemy
-                //sk.checkedIfIsAttacked(this.getPlayerAttackRectangle(), this.getAttackPoints()); //ersätt med lista av enemies, tillfälligt
-            }*/
-        }
+
 
         updateHitbox();
         player.setAttackMode(false); //ska vara timer
@@ -192,8 +186,8 @@ public class GamePanel extends JPanel {
         g.setColor(new Color(255, 0, 70));
         g.drawString("HP: " + hpStr,10,10);
         g.setColor(Color.YELLOW);
-        g.drawString("Keys: " + player.getKeyCount(), 10,30);
+        //g.drawString("Keys: " + player.getKeyCount(), 10,30);
         g.setColor(Color.WHITE);
-        g.drawString("Score: " + player.getScoreCount(), 10,50);
+        //g.drawString("Score: " + player.getScoreCount(), 10,50);
     }
 }

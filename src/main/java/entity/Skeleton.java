@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class Skeleton extends Enemy implements ActionListener{
 
-    //TODO: nästan alla dessa variabler är oförståliga (gör bättre namn) eller förbjudna att ha här (varför finns det en lista med skelett i varje skelett?)
+    //TODO: nästan alla dessa variabler är oförståeliga (gör bättre namn) eller förbjudna att ha här (varför finns det en lista med skelett i varje skelett?)
     int n=10;
     public BufferedImage[][] skeletonArray;
     public ArrayList<Skeleton> skeletons = new ArrayList<>();
@@ -51,11 +51,21 @@ public class Skeleton extends Enemy implements ActionListener{
     }
 
     public Skeleton(int x, int y){
-        super(x, y, 0, 0, 0);
+        super(x, y, 0, 30, 100);
+        this.setHealthPoints(50);
     }
     //temporärt public tills vi har fungerande rum metod o factory
     public void addEnemies() {
         skeletons.add(new Skeleton(400,400));
     } //TODO: vad gör denna och varför är den här? Ta bort.
 
+    @Override
+    public void gettingHit(Rectangle r, double atkD) {
+
+    }
+
+    @Override
+    public void addFriendly(Friendly friendly) {
+
+    }
 }

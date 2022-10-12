@@ -62,12 +62,11 @@ public class ActionController implements KeyListener {
             //gamePanel.getGameApp().getPlayer().setAttackMode(true); TODO: SORRY MEN MÅSTE!
             //Level.getPlayer().setAttackMode(true);
 
-            player.setAttackMode(true);
-            Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
+            //player.setAttackMode(true);
+            //Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
             //System.out.println("x och y player ActionController: " + movement.getX()+" och " + movement.getY());
 
-            AttackModel atk = new AttackModel();
-            atk.getAttackCoordinate(coordinate, dir);
+            player.attack();
 
 
 
