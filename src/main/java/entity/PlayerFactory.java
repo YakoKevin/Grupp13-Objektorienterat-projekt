@@ -1,10 +1,12 @@
 package entity;
 
+import utilz.Coordinate;
+
 import static utilz.EntitySetup.PLAYER;
 
 public class PlayerFactory {
 
     public Player createPlayer(){
-        return new Player(PLAYER.getStartX(), PLAYER.getStartY(), PLAYER.getHitBoxWidth(), PLAYER.getHitBoxHeight());
+        return new Player(new Coordinate(PLAYER.getStartX(), PLAYER.getStartY()), PLAYER.getHitBoxWidth(), PLAYER.getHitBoxHeight());
     }
 }

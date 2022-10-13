@@ -2,6 +2,7 @@ package model;
 
 import entity.Entity;
 import view.Animation;
+import view.WindowManager;
 
 public class Movement {
     private boolean moving = false;
@@ -15,10 +16,12 @@ public class Movement {
     private float x;
     private float y;
     private Animation animation;
+    private Animation animationEnemy;
 
-    public Movement(){/*
+    public Movement(Animation animation, Entity entity, Animation animationEnemy){
         this.entity = entity;
-        this.animation = animation;*/
+        this.animation = animation;
+        this.animationEnemy = animationEnemy;
     }
 
     public void updatePosition() { //TODO: retunera en ny Coordinate ist. och kalla på denna metod från entitin ist.
@@ -30,6 +33,20 @@ public class Movement {
 //        		moving = false;
 //        		return;
             }
+        }
+
+        if(entity.getX() < 0) {
+            entity.setX(0);
+            return;
+        }else if(entity.getX() > WindowManager.WIDTH) {
+            entity.setX(WindowManager.WIDTH);
+            return;
+        }else if(entity.getY() < 0) {
+            entity.setY(0);
+            return;
+        }else if(entity.getY() > WindowManager.HEIGHT) {
+            entity.setY(WindowManager.HEIGHT);
+            return;
         }
 
         if (left && !right) {
@@ -66,7 +83,7 @@ public class Movement {
     }
 
     //public void update(){
-   //     updatePosition();
+    //     updatePosition();
     //}
 
     public boolean isLeft() {

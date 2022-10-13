@@ -10,7 +10,7 @@ public class KeyItem extends Entity implements IObserver {
 
     private BufferedImage keySprite;
 
-    public KeyItem(float x, float y, int width, int height) {
+    public KeyItem(int x, int y, int width, int height) {
         super(x, y, width, height);
         keySprite = ImageServer.getImage(ImageServer.Ids.KEY);
     }

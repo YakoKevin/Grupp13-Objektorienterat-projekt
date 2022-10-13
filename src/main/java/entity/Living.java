@@ -5,6 +5,8 @@ import model.Movement;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.EntityStates;
+import utilz.ImageServer;
+import view.Animation;
 
 import java.awt.*;
 
@@ -15,11 +17,15 @@ public abstract class Living extends Entity implements Attackable{
     protected boolean isAlive; //TODO: borde vara en EntityState?
     protected EntityStates state;
     protected CardinalDirection direction;
-    protected Movement movement = new Movement();
+    protected Movement movement = new Movement(new Animation(ImageServer.Ids.PLAYER, null), null, null);
     protected AttackModel attack = new AttackModel();
 
     public Living(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate.getX(), startCoordinate.getY(), width, height);
+    }
+
+    public Living(int i, int j, int k, int l) {
+        super(i,j,k,l);
     }
 
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)

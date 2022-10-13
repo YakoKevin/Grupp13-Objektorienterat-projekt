@@ -36,11 +36,14 @@ public class ActionController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent event) {
+        if(player.getX()<0 || player.getY()<0) {
+            return;
+        }
         if (event.getKeyCode() == KeyEvent.VK_W) {
             movement.setUp(true);
             dir=CardinalDirection.NORTH;
 
-            //System.out.println("PRESSED W");
+            System.out.println(player.getX()  + "-" + player.getY());
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             movement.setRight(true);

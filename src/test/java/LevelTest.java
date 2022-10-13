@@ -16,7 +16,7 @@ public class LevelTest {
     @Test
     public void doesRoomHaveEntryOppositeToWherePlayerWalkedIn() {
         LevelFactory levelFactory = new LevelFactory();
-        Level level = levelFactory.simpleLevel(4,  new Player(0,0,0,0));
+        Level level = levelFactory.simpleLevel(4,  new Player(new Coordinate(0, 0),0,0));
         for (CardinalDirection cardinalDirection : CardinalDirection.values()) {
             level.playerEnterRoom(new Coordinate(0,0), cardinalDirection);
             assertEquals(cardinalDirection.getOppositeDirection(), level.getCurrentRoomEntry());
@@ -27,7 +27,7 @@ public class LevelTest {
     @Test
     public void doesLevelCalculateIfCoordinateIsBlocked(){
         LevelFactory levelFactory = new LevelFactory();
-        Level level = levelFactory.simpleLevel(4, new Player(0,0,0,0));
+        Level level = levelFactory.simpleLevel(4, new Player(new Coordinate(0, 0),0,0));
         level.playerEnterRoom(new Coordinate(0,0), CardinalDirection.WEST);
         for(int i = 0; i < 30; i++){
             for (int j = 0; j < 18; j++){
@@ -54,7 +54,7 @@ public class LevelTest {
         //TODO: fix issue with duplicate doors
         int size = 4;
         LevelFactory levelFactory = new LevelFactory();
-        Level level = levelFactory.simpleLevel(size,  new Player(1,1,0,0));
+        Level level = levelFactory.simpleLevel(size, new Player(new Coordinate(1, 1),0,0));
         level.playerEnterRoom(new Coordinate(1,1), CardinalDirection.WEST);
         Iterator<Door> doors = level.getCurrentRoomDoors();
 
@@ -68,7 +68,7 @@ public class LevelTest {
     public void drawRoom() {
         int size = 4;
         LevelFactory levelFactory = new LevelFactory();
-        Level level = levelFactory.simpleLevel(size,  new Player(0,0,0,0));
+        Level level = levelFactory.simpleLevel(size, new Player(new Coordinate(0, 0),0,0));
 
         int[][] nodeMatrix = level.getCurrentRoomAsMatrix();
         StringBuilder matrixString = new StringBuilder();

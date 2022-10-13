@@ -77,8 +77,8 @@ public class UpdateFrame extends JPanel {
         g.setFont(new Font("Araial", Font.BOLD, 12));
         g.setColor(new Color(255, 0, 70));
         g.drawString("HP: " + hpStr,10,10);
-        g.drawString("Keys: " + player.getKeyCount(), 10,30);
-        g.drawString("Score: " + player.getScoreCount(), 10,50);
+        g.drawString("Keys: " + "player.getKeyCount()", 10,30);
+        g.drawString("Score: " + "player.getScoreCount()", 10,50);
     }
 
     protected void render(Graphics g){

@@ -17,7 +17,7 @@ public class Animation {
     private EntityStates.PlayerStates playerAction = IDLE;
 
     private BufferedImage image;
-    private Entity entity;
+    public Entity entity;
     public boolean moving = false;
     public boolean attacking = false;
 

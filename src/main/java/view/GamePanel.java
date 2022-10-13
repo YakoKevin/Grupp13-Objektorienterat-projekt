@@ -41,8 +41,8 @@ public class GamePanel extends JPanel {
     private FPSUpdater fpsUpdater;
 
     private Movement movement;
-    private Animation animation;
-    private Animation animationEnemy;
+    protected Animation animation;
+    protected Animation animationEnemy;
     protected Rectangle hitbox; // Debugging purposes
     private Pause pause;
 

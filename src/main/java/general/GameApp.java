@@ -6,6 +6,7 @@ import model.AttackModel;
 import model.Movement;
 import model.level.Level;
 import model.level.LevelFactory;
+import utilz.Coordinate;
 import utilz.GameConstants;
 import utilz.ImageServer;
 import view.*;
@@ -53,11 +54,11 @@ public class GameApp {
 
     public GameApp(){
         //levelManager = new LevelManager();
-        player = new Player(100, 100, 30, 100);
+        player = new Player(new Coordinate(100, 100), 30, 100);
 
         animation = new Animation(ImageServer.Ids.PLAYER, player);
         updateFrame = new UpdateFrame(player, animation);
-        movement = new Movement();
+
         //attack = new Attack(animation);
         key = new KeyItem(450, 350, 40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
@@ -73,7 +74,7 @@ public class GameApp {
 
         firstSetup();
         fpsUpdater.startGameLoop(); //TODO: fixa med namn så att det är tydligt att det är bara View den uppdaterar
-        timer.schedule(new GameTicker(), 100);
+    //    timer.schedule(new GameTicker(), 100);
     }
 
     /**
