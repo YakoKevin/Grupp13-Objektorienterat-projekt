@@ -22,11 +22,11 @@ public class FPSUpdater implements Runnable {
 
     public void pauseGameLoop(){
         gameThread.suspend();
-    }
+    } //TODO: ska den vara kvar? Är deprecated.
 
     public void continueGameLoop(){
         gameThread.resume();
-    }
+    } //TODO: ska den vara kvar? Är deprecated.
 
     @Override
     public void run() {
