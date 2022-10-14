@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Player extends Living implements Friendly{
     private int keys;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
-    private Coordinate c;
     private boolean attackMode = false;
 
     public Player(Coordinate startCoordinate, int width, int height) {
@@ -22,9 +21,9 @@ public class Player extends Living implements Friendly{
 
     //Denna är ju den som ActionController ska anropar på.
     public void attack(){
-        c = new Coordinate((int)this.getX(),(int)this.getY());
-        atkM.getAttackCoordinate(c, this.dir);
-        Rectangle r = atkM.getAttackRectangle(c,this.width); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
+        position = new Coordinate((int)this.getX(),(int)this.getY());
+        atkM.getAttackCoordinate(position, this.dir);
+        Rectangle r = atkM.getAttackRectangle(position,this.width); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
         for(Hostile hostile : hostiles){
             hostile.gettingHit(r, this.getAttackPoints());
         }

@@ -63,7 +63,8 @@ public class FPSUpdater implements Runnable {
 
                 fps = 0;
                 updates = 0;
-
+                //TODO: Must move and redo! Can not lay in view-class. Do more dynamically, use objects (our enemies)!
+/*
                 float enemyX = this.gamePanel.animationEnemy.entity.getX();
                 float enemyY = this.gamePanel.animationEnemy.entity.getY();
 
@@ -111,7 +112,7 @@ public class FPSUpdater implements Runnable {
                 if(Math.abs(this.gamePanel.animationEnemy.entity.getX() - this.gamePanel.animation.entity.getX()) < 20 && Math.abs(this.gamePanel.animationEnemy.entity.getY() - this.gamePanel.animation.entity.getY()) < 20) {
                     this.gamePanel.player.healthPoints = this.gamePanel.player.healthPoints - 10;
                 }
-
+*/
             }
 
         }

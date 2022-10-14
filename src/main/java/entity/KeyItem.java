@@ -3,6 +3,7 @@ package entity;
 import java.awt.image.BufferedImage;
 
 import general.IObserver;
+import utilz.Coordinate;
 import utilz.ImageServer;
 import java.awt.*;
 
@@ -10,8 +11,8 @@ public class KeyItem extends Entity implements IObserver {
 
     private BufferedImage keySprite;
 
-    public KeyItem(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public KeyItem(Coordinate startCoordinate, int width, int height) {
+        super(startCoordinate, width, height);
         keySprite = ImageServer.getImage(ImageServer.Ids.KEY);
     }
 
@@ -24,6 +25,8 @@ public class KeyItem extends Entity implements IObserver {
 
     }
 
+    //TODO: remove/move View from here
+/*
     public boolean isCollision(int xPlayer, int yPlayer, int widthPlayer, int heightPlayer)
     {
         if(this.x + this.width >= xPlayer &&
@@ -45,5 +48,5 @@ public class KeyItem extends Entity implements IObserver {
         double newY = Math.random()*450;
         this.setX((float)newX);
         this.setY((float)newY);
-    }
+    }*/
 }

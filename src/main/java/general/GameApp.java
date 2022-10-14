@@ -60,9 +60,9 @@ public class GameApp {
         updateFrame = new UpdateFrame(player, animation);
 
         //attack = new Attack(animation);
-        key = new KeyItem(450, 350, 40, 40);
+        key = new KeyItem(new Coordinate(450, 350),  40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
-        skel=new Skeleton(200,200);
+        //skel=new Skeleton(200,200);
 
         //EnemyFactory enemyFactory = new EnemyFactory();
         //enemyFactory.createSkeleton();

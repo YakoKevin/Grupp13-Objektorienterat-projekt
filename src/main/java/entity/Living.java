@@ -21,17 +21,11 @@ public abstract class Living extends Entity implements Attackable{
     protected double movementSpeed;
 
     public Living(Coordinate startCoordinate, int width, int height) {
-        super(startCoordinate.getX(), startCoordinate.getY(), width, height);
-    }
-
-    public Living(int i, int j, int k, int l) {
-        super(i,j,k,l);
+        super(startCoordinate, width, height);
     }
 
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
     public abstract void attack();
-
-    public abstract void tick();
 
     public void gettingHit(Rectangle atkRect, double atkP) {
         if(atkRect.contains(this.hitbox)){
@@ -54,9 +48,8 @@ public abstract class Living extends Entity implements Attackable{
     public void updateMovement(){
         //System.out.println("x och y" + this.x + this.y);
         //ystem.out.println("Riktningen: " + getDirection());
-        Coordinate c = movement.updatePosition(this.x,this.y,this.getMovementSpeed(),this.getDirection());
-        setX(c.getX());
-        setY(c.getY());
+        Coordinate c = movement.updatePosition(position.getX(), position.getY(),this.getMovementSpeed(),this.getDirection());
+        position = c;
         //System.out.println("x och y efter: " + this.x + this.y);
     }
 }

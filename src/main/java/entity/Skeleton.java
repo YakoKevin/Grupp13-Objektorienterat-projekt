@@ -1,11 +1,13 @@
 package entity;
 
+import utilz.Coordinate;
+
 import java.awt.*;
 
 public class Skeleton extends Enemy{
 
-    public Skeleton(int x, int y){
-        super(x, y, 0, 30, 100);
+    public Skeleton(Coordinate startPosition){
+        super(startPosition, 0, 30);
         this.setHealthPoints(50);
     }
 

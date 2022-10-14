@@ -6,37 +6,32 @@ import utilz.Coordinate;
 import java.awt.*;
 
 public abstract class Entity {
-    protected int x; //TODO: ta bort dessa två och gör så allt använder position ist.
-    protected int y;
-    protected Coordinate position = new Coordinate(0,0);
+    protected Coordinate position;
     protected int width, height;
     protected Rectangle hitbox;
     protected boolean isAlive;
     protected CardinalDirection dir;
 
-    public Entity(int x, int y, int width, int height){
-        this.x = x;
-        this.y = y;
+    public Entity(Coordinate startCoordinate, int width, int height){
         this.width = width;
         this.height = height;
         this.dir = CardinalDirection.EAST;
-        this.position = new Coordinate(x, y);
+        this.position = startCoordinate;
 
         inititateHitbox();
     }
 
-    protected void drawHitbox(Graphics g){
-        g.setColor(Color.PINK);
-        g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+    private void inititateHitbox() {
+        hitbox = new Rectangle(position.getX(), position.getY(), width, height);
     }
 
-    private void inititateHitbox() {
-        hitbox = new Rectangle((int)x, (int)y, width, height);
+    public void tick(){
+        updateHitbox();
     }
 
     protected void updateHitbox(){ //TODO: Viktigt - måste göra varje update() för att undvika fel.
-        hitbox.x = (int)x;
-        hitbox.y = (int)y;
+        hitbox.x = position.getX();
+        hitbox.y = position.getY();
     }
 
     public Rectangle getHitbox() {
@@ -46,35 +41,21 @@ public abstract class Entity {
     //private double x,y;
     public double healthPoints;
     private double attackPoints; //TODO: borde vara i Attack inte i entity
-    private int keyItem;
-    private double movementSpeed;
-    private double attackRange; //TODO: borde vara i Attack inte i entity
-
-    public Entity(double healthPoints, double attackPoints, int keyItem, double movementSpeed, double attackRange){
-        this.healthPoints=healthPoints;
-        this.attackPoints=healthPoints;
-        this.keyItem=keyItem;
-        this.movementSpeed=movementSpeed;
-        this.x=0;
-        this.y=0;
-        this.attackRange = attackRange;
-        this.isAlive = true;
-    }
 
     public float getX(){
-        return x;
+        return position.getX();
     }
     public float getY(){
-        return y;
+        return position.getY();
     }
 
-    public void setX(float x) {
+    /*public void setX(float x) {
         this.x = (int)x;
     } //TODO: Borde inte finnas, vi använder ju Movement för detta!
 
     public void setY(float y) {
         this.y = (int)y;
-    } //TODO: Borde inte finnas, vi använder ju Movement för detta!
+    } *///TODO: Borde inte finnas, vi använder ju Movement för detta!
 
     public int getWidth() { return (int)width; }
 
@@ -103,19 +84,7 @@ public abstract class Entity {
     public CardinalDirection getDirection(){
         return this.dir;
     }
-
-
-    public int getKeyItem() {
-        return keyItem;
-    }
-
-    public double getAttackRange(){return attackRange;}
-    public boolean getAlive(){
-        return this.isAlive;
-    }
     protected void setAlive(boolean aliveStatus){
         this.isAlive=aliveStatus;
     }
-
-    //TODO: update() metod borde finnas i denna klass för att uppdatera logik.
 }
