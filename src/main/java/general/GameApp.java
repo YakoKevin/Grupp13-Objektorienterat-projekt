@@ -11,6 +11,7 @@ import utilz.GameConstants;
 import utilz.ImageServer;
 import view.*;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,16 +29,7 @@ public class GameApp {
     private final int MAX_UPS = 200;
 
     //TODO: Inget av dessa borde finnas som en direkt referens här i GameApp - byt till att fråga currentLevel istället
-    //private EnemyBrain enemyBrain;
-    private Skeleton skel;
     private Player player;
-    private KeyItem key;
-    private LevelManager levelManager;
-    private Movement movement;
-    private Animation animation;
-    private Animation animationEnemy;
-    private AttackModel attack;
-
     private UpdateFrame updateFrame;
     private FPSUpdater fpsUpdater;
 
@@ -54,23 +46,21 @@ public class GameApp {
 
     public GameApp(){
         //levelManager = new LevelManager();
-        player = new Player(new Coordinate(200, 200), 30, 100);
 
-        animation = new Animation(ImageServer.Ids.PLAYER, player);
-        updateFrame = new UpdateFrame(player, animation);
+        //animation = new Animation(ImageServer.Ids.PLAYER, player);
 
         //attack = new Attack(animation);
-        key = new KeyItem(new Coordinate(450, 350),  40, 40);
+        //key = new KeyItem(new Coordinate(450, 350),  40, 40);
         //player.loadLevelData(levelManager.getCurrentLevel());
         //skel=new Skeleton(200,200);
 
         //EnemyFactory enemyFactory = new EnemyFactory();
         //enemyFactory.createSkeleton();
         //skel.loadEnemyImages();
-        animationEnemy = new Animation(ImageServer.Ids.ENEMY, skel);
+        //animationEnemy = new Animation(ImageServer.Ids.ENEMY, skel);
         //**********Allt ovan borde bort.***************
 
-        movement = new Movement(animation, player, animationEnemy);
+       // movement = new Movement(animation, player, animationEnemy);
 
         firstSetup();
         fpsUpdater.startGameLoop(); //TODO: fixa med namn så att det är tydligt att det är bara View den uppdaterar
@@ -90,13 +80,15 @@ public class GameApp {
     }
 
     private void firstSetup(){
+        player = new Player(new Coordinate(200, 200), 30, 100);
         setupLevel(player);
         setupView();
     }
 
-    //TODO: REMOVE ALL NEED FOR MOVEMENT, ATTACK osv. Borde kunna hämta all från level ist.
+
     private void setupView(){
-        gamePanel = new GamePanel(this, movement, attack, updateFrame, fpsUpdater, player, animation, animationEnemy); // FIXA REFERENCES...
+        updateFrame = new UpdateFrame(player);
+        gamePanel = new GamePanel(this, fpsUpdater, player);
         fpsUpdater = new FPSUpdater(gamePanel);
         gameView = new GameView(gamePanel, updateFrame);
         gamePanel.setFocusable(true);

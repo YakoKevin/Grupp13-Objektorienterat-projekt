@@ -6,44 +6,43 @@ import utilz.ImageServer;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static utilz.EntityStates.PlayerStates.*;
 
-public class Animation {
-    private BufferedImage[][] animations;
-    private int animationTick = 30;
-    private int animationIndex = 0;
-    private int animationSpeed = 30;
-    private EntityStates.PlayerStates playerAction = IDLE;
+public class Animation implements Animator {
+    private static BufferedImage[][] animations;
+    private static int animationTick = 30;
+    private static int animationIndex = 0;
+    private static int animationSpeed = 30;
+    private static EntityStates.PlayerStates playerAction = IDLE;
 
     private BufferedImage image;
-    public Entity entity;
+    private static HashMap<Entity, ImageServer.Ids> entities;
     public boolean moving = false;
     public boolean attacking = false;
 
-    public Animation(ImageServer.Ids imageServer, Entity entity){// TODO: Logik i klassen? Separera det då!!
-        this.image = ImageServer.getImage(imageServer);
-        this.entity = entity;
+    public Animation(){// TODO: Logik i klassen? Separera det då!!
         loadAnimations();
     }
 
-    public void updateAnimationTick() {
+    public static void updateAnimationTick() {
         animationTick++;
 
         if (animationTick >= animationSpeed){
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= playerAction.getAnimationSpriteAmount()){
+            /*if (animationIndex >= playerAction.getAnimationSpriteAmount()){
                 animationIndex = 0;
-                attacking = false;
-            }
+            }*/
         }
     }
 
     //TODO: inte super viktigt, men borde gå att ta bort boolean:en för moving eftersom vi har enums för player state så
     // slipper vi denna if-sats radda.
-    public void setAnimation() {
-        EntityStates.PlayerStates startAnimation = playerAction;
+    public static void setAnimation() {
+        /*EntityStates.PlayerStates startAnimation = playerAction;
 
         if (moving)
             playerAction = RUNNING;
@@ -54,7 +53,7 @@ public class Animation {
             playerAction = ATTACK;
 
         if (startAnimation != playerAction)
-            resetAnimationTick();
+            resetAnimationTick();*/
     }
 
     private void resetAnimationTick() {
@@ -71,9 +70,17 @@ public class Animation {
         }
     }
 
-    public void render(Graphics g){
-        if(entity != null)
-            g.drawImage(animations[playerAction.ordinal()][animationIndex], (int) entity.getX(), (int) entity.getY(), null);
+    public static void render(Graphics g){
+        if(entities != null) {
+            for (Entity entity : entities.keySet()) {
+                g.drawImage(animations[playerAction.ordinal()][animationIndex], (int) entity.getX(), (int) entity.getY(), null); //TODO: redo so it works for everything and is static!
+            }
+        }
 
+    }
+
+    @Override
+    public void addEntity(Entity entity, ImageServer.Ids imageId) {
+        this.entities.put(entity, imageId);
     }
 }

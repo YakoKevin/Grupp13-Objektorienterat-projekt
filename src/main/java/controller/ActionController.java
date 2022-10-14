@@ -21,11 +21,11 @@ public class ActionController implements KeyListener {
     private boolean up,down,left,right,space=false;
 
 
-    public ActionController(GamePanel gamePanel, Movement movement, AttackModel attack, Player player){
+    public ActionController(GamePanel gamePanel, Player player){
         this.gamePanel = gamePanel;
-        this.movement = movement;
-        this.attack = attack;
+        this.movement = player.getMovement();
         this.player = player;
+        this.attack = player.getAttack();
     }
 
     @Override

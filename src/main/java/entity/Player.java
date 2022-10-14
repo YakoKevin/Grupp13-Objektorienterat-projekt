@@ -1,7 +1,10 @@
 package entity;
 
 import model.AttackModel;
+import model.Movement;
 import utilz.Coordinate;
+import utilz.ImageServer;
+import view.Animation;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,10 +13,9 @@ public class Player extends Living implements Friendly{
     private int keys;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private boolean attackMode = false;
-    protected AttackModel atkM = new AttackModel(20, 20);
 
     public Player(Coordinate startCoordinate, int width, int height) {
-        super(startCoordinate, width, height);
+        super(startCoordinate, width, height, new Movement(), new AttackModel(20, 20));
         this.setHealthPoints(100);
         this.setAttackPoints(20);
         this.setMovementSpeed(3);
@@ -22,8 +24,8 @@ public class Player extends Living implements Friendly{
     //Denna är ju den som ActionController ska anropar på.
     public void attack(){
         position = new Coordinate((int)this.getX(),(int)this.getY());
-        atkM.getAttackCoordinate(position, this.dir);
-        Rectangle r = atkM.getAttackRectangle(position,this.width); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
+        attack.getAttackCoordinate(position, this.dir);
+        Rectangle r = attack.getAttackRectangle(position,this.width); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
         for(Hostile hostile : hostiles){
             hostile.getHit(r, this.getAttackPoints());
         }

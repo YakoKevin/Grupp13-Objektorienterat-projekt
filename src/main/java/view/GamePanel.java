@@ -40,7 +40,6 @@ public class GamePanel extends JPanel {
     private KeyView keyView;
     public FPSUpdater fpsUpdater;
 
-    private Movement movement;
     protected Animation animation;
     protected Animation animationEnemy;
     protected Rectangle hitbox; // Debugging purposes
@@ -50,18 +49,15 @@ public class GamePanel extends JPanel {
     Player player;
     //Entity player;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
-    private final Object lock = new Object(); // TODO: Ska det verkligen vara object?
 
-    public GamePanel(GameApp gameApp, Movement movement, AttackModel attack, UpdateFrame updateFrame, FPSUpdater fpsUpdater, Player player, Animation animation, Animation animationEnemy){
-        addKeyListener(new ActionController(this, movement, attack, player));
+    //TODO: Se till att ha LEVEL ist. -> hämta där fienderna och player och loopa genom dem alla för att hämta animation och sådant
+    public GamePanel(GameApp gameApp, FPSUpdater fpsUpdater, Player player){
+        addKeyListener(new ActionController(this, player));
         this.gameApp = gameApp;
         setPanelSize();
         int width = 50;
         playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
         this.player = player; //TODO: ALLT MED ENTITIES MÅSTE FLYTTAS
-        this.animation = animation;
-        this.animationEnemy = animationEnemy;
-        this.movement = movement;
         inititateHitbox();
 
         JButton jb=new JButton("Pause");

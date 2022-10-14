@@ -17,17 +17,13 @@ public class Movement {
     private Entity entity;
     private float x;
     private float y;*/
-    private Animation animation;
-    private Animation animationEnemy;
 
-    public Movement(Animation animation, Entity entity, Animation animationEnemy){
-        //this.entity = entity;
-        this.animation = animation;
-        this.animationEnemy = animationEnemy;
+    public Movement(){
+
     }
 
     public float[] updatePosition(float x, float y, double speed, CardinalDirection dir) {
-        animation.moving = false;
+        //animation.moving = false;
         //System.out.println(entity.getX());
         /*
         if(this.x>477 && this.x<539) { //TODO: vad är dessa för specifika siffror?
@@ -56,49 +52,49 @@ public class Movement {
             x -= speed;
             y -= speed;
 
-            animation.moving = true;
+            //animation.moving = true;
         }
         if (dir==CardinalDirection.NORTHEAST) {
             speed /=diagonal;
             x += speed;
             y -= speed;
 
-            animation.moving = true;
+            //animation.moving = true;
         }
         if (dir==CardinalDirection.SOUTHWEST) {
             speed /=diagonal;
             x -= speed;
             y += speed;
 
-            animation.moving = true;
+            //animation.moving = true;
         }
         if (dir==CardinalDirection.SOUTHEAST) {
             speed /=diagonal;
             x += speed;
             y += speed;
 
-            animation.moving = true;
+           // animation.moving = true;
         }
 
 
         if (dir==CardinalDirection.WEST) {
             x -= speed;
 
-            animation.moving = true;
+            //animation.moving = true;
         }
         else if (dir==CardinalDirection.EAST) {
             x += speed;
-            animation.moving = true;
+           // animation.moving = true;
         }
 
         if (dir==CardinalDirection.NORTH) {
             y -= speed;
 
-            animation.moving = true;
+           // animation.moving = true;
         }
         else if (dir==CardinalDirection.SOUTH) {
             y += speed;
-            animation.moving = true;
+            //animation.moving = true;
         }
         return new float[]{x,y};
     }

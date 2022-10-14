@@ -14,18 +14,16 @@ public class UpdateFrame extends JPanel {
 
     BufferedImage playerImage;
     Player player;
-    Animation animation;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
 
     // make more generic
-    public UpdateFrame(Player player, Animation animation){
+    public UpdateFrame(Player player){
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(100, 100));
         this.setBackground(Color.green);
 
         playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
         this.player = player;
-        this.animation = animation;
         inititateHitbox();
     }
     // Debugging purposes
@@ -45,9 +43,8 @@ public class UpdateFrame extends JPanel {
     }
 
     public void update(){
-        animation.updateAnimationTick();
-        animation.setAnimation();
-
+        Animation.updateAnimationTick();
+        Animation.setAnimation();
         updateHitbox();
 
     }
@@ -82,7 +79,7 @@ public class UpdateFrame extends JPanel {
     }
 
     protected void render(Graphics g){
-        animation.render(g);
+        Animation.render(g);
     }
 
 }

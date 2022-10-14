@@ -3,6 +3,7 @@ package entity;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants;
+import view.Animation;
 
 import java.awt.*;
 

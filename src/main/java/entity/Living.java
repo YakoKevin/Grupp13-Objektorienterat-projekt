@@ -14,11 +14,14 @@ public abstract class Living extends Entity implements Attackable{
     protected boolean isAlive; //TODO: borde vara en EntityState?
     protected EntityStates state;
     protected CardinalDirection direction;
-    protected Movement movement = new Movement(new Animation(ImageServer.Ids.PLAYER, null), null, null);
+    protected Movement movement;
+    protected AttackModel attack;
     protected double movementSpeed;
 
-    public Living(Coordinate startCoordinate, int width, int height) {
+    public Living(Coordinate startCoordinate, int width, int height, Movement movement, AttackModel attackModel) {
         super(startCoordinate, width, height);
+        this.movement = movement;
+        this.attack = attackModel;
     }
 
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
@@ -50,5 +53,13 @@ public abstract class Living extends Entity implements Attackable{
         finePositionY = newPosition[1];
         position = new Coordinate((int)finePositionX/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
         //System.out.println("x och y efter: " + this.x + this.y);
+    }
+
+    public Movement getMovement(){
+        return movement;
+    }
+
+    public AttackModel getAttack(){
+        return attack;
     }
 }

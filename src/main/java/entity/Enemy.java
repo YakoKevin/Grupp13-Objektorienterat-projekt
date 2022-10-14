@@ -1,19 +1,18 @@
 package entity;
 
 import model.AttackModel;
+import model.Movement;
 import utilz.Coordinate;
 
 import java.awt.*;
 
 public abstract class Enemy extends Living implements Hostile {
     private Brain brain;
-    private AttackModel attackModel;
     //private EnemyStates enemyState = IDLE;
 
-    public Enemy(Coordinate startPosition, int width, int height, float sightRange, AttackModel attack) {
-        super(startPosition, width, height);
+    public Enemy(Coordinate startPosition, int width, int height, float sightRange, Movement movement, AttackModel attack) {
+        super(startPosition, width, height, movement, attack);
         this.brain = new Brain(sightRange);
-        this.attackModel = attack;
     }
 
 
@@ -43,8 +42,8 @@ public abstract class Enemy extends Living implements Hostile {
             if(Math.abs(friendlyLastSeenX - getX()) > sightRange &&
                     Math.abs(friendlyLastSeenY - getY()) > sightRange){
                 moveRandomly();
-            } else if(Math.abs(friendlyLastSeenX - getX()) > attackModel.getAttackRange() &&
-                    Math.abs(friendlyLastSeenY - getY()) > attackModel.getAttackRange()){
+            } else if(Math.abs(friendlyLastSeenX - getX()) > attack.getAttackRange() &&
+                    Math.abs(friendlyLastSeenY - getY()) > attack.getAttackRange()){
                 moveTowardsFriendly();
             }else
                 attackFriendly();
@@ -59,8 +58,8 @@ public abstract class Enemy extends Living implements Hostile {
         }
 
         private void attackFriendly(){
-            Rectangle attackRectangle = attackModel.getAttackRectangle(position, width);
-            friendly.getHit(attackRectangle, attackModel.getAttackDamage());
+            Rectangle attackRectangle = attack.getAttackRectangle(position, width);
+            friendly.getHit(attackRectangle, attack.getAttackDamage());
         }
 
         public void giveFriendlyCoordinates(float x, float y){
