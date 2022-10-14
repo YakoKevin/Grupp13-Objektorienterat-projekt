@@ -12,8 +12,8 @@ import java.util.List;
 
 public class AttackModel { //
     public Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
-        int atkOffSetX = coordinate.getX();
-        int atkOffSetY = coordinate.getY();
+        int atkOffSetX = (int)coordinate.getX();
+        int atkOffSetY = (int)coordinate.getY();
         //animation.attacking = true;
 
         int width = 30; //Players storlek i x och// y
@@ -49,7 +49,7 @@ public class AttackModel { //
         return c;
     }
     public Rectangle getAttackRectangle (Coordinate c, int atkR) {
-        return new Rectangle(c.getX(),c.getY(),atkR,atkR);
+        return new Rectangle((int)c.getX(),(int)c.getY(),atkR,atkR);
     }
 
 }
