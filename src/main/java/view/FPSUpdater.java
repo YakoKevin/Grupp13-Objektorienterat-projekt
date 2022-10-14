@@ -20,6 +20,14 @@ public class FPSUpdater implements Runnable {
         gameThread.start();
     }
 
+    public void pauseGameLoop(){
+        gameThread.suspend();
+    }
+
+    public void continueGameLoop(){
+        gameThread.resume();
+    }
+
     @Override
     public void run() {
         double timePerFrame = 1000000000.0 / MAX_FPS;

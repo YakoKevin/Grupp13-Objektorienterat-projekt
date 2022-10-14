@@ -38,7 +38,7 @@ public class GamePanel extends JPanel {
 
     private GameApp gameApp;
     private KeyView keyView;
-    private FPSUpdater fpsUpdater;
+    public FPSUpdater fpsUpdater;
 
     private Movement movement;
     protected Animation animation;
@@ -79,6 +79,8 @@ public class GamePanel extends JPanel {
                 (pause = new Pause()).execute();
                 try {
                     pauseThread();
+                    jb.setEnabled(false);
+                    jb1.setEnabled(true);
                 } catch (InterruptedException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -109,19 +111,12 @@ public class GamePanel extends JPanel {
     }
     public  void pauseThread() throws InterruptedException
     {
-        synchronized(lock){
-            lock.wait();
-        }
+        fpsUpdater.pauseGameLoop();
     }
 
     public  void resumeThread()
     {
-        synchronized(lock)
-        {
-//        	gameThread.notify();
-            lock.notify();
-//            lock.
-        }
+        fpsUpdater.continueGameLoop();
     }
     // Sets here, instead of view since it includes the border as well.
     private void setPanelSize() {

@@ -101,6 +101,7 @@ public class GameApp {
         gameView = new GameView(gamePanel, updateFrame);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
+        gamePanel.fpsUpdater = fpsUpdater;
     }
 
     private void setupLevel(Player player){
