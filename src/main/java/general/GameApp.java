@@ -67,7 +67,6 @@ public class GameApp {
         //EnemyFactory enemyFactory = new EnemyFactory();
         //enemyFactory.createSkeleton();
         //skel.loadEnemyImages();
-        skel.addEnemies();
         animationEnemy = new Animation(ImageServer.Ids.ENEMY, skel);
         //**********Allt ovan borde bort.***************
 
@@ -91,8 +90,8 @@ public class GameApp {
     }
 
     private void firstSetup(){
-        setupView();
         setupLevel(player);
+        setupView();
     }
 
     //TODO: REMOVE ALL NEED FOR MOVEMENT, ATTACK osv. Borde kunna hämta all från level ist.
