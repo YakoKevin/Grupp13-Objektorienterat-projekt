@@ -27,8 +27,9 @@ public abstract class Room{
     protected EnemyFactory enemyFactory;
 
 
-    public Room(Iterator<Door> doors, EnemyFactory enemyFactory) {
+    public Room(ArrayList<Door> doors, EnemyFactory enemyFactory) {
         this.enemyFactory = enemyFactory;
+        addDoors(doors);
     }
 
     public boolean isCoordinateInWall(Coordinate coordinate) {
@@ -89,16 +90,16 @@ public abstract class Room{
         this.coordinate = coordinate;
     }
 
-    public Iterator<Coordinate> getWalls(){
-        return wallCoordinates.iterator();
+    public ArrayList<Coordinate> getWalls(){
+        return new ArrayList<>(wallCoordinates);
     }
 
-    public Iterator<Coordinate> getObstacles(){
-        return obstaclesCoordinates.iterator();
+    public ArrayList<Coordinate> getObstacles(){
+        return new ArrayList<>(obstaclesCoordinates);
     }
 
-    public Iterator<Door> getDoors(){
-        return doors.iterator();
+    public ArrayList<Door> getDoors(){
+        return new ArrayList<>(doors);
     }
 
     public void setEntryDirection(CardinalDirection entryDirection){
@@ -109,8 +110,8 @@ public abstract class Room{
         return entryDirection;
     }
 
-    public Iterator<Enemy> getEnemies(){
-        return enemies.iterator();
+    public ArrayList<Enemy> getEnemies(){
+        return new ArrayList<>(enemies);
     }
 
     public void givePlayerHostiles(Player player){
@@ -120,6 +121,7 @@ public abstract class Room{
 
     public void giveEnemiesFriendly(Friendly friendly){
         for(Enemy enemy : enemies){
+            System.out.println("Adding to "+enemy);
             enemy.addFriendly(friendly);
         }
     }
@@ -132,5 +134,9 @@ public abstract class Room{
             }
         }
         throw new Exception("No door found but request of a door close by was made");
+    }
+
+    private void addDoors(ArrayList<Door> doors) {
+        this.doors = doors;
     }
 }

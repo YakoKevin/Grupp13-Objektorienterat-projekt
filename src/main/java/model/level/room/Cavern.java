@@ -4,6 +4,7 @@ import entity.EnemyFactory;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,10 +15,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Cavern extends Room {
 
-    public Cavern(Iterator<Door> doors) {
+    public Cavern(ArrayList<Door> doors) {
         super(doors, new EnemyFactory());
         createWalls();
-        addDoors(doors);
         addObstacles();
         addEnemies(enemyFactory);
     }
@@ -38,13 +38,6 @@ public class Cavern extends Room {
         x = HEIGHT -1;
         for (y = 0; y < WIDTH; y++)
             wallCoordinates.add(new Coordinate(x,y));
-    }
-
-    private void addDoors(Iterator<Door> doorsIt) {
-        while (doorsIt.hasNext()) {
-            Door door = doorsIt.next();
-            doors.add(door);
-        }
     }
 
     private void removeWalls(){

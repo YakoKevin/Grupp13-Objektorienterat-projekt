@@ -22,9 +22,4 @@ public class Skeleton extends Enemy{
     public void getHit(Rectangle r, double atkD) {
 
     }
-
-    @Override
-    public void addFriendly(Friendly friendly) {
-
-    }
 }

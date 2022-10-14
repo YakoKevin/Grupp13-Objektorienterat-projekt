@@ -6,6 +6,7 @@ import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
@@ -34,15 +35,17 @@ public class LevelTest {
                 Coordinate playerCoord = new Coordinate(i, j);
                 boolean blocked = level.isCoordinateInWallOrObstacle(playerCoord);
                 boolean blocked2 = false;
-                for (Iterator<Coordinate> obstaclesCoordinates = level.getCurrentRoomObstacles(); obstaclesCoordinates.hasNext(); ) {
-                    Coordinate coordinate = obstaclesCoordinates.next();
-                    if(coordinate.equals(playerCoord))
+                for (Coordinate obstaclesCoordinates : level.getCurrentRoomObstacles()) {
+                    if (obstaclesCoordinates.equals(playerCoord)) {
                         blocked2 = true;
+                        break;
+                    }
                 }
-                for (Iterator<Coordinate> wallCoordinates = level.getCurrentRoomWalls(); wallCoordinates.hasNext(); ) {
-                    Coordinate coordinate = wallCoordinates.next();
-                    if(coordinate.equals(playerCoord))
+                for (Coordinate wallCoordinates : level.getCurrentRoomWalls()) {
+                    if (wallCoordinates.equals(playerCoord)) {
                         blocked2 = true;
+                        break;
+                    }
                 }
                 assertEquals(blocked, blocked2);
             }
@@ -56,12 +59,7 @@ public class LevelTest {
         LevelFactory levelFactory = new LevelFactory();
         Level level = levelFactory.simpleLevel(size, new Player(new Coordinate(1, 1),0,0));
         level.playerEnterRoom(new Coordinate(1,1), CardinalDirection.WEST);
-        Iterator<Door> doors = level.getCurrentRoomDoors();
-
-        while (doors.hasNext()) {
-            System.out.println("x: " + level.getCurrentRoomDoors().next().getCoordinate().getX() + " and y: " + level.getCurrentRoomDoors().next().getCoordinate().getY());
-            doors.next();
-        }
+        ArrayList<Door> doors = level.getCurrentRoomDoors();
     }
 
     @Test

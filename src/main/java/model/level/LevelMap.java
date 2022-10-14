@@ -65,7 +65,7 @@ public class LevelMap {
         mapGraph.placeDoorsAtNode(coordinate.getX(), coordinate.getY(), directionList);
     }
 
-    public Iterator<Door> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
+    public ArrayList<Door> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
         return mapGraph.getNodeDoors(nodeCoordinate);
     }
 
@@ -147,7 +147,7 @@ public class LevelMap {
             return nodesCoordinates;
         }
 
-        public Iterator<Door> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
+        public ArrayList<Door> getNodeDoors(Coordinate nodeCoordinate) throws NoSuchElementException {
             for (MapNode node : nodes){
                 if (nodeCoordinate.equals(node.getCoordinate()))
                     return node.getDoors();
@@ -177,8 +177,8 @@ public class LevelMap {
             doors.add(Door.getDoorFromCardinalDirection(doorDirection));
         }
 
-        private Iterator<Door> getDoors(){
-            return doors.iterator();
+        private ArrayList<Door> getDoors(){
+            return new ArrayList<>(doors);
         }
 
     }

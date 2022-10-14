@@ -80,7 +80,7 @@ public class GameApp {
     }
 
     private void firstSetup(){
-        player = new Player(new Coordinate(200, 200), 30, 100);
+        player = PlayerFactory.createPlayer();
         setupLevel(player);
         setupView();
     }

@@ -36,11 +36,11 @@ public abstract class Level{
         return currentRoom.getRoomAsMatrix();
     }
 
-    public Iterator<Coordinate> getCurrentRoomWalls(){
+    public ArrayList<Coordinate> getCurrentRoomWalls(){
         return currentRoom.getWalls();
     }
 
-    public Iterator<Coordinate> getCurrentRoomObstacles(){
+    public ArrayList<Coordinate> getCurrentRoomObstacles(){
         return currentRoom.getObstacles();
     }
 
@@ -48,7 +48,7 @@ public abstract class Level{
         return currentRoom.getEntryDirection();
     }
 
-    public Iterator<Door> getCurrentRoomDoors(){
+    public ArrayList<Door> getCurrentRoomDoors(){
         return currentRoom.getDoors();
     }
 
@@ -77,11 +77,11 @@ public abstract class Level{
 
     private void changeRoom() {
         try {
-            CardinalDirection doorDirection = currentRoom.getClosestDoor(player.getPosition()).getDoorDirection();
+            Door door = currentRoom.getClosestDoor(player.getPosition());
+            CardinalDirection doorDirection = door.getDoorDirection();
             Coordinate newRoomCoordinate = new Coordinate(currentRoom.getX() + doorDirection.getXOffset(), currentRoom.getY() + doorDirection.getYOffset());
             currentRoom = createRoom(newRoomCoordinate);
-            player.setX(5);
-            player.setY(5); //TODO: make real method for calculating where
+            player.setCoordinate(door.getCoordinate().add(doorDirection.getOffset()));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -89,7 +89,7 @@ public abstract class Level{
 
     protected Room createRoom(Coordinate coordinate){
         int index = ThreadLocalRandom.current().nextInt(0, roomTypes.length);
-        Iterator<Door> doors = levelMap.getNodeDoors(coordinate);
+        ArrayList<Door> doors = levelMap.getNodeDoors(coordinate);
         Room room = roomTypes[index].apply(doors);
         room.givePlayerHostiles(player);
         room.giveEnemiesFriendly(player);
@@ -97,15 +97,15 @@ public abstract class Level{
     }
 
     public void tick(){
-        System.out.println("Level tick");
         checkDoorCollision();
         updateEnemies();
         updatePlayer();
     }
 
     private void updateEnemies(){
-        for (Iterator<Enemy> it = currentRoom.getEnemies(); it.hasNext(); ) {
-            it.next().tick();
+        for (Enemy enemy : currentRoom.getEnemies()) {
+            enemy.giveFriendlyCoordinates(player.getX(), player.getY());
+            enemy.tick();
         }
     }
 

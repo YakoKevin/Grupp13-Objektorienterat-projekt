@@ -20,14 +20,11 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.dir = CardinalDirection.EAST;
-        this.position = startCoordinate;
+        this.position = startCoordinate; //TODO: gör att position inte finns och fixa så att getPosition ger en Coordinate efter beräkning
+        finePositionX = startCoordinate.getX();
+        finePositionY = startCoordinate.getY();
 
         inititateHitbox();
-    }
-
-    protected void drawHitbox(Graphics g){
-        g.setColor(Color.PINK);
-        g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
     private void inititateHitbox() {
@@ -35,7 +32,6 @@ public abstract class Entity {
     }
 
     public void tick(){
-        System.out.println("Player coord: " + position.getX() + ", " + position.getY());
         updateHitbox();
     }
 
