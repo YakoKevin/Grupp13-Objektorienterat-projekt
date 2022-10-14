@@ -74,7 +74,7 @@ public class GameApp {
 
         firstSetup();
         fpsUpdater.startGameLoop(); //TODO: fixa med namn så att det är tydligt att det är bara View den uppdaterar
-    //    timer.schedule(new GameTicker(), 100);
+        timer.schedule(new GameTicker(), 100);
     }
 
     /**

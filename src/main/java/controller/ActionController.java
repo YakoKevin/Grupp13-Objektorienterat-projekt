@@ -35,12 +35,15 @@ public class ActionController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent event) {
+        if(player.getX()<0 || player.getY()<0) {
+            return;
+        }
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=true;
             //movement.setUp(true);
 
             dir=CardinalDirection.NORTH;
-            player.updateMovement();
+
             //System.out.println(player.getX()  + "-" + player.getY());
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
@@ -49,13 +52,13 @@ public class ActionController implements KeyListener {
             //System.out.println("PRESSED A");
 
             dir = CardinalDirection.WEST;
-            player.updateMovement();
+
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             down=true;
             //movement.setDown(true);
             dir= CardinalDirection.SOUTH;
-            player.updateMovement();
+
             //System.out.println("PRESSED S");
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
@@ -63,7 +66,7 @@ public class ActionController implements KeyListener {
             //movement.setLeft(true);
             //System.out.println("PRESSED D");
             dir=CardinalDirection.EAST;
-            player.updateMovement();
+
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             //gamePanel.getGameApp().getPlayer().setAttackMode(true); TODO: SORRY MEN MÅSTE!
@@ -82,18 +85,17 @@ public class ActionController implements KeyListener {
         }
         if(up&&right){
             dir = CardinalDirection.NORTHEAST;
-            player.updateMovement();
         }
         else if(up&&left){
             dir = CardinalDirection.NORTHWEST;
-            player.updateMovement();
         }
         else if(down&&left){
             dir = CardinalDirection.SOUTHWEST;
-            player.updateMovement();
         }
         else if(down&&right){
             dir = CardinalDirection.SOUTHEAST;
+        }
+        if(up||right||down||left){
             player.updateMovement();
         }
 

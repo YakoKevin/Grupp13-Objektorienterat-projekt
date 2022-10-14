@@ -50,7 +50,7 @@ public class Movement {
             y = WindowManager.HEIGHT;
 
         }*/
-        double diagonal = 2/Math.sqrt(2);
+        double diagonal = Math.sqrt(2);
         if (dir==CardinalDirection.NORTHWEST) {
             speed /=diagonal;
             x -= speed;
