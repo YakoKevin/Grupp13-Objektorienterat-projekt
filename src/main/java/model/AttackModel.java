@@ -1,19 +1,17 @@
 package model;
 
-import controller.ActionController;
-import entity.Entity;
-import entity.Skeleton;
+
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
-import java.util.List;
 
 public class AttackModel { //
 
     private int attackDamage;
     private float attackRange;
+    private int coolDown;
+    private final int COOL_DOWN_TIME = 15;
 
     public AttackModel(int attackDamage, float attackRange){
         this.attackDamage = attackDamage;
@@ -56,8 +54,8 @@ public class AttackModel { //
         //notifyObservers();
         return c;
     }
-    public Rectangle getAttackRectangle (Coordinate c, int atkR) {
-        return new Rectangle((int)c.getX(),(int)c.getY(),atkR,atkR);
+    public Rectangle getAttackRectangle (float x, float y) {
+        return new Rectangle((int)x, (int)y,(int)attackRange, (int)attackRange);
     }
 
     public float getAttackRange() {
@@ -66,5 +64,17 @@ public class AttackModel { //
 
     public int getAttackDamage() {
         return attackDamage;
+    }
+
+    public boolean coolDown() {
+        if(coolDown > 0) {
+            coolDown--;
+            return false;
+        }
+        return true;
+    }
+
+    public void coolDownReset() {
+        this.coolDown = COOL_DOWN_TIME;
     }
 }

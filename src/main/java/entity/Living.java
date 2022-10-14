@@ -22,13 +22,14 @@ public abstract class Living extends Entity implements Attackable{
         super(startCoordinate, width, height);
         this.movement = movement;
         this.attack = attackModel;
+        this.healthPoints = 100;
     }
 
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
     public abstract void attack();
 
     public void getHit(Rectangle atkRect, double atkP) {
-        if(atkRect.contains(this.hitbox)){
+        if(atkRect.intersects(this.hitbox)){
             this.setHealthPoints(this.healthPoints-atkP);
         }
         if(this.healthPoints<=0){

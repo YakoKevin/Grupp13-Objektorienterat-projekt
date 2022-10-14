@@ -36,8 +36,8 @@ public abstract class Entity {
     }
 
     protected void updateHitbox(){ //TODO: Viktigt - måste göra varje update() för att undvika fel.
-        hitbox.x = position.getX();
-        hitbox.y = position.getY();
+        hitbox.x = (int)finePositionX;
+        hitbox.y = (int)finePositionY;
     }
 
     public Rectangle getHitbox() {

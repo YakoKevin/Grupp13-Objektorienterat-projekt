@@ -33,6 +33,7 @@ public abstract class Enemy extends Living implements Hostile {
         private float friendlyLastSeenX = Float.MIN_VALUE;
         private float friendlyLastSeenY = Float.MIN_VALUE;
         private final float sightRange;
+        private boolean readyToAttack;
 
         public Brain(float sightRange){
             this.sightRange = sightRange;
@@ -42,11 +43,14 @@ public abstract class Enemy extends Living implements Hostile {
             if(Math.abs(friendlyLastSeenX - getX()) > sightRange &&
                     Math.abs(friendlyLastSeenY - getY()) > sightRange){
                 moveRandomly();
-            } else if(friendly != null && Math.abs(friendlyLastSeenX - getX()) > attack.getAttackRange() &&
-                    Math.abs(friendlyLastSeenY - getY()) > attack.getAttackRange()){
-                moveTowardsFriendly();
-            }else if(friendly != null)
-                attackFriendly();
+            } else if(friendly != null){
+                if(Math.abs(friendlyLastSeenX - getX()) > attack.getAttackRange() &&
+                        Math.abs(friendlyLastSeenY - getY()) > attack.getAttackRange()){
+                    moveTowardsFriendly();
+                }else if(readyToAttack)
+                    attackFriendly();
+            }
+            readyToAttack = attack.coolDown();
         }
 
         private void moveRandomly(){
@@ -58,9 +62,10 @@ public abstract class Enemy extends Living implements Hostile {
         }
 
         private void attackFriendly(){
-            Rectangle attackRectangle = attack.getAttackRectangle(position, width);
+            Rectangle attackRectangle = attack.getAttackRectangle(finePositionX, finePositionY);
             friendly.getHit(attackRectangle, attack.getAttackDamage());
-            System.out.println("ATTACK");
+            attack.coolDownReset();
+            System.out.println("ATTACK: " + finePositionX + ", " + finePositionY);
         }
 
         public void giveFriendlyCoordinates(float x, float y){

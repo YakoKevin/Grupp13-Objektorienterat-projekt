@@ -25,7 +25,7 @@ public class Player extends Living implements Friendly{
     public void attack(){
         position = new Coordinate((int)this.getX(),(int)this.getY());
         attack.getAttackCoordinate(position, this.dir);
-        Rectangle r = attack.getAttackRectangle(position,this.width); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
+        Rectangle r = attack.getAttackRectangle(finePositionX, finePositionY); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
         for(Hostile hostile : hostiles){
             hostile.getHit(r, this.getAttackPoints());
         }

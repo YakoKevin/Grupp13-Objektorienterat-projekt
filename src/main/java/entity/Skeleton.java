@@ -9,7 +9,7 @@ import java.awt.*;
 public class Skeleton extends Enemy{
 
     public Skeleton(Coordinate startPosition){
-        super(startPosition, 0, 30, 60, new Movement(), new AttackModel(10,20));
+        super(startPosition, 0, 30, 120, new Movement(), new AttackModel(10,20));
         this.setHealthPoints(50);
     }
 
