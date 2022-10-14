@@ -54,7 +54,7 @@ public class GameApp {
 
     public GameApp(){
         //levelManager = new LevelManager();
-        player = new Player(new Coordinate(100, 100), 30, 100);
+        player = new Player(new Coordinate(200, 200), 30, 100);
 
         animation = new Animation(ImageServer.Ids.PLAYER, player);
         updateFrame = new UpdateFrame(player, animation);
@@ -87,7 +87,7 @@ public class GameApp {
     }
 
     public void windowFocusLost(){
-        movement.resetDirectionBooleans();
+        //movement.resetDirectionBooleans();
     }
 
     private void firstSetup(){

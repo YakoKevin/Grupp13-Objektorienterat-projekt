@@ -18,7 +18,7 @@ public abstract class Living extends Entity implements Attackable{
     protected EntityStates state;
     protected CardinalDirection direction;
     protected Movement movement = new Movement(new Animation(ImageServer.Ids.PLAYER, null), null, null);
-    protected AttackModel attack = new AttackModel();
+    protected double movementSpeed;
 
     public Living(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate.getX(), startCoordinate.getY(), width, height);
@@ -41,8 +41,22 @@ public abstract class Living extends Entity implements Attackable{
             this.setAlive(false); //ska kanske ändras till ett state som sagt
         }
     }
+
+    public double getMovementSpeed() {
+        return movementSpeed;
+    }
+    public void setMovementSpeed(double speed){
+        this.movementSpeed=speed;
+    }
+
+
     //TODO: fixa till vad som behövs. Ska ActionController kalla denna tro?
     public void updateMovement(){
-        movement.updatePosition();
+        //System.out.println("x och y" + this.x + this.y);
+        //ystem.out.println("Riktningen: " + getDirection());
+        Coordinate c = movement.updatePosition(this.x,this.y,this.getMovementSpeed(),this.getDirection());
+        setX(c.getX());
+        setY(c.getY());
+        //System.out.println("x och y efter: " + this.x + this.y);
     }
 }

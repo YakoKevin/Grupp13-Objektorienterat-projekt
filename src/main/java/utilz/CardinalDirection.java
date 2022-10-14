@@ -7,8 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public enum CardinalDirection {
     NORTH(0,-1),
+    NORTHWEST(-1,1),
+    NORTHEAST(1,1),
     EAST(1,0),
     SOUTH(0,1),
+    SOUTHWEST(-1,-1),
+    SOUTHEAST(1,-1),
     WEST(0,-1);
 
     private final int xOffset;

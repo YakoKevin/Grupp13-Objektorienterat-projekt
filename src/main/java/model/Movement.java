@@ -1,11 +1,13 @@
 package model;
 
 import entity.Entity;
+import utilz.CardinalDirection;
+import utilz.Coordinate;
 import view.Animation;
 import view.WindowManager;
 
 public class Movement {
-    private boolean moving = false;
+   /* private boolean moving = false;
     private boolean attacking = false;
     private boolean left;
     private boolean right;
@@ -14,66 +16,94 @@ public class Movement {
     private float playerSpeed = 2.0f;
     private Entity entity;
     private float x;
-    private float y;
+    private float y;*/
     private Animation animation;
     private Animation animationEnemy;
 
     public Movement(Animation animation, Entity entity, Animation animationEnemy){
-        this.entity = entity;
+        //this.entity = entity;
         this.animation = animation;
         this.animationEnemy = animationEnemy;
     }
 
-    public void updatePosition() { //TODO: retunera en ny Coordinate ist. och kalla på denna metod från entitin ist.
+    public Coordinate updatePosition(double x, double y, double speed, CardinalDirection dir) { //TODO: returnera en ny Coordinate ist. och kalla på denna metod från entityn ist.
         animation.moving = false;
         //System.out.println(entity.getX());
-
+        /*
         if(this.x>477 && this.x<539) { //TODO: vad är dessa för specifika siffror?
             if(this.y>191 && this.y<223) {
 //        		moving = false;
 //        		return;
             }
+        }*/
+/*
+        if(x < 0) {
+            x=0;
         }
-
-        if(entity.getX() < 0) {
-            entity.setX(0);
-            return;
-        }else if(entity.getX() > WindowManager.WIDTH) {
-            entity.setX(WindowManager.WIDTH);
-            return;
-        }else if(entity.getY() < 0) {
-            entity.setY(0);
-            return;
-        }else if(entity.getY() > WindowManager.HEIGHT) {
-            entity.setY(WindowManager.HEIGHT);
-            return;
+        else if(x > WindowManager.WIDTH) {
+            x = WindowManager.WIDTH;
         }
+        else if(y < 0) {
+            y = 0;
+        }
+        else if(y > WindowManager.HEIGHT) {
+            y = WindowManager.HEIGHT;
 
-        if (left && !right) {
-            x = entity.getX() + playerSpeed;
-            entity.setX(x);
+        }*/
+        double diagonal = 2/Math.sqrt(2);
+        if (dir==CardinalDirection.NORTHWEST) {
+            speed /=diagonal;
+            x -= speed;
+            y -= speed;
+
             animation.moving = true;
         }
-        else if (right && !left) {
-            x = entity.getX() - playerSpeed;
-            entity.setX(x);
+        if (dir==CardinalDirection.NORTHEAST) {
+            speed /=diagonal;
+            x += speed;
+            y -= speed;
+
+            animation.moving = true;
+        }
+        if (dir==CardinalDirection.SOUTHWEST) {
+            speed /=diagonal;
+            x -= speed;
+            y += speed;
+
+            animation.moving = true;
+        }
+        if (dir==CardinalDirection.SOUTHEAST) {
+            speed /=diagonal;
+            x += speed;
+            y += speed;
+
             animation.moving = true;
         }
 
-        if (up && !down) {
-            y = entity.getY() - playerSpeed;
-            entity.setY(y);
-            //animation.moving = true;
+
+        if (dir==CardinalDirection.WEST) {
+            x -= speed;
+
+            animation.moving = true;
         }
-        else if (down && !up) {
-            y = entity.getY() + playerSpeed;
-            entity.setY(y);
+        else if (dir==CardinalDirection.EAST) {
+            x += speed;
             animation.moving = true;
         }
 
+        if (dir==CardinalDirection.NORTH) {
+            y -= speed;
 
+            animation.moving = true;
+        }
+        else if (dir==CardinalDirection.SOUTH) {
+            y += speed;
+            animation.moving = true;
+        }
+        Coordinate c = new Coordinate ((int)x,(int)y); //animation.moving alltid sant?
+        return c;
     }
-
+/*
     public void resetDirectionBooleans(){
         //System.out.println("TEST");
         left = false;
@@ -125,4 +155,6 @@ public class Movement {
     public float getY() {
         return y;
     }
+    */
+
 }

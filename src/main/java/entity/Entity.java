@@ -103,9 +103,7 @@ public abstract class Entity {
     public CardinalDirection getDirection(){
         return this.dir;
     }
-    public double getMovementSpeed() {
-        return movementSpeed;
-    }
+
 
     public int getKeyItem() {
         return keyItem;

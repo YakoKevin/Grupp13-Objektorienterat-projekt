@@ -16,6 +16,7 @@ public class Player extends Living implements Friendly{
         super(startCoordinate, width, height);
         this.setHealthPoints(100);
         this.setAttackPoints(20);
+        this.setMovementSpeed(3);
     }
     private AttackModel atkM = new AttackModel();
 
@@ -42,6 +43,7 @@ public class Player extends Living implements Friendly{
     public void setAttackMode(boolean atkM){
         this.attackMode=atkM;
     }
+
 
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;

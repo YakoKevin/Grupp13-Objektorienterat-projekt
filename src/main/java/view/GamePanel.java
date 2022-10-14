@@ -153,9 +153,9 @@ public class GamePanel extends JPanel {
         animation.setAnimation();
         animationEnemy.updateAnimationTick();
         animationEnemy.setAnimation();
-        movement.updatePosition();
-
-
+        //Coordinate c = movement.updatePosition(player.getX(),player.getY(),player.getMovementSpeed(),player.getDirection());
+        //player.setX(c.getX());
+        //player.setY(c.getY());
         updateHitbox();
         player.setAttackMode(false); //ska vara timer
     }
