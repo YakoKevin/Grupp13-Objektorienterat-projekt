@@ -63,7 +63,7 @@ public class UpdateFrame extends JPanel {
         if(player.getAttackMode()==true){
             //System.out.println("defgrtxz ");
             AttackView atkV = new AttackView();
-            AttackModel atkM = new AttackModel();
+            AttackModel atkM = new AttackModel(10, 50); //TODO: detta borde inte vara här -- hämta från spelaren ist.
             Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
             c = atkM.getAttackCoordinate(c,this.player.getDirection());
             atkV.drawAttackRectangle(g,c.getX(),c.getY(),100,100);
