@@ -26,7 +26,7 @@ public class Movement {
         this.animationEnemy = animationEnemy;
     }
 
-    public Coordinate updatePosition(double x, double y, double speed, CardinalDirection dir) { //TODO: returnera en ny Coordinate ist. och kalla på denna metod från entityn ist.
+    public float[] updatePosition(float x, float y, double speed, CardinalDirection dir) {
         animation.moving = false;
         //System.out.println(entity.getX());
         /*
@@ -100,8 +100,7 @@ public class Movement {
             y += speed;
             animation.moving = true;
         }
-        Coordinate c = new Coordinate ((int)x,(int)y); //animation.moving alltid sant?
-        return c;
+        return new float[]{x,y};
     }
 /*
     public void resetDirectionBooleans(){

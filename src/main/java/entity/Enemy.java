@@ -4,6 +4,7 @@ import utilz.Coordinate;
 
 public abstract class Enemy extends Entity implements Hostile {
     private Friendly friendly;
+    private Coordinate friendlyLastSeenCoordinate;
     //private EnemyStates enemyState = IDLE;
 
     public Enemy(Coordinate startPosition, int width, int height) { //TODO: den som vet: gör bättre variabelnamn!... Vad är int v?

@@ -6,6 +6,8 @@ import utilz.Coordinate;
 import java.awt.*;
 
 public abstract class Entity {
+    protected float finePositionX;
+    protected float finePositionY;
     protected Coordinate position;
     protected int width, height;
     protected Rectangle hitbox;
@@ -19,6 +21,11 @@ public abstract class Entity {
         this.position = startCoordinate;
 
         inititateHitbox();
+    }
+
+    protected void drawHitbox(Graphics g){
+        g.setColor(Color.PINK);
+        g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
     }
 
     private void inititateHitbox() {
@@ -43,10 +50,14 @@ public abstract class Entity {
     private double attackPoints; //TODO: borde vara i Attack inte i entity
 
     public float getX(){
-        return position.getX();
+        return finePositionX;
     }
     public float getY(){
-        return position.getY();
+        return finePositionY;
+    }
+
+    public Coordinate getPosition() {
+        return position;
     }
 
     /*public void setX(float x) {
