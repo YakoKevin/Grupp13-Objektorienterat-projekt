@@ -1,31 +1,75 @@
 package entity;
 
+import model.AttackModel;
 import utilz.Coordinate;
 
-public abstract class Enemy extends Entity implements Hostile {
-    private Friendly friendly;
-    private Coordinate friendlyLastSeenCoordinate;
+import java.awt.*;
+
+public abstract class Enemy extends Living implements Hostile {
+    private Brain brain;
+    private AttackModel attackModel;
     //private EnemyStates enemyState = IDLE;
 
-    public Enemy(Coordinate startPosition, int width, int height) { //TODO: den som vet: gör bättre variabelnamn!... Vad är int v?
+    public Enemy(Coordinate startPosition, int width, int height, float sightRange, AttackModel attack) {
         super(startPosition, width, height);
+        this.brain = new Brain(sightRange);
+        this.attackModel = attack;
     }
 
-    //TODO: lägg här allt som ska hända när logiken i fienden ska göras. Ska EnemyBrain hantera detta tro?
+
     public void tick() {
-        //TODO: lägg till att gå,
-        //TODO: lägg till att slå
-        //TODO: lägg till att ...?
-        //TODO: ELLER anropa EnemyBrain.tick() kankse, om vi fixar den klassen dvs.?
+        brain.think();
     }
 
     public void addFriendly(Friendly friendly) {
-        this.friendly = friendly;
+        brain.addFriendly(friendly);
     }
 
-    public class EnemyBrain {
-        public void think() {
+    public void giveFriendlyCoordinates(float x, float y){
+        brain.giveFriendlyCoordinates(x, y);
+    }
 
+    private class Brain {
+        private Friendly friendly;
+        private float friendlyLastSeenX;
+        private float friendlyLastSeenY;
+        private final float sightRange;
+
+        public Brain(float sightRange){
+            this.sightRange = sightRange;
+        }
+
+        public void think() {
+            if(Math.abs(friendlyLastSeenX - getX()) > sightRange &&
+                    Math.abs(friendlyLastSeenY - getY()) > sightRange){
+                moveRandomly();
+            } else if(Math.abs(friendlyLastSeenX - getX()) > attackModel.getAttackRange() &&
+                    Math.abs(friendlyLastSeenY - getY()) > attackModel.getAttackRange()){
+                moveTowardsFriendly();
+            }else
+                attackFriendly();
+        }
+
+        private void moveRandomly(){
+
+        }
+
+        private void moveTowardsFriendly(){
+
+        }
+
+        private void attackFriendly(){
+            Rectangle attackRectangle = attackModel.getAttackRectangle(position, width);
+            friendly.getHit(attackRectangle, attackModel.getAttackDamage());
+        }
+
+        public void giveFriendlyCoordinates(float x, float y){
+            this.friendlyLastSeenX = x;
+            this.friendlyLastSeenY = y;
+        }
+
+        public void addFriendly(Friendly friendly) {
+            this.friendly = friendly;
         }
     }
 }

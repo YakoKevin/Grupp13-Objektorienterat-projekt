@@ -11,6 +11,14 @@ import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 public class AttackModel { //
+
+    private int attackDamage;
+    private float attackRange;
+
+    public AttackModel(int attackDamage, float attackRange){
+        this.attackDamage = attackDamage;
+        this.attackRange = attackRange;
+    }
     public Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
         int atkOffSetX = (int)coordinate.getX();
         int atkOffSetY = (int)coordinate.getY();
@@ -52,4 +60,11 @@ public class AttackModel { //
         return new Rectangle((int)c.getX(),(int)c.getY(),atkR,atkR);
     }
 
+    public float getAttackRange() {
+        return attackRange;
+    }
+
+    public int getAttackDamage() {
+        return attackDamage;
+    }
 }

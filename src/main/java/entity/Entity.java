@@ -73,6 +73,11 @@ public abstract class Entity {
         position = new Coordinate(position.getX(), (int)y/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
     }
 
+    public void setCoordinate(Coordinate coordinate){
+        this.finePositionX = coordinate.getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+        this.finePositionY = coordinate.getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+    }
+
     public int getWidth() { return (int)width; }
 
     public int getHeight()

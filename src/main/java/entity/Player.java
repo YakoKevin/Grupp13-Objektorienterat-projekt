@@ -10,6 +10,7 @@ public class Player extends Living implements Friendly{
     private int keys;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private boolean attackMode = false;
+    protected AttackModel atkM = new AttackModel(20, 20);
 
     public Player(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate, width, height);
@@ -17,7 +18,6 @@ public class Player extends Living implements Friendly{
         this.setAttackPoints(20);
         this.setMovementSpeed(3);
     }
-    private AttackModel atkM = new AttackModel();
 
     //Denna är ju den som ActionController ska anropar på.
     public void attack(){
@@ -25,7 +25,7 @@ public class Player extends Living implements Friendly{
         atkM.getAttackCoordinate(position, this.dir);
         Rectangle r = atkM.getAttackRectangle(position,this.width); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
         for(Hostile hostile : hostiles){
-            hostile.gettingHit(r, this.getAttackPoints());
+            hostile.getHit(r, this.getAttackPoints());
         }
     }
 

@@ -24,7 +24,7 @@ public abstract class Living extends Entity implements Attackable{
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
     public abstract void attack();
 
-    public void gettingHit(Rectangle atkRect, double atkP) {
+    public void getHit(Rectangle atkRect, double atkP) {
         if(atkRect.contains(this.hitbox)){
             this.setHealthPoints(this.healthPoints-atkP);
         }
@@ -36,10 +36,10 @@ public abstract class Living extends Entity implements Attackable{
     public double getMovementSpeed() {
         return movementSpeed;
     }
+
     public void setMovementSpeed(double speed){
         this.movementSpeed=speed;
     }
-
 
     //TODO: fixa till vad som behövs. Ska ActionController kalla denna tro?
     public void updateMovement(){
