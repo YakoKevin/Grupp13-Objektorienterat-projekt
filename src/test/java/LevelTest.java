@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class LevelTest {
-/*
+
     @Test
     public void doesRoomHaveEntryOppositeToWherePlayerWalkedIn() {
         LevelFactory levelFactory = new LevelFactory();
@@ -79,6 +79,6 @@ public class LevelTest {
             matrixString.append("\n");
         }
         System.out.println(matrixString);
-    }*/
+    }
 
 }

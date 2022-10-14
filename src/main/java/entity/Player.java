@@ -29,11 +29,6 @@ public class Player extends Living implements Friendly{
         }
     }
 
-    @Override
-    public void tick() {
-
-    }
-
     //Denna metod anropar enemy (som har en lista med Friendlies), för att slå Player (Friendly).
 
     public boolean getAttackMode() { // ska kanske vara state

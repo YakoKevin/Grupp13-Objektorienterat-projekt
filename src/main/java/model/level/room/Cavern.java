@@ -42,7 +42,8 @@ public class Cavern extends Room {
 
     private void addDoors(Iterator<Door> doorsIt) {
         while (doorsIt.hasNext()) {
-            doors.add(doorsIt.next());
+            Door door = doorsIt.next();
+            doors.add(door);
         }
     }
 

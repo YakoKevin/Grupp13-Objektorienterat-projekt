@@ -2,10 +2,7 @@ package entity;
 
 import model.AttackModel;
 import model.Movement;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.EntityStates;
-import utilz.ImageServer;
+import utilz.*;
 import view.Animation;
 
 import java.awt.*;
@@ -51,7 +48,7 @@ public abstract class Living extends Entity implements Attackable{
         float newPosition[] = movement.updatePosition(finePositionX, finePositionY,this.getMovementSpeed(),this.getDirection());
         finePositionX = newPosition[0];
         finePositionY = newPosition[1];
-        position = new Coordinate((int)finePositionX, (int)finePositionY);
+        position = new Coordinate((int)finePositionX/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
         //System.out.println("x och y efter: " + this.x + this.y);
     }
 }

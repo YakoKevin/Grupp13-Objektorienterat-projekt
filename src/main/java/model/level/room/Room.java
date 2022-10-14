@@ -19,7 +19,6 @@ public abstract class Room{
     protected final int HEIGHT = RoomMapSizes.HEIGHT.getSize();
     protected final int WIDTH = RoomMapSizes.WIDTH.getSize();
     protected CardinalDirection entryDirection = CardinalDirection.WEST;
-
     protected Coordinate coordinate = new Coordinate(0,0);
     protected ArrayList<Coordinate> wallCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> obstaclesCoordinates = new ArrayList<>();
@@ -50,6 +49,22 @@ public abstract class Room{
 
     public boolean isCoordinateInWallOrObstacle(Coordinate coordinate) {
         return isCoordinateInObstacle(coordinate) || isCoordinateInWall(coordinate);
+    }
+
+    public boolean isCoordinateInDoor(Coordinate coordinate){
+        for(Door door : doors){
+            if (coordinate.equals(door.coordinate))
+                return true;
+        }
+        return false;
+    }
+
+    public int getX(){
+        return coordinate.getX();
+    }
+
+    public int getY(){
+        return coordinate.getY();
     }
 
     public int[][] getRoomAsMatrix() {
@@ -107,5 +122,15 @@ public abstract class Room{
         for(Enemy enemy : enemies){
             enemy.addFriendly(friendly);
         }
+    }
+
+    public Door getClosestDoor(Coordinate position) throws Exception {
+        Door closestDoor = doors.get(0);
+        for(Door door : doors){
+            if(Math.abs(coordinate.getX()) - Math.abs(door.coordinate.getX()) < 3 && Math.abs(coordinate.getY()) - Math.abs(door.coordinate.getY()) < 3){
+                return door;
+            }
+        }
+        throw new Exception("No door found but request of a door close by was made");
     }
 }

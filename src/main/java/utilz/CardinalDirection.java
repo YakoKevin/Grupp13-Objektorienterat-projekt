@@ -25,13 +25,25 @@ public enum CardinalDirection {
 
     public CardinalDirection getOppositeDirection(){
         int ordinal = this.ordinal();
-        int oppositeOrdinal = (ordinal + 2) % 4;
+        int oppositeOrdinal = (ordinal + 2) % 8;
         return CardinalDirection.values()[oppositeOrdinal];
     }
 
     public static CardinalDirection getRandomDirection(){
         int randomInt = ThreadLocalRandom.current().nextInt(0, 4);
         return CardinalDirection.values()[randomInt];
+    }
+
+    public Coordinate getOffset(){
+        return new Coordinate(xOffset, yOffset);
+    }
+
+    public int getXOffset(){
+        return xOffset;
+    }
+
+    public int getYOffset(){
+        return yOffset;
     }
 
     public static CardinalDirection getEastWestDirection(int start, int end) {

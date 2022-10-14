@@ -43,7 +43,7 @@ public enum GameConstants {
         }
     }
 
-    private enum GameScalingFactors {
+    public enum GameScalingFactors {
         TILE_SCALE_FACTOR(42); //1.3*32
         int size;
 

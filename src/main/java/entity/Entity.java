@@ -2,6 +2,7 @@ package entity;
 
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.GameConstants;
 
 import java.awt.*;
 
@@ -33,6 +34,7 @@ public abstract class Entity {
     }
 
     public void tick(){
+        System.out.println("Player coord: " + position.getX() + ", " + position.getY());
         updateHitbox();
     }
 
@@ -60,13 +62,16 @@ public abstract class Entity {
         return position;
     }
 
-    /*public void setX(float x) {
-        this.x = (int)x;
-    } //TODO: Borde inte finnas, vi använder ju Movement för detta!
+    //TODO: fix some float-to-coordinate algoritm instead that all classes can use
+    public void setX(float x) {
+        this.finePositionX = x;
+        position = new Coordinate((int)x/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), position.getY());
+    }
 
     public void setY(float y) {
-        this.y = (int)y;
-    } *///TODO: Borde inte finnas, vi använder ju Movement för detta!
+        this.finePositionY = y;
+        position = new Coordinate(position.getX(), (int)y/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
+    }
 
     public int getWidth() { return (int)width; }
 
