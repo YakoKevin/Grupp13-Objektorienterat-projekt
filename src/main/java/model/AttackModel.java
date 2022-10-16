@@ -17,22 +17,20 @@ public class AttackModel { //
         this.attackDamage = attackDamage;
         this.attackRange = attackRange;
     }
-    public Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
-        int atkOffSetX = (int)coordinate.getX();
-        int atkOffSetY = (int)coordinate.getY();
-        //animation.attacking = true;
+    public AttackModel(){
+    }
+    public Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir, int width, int height){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
+        int atkOffSetX = coordinate.getX();
+        int atkOffSetY = coordinate.getY();
 
-        int width = 30; //Players storlek i x och// y
-        int height = 100; // Kan lägga till detta som parameter ifall vi har olika storlek på entities
-        //System.out.println("playerCoords: " + this.x+this.y);
+
+        //TODO: ska ta lägga till för fyra andra riktningar
         if(dir == CardinalDirection.WEST) { //left
             atkOffSetX -= height;
         }
         else if(dir==CardinalDirection.NORTH){
             atkOffSetX-=width;
             atkOffSetY-=height;
-
-            //System.out.println("u");
         }
         else if(dir== CardinalDirection.SOUTH){
             atkOffSetX-=width;

@@ -54,17 +54,18 @@ public class UpdateFrame extends JPanel {
         super.paintComponent(g);
         levelManager.draw(g);
         drawUI(g);
-        System.out.println("t h");
+
         //drawHitbox(g);
         g.drawImage(playerImage, (int)player.getX(), (int)player.getY(), null);
         if(player.getAttackMode()==true){
-            //System.out.println("defgrtxz ");
+            System.out.println("t h");
             AttackView atkV = new AttackView();
-            AttackModel atkM = new AttackModel(10, 50); //TODO: detta borde inte vara här -- hämta från spelaren ist.
+            AttackModel atkM = new AttackModel(); //TODO: detta borde inte vara här -- hämta från spelaren ist.
             Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
-            c = atkM.getAttackCoordinate(c,this.player.getDirection());
-            atkV.drawAttackRectangle(g,c.getX(),c.getY(),100,100);
+            c = atkM.getAttackCoordinate(c,this.player.getDirection(),player.getWidth(),player.getHeight());
+            atkV.drawAttackRectangle(g,c.getX(),c.getY(),(int)player.getAttackRange(),(int)player.getAttackRange());
         }
+        player.setAttackMode(false);
         render(g);
 
     }

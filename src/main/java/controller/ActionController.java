@@ -66,26 +66,9 @@ public class ActionController implements KeyListener {
             //movement.setLeft(true);
             //System.out.println("PRESSED D");
             dir=CardinalDirection.EAST;
-            System.out.println("bcfght ");
 
-        }
-        else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            //gamePanel.getGameApp().getPlayer().setAttackMode(true); TODO: SORRY MEN MÅSTE!
-            //Level.getPlayer().setAttackMode(true);
-
-            //player.setAttackMode(true);
-            //Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet? Ja hyfsat
-            //System.out.println("x och y player ActionController: " + movement.getX()+" och " + movement.getY());
-
-            player.attack();
-            //attack.setAttack(true);
-            //gamePanel.getGameApp().getPlayer().setAttack(true);
-            //System.out.println("PRESSED SPACE");
-            //Coordinate coordinate = new Coordinate((int)movement.getX(), (int)movement.getY()); // är detta tillåtet?
-            //attack.attack(coordinate, dir);
         }
         if(up&&right){
-            System.out.println("bcfght ");
             dir = CardinalDirection.NORTHEAST;
         }
         else if(up&&left){
@@ -101,48 +84,37 @@ public class ActionController implements KeyListener {
         if(up||right||down||left){
             player.updateMovement();
         }
-
-
-
-        //gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
-        //Level.getPlayer().setDirection(dir); //behöver ett objekt här
+        else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            player.attack();
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=false;
-            //gamePanel.getGameApp().getPlayer().setUp(false);
-            //movement.setUp(false);
+
             //System.out.println("RELEASED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             left=false;
-            //gamePanel.getGameApp().getPlayer().setRight(false);
-            //movement.setRight(false);
+
             //System.out.println("RELEASED A");
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             down=false;
-            //gamePanel.getGameApp().getPlayer().setDown(false);
-            //movement.setDown(false);
+
             //System.out.println("RELEASED S");
 
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             right=false;
-            //gamePanel.getGameApp().getPlayer().setLeft(false);
-            //movement.setLeft(false);
+
             //System.out.println("RELEASED D");
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            space=false;
-            //System.out.println("RELEASED SPACE");
-
-            //attack.setAttack(false);
-            //gamePanel.getGameApp().getPlayer().setAttack(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
+            player.setAttackMode(true); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
-        System.out.println("Released " + event);
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }
 }

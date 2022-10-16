@@ -160,7 +160,7 @@ public class GamePanel extends JPanel {
             AttackView atkV = new AttackView();
             AttackModel atkM = new AttackModel(10, 20); //TODO: get from player instead
             Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
-            c = atkM.getAttackCoordinate(c,this.player.getDirection());
+            c = atkM.getAttackCoordinate(c,this.player.getDirection(),player.getWidth(),player.getHeight());
             atkV.drawAttackRectangle(g,(int)c.getX(),(int)c.getY(),100,100);
         }
         render(g);

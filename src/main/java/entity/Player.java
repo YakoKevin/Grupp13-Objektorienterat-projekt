@@ -15,16 +15,16 @@ public class Player extends Living implements Friendly{
     private boolean attackMode = false;
 
     public Player(Coordinate startCoordinate, int width, int height) {
-        super(startCoordinate, width, height, new Movement(), new AttackModel(20, 20));
+        super(startCoordinate, width, height, new Movement(), new AttackModel(20, 100));
         this.setHealthPoints(100);
         this.setAttackPoints(20);
-        this.setMovementSpeed(3);
+        this.setMovementSpeed(4);
     }
 
     //Denna är ju den som ActionController ska anropar på.
     public void attack(){
         position = new Coordinate((int)this.getX(),(int)this.getY());
-        attack.getAttackCoordinate(position, this.dir);
+        attack.getAttackCoordinate(position, this.dir, this.width ,this.height);
         Rectangle r = attack.getAttackRectangle(finePositionX, finePositionY); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
         for(Hostile hostile : hostiles){
             hostile.getHit(r, this.getAttackPoints());

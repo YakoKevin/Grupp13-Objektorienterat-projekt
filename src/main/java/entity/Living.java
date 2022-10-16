@@ -63,4 +63,7 @@ public abstract class Living extends Entity implements Attackable{
     public AttackModel getAttack(){
         return attack;
     }
+    public double getAttackRange(){
+        return attack.getAttackRange();
+    }
 }
