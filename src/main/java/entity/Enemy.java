@@ -54,11 +54,11 @@ public abstract class Enemy extends Living implements Hostile {
         }
 
         private void moveRandomly(){
-            System.out.println("MOVE RANDOMLY");
+            //System.out.println("MOVE RANDOMLY");
         }
 
         private void moveTowardsFriendly(){
-            System.out.println("MOVE TOWARDS FRIENDLY");
+            //System.out.println("MOVE TOWARDS FRIENDLY");
         }
 
         private void attackFriendly(){

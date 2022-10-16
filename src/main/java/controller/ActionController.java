@@ -66,6 +66,7 @@ public class ActionController implements KeyListener {
             //movement.setLeft(true);
             //System.out.println("PRESSED D");
             dir=CardinalDirection.EAST;
+            System.out.println("bcfght ");
 
         }
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -84,6 +85,7 @@ public class ActionController implements KeyListener {
             //attack.attack(coordinate, dir);
         }
         if(up&&right){
+            System.out.println("bcfght ");
             dir = CardinalDirection.NORTHEAST;
         }
         else if(up&&left){
@@ -95,11 +97,12 @@ public class ActionController implements KeyListener {
         else if(down&&right){
             dir = CardinalDirection.SOUTHEAST;
         }
+        player.setDirection(dir);
         if(up||right||down||left){
             player.updateMovement();
         }
 
-        player.setDirection(dir);
+
 
         //gamePanel.getGameApp().getPlayer().setDirection(dir); //tillfälligt
         //Level.getPlayer().setDirection(dir); //behöver ett objekt här
@@ -139,6 +142,7 @@ public class ActionController implements KeyListener {
             //attack.setAttack(false);
             //gamePanel.getGameApp().getPlayer().setAttack(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
+        System.out.println("Released " + event);
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }
 }

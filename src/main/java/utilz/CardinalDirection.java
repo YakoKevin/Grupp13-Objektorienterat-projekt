@@ -7,21 +7,33 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public enum CardinalDirection {
     NORTH(0,-1),
-    NORTHWEST(-1,1),
-    NORTHEAST(1,1),
+    NORTHWEST(-1,-1),
+    NORTHEAST(1,-1),
     EAST(1,0),
     SOUTH(0,1),
-    SOUTHWEST(-1,-1),
-    SOUTHEAST(1,-1),
-    WEST(0,-1);
+    SOUTHWEST(-1,1),
+    SOUTHEAST(1,1),
+    WEST(-1,0);
 
-    private final int xOffset;
-    private final int yOffset;
+    private int xOffset;
+    private int yOffset;
+
+    private final double hypothenuseReciprocal;
 
     CardinalDirection(int xOffset, int yOffset) {
+        this.hypothenuseReciprocal = 1.0 / Math.sqrt(xOffset * xOffset + yOffset * yOffset); //räkna ut hypotenusan för olika riktningar
         this.xOffset = xOffset;
         this.yOffset = yOffset;
     }
+
+    public double getHypothenuseReciprocal() {
+        return hypothenuseReciprocal;
+    }
+
+    /*CardinalDirection(int xOffset, int yOffset) {
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+    }*/
 
     public CardinalDirection getOppositeDirection(){
         int ordinal = this.ordinal();
@@ -64,4 +76,5 @@ public enum CardinalDirection {
             return NORTH;
 
     }
+
 }

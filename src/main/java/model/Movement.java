@@ -23,78 +23,30 @@ public class Movement {
     }
 
     public float[] updatePosition(float x, float y, double speed, CardinalDirection dir) {
-        //animation.moving = false;
-        //System.out.println(entity.getX());
+        x+= (float) speed * (float) dir.getHypothenuseReciprocal() * dir.getXOffset();
+        y+= (float) speed * (float) dir.getHypothenuseReciprocal() * dir.getYOffset();
+
         /*
         if(this.x>477 && this.x<539) { //TODO: vad är dessa för specifika siffror?
             if(this.y>191 && this.y<223) {
 //        		moving = false;
 //        		return;
             }
-        }*/
-/*
+        }
+        */
+
+        // om x eller y hamnar utanför skärmen.
         if(x < 0) {
             x=0;
-        }
-        else if(x > WindowManager.WIDTH) {
-            x = WindowManager.WIDTH;
         }
         else if(y < 0) {
             y = 0;
         }
-        else if(y > WindowManager.HEIGHT) {
-            y = WindowManager.HEIGHT;
-
-        }*/
-        double diagonal = Math.sqrt(2);
-        if (dir==CardinalDirection.NORTHWEST) {
-            speed /=diagonal;
-            x -= speed;
-            y -= speed;
-
-            //animation.moving = true;
+        else if(x > 30 + WindowManager.WIDTH) { // +30 eftersom entity har 30 i width, kanske att man ska ta in player.width hit också. Dock verkar skärmen inte gå så långt som den borde.
+            x = WindowManager.WIDTH;
         }
-        if (dir==CardinalDirection.NORTHEAST) {
-            speed /=diagonal;
-            x += speed;
-            y -= speed;
-
-            //animation.moving = true;
-        }
-        if (dir==CardinalDirection.SOUTHWEST) {
-            speed /=diagonal;
-            x -= speed;
-            y += speed;
-
-            //animation.moving = true;
-        }
-        if (dir==CardinalDirection.SOUTHEAST) {
-            speed /=diagonal;
-            x += speed;
-            y += speed;
-
-           // animation.moving = true;
-        }
-
-
-        if (dir==CardinalDirection.WEST) {
-            x -= speed;
-
-            //animation.moving = true;
-        }
-        else if (dir==CardinalDirection.EAST) {
-            x += speed;
-           // animation.moving = true;
-        }
-
-        if (dir==CardinalDirection.NORTH) {
-            y -= speed;
-
-           // animation.moving = true;
-        }
-        else if (dir==CardinalDirection.SOUTH) {
-            y += speed;
-            //animation.moving = true;
+        else if(y > (WindowManager.HEIGHT-100)) {
+            y = (WindowManager.HEIGHT-100);
         }
         return new float[]{x,y};
     }

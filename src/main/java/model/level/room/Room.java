@@ -72,15 +72,15 @@ public abstract class Room{
         int[][] matrix = new int[HEIGHT][WIDTH];
 
         for (Coordinate coordinate : wallCoordinates) {
-            matrix[coordinate.getX()][coordinate.getY()] = 2;
+            matrix[(int)coordinate.getX()][(int)coordinate.getY()] = 2;
         }
 
         for (Coordinate coordinate : obstaclesCoordinates) {
-            matrix[coordinate.getY()][coordinate.getX()] = 2;
+            matrix[(int)coordinate.getY()][(int)coordinate.getX()] = 2;
         }
 
         for (Door door : doors) {
-            matrix[door.coordinate.getY()][door.coordinate.getX()] = 8;
+            matrix[(int)door.coordinate.getY()][(int)door.coordinate.getX()] = 8;
         }
 
         return matrix;

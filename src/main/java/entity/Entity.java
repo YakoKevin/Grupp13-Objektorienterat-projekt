@@ -59,7 +59,7 @@ public abstract class Entity {
         return position;
     }
 
-    //TODO: fix some float-to-coordinate algoritm instead that all classes can use
+    //TODO: fix some float-to-coordinate algorithm instead that all classes can use
     public void setX(float x) {
         this.finePositionX = x;
         position = new Coordinate((int)x/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), position.getY());
