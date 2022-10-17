@@ -7,6 +7,7 @@ import entity.*;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants.*;
+import view.Animation;
 
 import java.util.ArrayList;
 import java.util.Iterator;

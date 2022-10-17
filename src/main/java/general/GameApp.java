@@ -72,7 +72,11 @@ public class GameApp {
      */
     public void gameTick(){
         currentLevel.tick();
-        //TODO: lägga till mer?
+        updateAnimation();
+    }
+
+    private void updateAnimation() {
+        //Animation.currentLevel.getCurrentEntities();
     }
 
     public void windowFocusLost(){

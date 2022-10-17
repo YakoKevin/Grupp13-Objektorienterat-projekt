@@ -1,6 +1,7 @@
 package model.level;
 
 import entity.Enemy;
+import entity.Entity;
 import entity.Player;
 import model.level.room.Door;
 import model.level.room.Room;
@@ -126,6 +127,13 @@ public abstract class Level{
         if(isCoordinateInWallOrObstacle(player.getPosition())){
 
         }
+    }
+
+    public ArrayList<Entity> getCurrentEntities(){
+        ArrayList<Entity> entities = new ArrayList<>();
+        entities.addAll(entities);
+        entities.add(player);
+        return entities;
     }
 
     public Player getPlayer() {

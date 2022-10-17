@@ -56,6 +56,10 @@ public class Animation {
             resetAnimationTick();*/
     }
 
+    public static void clearEntities() {
+        entities.clear();
+    }
+
     private void resetAnimationTick() {
         animationIndex = 0;
         animationTick = 0;
