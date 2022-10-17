@@ -80,7 +80,7 @@ public class Animation {
 
         if (entities != null) {
                 for (Entity entity : entities.keySet()) {
-                    //g.drawImage(entities.get(entity)[entity.getState()][0], (int) entity.getX(), (int) entity.getY(), null); //TODO: redo so it works for everything and is static
+                    g.drawImage(entities.get(entity)[entity.getState().ordinal()][0], (int) entity.getX(), (int) entity.getY(), null); //TODO: redo so it works for everything and is static
             }
             for (Entity entity : entities.keySet()){
                 g.setColor(new Color(0x00ff0000));

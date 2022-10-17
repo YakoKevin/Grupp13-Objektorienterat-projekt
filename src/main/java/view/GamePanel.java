@@ -140,9 +140,9 @@ public class GamePanel extends JPanel {
     }
 
     public void update(){
-        animation.updateAnimationTick();
+        //animation.updateAnimationTick();
         animation.setAnimation();
-        animationEnemy.updateAnimationTick();
+        //animationEnemy.updateAnimationTick();
         animationEnemy.setAnimation();
         //Coordinate c = movement.updatePosition(player.getX(),player.getY(),player.getMovementSpeed(),player.getDirection());
         //player.setX(c.getX());
