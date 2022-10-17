@@ -53,6 +53,7 @@ public class GamePanel extends JPanel {
     //TODO: Se till att ha LEVEL ist. -> hämta där fienderna och player och loopa genom dem alla för att hämta animation och sådant
     public GamePanel(GameApp gameApp, FPSUpdater fpsUpdater, Player player){
         addKeyListener(new ActionController(this, player));
+        setBackground(Color.ORANGE);
         this.gameApp = gameApp;
         setPanelSize();
         int width = 50;
@@ -153,7 +154,7 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        levelManager.draw(g);
+        //levelManager.draw(g);
         drawHitbox(g);
         drawUI(g);
         if(player.getAttackMode()==true){
