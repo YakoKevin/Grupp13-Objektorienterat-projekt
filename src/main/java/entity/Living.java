@@ -49,6 +49,7 @@ public abstract class Living extends Entity implements Attackable{
     public void updateMovement(){
         //System.out.println("x och y" + this.x + this.y);
         //ystem.out.println("Riktningen: " + getDirection());
+
         float newPosition[] = movement.updatePosition(finePositionX, finePositionY,this.getMovementSpeed(),this.getDirection());
         finePositionX = newPosition[0];
         finePositionY = newPosition[1];

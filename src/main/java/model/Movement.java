@@ -36,6 +36,7 @@ public class Movement {
         */
 
         // om x eller y hamnar utanför skärmen.
+
         if(x < 0) {
             x=0;
         }
