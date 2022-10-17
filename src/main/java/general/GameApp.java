@@ -96,7 +96,7 @@ public class GameApp implements RoomChangeObserver{
 
     private void setupView(){
         updateFrame = new UpdateFrame(player);
-        gamePanel = new GamePanel(this, fpsUpdater, player);
+        gamePanel = new GamePanel(this, fpsUpdater, currentLevel);
         fpsUpdater = new FPSUpdater(gamePanel);
         gameView = new GameView(gamePanel, updateFrame);
         gamePanel.setFocusable(true);

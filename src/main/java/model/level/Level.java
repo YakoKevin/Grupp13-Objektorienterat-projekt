@@ -86,7 +86,8 @@ public abstract class Level{
             Coordinate newRoomCoordinate = new Coordinate(currentRoom.getX() + doorDirection.getXOffset(), currentRoom.getY() + doorDirection.getYOffset());
             currentRoom.removeEnemies();
             currentRoom = createRoom(newRoomCoordinate);
-            player.setCoordinate(door.getCoordinate().add(doorDirection.getOppositeDirection().getOffset()));
+            Door doorOpposite = Door.getDoorFromCardinalDirection(doorDirection.getOppositeDirection());
+            player.setCoordinate(doorOpposite.getCoordinate().add(doorDirection.getOffset()));
             updateRoomChangeObservers();
         } catch (Exception e){
             System.out.println(e.getMessage());
