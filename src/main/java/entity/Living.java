@@ -49,7 +49,6 @@ public abstract class Living extends Entity implements Attackable{
         float newPosition[] = movement.updatePosition(finePositionX, finePositionY, movementSpeed,this.getDirection());
         finePositionX = newPosition[0];
         finePositionY = newPosition[1];
-        position = new Coordinate((int)finePositionX/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
         //System.out.println("x och y efter: " + this.x + this.y);
     }
 

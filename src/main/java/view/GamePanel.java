@@ -159,6 +159,10 @@ public class GamePanel extends JPanel {
         }
     }
 
+    private void drawMap(Graphics g) {
+
+    }
+
     protected void render(Graphics g){
         Animation.render(g);
     }

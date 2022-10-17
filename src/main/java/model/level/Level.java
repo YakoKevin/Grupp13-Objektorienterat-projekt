@@ -10,6 +10,7 @@ import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.GameConstants;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +28,8 @@ public abstract class Level{
     protected final LevelMap levelMap;
     protected final RoomTypeFunction[] roomTypes;
     private final ArrayList<RoomChangeObserver> observers = new ArrayList<>();
+    private boolean canGoThroughDoor = true;
+    private int doorTimer;
 
     protected Level(LevelMap levelMap, Player player, RoomTypeFunction ... roomTypeFunctions) {
         this.levelMap = levelMap;
@@ -46,10 +49,6 @@ public abstract class Level{
 
     public ArrayList<Coordinate> getCurrentRoomObstacles(){
         return currentRoom.getObstacles();
-    }
-
-    public CardinalDirection getCurrentRoomEntry(){
-        return currentRoom.getEntryDirection();
     }
 
     public ArrayList<Door> getCurrentRoomDoors(){
@@ -72,23 +71,19 @@ public abstract class Level{
         return currentRoom.isCoordinateInWallOrObstacle(coordinate);
     }
 
-    public void playerEnterRoom(Coordinate coordinate, CardinalDirection doorDirection){
-        if(currentRoom != null)
-            allRooms.add(currentRoom);
-        currentRoom = createRoom(coordinate);
-        currentRoom.setEntryDirection(doorDirection.getOppositeDirection());
-    }
-
     private void changeRoom() {
         try {
+            if(currentRoom != null)
+                allRooms.add(currentRoom);
             Door door = currentRoom.getClosestDoor(player.getPosition());
             CardinalDirection doorDirection = door.getDoorDirection();
+            Door doorOpposite = Door.getDoorFromCardinalDirection(doorDirection.getOppositeDirection());
+            player.setCoordinate(doorOpposite.getCoordinate().add(doorDirection.getOffset(), 2));
             Coordinate newRoomCoordinate = new Coordinate(currentRoom.getX() + doorDirection.getXOffset(), currentRoom.getY() + doorDirection.getYOffset());
             currentRoom.removeEnemies();
             currentRoom = createRoom(newRoomCoordinate);
-            Door doorOpposite = Door.getDoorFromCardinalDirection(doorDirection.getOppositeDirection());
-            player.setCoordinate(doorOpposite.getCoordinate().add(doorDirection.getOffset()));
             updateRoomChangeObservers();
+            System.out.println(newRoomCoordinate.getX() + ", " + newRoomCoordinate.getY());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -105,9 +100,21 @@ public abstract class Level{
     }
 
     public void tick(){
-        checkDoorCollision();
+        if(canGoThroughDoor)
+            checkDoorCollision();
+        else
+            doorTimer();
+
         updateEnemies();
         updatePlayer();
+    }
+
+    private void doorTimer(){
+        this.doorTimer++;
+        if(doorTimer >= 8) {
+            canGoThroughDoor = true;
+            doorTimer = 0;
+        }
     }
 
     private void updateEnemies(){
@@ -123,8 +130,8 @@ public abstract class Level{
 
     private void checkDoorCollision(){
       if(isCoordinateInDoor(player.getPosition())){
+          canGoThroughDoor = false;
           changeRoom();
-          System.out.println("Change room");
       }
     }
 

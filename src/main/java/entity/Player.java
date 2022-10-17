@@ -28,8 +28,7 @@ public class Player extends Living implements Friendly{
 
     //Denna är ju den som ActionController ska anropar på.
     public void attack(){
-        position = new Coordinate((int)this.getX(),(int)this.getY());
-        attack.getAttackCoordinate(position, this.dir, this.width ,this.height);
+        attack.getAttackCoordinate(getPosition(), this.dir, this.width ,this.height);
         Rectangle r = attack.getAttackRectangle(finePositionX, finePositionY); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
         for(Hostile hostile : hostiles){
             hostile.getHit(r, this.getAttackPoints());

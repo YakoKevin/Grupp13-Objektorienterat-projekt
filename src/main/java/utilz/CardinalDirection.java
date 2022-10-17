@@ -41,9 +41,9 @@ public enum CardinalDirection {
         return CardinalDirection.values()[oppositeOrdinal];
     }
 
-    public static CardinalDirection getRandomDirection(){
+    public static CardinalDirection getRandomAxisDirection(){
         int randomInt = ThreadLocalRandom.current().nextInt(0, 4);
-        return CardinalDirection.values()[randomInt];
+        return CardinalDirection.values()[randomInt*2];
     }
 
     public Coordinate getOffset(){
