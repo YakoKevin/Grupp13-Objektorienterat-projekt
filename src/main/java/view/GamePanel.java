@@ -45,7 +45,6 @@ public class GamePanel extends JPanel {
     protected Rectangle hitbox; // Debugging purposes
     private Pause pause;
 
-    BufferedImage playerImage;
     Player player;
     //Entity player;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
@@ -57,7 +56,6 @@ public class GamePanel extends JPanel {
         this.gameApp = gameApp;
         setPanelSize();
         int width = 50;
-        playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
         this.player = player; //TODO: ALLT MED ENTITIES MÅSTE FLYTTAS
         inititateHitbox();
 

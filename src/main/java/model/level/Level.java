@@ -2,7 +2,9 @@ package model.level;
 
 import entity.Enemy;
 import entity.Entity;
+import entity.Living;
 import entity.Player;
+import general.RoomChangeObserver;
 import model.level.room.Door;
 import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
@@ -24,6 +26,7 @@ public abstract class Level{
 
     protected final LevelMap levelMap;
     protected final RoomTypeFunction[] roomTypes;
+    private final ArrayList<RoomChangeObserver> observers = new ArrayList<>();
 
     protected Level(LevelMap levelMap, Player player, RoomTypeFunction ... roomTypeFunctions) {
         this.levelMap = levelMap;
@@ -84,6 +87,7 @@ public abstract class Level{
             currentRoom.removeEnemies();
             currentRoom = createRoom(newRoomCoordinate);
             player.setCoordinate(door.getCoordinate().add(doorDirection.getOppositeDirection().getOffset()));
+            updateRoomChangeObservers();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -129,15 +133,23 @@ public abstract class Level{
         }
     }
 
-    public ArrayList<Entity> getCurrentEntities(){
-        ArrayList<Entity> entities = new ArrayList<>();
-        entities.addAll(entities);
-        entities.add(player);
-        return entities;
+    public ArrayList<Living> getCurrentLiving(){
+        ArrayList<Living> livings = new ArrayList<>(currentRoom.getEnemies());
+        livings.add(player);
+        return livings;
     }
 
     public Player getPlayer() {
         return this.player;
     } //behöver ett objekt
+
+    public void addRoomChangeObserver(RoomChangeObserver observer){
+        observers.add(observer);
+    }
+
+    private void updateRoomChangeObservers(){
+        for (RoomChangeObserver observer : observers)
+            observer.roomChangeUpdate();
+    }
 
 }

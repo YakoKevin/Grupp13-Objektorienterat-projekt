@@ -1,9 +1,6 @@
 package entity;
 
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.EntityStates;
-import utilz.GameConstants;
+import utilz.*;
 import view.Animation;
 
 import java.awt.*;
@@ -114,4 +111,5 @@ public abstract class Entity {
     public EntityStates getState() {
         return state;
     }
+
 }

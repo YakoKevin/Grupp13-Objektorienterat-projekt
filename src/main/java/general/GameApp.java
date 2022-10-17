@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameApp {
+public class GameApp implements RoomChangeObserver{
 
     private LevelFactory levelFactory = new LevelFactory();
     private Level currentLevel;
@@ -72,11 +72,12 @@ public class GameApp {
      */
     public void gameTick(){
         currentLevel.tick();
-        updateAnimation();
     }
 
-    private void updateAnimation() {
-        //Animation.currentLevel.getCurrentEntities();
+    public void roomChangeUpdate() {
+        Animation.clearEntities();
+        for(Living living : currentLevel.getCurrentLiving())
+            Animation.addEntity(living);
     }
 
     public void windowFocusLost(){
@@ -87,6 +88,9 @@ public class GameApp {
         player = PlayerFactory.createPlayer();
         setupLevel(player);
         setupView();
+        currentLevel.addRoomChangeObserver(this);
+        for(Living living : currentLevel.getCurrentLiving())
+            Animation.addEntity(living);
     }
 
 

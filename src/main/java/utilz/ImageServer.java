@@ -11,8 +11,6 @@ import java.io.InputStream;
 public enum ImageServer {
     ;
     public enum Ids {
-        PLAYER("player_sprites3.png"),
-        ENEMY("skeleton_sprites.png"),
         LEVEL("bg_sprite2.png"),
         KEY("key_sprite.png");
         private String path;
@@ -31,6 +29,30 @@ public enum ImageServer {
         catch (IOException ignored) {
         }
         return image;
+    }
+
+    public enum AnimationIds{
+        PLAYER("player_sprites3.png"),
+        ENEMY("skeleton_sprites.png");
+        private BufferedImage[][] imageGrid;
+
+        AnimationIds(String path){
+            this.imageGrid = loadAnimations(path);
+        }
+    }
+
+    private static BufferedImage[][] loadAnimations(String path) {
+        BufferedImage[][] animations = new BufferedImage[6][3]; //TODO: add into a constant instead to avoid miss-match errors
+        for (int row = 0; row < animations.length; row++) {
+            for (int column = 0; column < animations[row].length; column++) {
+                animations[row][column] = ImageServer.getSprite(path).getSubimage(row * 40, column * 80, 30, 80);
+            }
+        }
+        return animations;
+    }
+
+    public static BufferedImage[][] getImageGrid(AnimationIds id) {
+        return id.imageGrid;
     }
 
     public static BufferedImage getImage(Ids ids){

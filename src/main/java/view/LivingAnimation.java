@@ -1,15 +1,25 @@
 package view;
 
 import entity.Entity;
+import entity.Living;
 import utilz.EntityStates;
+import utilz.ImageServer;
 
-public class EntityAnimation {
-    private Entity entity;
+import java.awt.image.BufferedImage;
+
+public class LivingAnimation {
+    private BufferedImage[][] imageGrid;
+    private Living living;
     private int animationIndex;
     private int animationTick;
 
-    EntityAnimation(Entity entity){
-        this.entity = entity;
+    LivingAnimation(Living living){
+        this.living = living;
+        setImageGrid(living.getAnimationId());
+    }
+
+    private void setImageGrid(ImageServer.AnimationIds id){
+        this.imageGrid = ImageServer.getImageGrid(id);
     }
 
     public void addAnimationTick(){
@@ -37,18 +47,22 @@ public class EntityAnimation {
     }
 
     public Entity getEntity(){
-        return entity;
+        return living;
     }
 
     public EntityStates getEntityState() {
-        return entity.getState();
+        return living.getState();
     }
 
     public int getX(){
-        return (int)entity.getX();
+        return (int)living.getX();
     }
 
     public int getY(){
-        return (int)entity.getY();
+        return (int)living.getY();
+    }
+
+    public BufferedImage[][] getImageGrid() {
+        return imageGrid;
     }
 }

@@ -67,4 +67,5 @@ public abstract class Living extends Entity implements Attackable{
     public double getAttackRange(){
         return attack.getAttackRange();
     }
+    public abstract ImageServer.AnimationIds getAnimationId();
 }
