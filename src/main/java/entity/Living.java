@@ -41,6 +41,10 @@ public abstract class Living extends Entity implements Attackable{
         this.movementSpeed=speed;
     }
 
+    public double getMovementSpeed() {
+        return movementSpeed;
+    }
+
     //TODO: fixa till vad som behövs. Ska ActionController kalla denna tro?
     public void updateMovement(){
         //System.out.println("x och y" + this.x + this.y);
