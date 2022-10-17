@@ -44,7 +44,7 @@ public class UpdateFrame extends JPanel {
 
     public void update(){
         //Animation.updateAnimationTick();
-        Animation.setAnimation();
+        //Animation.setAnimation();
         updateHitbox();
 
     }

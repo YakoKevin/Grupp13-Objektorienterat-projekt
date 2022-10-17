@@ -98,7 +98,6 @@ public class GameApp {
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         gamePanel.fpsUpdater = fpsUpdater;
-        Animation.loadImages();
         //Animation.loadAnimations();
 
     }
