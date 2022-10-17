@@ -4,7 +4,6 @@ import model.AttackModel;
 import model.Movement;
 import utilz.Coordinate;
 import utilz.ImageServer;
-import view.Animation;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class Player extends Living implements Friendly{
         super(startCoordinate, width, height, new Movement(), new AttackModel(20, 100));
         this.setHealthPoints(100);
         this.setAttackPoints(20);
-        this.setMovementSpeed(4);
+        this.setMovementSpeed(10);
     }
 
     @Override

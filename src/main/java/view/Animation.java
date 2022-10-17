@@ -1,8 +1,6 @@
 package view;
 
-import entity.Entity;
 import entity.Living;
-import utilz.ImageServer;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,7 +27,8 @@ public class Animation {
         if (livingEntites != null) {
                 for (LivingAnimation entityAnimation : livingEntites) {
                     updateAnimationTick(entityAnimation);
-                    g.drawImage(entityAnimation.getImageGrid()[entityAnimation.getEntityState().ordinal()][entityAnimation.getAnimationIndex()], entityAnimation.getX(), entityAnimation.getY(), null); //TODO: redo so it works for everything and is static
+                    g.drawImage(entityAnimation.getImageGrid()[entityAnimation.getEntityState().ordinal()][entityAnimation.getAnimationIndex()],
+                            entityAnimation.getX(), entityAnimation.getY(), null);
             }
         }
 
