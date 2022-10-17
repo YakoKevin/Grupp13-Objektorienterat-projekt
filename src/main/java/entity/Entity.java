@@ -2,6 +2,7 @@ package entity;
 
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.EntityStates;
 import utilz.GameConstants;
 import view.Animation;
 
@@ -15,6 +16,7 @@ public abstract class Entity {
     protected Rectangle hitbox;
     protected boolean isAlive;
     protected CardinalDirection dir;
+    protected EntityStates state = EntityStates.IDLE;
 
     public Entity(Coordinate startCoordinate, int width, int height){
         this.width = width;
@@ -104,5 +106,12 @@ public abstract class Entity {
     }
     protected void setAlive(boolean aliveStatus){
         this.isAlive=aliveStatus;
+    }
+
+    public void setState(EntityStates state){
+        this.state = state;
+    }
+    public EntityStates getState() {
+        return state;
     }
 }
