@@ -72,7 +72,11 @@ public class GameApp {
      */
     public void gameTick(){
         currentLevel.tick();
-        //TODO: lägga till mer?
+        updateAnimation();
+    }
+
+    private void updateAnimation() {
+        //Animation.currentLevel.getCurrentEntities();
     }
 
     public void windowFocusLost(){
@@ -94,6 +98,9 @@ public class GameApp {
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         gamePanel.fpsUpdater = fpsUpdater;
+        Animation.loadImages();
+        //Animation.loadAnimations();
+
     }
 
     private void setupLevel(Player player){

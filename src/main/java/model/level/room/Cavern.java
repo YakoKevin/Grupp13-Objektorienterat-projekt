@@ -1,8 +1,11 @@
 package model.level.room;
 
+import entity.Enemy;
 import entity.EnemyFactory;
+import entity.Skeleton;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.GameConstants;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,7 +49,11 @@ public class Cavern extends Room {
 
     private void addEnemies(EnemyFactory enemyFactory) {
         for (int i = 0; i <= Constants.getRandomEnemiesAmount(); i++) {
-            enemies.add(enemyFactory.createSkeleton());
+            int x = ThreadLocalRandom.current().nextInt(1, GameConstants.RoomMapSizes.WIDTH.getSize());
+            int y = ThreadLocalRandom.current().nextInt(1, GameConstants.RoomMapSizes.HEIGHT.getSize());
+            Enemy enemy = enemyFactory.createSkeleton();
+            enemy.setCoordinate(new Coordinate(x, y));
+            enemies.add(enemy);
         }
     }
 

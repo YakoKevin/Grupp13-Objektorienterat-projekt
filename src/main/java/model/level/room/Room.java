@@ -7,17 +7,17 @@ import entity.*;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants.*;
+import view.Animation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * A class representing a Rooms main construction: walls and obstacles (and perhaps more). Returns list of the
- * coordinates of those. It has a size of 30x18 tiles.
+ * A class representing a Rooms main construction: walls and obstacles and doors. Also keeps and creates the enimes.
  */
 public abstract class Room{
-    protected final int HEIGHT = RoomMapSizes.HEIGHT.getSize();
-    protected final int WIDTH = RoomMapSizes.WIDTH.getSize();
+    protected final int HEIGHT;
+    protected final int WIDTH;
     protected CardinalDirection entryDirection = CardinalDirection.WEST;
     protected Coordinate coordinate = new Coordinate(0,0);
     protected ArrayList<Coordinate> wallCoordinates = new ArrayList<>();
@@ -25,10 +25,13 @@ public abstract class Room{
     protected ArrayList<Door> doors = new ArrayList<>();
     protected ArrayList<Enemy> enemies = new ArrayList<>();
     protected EnemyFactory enemyFactory;
+    private final int DOOR_DISTANCE = 2; //TODO: lägg i något annat ställe?
 
 
     public Room(ArrayList<Door> doors, EnemyFactory enemyFactory) {
         this.enemyFactory = enemyFactory;
+        this.HEIGHT = RoomMapSizes.HEIGHT.getSize();
+        this.WIDTH = RoomMapSizes.WIDTH.getSize();
         addDoors(doors);
     }
 
@@ -72,15 +75,15 @@ public abstract class Room{
         int[][] matrix = new int[HEIGHT][WIDTH];
 
         for (Coordinate coordinate : wallCoordinates) {
-            matrix[(int)coordinate.getX()][(int)coordinate.getY()] = 2;
+            matrix[coordinate.getX()][coordinate.getY()] = 2;
         }
 
         for (Coordinate coordinate : obstaclesCoordinates) {
-            matrix[(int)coordinate.getY()][(int)coordinate.getX()] = 2;
+            matrix[coordinate.getY()][coordinate.getX()] = 2;
         }
 
         for (Door door : doors) {
-            matrix[(int)door.coordinate.getY()][(int)door.coordinate.getX()] = 8;
+            matrix[door.coordinate.getY()][door.coordinate.getX()] = 8;
         }
 
         return matrix;
@@ -127,9 +130,8 @@ public abstract class Room{
     }
 
     public Door getClosestDoor(Coordinate position) throws Exception {
-        Door closestDoor = doors.get(0);
         for(Door door : doors){
-            if(Math.abs(coordinate.getX()) - Math.abs(door.coordinate.getX()) < 3 && Math.abs(coordinate.getY()) - Math.abs(door.coordinate.getY()) < 3){
+            if(Math.abs(position.getX() - door.coordinate.getX()) < DOOR_DISTANCE && Math.abs(position.getY() - door.coordinate.getY()) < DOOR_DISTANCE){
                 return door;
             }
         }
@@ -138,5 +140,9 @@ public abstract class Room{
 
     private void addDoors(ArrayList<Door> doors) {
         this.doors = doors;
+    }
+
+    public void removeEnemies(){
+        enemies.clear();
     }
 }

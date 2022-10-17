@@ -5,10 +5,13 @@ import model.AttackModel;
 import model.Movement;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.EntityStates;
 import view.GamePanel;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.TimerTask;
 
 public class ActionController implements KeyListener {
 
@@ -82,15 +85,18 @@ public class ActionController implements KeyListener {
         }
         player.setDirection(dir);
         if(up||right||down||left){
+            player.setState(EntityStates.RUNNING);
             player.updateMovement();
         }
-        else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             player.attack();
+            player.setAttackMode(true);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent event) {
+        player.setState(EntityStates.IDLE);
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=false;
 
@@ -112,8 +118,9 @@ public class ActionController implements KeyListener {
 
             //System.out.println("RELEASED D");
         }
+
         else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            player.setAttackMode(true); //tillfälligt, ska kanske vara en timer hur länge man attackerar
+            player.setAttackMode(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }

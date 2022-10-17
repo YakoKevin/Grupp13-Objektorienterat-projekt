@@ -1,6 +1,7 @@
 package model.level;
 
 import entity.Enemy;
+import entity.Entity;
 import entity.Player;
 import model.level.room.Door;
 import model.level.room.Room;
@@ -80,8 +81,9 @@ public abstract class Level{
             Door door = currentRoom.getClosestDoor(player.getPosition());
             CardinalDirection doorDirection = door.getDoorDirection();
             Coordinate newRoomCoordinate = new Coordinate(currentRoom.getX() + doorDirection.getXOffset(), currentRoom.getY() + doorDirection.getYOffset());
+            currentRoom.removeEnemies();
             currentRoom = createRoom(newRoomCoordinate);
-            player.setCoordinate(door.getCoordinate().add(doorDirection.getOffset()));
+            player.setCoordinate(door.getCoordinate().add(doorDirection.getOppositeDirection().getOffset()));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -91,6 +93,7 @@ public abstract class Level{
         int index = ThreadLocalRandom.current().nextInt(0, roomTypes.length);
         ArrayList<Door> doors = levelMap.getNodeDoors(coordinate);
         Room room = roomTypes[index].apply(doors);
+        room.setCoordinate(coordinate);
         room.givePlayerHostiles(player);
         room.giveEnemiesFriendly(player);
         return room;
@@ -124,6 +127,13 @@ public abstract class Level{
         if(isCoordinateInWallOrObstacle(player.getPosition())){
 
         }
+    }
+
+    public ArrayList<Entity> getCurrentEntities(){
+        ArrayList<Entity> entities = new ArrayList<>();
+        entities.addAll(entities);
+        entities.add(player);
+        return entities;
     }
 
     public Player getPlayer() {

@@ -62,10 +62,11 @@ public abstract class Enemy extends Living implements Hostile {
         }
 
         private void attackFriendly(){
+            //TODO: make enemy rotate towards friendly
             Rectangle attackRectangle = attack.getAttackRectangle(finePositionX, finePositionY);
             friendly.getHit(attackRectangle, attack.getAttackDamage());
             attack.coolDownReset();
-            System.out.println("ATTACK: " + finePositionX + ", " + finePositionY);
+            System.out.println("ATTACK");
         }
 
         public void giveFriendlyCoordinates(float x, float y){
