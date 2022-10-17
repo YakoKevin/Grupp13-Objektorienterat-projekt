@@ -1,9 +1,6 @@
 package entity;
 
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.EntityStates;
-import utilz.GameConstants;
+import utilz.*;
 import view.Animation;
 
 import java.awt.*;
@@ -12,11 +9,9 @@ public abstract class Entity {
     protected float velX,velY;
     protected float finePositionX;
     protected float finePositionY;
-    protected Coordinate position;
     protected int width, height;
     protected Rectangle hitbox;
     protected boolean isAlive;
-    private int animationIndex;
     protected CardinalDirection dir;
     protected EntityStates state = EntityStates.IDLE;
 
@@ -24,7 +19,6 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.dir = CardinalDirection.EAST;
-        this.position = startCoordinate; //TODO: gör att position inte finns och fixa så att getPosition ger en Coordinate efter beräkning
         finePositionX = startCoordinate.getX();
         finePositionY = startCoordinate.getY();
 
@@ -32,7 +26,7 @@ public abstract class Entity {
     }
 
     private void inititateHitbox() {
-        hitbox = new Rectangle(position.getX(), position.getY(), width, height);
+        hitbox = new Rectangle((int)finePositionX, (int)finePositionY, width, height);
     }
 
     public void tick(){
@@ -78,18 +72,17 @@ public abstract class Entity {
     }
 
     public Coordinate getPosition() {
-        return position;
+        return new Coordinate((int)finePositionX/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+                (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
     }
 
     //TODO: fix some float-to-coordinate algorithm instead that all classes can use
     public void setX(float x) {
         this.finePositionX = x;
-        position = new Coordinate((int)x/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), position.getY());
     }
 
     public void setY(float y) {
         this.finePositionY = y;
-        position = new Coordinate(position.getX(), (int)y/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
     }
 
     public void setCoordinate(Coordinate coordinate){
@@ -134,12 +127,5 @@ public abstract class Entity {
     public EntityStates getState() {
         return state;
     }
-    
-    public int getAnimationIndex(){
-        return animationIndex;
-    }
 
-    public void setAnimationIndex(int i) {
-        animationIndex = i;
-    }
 }

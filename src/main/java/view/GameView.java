@@ -1,8 +1,5 @@
 package view;
 
-import entity.Entity;
-import general.IObserver;
-
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;

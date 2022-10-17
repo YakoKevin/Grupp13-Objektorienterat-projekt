@@ -3,6 +3,7 @@ package model;
 import entity.Entity;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.GameConstants;
 import view.Animation;
 import view.WindowManager;
 
@@ -44,11 +45,11 @@ public class Movement {
         else if(y < 0) {
             y = 0;
         }
-        else if(x > 30 + WindowManager.WIDTH) { // +30 eftersom entity har 30 i width, kanske att man ska ta in player.width hit också. Dock verkar skärmen inte gå så långt som den borde.
-            x = WindowManager.WIDTH;
+        else if(x > 30 + GameConstants.GameSizes.WIDTH.getSize()) { // +30 eftersom entity har 30 i width, kanske att man ska ta in player.width hit också. Dock verkar skärmen inte gå så långt som den borde.
+            x = 30 + GameConstants.GameSizes.WIDTH.getSize();
         }
-        else if(y > (WindowManager.HEIGHT-100)) {
-            y = (WindowManager.HEIGHT-100);
+        else if(y > GameConstants.GameSizes.HEIGHT.getSize()) {
+            y = GameConstants.GameSizes.HEIGHT.getSize();
         }
         return new float[]{x,y};
     }

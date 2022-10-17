@@ -51,5 +51,9 @@ public class Coordinate {
     public Coordinate add(Coordinate offset) {
         return new Coordinate(this.x + offset.getX(), this.y  + offset.getY());
     }
+
+    public Coordinate add(Coordinate offset, int multiplier) {
+        return new Coordinate(this.x + offset.getX()* multiplier, this.y  + offset.getY()* multiplier);
+    }
 }
 

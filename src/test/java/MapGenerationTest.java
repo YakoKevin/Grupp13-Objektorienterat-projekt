@@ -36,7 +36,7 @@ public class MapGenerationTest {
         StringBuilder matrixString = new StringBuilder();
         for (int i = 0; i < size*2-1; i++) {
             for (int j = 0; j < size*2-1; j++) {
-                matrixString.append(nodeMatrix[i][j]).append(" ");
+                matrixString.append(nodeMatrix[j][i]).append(" ");
             }
             matrixString.append("\n");
         }

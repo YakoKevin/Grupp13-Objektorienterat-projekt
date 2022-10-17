@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
 public class UpdateFrame extends JPanel {
     protected Rectangle hitbox; // Debugging purposes
 
-    BufferedImage playerImage;
     Player player;
     LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
 
@@ -22,7 +21,7 @@ public class UpdateFrame extends JPanel {
         this.setPreferredSize(new Dimension(100, 100));
         this.setBackground(Color.green);
 
-        playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
+
         this.player = player;
         inititateHitbox();
     }
@@ -44,7 +43,7 @@ public class UpdateFrame extends JPanel {
 
     public void update(){
         //Animation.updateAnimationTick();
-        Animation.setAnimation();
+        //Animation.setAnimation();
         updateHitbox();
 
     }
@@ -55,8 +54,6 @@ public class UpdateFrame extends JPanel {
         levelManager.draw(g);
         drawUI(g);
 
-        //drawHitbox(g);
-        g.drawImage(playerImage, (int)player.getX(), (int)player.getY(), null);
         if(player.getAttackMode()==true){
             System.out.println("t h");
             AttackView atkV = new AttackView();

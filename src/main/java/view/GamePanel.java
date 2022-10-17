@@ -1,20 +1,15 @@
 package view;
 
 import controller.ActionController;
-import entity.Enemy;
-import entity.Player;
 import general.GameApp;
-import model.AttackModel;
-import model.Movement;
-import utilz.Coordinate;
-import utilz.ImageServer;
+import model.level.Level;
+import model.level.room.Door;
+import utilz.GameConstants;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Random;
 
 import static general.GameApp.GAME_HEIGHT;
@@ -35,31 +30,22 @@ class Pause extends SwingWorker<Void,String> {
 
 public class GamePanel extends JPanel {
 
-
-    private GameApp gameApp;
-    private KeyView keyView;
     public FPSUpdater fpsUpdater;
 
     protected Animation animation;
     protected Animation animationEnemy;
-    protected Rectangle hitbox; // Debugging purposes
     private Pause pause;
+    private Level level;
 
-    BufferedImage playerImage;
-    Player player;
-    //Entity player;
-    LevelManager levelManager = new LevelManager(); // TODO: FLYTTA!
 
     //TODO: Se till att ha LEVEL ist. -> hämta där fienderna och player och loopa genom dem alla för att hämta animation och sådant
-    public GamePanel(GameApp gameApp, FPSUpdater fpsUpdater, Player player){
-        addKeyListener(new ActionController(this, player));
+    public GamePanel(GameApp gameApp, FPSUpdater fpsUpdater, Level level){
+        addKeyListener(new ActionController(this, level.getPlayer()));
         setBackground(Color.ORANGE);
-        this.gameApp = gameApp;
         setPanelSize();
         int width = 50;
-        playerImage = ImageServer.getImage(ImageServer.Ids.PLAYER);
-        this.player = player; //TODO: ALLT MED ENTITIES MÅSTE FLYTTAS
-        inititateHitbox();
+        this.level = level;
+        //inititateHitbox();
 
         JButton jb=new JButton("Pause");
         jb.setBackground(Color.BLUE);
@@ -101,10 +87,7 @@ public class GamePanel extends JPanel {
             }
         });
 
-        KeyView keyView = new KeyView(width, -30, width, 30, 0);
-
         this.fpsUpdater = fpsUpdater;
-        //startGameLoop();
     }
     public  void pauseThread() throws InterruptedException
     {
@@ -125,10 +108,10 @@ public class GamePanel extends JPanel {
     }
 
     // Debugging purposes, will be removed
-    protected void drawHitbox(Graphics g){
+    /*protected void drawHitbox(Graphics g){
         g.setColor(Color.PINK);
         g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-    }
+    }/*
     // TODO: Move to seperate Hitbox class
     private void inititateHitbox() {
         hitbox = new Rectangle((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
@@ -138,42 +121,54 @@ public class GamePanel extends JPanel {
     protected void updateHitbox(){
         hitbox.x = (int)player.getX();
         hitbox.y = (int)player.getY();
-    }
+    }*/
 
     public void update(){
         //animation.updateAnimationTick();
-        animation.setAnimation();
+        //animation.setAnimation();
         //animationEnemy.updateAnimationTick();
-        animationEnemy.setAnimation();
+        //animationEnemy.setAnimation();
         //Coordinate c = movement.updatePosition(player.getX(),player.getY(),player.getMovementSpeed(),player.getDirection());
         //player.setX(c.getX());
         //player.setY(c.getY());
-        updateHitbox();
-        player.setAttackMode(false); //ska vara timer
+        //updateHitbox();
+        //player.setAttackMode(false); //ska vara timer
     }
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         //levelManager.draw(g);
-        drawHitbox(g);
+        //drawHitbox(g);
         drawUI(g);
-        if(player.getAttackMode()==true){
+        drawDoors(g);
+        /*if(player.getAttackMode()==true){
             AttackView atkV = new AttackView();
             AttackModel atkM = new AttackModel(10, 20); //TODO: get from player instead
             Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
             c = atkM.getAttackCoordinate(c,this.player.getDirection(),player.getWidth(),player.getHeight());
             atkV.drawAttackRectangle(g,(int)c.getX(),(int)c.getY(),100,100);
-        }
+        }*/
         render(g);
     }
 
+    private void drawDoors(Graphics g) {
+        if(!level.getCurrentRoomDoors().isEmpty()) {
+            for (Door door : level.getCurrentRoomDoors()) {
+                g.fillRect(door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
+            }
+        }
+    }
+
+    private void drawMap(Graphics g) {
+
+    }
+
     protected void render(Graphics g){
-        animation.render(g);
-        animationEnemy.render(g);
+        Animation.render(g);
     }
 
     public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
-        String hpStr = Double.toString(player.getHealthPoints());
+        String hpStr = Double.toString(level.getPlayer().getHealthPoints());
         g.setFont(new Font("Araial", Font.BOLD, 12));
         g.setColor(new Color(255, 0, 70));
         g.drawString("HP: " + hpStr,10,10);

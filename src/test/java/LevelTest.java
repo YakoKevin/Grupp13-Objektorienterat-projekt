@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class LevelTest {
-
+/*
     @Test
     public void doesRoomHaveEntryOppositeToWherePlayerWalkedIn() {
         LevelFactory levelFactory = new LevelFactory();
@@ -60,7 +60,7 @@ public class LevelTest {
         Level level = levelFactory.simpleLevel(size, new Player(new Coordinate(1, 1),0,0));
         level.playerEnterRoom(new Coordinate(1,1), CardinalDirection.WEST);
         ArrayList<Door> doors = level.getCurrentRoomDoors();
-    }
+    }*/
 
     @Test
     public void drawRoom() {

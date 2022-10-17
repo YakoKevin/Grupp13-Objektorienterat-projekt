@@ -9,7 +9,6 @@ public class EnemyFactory {
 
     public Enemy createSkeleton(){
         Enemy enemy = new Skeleton(SKELETON.getStartCoordinate());
-        Animation.addEntity(enemy, ImageServer.Ids.ENEMY);
         return enemy;
     }
 }

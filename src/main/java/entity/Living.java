@@ -37,10 +37,6 @@ public abstract class Living extends Entity implements Attackable{
         }
     }
 
-    public double getMovementSpeed() {
-        return movementSpeed;
-    }
-
     public void setMovementSpeed(double speed){
         this.movementSpeed=speed;
     }
@@ -50,10 +46,9 @@ public abstract class Living extends Entity implements Attackable{
         //System.out.println("x och y" + this.x + this.y);
         //ystem.out.println("Riktningen: " + getDirection());
 
-        float newPosition[] = movement.updatePosition(finePositionX, finePositionY,this.getMovementSpeed(),this.getDirection());
+        float newPosition[] = movement.updatePosition(finePositionX, finePositionY, movementSpeed,this.getDirection());
         finePositionX = newPosition[0];
         finePositionY = newPosition[1];
-        position = new Coordinate((int)finePositionX/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
         //System.out.println("x och y efter: " + this.x + this.y);
     }
 
@@ -67,4 +62,5 @@ public abstract class Living extends Entity implements Attackable{
     public double getAttackRange(){
         return attack.getAttackRange();
     }
+    public abstract ImageServer.AnimationIds getAnimationId();
 }

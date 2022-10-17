@@ -2,12 +2,10 @@ package entity;
 
 import java.awt.image.BufferedImage;
 
-import general.IObserver;
 import utilz.Coordinate;
 import utilz.ImageServer;
-import java.awt.*;
 
-public class KeyItem extends Entity implements IObserver {
+public class KeyItem extends Entity {
 
     private BufferedImage keySprite;
 
@@ -18,11 +16,6 @@ public class KeyItem extends Entity implements IObserver {
 
     public BufferedImage getKey() {
         return keySprite;
-    }
-
-    @Override
-    public void update() {
-
     }
 
     //TODO: remove/move View from here

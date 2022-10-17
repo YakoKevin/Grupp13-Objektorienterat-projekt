@@ -18,7 +18,6 @@ import java.util.Iterator;
 public abstract class Room{
     protected final int HEIGHT;
     protected final int WIDTH;
-    protected CardinalDirection entryDirection = CardinalDirection.WEST;
     protected Coordinate coordinate = new Coordinate(0,0);
     protected ArrayList<Coordinate> wallCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> obstaclesCoordinates = new ArrayList<>();
@@ -105,14 +104,6 @@ public abstract class Room{
         return new ArrayList<>(doors);
     }
 
-    public void setEntryDirection(CardinalDirection entryDirection){
-        this.entryDirection = entryDirection;
-    }
-
-    public CardinalDirection getEntryDirection(){
-        return entryDirection;
-    }
-
     public ArrayList<Enemy> getEnemies(){
         return new ArrayList<>(enemies);
     }
@@ -124,7 +115,6 @@ public abstract class Room{
 
     public void giveEnemiesFriendly(Friendly friendly){
         for(Enemy enemy : enemies){
-            System.out.println("Adding to "+enemy);
             enemy.addFriendly(friendly);
         }
     }
