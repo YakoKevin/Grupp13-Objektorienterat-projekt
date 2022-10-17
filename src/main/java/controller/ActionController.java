@@ -45,12 +45,18 @@ public class ActionController implements KeyListener {
             up=true;
             //movement.setUp(true);
 
+            //player.setVelY(-(float)player.getMovementSpeed());
+
+
             dir=CardinalDirection.NORTH;
 
             //System.out.println(player.getX()  + "-" + player.getY());
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             left=true;
+
+            //player.setVelX(-(float)player.getMovementSpeed());
+
             //movement.setRight(true);
             //System.out.println("PRESSED A");
 
@@ -59,6 +65,9 @@ public class ActionController implements KeyListener {
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             down=true;
+
+            //player.setVelY((float)player.getMovementSpeed());
+
             //movement.setDown(true);
             dir= CardinalDirection.SOUTH;
 
@@ -66,8 +75,12 @@ public class ActionController implements KeyListener {
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             right=true;
+
+            //player.setVelX((float)player.getMovementSpeed());
+
             //movement.setLeft(true);
             //System.out.println("PRESSED D");
+
             dir=CardinalDirection.EAST;
 
         }
@@ -86,8 +99,12 @@ public class ActionController implements KeyListener {
         player.setDirection(dir);
         if(up||right||down||left){
             player.setState(EntityStates.RUNNING);
-            player.updateMovement();
+            //player.updateMovement();
+
+            player.setVelX((float)player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getXOffset());
+            player.setVelY((float) player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getYOffset());
         }
+
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             player.attack();
             player.setAttackMode(true);
@@ -96,30 +113,40 @@ public class ActionController implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent event) {
+        float tempVelX,tempVelY;
         player.setState(EntityStates.IDLE);
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=false;
+
+
+            player.setVelY(0);
 
             //System.out.println("RELEASED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             left=false;
 
+            player.setVelX(0);
+
             //System.out.println("RELEASED A");
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             down=false;
+            player.setVelY(0);
 
             //System.out.println("RELEASED S");
 
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             right=false;
+            player.setVelX(0);
 
             //System.out.println("RELEASED D");
         }
 
-        else if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+
+
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             player.setAttackMode(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa

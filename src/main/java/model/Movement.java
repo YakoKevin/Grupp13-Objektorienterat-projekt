@@ -22,6 +22,7 @@ public class Movement {
 
     }
 
+
     public float[] updatePosition(float x, float y, double speed, CardinalDirection dir) {
         x+= (float) speed * (float) dir.getHypothenuseReciprocal() * dir.getXOffset();
         y+= (float) speed * (float) dir.getHypothenuseReciprocal() * dir.getYOffset();

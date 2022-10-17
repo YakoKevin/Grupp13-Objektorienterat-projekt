@@ -9,6 +9,7 @@ import view.Animation;
 import java.awt.*;
 
 public abstract class Entity {
+    protected float velX,velY;
     protected float finePositionX;
     protected float finePositionY;
     protected Coordinate position;
@@ -36,6 +37,8 @@ public abstract class Entity {
 
     public void tick(){
         updateHitbox();
+        finePositionX+=velX;
+        finePositionY+=velY;
     }
 
     protected void updateHitbox(){ //TODO: Viktigt - måste göra varje update() för att undvika fel.
@@ -50,6 +53,22 @@ public abstract class Entity {
     //private double x,y;
     public double healthPoints;
     private double attackPoints; //TODO: borde vara i Attack inte i entity
+
+    public float getVelX() {
+        return velX;
+    }
+
+    public float getVelY() {
+        return velY;
+    }
+
+    public void setVelX(float velX) {
+        this.velX = velX;
+    }
+
+    public void setVelY(float velY) {
+        this.velY = velY;
+    }
 
     public float getX(){
         return finePositionX;
