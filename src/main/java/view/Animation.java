@@ -1,7 +1,6 @@
 package view;
 
 import entity.Living;
-import utilz.EntityStates;
 
 import java.awt.*;
 import java.util.ArrayList;

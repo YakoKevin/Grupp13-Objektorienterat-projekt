@@ -26,55 +26,50 @@ public enum CardinalDirection {
         this.yOffset = yOffset;
     }
 
+    /**
+     * @return hypotenuse reciprocal.
+     */
     public double getHypothenuseReciprocal() {
         return hypothenuseReciprocal;
     }
 
-    /*CardinalDirection(int xOffset, int yOffset) {
-        this.xOffset = xOffset;
-        this.yOffset = yOffset;
-    }*/
-
+    /**
+     * @return {@code cardinal direction} opposite this.
+     */
     public CardinalDirection getOppositeDirection(){
         int ordinal = this.ordinal();
         int oppositeOrdinal = (ordinal + 4) % 8;
         return CardinalDirection.values()[oppositeOrdinal];
     }
 
+    /**
+     * Makes a true {@code cardinal direction} randomly (i.e. only North, East, South and West).
+     * @return {@code cardinal direction}.
+     */
     public static CardinalDirection getRandomAxisDirection(){
         int randomInt = ThreadLocalRandom.current().nextInt(0, 4);
         return CardinalDirection.values()[randomInt*2];
     }
 
+    /**
+     * @return x,y-offsets from the direction.
+     */
     public Coordinate getOffset(){
         return new Coordinate(xOffset, yOffset);
     }
 
+    /**
+     * @return x-offset from the direction.
+     */
     public int getXOffset(){
         return xOffset;
     }
 
+    /**
+     * @return y-offset from the direction.
+     */
     public int getYOffset(){
         return yOffset;
-    }
-
-    public static CardinalDirection getEastWestDirection(int start, int end) {
-        int diff = start - end;
-
-        if(diff < 0) {
-            return EAST;
-        }else
-            return WEST;
-    }
-
-    public static CardinalDirection getNorthSouthDirection(int start, int end) {
-        int diff = start - end;
-
-        if(diff < 0) {
-            return SOUTH;
-        } else
-            return NORTH;
-
     }
 
 }

@@ -1,7 +1,6 @@
 package entity;
 
 import utilz.*;
-import view.Animation;
 
 import java.awt.*;
 
@@ -12,7 +11,7 @@ public abstract class Entity {
     protected int width, height;
     protected Rectangle hitbox;
     protected CardinalDirection dir;
-    protected EntityStates state = EntityStates.IDLE;
+    protected LivingStates state = LivingStates.IDLE;
 
 
     public Entity(Coordinate startCoordinate, int width, int height){
@@ -110,10 +109,10 @@ public abstract class Entity {
         return this.dir;
     }
 
-    public void setState(EntityStates state){
+    public void setState(LivingStates state){
         this.state = state;
     }
-    public EntityStates getState() {
+    public LivingStates getState() {
         return state;
     }
 

@@ -1,10 +1,8 @@
 package entity;
 
-import com.almasb.fxgl.physics.HitBox;
 import model.AttackModel;
 import model.Movement;
 import utilz.*;
-import view.Animation;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import java.util.ArrayList;
  */
 public abstract class Living extends Entity implements Attackable{
     protected boolean isAlive = true;
-    protected EntityStates state;
+    protected LivingStates state;
     protected Movement movement;
     protected AttackModel attack;
     protected double movementSpeed;
@@ -60,7 +58,7 @@ public abstract class Living extends Entity implements Attackable{
         }
         if(this.healthPoints<=0){
             this.setAlive(false); //ska kanske ändras till ett state som sagt
-            this.state = EntityStates.DEAD;
+            this.state = LivingStates.DEAD;
         }
     }
     

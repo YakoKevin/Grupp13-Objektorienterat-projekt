@@ -5,14 +5,11 @@ import model.AttackModel;
 import model.Movement;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
-import utilz.EntityStates;
-import utilz.GameConstants;
+import utilz.LivingStates;
 import view.GamePanel;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.TimerTask;
 
 public class ActionController implements KeyListener {
 
@@ -90,7 +87,7 @@ public class ActionController implements KeyListener {
         }
         if(up||right||down||left){
             player.setDirection(dir);
-            player.setState(EntityStates.RUNNING);
+            player.setState(LivingStates.RUNNING);
             //player.updateMovement();
 
             player.setVelX((float)player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getXOffset());
@@ -101,7 +98,7 @@ public class ActionController implements KeyListener {
 
 
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            player.setState(EntityStates.ATTACK);
+            player.setState(LivingStates.ATTACK);
             player.attack();
             player.setAttackMode(true);
         }
@@ -137,7 +134,7 @@ public class ActionController implements KeyListener {
             //System.out.println("RELEASED D");
         }
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            player.setState(EntityStates.IDLE);
+            player.setState(LivingStates.IDLE);
             player.setAttackMode(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
         if(!(up||down)){
@@ -159,10 +156,10 @@ public class ActionController implements KeyListener {
             if(right&&!left){
                 player.setVelX((float)player.getMovementSpeed());
             }
-            player.setState(EntityStates.RUNNING);
+            player.setState(LivingStates.RUNNING);
         }
         else{
-            player.setState(EntityStates.IDLE);
+            player.setState(LivingStates.IDLE);
         }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }

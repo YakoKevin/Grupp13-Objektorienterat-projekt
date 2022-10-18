@@ -1,5 +1,8 @@
 package utilz;
 
+/**
+ * Constants used for the initialization of entities.
+ */
 public enum EntitySetup {
     PLAYER(500, 250, 40, 80),
     ENEMY(60, 60, 40, 80);

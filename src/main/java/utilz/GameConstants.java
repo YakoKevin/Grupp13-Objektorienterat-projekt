@@ -1,5 +1,8 @@
 package utilz;
 
+/**
+ * Constants used throughout the game.
+ */
 public enum GameConstants {
     ;
     public enum RoomMapSizes {

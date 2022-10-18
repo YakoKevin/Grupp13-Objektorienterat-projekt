@@ -1,11 +1,9 @@
 package view;
 
-import entity.Entity;
 import entity.Living;
-import utilz.EntityStates;
+import utilz.LivingStates;
 import utilz.ImageServer;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class LivingAnimation {
@@ -58,7 +56,7 @@ public class LivingAnimation {
         return living;
     }
 
-    public EntityStates getEntityState() {
+    public LivingStates getEntityState() {
         return living.getState();
     }
 

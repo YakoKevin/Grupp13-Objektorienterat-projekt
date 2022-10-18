@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Place to store all locations for images used in the game. Perhaps for other storage of animation related stuff.
+ * Place to store all locations for images used in the game.
+ *
+ * @see BufferedImage
  */
 public enum ImageServer {
     ;
