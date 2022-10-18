@@ -12,10 +12,17 @@ import java.util.concurrent.ThreadLocalRandom;
  * Functional class for generating a map with pseudo random amount of nodes in it. Takes a size parameter that represents
  * the border size of the map. Generates a LevelMap with a random amount of nodes and edges connecting those. There is
  * always a path from a starting coordinate to an end coordinate.
+ *
+ * @see LevelMap
  */
 public enum SquareMapGenerator {
     ;
 
+    /**
+     *
+     * @param size is the size of the square map sides. Is always greater than 4.
+     * @return a complete {@code LevelMap} with all the nodes and edges generated.
+     */
     public static LevelMap generate(int size) {
         if(size < 4)
             size = 4;

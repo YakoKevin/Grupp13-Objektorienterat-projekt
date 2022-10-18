@@ -1,7 +1,6 @@
 package model.level;
 
 import entity.Enemy;
-import entity.Entity;
 import entity.Living;
 import entity.Player;
 import general.RoomChangeObserver;
@@ -10,15 +9,21 @@ import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
-import utilz.GameConstants;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
- * A facade to the level module. For interacting with the level and its rooms.
+ * A facade to the level module. For interacting with the {@code Level} and its {@code room}. It holds all relevant information about
+ * the games map and {@code room}, also all the {@code entities} within them. {@code Level} updates from the {@link #tick() tick}
+ * function and will call the {@link #tick() tick} function for all its {@code entities}. {@code Level} also manages the detection of
+ * the player being inside a {@code door} and will change the {@code room} thereafter.
+ *
+ * @see Room
+ * @see LevelMap
+ * @see Player
+ * @see Enemy
  */
 public abstract class Level{
     protected Room currentRoom;

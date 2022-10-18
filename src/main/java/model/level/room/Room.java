@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * A class representing a Rooms main construction: walls and obstacles and doors. Also keeps and creates the enimes.
+ * A class representing a Rooms main construction: walls and obstacles and doors. Also keeps and creates the enemies.
  */
 public abstract class Room{
     protected final int HEIGHT;
