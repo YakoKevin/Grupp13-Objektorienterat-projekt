@@ -1,8 +1,8 @@
 package utilz;
 
 public enum EntityStates {
-        IDLE(3),
-        RUNNING(1),
+        IDLE(10),
+        RUNNING(10),
         ATTACK(1),
         HIT(1),
         DEAD(1);
