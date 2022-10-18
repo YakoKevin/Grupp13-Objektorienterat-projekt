@@ -3,7 +3,7 @@ package utilz;
 public enum EntityStates {
         IDLE(10),
         RUNNING(10),
-        ATTACK(1),
+        ATTACK(10),
         HIT(1),
         DEAD(1);
         int animationSpriteAmount;
