@@ -4,6 +4,7 @@ import controller.ActionController;
 import general.GameApp;
 import model.level.Level;
 import model.level.room.Door;
+import utilz.Coordinate;
 import utilz.GameConstants;
 import utilz.ImageServer;
 
@@ -47,7 +48,6 @@ public class GamePanel extends JPanel {
         int width = 50;
         this.level = level;
         //inititateHitbox();
-
         JButton jb=new JButton("Pause");
         jb.setBackground(Color.BLUE);
         jb.setBounds(515, 300, 80, 30);
@@ -114,18 +114,34 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         drawUI(g);
         drawDoors(g);
+        //drawWalls(g);
         render(g);
+    }
+
+    private void drawWalls(Graphics g) {
+        if(!level.getCurrentRoomWalls().isEmpty()) {
+            for (Coordinate wallCoord : level.getCurrentRoomWalls()) {
+                g.drawImage(ImageServer.getImage(ImageServer.Ids.WALL),
+                        wallCoord.getY() * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), // x och y är kanske feltransponerade
+                        wallCoord.getX() * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+                        GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+                        GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
+            }
+        }
     }
 
     private void drawDoors(Graphics g) {
         if(!level.getCurrentRoomDoors().isEmpty()) {
             for (Door door : level.getCurrentRoomDoors()) {
-                g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR), 50+door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+                g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR),
+                        50 +door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
                         door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
-                        2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
+                        2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+                        2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
             }
         }
     }
+
 
     private void drawMap(Graphics g) {
 
