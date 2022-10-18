@@ -39,18 +39,21 @@ public class Movement {
 
         // om x eller y hamnar utanför skärmen.
 
-        if(x < 0) {
-            x=0;
+        System.out.println("X: " + x);
+        System.out.println("Y: " + y);
+        if(x < 1) {
+            x=200;
         }
-        else if(y < 0) {
-            y = 0;
+
+        if(y < 0) {
+            y = 300;
         }
-        else if(x > 30 + GameConstants.GameSizes.WIDTH.getSize()) { // +30 eftersom entity har 30 i width, kanske att man ska ta in player.width hit också. Dock verkar skärmen inte gå så långt som den borde.
-            x = 30 + GameConstants.GameSizes.WIDTH.getSize();
-        }
-        else if(y > GameConstants.GameSizes.HEIGHT.getSize()) {
-            y = GameConstants.GameSizes.HEIGHT.getSize();
-        }
+        //else if(x > 50 + GameConstants.GameSizes.WIDTH.getSize()) { // +30 eftersom entity har 30 i width, kanske att man ska ta in player.width hit också. Dock verkar skärmen inte gå så långt som den borde.
+       //     x = 50 + GameConstants.GameSizes.WIDTH.getSize();
+        //}
+        //else if(y > GameConstants.GameSizes.HEIGHT.getSize()) {
+        //    y = GameConstants.GameSizes.HEIGHT.getSize();
+        //}
         return new float[]{x,y};
     }
 /*

@@ -106,6 +106,7 @@ public class ActionController implements KeyListener {
         }
 
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            player.setState(EntityStates.ATTACK);
             player.attack();
             player.setAttackMode(true);
         }
@@ -147,6 +148,7 @@ public class ActionController implements KeyListener {
 
 
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            player.setState(EntityStates.IDLE);
             player.setAttackMode(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
