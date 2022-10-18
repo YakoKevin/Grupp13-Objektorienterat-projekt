@@ -2,7 +2,9 @@ package entity;
 
 import model.AttackModel;
 import model.Movement;
+import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.EntityStates;
 
 import java.awt.*;
 import java.time.LocalTime;
@@ -66,7 +68,17 @@ public abstract class Enemy extends Living implements Hostile {
                 }else if(random == 3) {
                     finePositionY -= enemyMoveDistance;
                 }
-
+                setDirection(CardinalDirection.values()[new Random().nextInt(CardinalDirection.values().length)]);
+                setState(EntityStates.RUNNING);
+                if(dir == CardinalDirection.EAST) {
+                    setVelX(-1);
+                }else if(dir == CardinalDirection.NORTH) {
+                    setVelY(1);
+                }else if(dir == CardinalDirection.SOUTH) {
+                    setVelY(-1);
+                }else if(dir == CardinalDirection.WEST) {
+                    setVelX(-1);
+                }
             }
         }
 
@@ -87,6 +99,17 @@ public abstract class Enemy extends Living implements Hostile {
                     }else {
                         finePositionY += enemyMoveDistance;
                     }
+                }
+                setDirection(CardinalDirection.values()[new Random().nextInt(CardinalDirection.values().length)]);
+                setState(EntityStates.RUNNING);
+                if(dir == CardinalDirection.EAST) {
+                    setVelX(-1);
+                }else if(dir == CardinalDirection.NORTH) {
+                    setVelY(1);
+                }else if(dir == CardinalDirection.SOUTH) {
+                    setVelY(-1);
+                }else if(dir == CardinalDirection.WEST) {
+                    setVelX(-1);
                 }
             }
         }
