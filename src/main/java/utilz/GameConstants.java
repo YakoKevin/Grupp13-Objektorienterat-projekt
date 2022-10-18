@@ -32,6 +32,7 @@ public enum GameConstants {
     public enum GameSizes {
         HEIGHT(RoomMapSizes.HEIGHT.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize()),
         WIDTH(RoomMapSizes.WIDTH.getSize()*GameScalingFactors.TILE_SCALE_FACTOR.getSize());
+
         int size;
 
         GameSizes(int size){

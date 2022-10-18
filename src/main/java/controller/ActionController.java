@@ -6,6 +6,7 @@ import model.Movement;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.EntityStates;
+import utilz.GameConstants;
 import view.GamePanel;
 
 import javax.swing.*;
@@ -93,9 +94,11 @@ public class ActionController implements KeyListener {
             //player.updateMovement();
 
             player.setVelX((float)player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getXOffset());
+
             player.setVelY((float) player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getYOffset());
             //System.out.println("velx och vely + dir" + player.getVelX() + " " +player.getVelY() +"" + dir);
         }
+
 
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             player.setState(EntityStates.ATTACK);
@@ -103,6 +106,7 @@ public class ActionController implements KeyListener {
             player.setAttackMode(true);
         }
     }
+
 
     @Override
     public void keyReleased(KeyEvent event) {
@@ -136,7 +140,6 @@ public class ActionController implements KeyListener {
             player.setState(EntityStates.IDLE);
             player.setAttackMode(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
-
         if(!(up||down)){
             player.setVelY(0);
         }

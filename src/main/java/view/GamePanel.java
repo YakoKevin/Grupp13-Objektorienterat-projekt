@@ -108,54 +108,18 @@ public class GamePanel extends JPanel {
         System.out.println("Size : " + GAME_WIDTH + " : " + GAME_HEIGHT);
     }
 
-    // Debugging purposes, will be removed
-    /*protected void drawHitbox(Graphics g){
-        g.setColor(Color.PINK);
-        g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-    }/*
-    // TODO: Move to seperate Hitbox class
-    private void inititateHitbox() {
-        hitbox = new Rectangle((int)player.getX(), (int)player.getY(), player.getWidth(), player.getHeight());
-    }
 
-    // TODO: Move to seperate Hitbox class
-    protected void updateHitbox(){
-        hitbox.x = (int)player.getX();
-        hitbox.y = (int)player.getY();
-    }*/
-
-    public void update(){
-        //animation.updateAnimationTick();
-        //animation.setAnimation();
-        //animationEnemy.updateAnimationTick();
-        //animationEnemy.setAnimation();
-        //Coordinate c = movement.updatePosition(player.getX(),player.getY(),player.getMovementSpeed(),player.getDirection());
-        //player.setX(c.getX());
-        //player.setY(c.getY());
-        //updateHitbox();
-        //player.setAttackMode(false); //ska vara timer
-    }
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        //levelManager.draw(g);
-        //drawHitbox(g);
         drawUI(g);
         drawDoors(g);
-        /*if(player.getAttackMode()==true){
-            AttackView atkV = new AttackView();
-            AttackModel atkM = new AttackModel(10, 20); //TODO: get from player instead
-            Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
-            c = atkM.getAttackCoordinate(c,this.player.getDirection(),player.getWidth(),player.getHeight());
-            atkV.drawAttackRectangle(g,(int)c.getX(),(int)c.getY(),100,100);
-        }*/
         render(g);
     }
 
     private void drawDoors(Graphics g) {
         if(!level.getCurrentRoomDoors().isEmpty()) {
             for (Door door : level.getCurrentRoomDoors()) {
-                //g.fillRect(door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
                 g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR), 50 +door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
             }
         }
@@ -175,8 +139,6 @@ public class GamePanel extends JPanel {
         g.setColor(new Color(255, 0, 70));
         g.drawString("HP: " + hpStr,10,10);
         g.setColor(Color.YELLOW);
-        //g.drawString("Keys: " + player.getKeyCount(), 10,30);
         g.setColor(Color.WHITE);
-        //g.drawString("Score: " + player.getScoreCount(), 10,50);
     }
 }

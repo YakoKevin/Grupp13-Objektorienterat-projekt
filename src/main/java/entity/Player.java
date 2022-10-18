@@ -3,6 +3,7 @@ package entity;
 import model.AttackModel;
 import model.Movement;
 import utilz.Coordinate;
+import utilz.GameConstants;
 import utilz.ImageServer;
 
 import java.awt.*;
@@ -35,6 +36,8 @@ public class Player extends Living implements Friendly{
         }
     }
 
+
+
     //Denna metod anropar enemy (som har en lista med Friendlies), för att slå Player (Friendly).
 
     public boolean getAttackMode() { // ska kanske vara state
@@ -46,4 +49,28 @@ public class Player extends Living implements Friendly{
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;
     }
+
+    @Override
+    public void tick(){
+        updateHitbox();
+        finePositionX+=velX;
+        finePositionY+=velY;
+        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()){
+            finePositionX = GameConstants.GameSizes.WIDTH.getSize();
+        }
+        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-50){
+            finePositionY =GameConstants.GameSizes.HEIGHT.getSize()-50;
+        }
+        if(finePositionX<0){
+            finePositionX =0;
+        }
+        if(finePositionY<0){
+            finePositionY = 0;
+        }
+
+        //System.out.println("x, y och velx och vely " + finePositionX + finePositionY + velX + velY);
+    }
+
+
+
 }

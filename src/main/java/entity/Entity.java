@@ -35,13 +35,28 @@ public abstract class Entity {
         /*if((velX>8||velY>8)){
             velX = 8;velY=8;
 
+
         }*/
+        /*
         finePositionX+=velX;
-
         finePositionY+=velY;
+        if(finePositionX>GameConstants.GameSizes.WIDTH.getSize()){
+            finePositionX = GameConstants.GameSizes.WIDTH.getSize();
+        }
+        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()){
+            finePositionY =GameConstants.GameSizes.HEIGHT.getSize();
+        }
+        if(finePositionX<0){
+            finePositionX =0;
+        }
+        if(finePositionY<0){
+            finePositionY = 0;
+        }
+
+        System.out.println("x ar" + finePositionX);
 
 
-        //System.out.println("x, y och velx och vely " + finePositionX + finePositionY + velX + velY);
+        //System.out.println("x, y och velx och vely " + finePositionX + finePositionY + velX + velY);*/
     }
 
     protected void updateHitbox(){ //TODO: Viktigt - måste göra varje update() för att undvika fel.
