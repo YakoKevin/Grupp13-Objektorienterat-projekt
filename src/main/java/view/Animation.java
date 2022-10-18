@@ -3,6 +3,7 @@ package view;
 import entity.Living;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 /***
@@ -38,7 +39,7 @@ public class Animation {
                 for (LivingAnimation entityAnimation : livingEntites) {
                     updateAnimationTick(entityAnimation);
                     g.drawImage(entityAnimation.getImageGrid()[entityAnimation.getEntityState().ordinal()][entityAnimation.getAnimationIndex()],
-                            entityAnimation.getX(), entityAnimation.getY(), 140, 150, null);
+                            entityAnimation.getX() + entityAnimation.getFlipAddition(), entityAnimation.getY(), entityAnimation.getFlip()*140, 150, null);
             }
         }
 
