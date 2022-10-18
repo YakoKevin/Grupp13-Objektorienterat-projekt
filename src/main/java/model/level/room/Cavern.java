@@ -2,19 +2,20 @@ package model.level.room;
 
 import entity.Enemy;
 import entity.EnemyFactory;
-import entity.Skeleton;
-import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
 //TODO: add method to remove obstacles in the way of doors
 
 /**
  * A simple rectangular room with doors and obstacles and enemies.
+ *
+ * @see Room
+ * @see Enemy
+ * @see EnemyFactory
  */
 public class Cavern extends Room {
 

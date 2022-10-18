@@ -44,34 +44,58 @@ public abstract class Level{
     }
 
 
+    /**
+     * @return the room represented as an int[][] matrix. Ones are walls, twos obstacles and eights are doors.
+     */
     public int[][] getCurrentRoomAsMatrix(){
         return currentRoom.getRoomAsMatrix();
     }
 
+    /**
+     * @return an {@code ArrayList} of the {@code Coordinates} of all the wall pieces.
+     */
     public ArrayList<Coordinate> getCurrentRoomWalls(){
         return currentRoom.getWalls();
     }
 
+    /**
+     * @return an {@code ArrayList} of the {@code Coordinates} of all the obstacle pieces.
+     */
     public ArrayList<Coordinate> getCurrentRoomObstacles(){
         return currentRoom.getObstacles();
     }
 
+    /**
+     * @return an {@code ArrayList} of the {@code Coordinates} of all the {@code door} pieces.
+     */
     public ArrayList<Door> getCurrentRoomDoors(){
         return currentRoom.getDoors();
     }
 
+    /**
+     * @return a boolean if the argument {@code coordinate} is equal to any obstacle {@code coordinate}.
+     */
     public boolean isCoordinateInObstacle(Coordinate coordinate){
         return currentRoom.isCoordinateInObstacle(coordinate);
     }
 
+    /**
+     * @return a boolean if the argument {@code coordinate} is equal to any {@code door} {@code coordinate}.
+     */
     public boolean isCoordinateInDoor(Coordinate coordinate){
         return currentRoom.isCoordinateInDoor(coordinate);
     }
 
+    /**
+     * @return a boolean if the argument {@code coordinate} is equal to any wall {@code coordinate}.
+     */
     public boolean isCoordinateInWall(Coordinate coordinate){
         return currentRoom.isCoordinateInWall(coordinate);
     }
 
+    /**
+     * @return a boolean if the argument {@code coordinate} is equal to any wall or obstacle {@code coordinate}.
+     */
     public boolean isCoordinateInWallOrObstacle(Coordinate coordinate){
         return currentRoom.isCoordinateInWallOrObstacle(coordinate);
     }
@@ -114,6 +138,10 @@ public abstract class Level{
         return room;
     }
 
+    /**
+     * A method that updates all the logic in the {@code level}. When called {@code level} will tick any entities in it.
+     * Should not be called too often since all logic in level depends on its frequency.
+     */
     public void tick(){
         if(canGoThroughDoor)
             checkDoorCollision();
@@ -150,22 +178,31 @@ public abstract class Level{
       }
     }
 
-    public void doCollisions(){
+    private void doCollisions(){
         if(isCoordinateInWallOrObstacle(player.getPosition())){
 
         }
     }
 
+    /**
+     * @return all {@code living} in {@code level} in the form of an {@code ArrayList<Living>}. Defencive copying is used.
+     */
     public ArrayList<Living> getCurrentLiving(){
         ArrayList<Living> livings = new ArrayList<>(currentRoom.getEnemies());
         livings.add(player);
         return livings;
     }
 
+    /**
+     * @return return the {@code player} referens. Note that this is the same referens used in {@code level}, not a new objekt!
+     */
     public Player getPlayer() {
         return this.player;
     } //behöver ett objekt
 
+    /**
+     * To add a new observer, listening to whenever a new room is created.
+     */
     public void addRoomChangeObserver(RoomChangeObserver observer){
         observers.add(observer);
     }

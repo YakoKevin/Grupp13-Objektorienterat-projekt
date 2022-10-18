@@ -4,6 +4,12 @@ import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.GameConstants;
 
+/**
+ * Enum with the four different door types. Doors contain coordinate and a direction.
+ *
+ * @see Coordinate
+ * @see CardinalDirection
+ */
 public enum Door {
     NORTH(GameConstants.RoomMapSizes.WIDTH.getSize()/2, 0, CardinalDirection.NORTH),
     EAST(GameConstants.RoomMapSizes.WIDTH.getSize()-1, GameConstants.RoomMapSizes.HEIGHT.getSize()/2, CardinalDirection.EAST),
@@ -18,15 +24,26 @@ public enum Door {
         this.direction = direction;
     }
 
+    /**
+     * @return the {@code coordinate} of the door.
+     */
     public Coordinate getCoordinate() {
         return coordinate;
     }
 
+    /**
+     * @return the {@code cardinal direction} of the door - where on the map it sits.
+     */
     public CardinalDirection getDoorDirection(){
         return direction;
     }
 
-    //TODO: make better/not have to return null.
+    /**
+     * To get a door from a cardinal direction with the same direction.
+     *
+     * @param direction is the {@code cardinal direction} of which to get a {@code door}.
+     * @return a {@code door} for the matching {@code cardinal direction}. Returns {@code null} if argument is {@code null} or a direction outside true cardinals.
+     */
     public static Door getDoorFromCardinalDirection(CardinalDirection direction){
         for(Door door : Door.values()){
             if (direction.equals(door.direction)){

@@ -12,7 +12,10 @@ import java.util.NoSuchElementException;
 //TODO: Fix so that we have an coordinate object instead of int[]?
 
 /**
- * An object for containing a node matrix, a neighbor matrix and the coordinates for a start and a finish node.
+ * An object for containing the map nodes and edges and the coordinates for a start and a finish node.
+ *
+ * @see Coordinate
+ * @see MapGraph
  */
 public class LevelMap {
     private final MapGraph mapGraph;

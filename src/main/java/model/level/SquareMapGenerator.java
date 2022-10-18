@@ -139,7 +139,7 @@ public enum SquareMapGenerator {
         }
     }
 
-    public static void placeEdgesRandomlyForNodes(LevelMap levelMap){
+    private static void placeEdgesRandomlyForNodes(LevelMap levelMap){
         for(int i = 0; i < 25; i++){
             Coordinate[] nodeCoordinates = levelMap.getNodesCoordinates();
             int randomIndex = ThreadLocalRandom.current().nextInt(0, nodeCoordinates.length);
