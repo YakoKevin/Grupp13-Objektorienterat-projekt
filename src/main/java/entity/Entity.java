@@ -32,8 +32,16 @@ public abstract class Entity {
 
     public void tick(){
         updateHitbox();
+        /*if((velX>8||velY>8)){
+            velX = 8;velY=8;
+
+        }*/
         finePositionX+=velX;
+
         finePositionY+=velY;
+
+
+        //System.out.println("x, y och velx och vely " + finePositionX + finePositionY + velX + velY);
     }
 
     protected void updateHitbox(){ //TODO: Viktigt - måste göra varje update() för att undvika fel.

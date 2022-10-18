@@ -18,7 +18,7 @@ public class Player extends Living implements Friendly{
         super(startCoordinate, width, height, new Movement(), new AttackModel(20, 100));
         this.setHealthPoints(100);
         this.setAttackPoints(20);
-        this.setMovementSpeed(10);
+        this.setMovementSpeed(8);
     }
 
     @Override

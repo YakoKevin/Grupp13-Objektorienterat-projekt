@@ -38,28 +38,21 @@ public class ActionController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent event) {
-        if(player.getX()<0 || player.getY()<0) {
+        /*if(player.getX()<0 || player.getY()<0) {
             return;
-        }
+        }*/
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=true;
             //movement.setUp(true);
-
             //player.setVelY(-(float)player.getMovementSpeed());
-
-
             dir=CardinalDirection.NORTH;
-
             //System.out.println(player.getX()  + "-" + player.getY());
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             left=true;
-
             //player.setVelX(-(float)player.getMovementSpeed());
-
             //movement.setRight(true);
             //System.out.println("PRESSED A");
-
             dir = CardinalDirection.WEST;
 
         }
@@ -75,14 +68,12 @@ public class ActionController implements KeyListener {
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             right=true;
-
             //player.setVelX((float)player.getMovementSpeed());
 
             //movement.setLeft(true);
             //System.out.println("PRESSED D");
 
             dir=CardinalDirection.EAST;
-
         }
         if(up&&right){
             dir = CardinalDirection.NORTHEAST;
@@ -96,13 +87,14 @@ public class ActionController implements KeyListener {
         else if(down&&right){
             dir = CardinalDirection.SOUTHEAST;
         }
-        player.setDirection(dir);
         if(up||right||down||left){
+            player.setDirection(dir);
             player.setState(EntityStates.RUNNING);
             //player.updateMovement();
 
             player.setVelX((float)player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getXOffset());
             player.setVelY((float) player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getYOffset());
+            //System.out.println("velx och vely + dir" + player.getVelX() + " " +player.getVelY() +"" + dir);
         }
 
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -115,42 +107,63 @@ public class ActionController implements KeyListener {
     @Override
     public void keyReleased(KeyEvent event) {
         float tempVelX,tempVelY;
-        player.setState(EntityStates.IDLE);
+
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=false;
-
-
-            player.setVelY(0);
+            //player.setVelY(0);
 
             //System.out.println("RELEASED W");
         }
         else if (event.getKeyCode() == KeyEvent.VK_A) {
             left=false;
-
-            player.setVelX(0);
+            //player.setVelX(0);
 
             //System.out.println("RELEASED A");
         }
         else if (event.getKeyCode() == KeyEvent.VK_S) {
             down=false;
-            player.setVelY(0);
+            //player.setVelY(0);
 
             //System.out.println("RELEASED S");
-
         }
         else if (event.getKeyCode() == KeyEvent.VK_D) {
             right=false;
-            player.setVelX(0);
+            //player.setVelX(0);
 
             //System.out.println("RELEASED D");
         }
-
-
-
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
             player.setState(EntityStates.IDLE);
             player.setAttackMode(false); //tillfälligt, ska kanske vara en timer hur länge man attackerar
         }
+
+        if(!(up||down)){
+            player.setVelY(0);
+        }
+        if(!(left||right)){
+            player.setVelX(0);
+        }
+        if(up||right||down||left){
+            if(up&&!down){
+            player.setVelY(-(float)player.getMovementSpeed());
+            }
+            if(!up&&down){
+                player.setVelY((float)player.getMovementSpeed());
+            }
+            if(!right&&left){
+                player.setVelX(-(float)player.getMovementSpeed());
+            }
+            if(right&&!left){
+                player.setVelX((float)player.getMovementSpeed());
+            }
+            player.setState(EntityStates.RUNNING);
+        }
+        else{
+            player.setState(EntityStates.IDLE);
+        }
         //gamePanel.getGameApp().getPlayer().setMoving(false); // inte bra metod anrop, fixafixafixa
     }
+
+
+
 }
