@@ -5,6 +5,10 @@ import entity.Entity;
 import java.awt.*;
 import java.util.Random;
 
+/***
+ * This class handles the amount of times the game will update per second.
+ * If set to N times per second, the game will repaint itself N times.
+ */
 public class FPSUpdater implements Runnable {
     private final int MAX_FPS = 120;
     private final int MAX_UPS = 200;
@@ -28,6 +32,10 @@ public class FPSUpdater implements Runnable {
         gameThread.resume();
     } //TODO: ska den vara kvar? Är deprecated.
 
+    /***
+     * This is the gameloop for the game, run on a separate thread.
+     * It will repaint the game N times per second.
+     */
     @Override
     public void run() {
         double timePerFrame = 1000000000.0 / MAX_FPS;
