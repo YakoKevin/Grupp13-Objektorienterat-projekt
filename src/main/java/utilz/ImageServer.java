@@ -46,7 +46,7 @@ public enum ImageServer {
         BufferedImage[][] animations = new BufferedImage[3][10]; //TODO: add into a constant instead to avoid miss-match errors
         for (int row = 0; row < animations.length; row++) {
             for (int column = 0; column < animations[row].length; column++) {
-                animations[row][column] = ImageServer.getSprite(path).getSubimage(row * 95, column * 120, 30, 80);
+                animations[row][column] = ImageServer.getSprite(path).getSubimage(row * 80, column * 120, 80, 80);
             }
         }
         return animations;
