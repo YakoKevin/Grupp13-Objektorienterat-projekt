@@ -1,5 +1,8 @@
 package view;
 
+import entity.Enemy;
+import entity.Entity;
+import entity.Living;
 import entity.Player;
 import model.AttackModel;
 import utilz.Coordinate;
@@ -7,6 +10,7 @@ import utilz.ImageServer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class UpdateFrame extends JPanel {
@@ -55,7 +59,6 @@ public class UpdateFrame extends JPanel {
         drawUI(g);
 
         if(player.getAttackMode()==true){
-            System.out.println("t h");
             AttackView atkV = new AttackView();
             AttackModel atkM = new AttackModel(); //TODO: detta borde inte vara här -- hämta från spelaren ist.
             Coordinate c = new Coordinate((int)player.getX(), (int)player.getY());
@@ -64,6 +67,17 @@ public class UpdateFrame extends JPanel {
         }
         player.setAttackMode(false);
         render(g);
+
+    }
+    public void drawHealthBar(Graphics g, Living living){
+        double percentageOfHealth = living.getHealthPoints()/living.getMaximumHealthPoints();
+        g.setColor(Color.BLACK);
+        g.drawRect((int)living.getX()+1,(int) living.getY()-5,living.getWidth(),15);
+        g.setColor(Color.RED);
+
+        Rectangle2D rect = new Rectangle2D.Double(living.getX()+1,living.getY()-5,living.getWidth()* percentageOfHealth,15);
+        Graphics2D g2 =(Graphics2D)g;
+        g2.fill(rect);
 
     }
 

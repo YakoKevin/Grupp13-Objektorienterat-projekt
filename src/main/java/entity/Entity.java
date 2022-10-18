@@ -15,6 +15,7 @@ public abstract class Entity {
     protected CardinalDirection dir;
     protected EntityStates state = EntityStates.IDLE;
 
+
     public Entity(Coordinate startCoordinate, int width, int height){
         this.width = width;
         this.height = height;
@@ -89,6 +90,8 @@ public abstract class Entity {
         this.finePositionX = coordinate.getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
         this.finePositionY = coordinate.getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
     }
+
+
 
     public int getWidth() { return (int)width; }
 

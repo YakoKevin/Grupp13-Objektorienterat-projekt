@@ -39,7 +39,7 @@ public abstract class Enemy extends Living implements Hostile {
             this.sightRange = sightRange;
         }
 
-        public void think() {
+        public void think() { //går kanske att ha ett mer beskrivande namn :)
             if(Math.abs(friendlyLastSeenX - getX()) > sightRange &&
                     Math.abs(friendlyLastSeenY - getY()) > sightRange){
                 moveRandomly();

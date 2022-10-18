@@ -17,12 +17,14 @@ public abstract class Living extends Entity implements Attackable{
     protected Movement movement;
     protected AttackModel attack;
     protected double movementSpeed;
+    private double maximumHealthPoints;
 
     public Living(Coordinate startCoordinate, int width, int height, Movement movement, AttackModel attackModel) {
         super(startCoordinate, width, height);
         this.movement = movement;
         this.attack = attackModel;
         this.healthPoints = 100;
+        this.setMaximumHealthPoints(100);
     }
 
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
@@ -54,6 +56,14 @@ public abstract class Living extends Entity implements Attackable{
         finePositionX = newPosition[0];
         finePositionY = newPosition[1];
         //System.out.println("x och y efter: " + this.x + this.y);
+    }
+
+    public double getMaximumHealthPoints(){
+        return this.maximumHealthPoints;
+    }
+
+    public void setMaximumHealthPoints(double maximumHealthPoints) {
+        this.maximumHealthPoints = maximumHealthPoints;
     }
 
     public Movement getMovement(){
