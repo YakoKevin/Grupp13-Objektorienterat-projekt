@@ -14,6 +14,7 @@ public class Player extends Living implements Friendly{
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private boolean attackMode = false;
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.PLAYER;
+    private ImageServer.DeathId deathIdentification = ImageServer.DeathId.PLAYER;
 
     public Player(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate, width, height, new Movement(), new AttackModel(100, 100));
@@ -62,6 +63,9 @@ public class Player extends Living implements Friendly{
         }
     }
 
-
+    @Override
+    public ImageServer.DeathId getDeadId() {
+        return deathIdentification;
+    }
 
 }
