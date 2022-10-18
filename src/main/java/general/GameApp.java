@@ -33,7 +33,7 @@ public class GameApp implements RoomChangeObserver{
     public GameApp(){
         firstSetup();
         fpsUpdater.startGameLoop();
-        timer.schedule(new GameTicker(), 10, 10);
+        timer.schedule(new GameTicker(), 15, 15);
     }
 
     /**
