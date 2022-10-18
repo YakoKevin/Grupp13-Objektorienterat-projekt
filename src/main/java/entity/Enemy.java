@@ -63,7 +63,7 @@ public abstract class Enemy extends Living implements Hostile {
 
         private void attackFriendly(){
             //TODO: make enemy rotate towards friendly
-            Rectangle attackRectangle = attack.getAttackRectangle(finePositionX, finePositionY);
+            Rectangle attackRectangle = attack.getAttackRectangle(finePositionX, finePositionY, dir);
             friendly.getHit(attackRectangle, attack.getAttackDamage());
             attack.coolDownReset();
             System.out.println("ATTACK");

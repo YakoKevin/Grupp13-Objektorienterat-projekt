@@ -1,9 +1,9 @@
 package view;
 
 import entity.Living;
+import utilz.EntityStates;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 /***
@@ -36,10 +36,15 @@ public class Animation {
      */
     public static void render(Graphics g) {
         if (livingEntites != null) {
-                for (LivingAnimation entityAnimation : livingEntites) {
-                    updateAnimationTick(entityAnimation);
-                    g.drawImage(entityAnimation.getImageGrid()[entityAnimation.getEntityState().ordinal()][entityAnimation.getAnimationIndex()],
-                            entityAnimation.getX() + entityAnimation.getFlipAddition(), entityAnimation.getY(), entityAnimation.getFlip()*140, 150, null);
+                for (LivingAnimation livingAnimation : livingEntites) {
+                    updateAnimationTick(livingAnimation);
+                    g.drawImage(livingAnimation.getImageGrid()[livingAnimation.getEntityState().ordinal()][livingAnimation.getAnimationIndex()],
+                            livingAnimation.getX() + livingAnimation.getFlipAddition(), livingAnimation.getY()-30, livingAnimation.getFlip()*140, 150, null);
+                    if(livingAnimation.getEntityState() == EntityStates.ATTACK){
+                        Rectangle rec = livingAnimation.getEntity().getAttackRec();
+                        g.drawRect(rec.x, rec.y, rec.width, rec.height);
+                    }
+                    g.drawRect(livingAnimation.getX(), livingAnimation.getY(), livingAnimation.getEntity().getWidth(), livingAnimation.getEntity().getHeight());
             }
         }
 

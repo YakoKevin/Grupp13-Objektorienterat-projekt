@@ -47,7 +47,7 @@ public class LivingAnimation {
         return animationTick;
     }
 
-    public Entity getEntity(){
+    public Living getEntity(){
         return living;
     }
 
@@ -75,7 +75,7 @@ public class LivingAnimation {
 
     public int getFlipAddition() {
         if(getFlip() < 0)
-            return 70;
-        return 0;
+            return 53;
+        return -12;
     }
 }

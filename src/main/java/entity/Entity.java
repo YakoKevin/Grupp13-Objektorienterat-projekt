@@ -11,7 +11,6 @@ public abstract class Entity {
     protected float finePositionY;
     protected int width, height;
     protected Rectangle hitbox;
-    protected boolean isAlive;
     protected CardinalDirection dir;
     protected EntityStates state = EntityStates.IDLE;
 
@@ -143,9 +142,6 @@ public abstract class Entity {
     public CardinalDirection getDirection(){
         return this.dir;
     }
-    protected void setAlive(boolean aliveStatus){
-        this.isAlive=aliveStatus;
-    }
 
     public void setState(EntityStates state){
         this.state = state;
@@ -153,5 +149,6 @@ public abstract class Entity {
     public EntityStates getState() {
         return state;
     }
+
 
 }

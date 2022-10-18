@@ -1,6 +1,7 @@
 package model;
 
 
+import entity.Player;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
@@ -19,10 +20,7 @@ public class AttackModel { //
     }
     public AttackModel(){
     }
-    public Coordinate getAttackCoordinate(Coordinate coordinate, CardinalDirection dir, int width, int height){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
-        int atkOffSetX = coordinate.getX();
-        int atkOffSetY = coordinate.getY();
-
+    public Coordinate getAttackCoordinate(float atkOffSetX, float atkOffSetY, CardinalDirection dir, int width, int height){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
 
         //TODO: ska ta lägga till för fyra andra riktningar
         if(dir == CardinalDirection.WEST) { //left
@@ -48,12 +46,12 @@ public class AttackModel { //
         }
         //if utanför rutan också, vet inte vad den ska har för storlek
 
-        Coordinate c = new Coordinate(atkOffSetX,atkOffSetY);
+        //Coordinate c = new Coordinate(atkOffSetX,atkOffSetY);
         //notifyObservers();
-        return c;
+        return new Coordinate(0,0);
     }
-    public Rectangle getAttackRectangle (float x, float y) {
-        return new Rectangle((int)x, (int)y,(int)attackRange, (int)attackRange);
+    public Rectangle getAttackRectangle (float x, float y, CardinalDirection direction) {
+        return new Rectangle((int)x + 60*direction.getXOffset(), (int)y+30*direction.getYOffset(),(int)attackRange, (int)attackRange);
     }
 
     public float getAttackRange() {

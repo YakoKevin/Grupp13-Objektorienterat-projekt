@@ -1,8 +1,8 @@
 package utilz;
 
 public enum EntitySetup {
-    PLAYER(500, 250, 30, 100),
-    SKELETON(60, 60, 30, 100);
+    PLAYER(500, 250, 40, 80),
+    ENEMY(60, 60, 40, 80);
     Coordinate startingCoordinate;
     int hitBoxWidth;
     int hitBoxHeight;

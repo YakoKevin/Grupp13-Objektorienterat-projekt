@@ -1,5 +1,6 @@
 package entity;
 
+import com.almasb.fxgl.physics.HitBox;
 import model.AttackModel;
 import model.Movement;
 import utilz.*;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 public abstract class Living extends Entity implements Attackable{
     protected boolean isAlive; //TODO: borde vara en EntityState?
     protected EntityStates state;
-    protected CardinalDirection direction;
     protected Movement movement;
     protected AttackModel attack;
     protected double movementSpeed;
@@ -86,8 +86,7 @@ public abstract class Living extends Entity implements Attackable{
     }
     public abstract ImageServer.AnimationIds getAnimationId();
 
-    @Override
-    public CardinalDirection getDirection() {
-        return direction;
+    public Rectangle getAttackRec(){
+        return attack.getAttackRectangle(finePositionX,finePositionY,dir);
     }
 }

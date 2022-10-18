@@ -1,14 +1,11 @@
 package entity;
 
-import utilz.ImageServer;
-import view.Animation;
-
-import static utilz.EntitySetup.SKELETON;
+import static utilz.EntitySetup.ENEMY;
 
 public class EnemyFactory {
 
     public Enemy createSkeleton(){
-        Enemy enemy = new Skeleton(SKELETON.getStartCoordinate());
+        Enemy enemy = new Skeleton(ENEMY.getStartCoordinate());
         return enemy;
     }
 }
