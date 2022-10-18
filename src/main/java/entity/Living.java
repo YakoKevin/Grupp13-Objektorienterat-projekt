@@ -6,6 +6,7 @@ import utilz.*;
 import view.Animation;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Entity class for all "living" entities.
@@ -18,6 +19,7 @@ public abstract class Living extends Entity implements Attackable{
     protected AttackModel attack;
     protected double movementSpeed;
     private double maximumHealthPoints;
+    private ArrayList<Coordinate> obstructionCoordinates = new ArrayList<>();
 
     public Living(Coordinate startCoordinate, int width, int height, Movement movement, AttackModel attackModel) {
         super(startCoordinate, width, height);
@@ -31,7 +33,7 @@ public abstract class Living extends Entity implements Attackable{
     public abstract void attack();
 
     public void getHit(Rectangle atkRect, double atkP) {
-        if(atkRect.intersects(this.hitbox)){
+        if(isAlive && atkRect.intersects(this.hitbox)){
             this.setHealthPoints(this.healthPoints-atkP);
         }
         if(this.healthPoints<=0){
@@ -70,6 +72,12 @@ public abstract class Living extends Entity implements Attackable{
         return movement;
     }
 
+    protected void setAlive(boolean aliveStatus){
+        this.isAlive=aliveStatus;
+    }
+    public void giveObstructionList(ArrayList<Coordinate> obstructionCoordinates){
+        this.obstructionCoordinates = obstructionCoordinates;
+    }
     public AttackModel getAttack(){
         return attack;
     }
@@ -77,4 +85,9 @@ public abstract class Living extends Entity implements Attackable{
         return attack.getAttackRange();
     }
     public abstract ImageServer.AnimationIds getAnimationId();
+
+    @Override
+    public CardinalDirection getDirection() {
+        return direction;
+    }
 }

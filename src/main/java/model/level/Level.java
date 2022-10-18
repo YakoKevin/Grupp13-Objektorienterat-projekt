@@ -88,13 +88,23 @@ public abstract class Level{
             currentRoom.removeEnemies();
             currentRoom = createRoom(newRoomCoordinate);
             updateRoomChangeObservers();
+            giveObstructionCoordinatesToLiving();
             System.out.println(newRoomCoordinate.getX() + ", " + newRoomCoordinate.getY());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
-    protected Room createRoom(Coordinate coordinate){
+    private void giveObstructionCoordinatesToLiving(){
+        ArrayList<Coordinate> list = new ArrayList<>(getCurrentRoomWalls());
+        list.addAll(getCurrentRoomObstacles());
+        player.giveObstructionList(list);
+        for(Enemy enemy : currentRoom.getEnemies()){
+            enemy.giveObstructionList(list);
+        }
+    }
+
+    private Room createRoom(Coordinate coordinate){
         int index = ThreadLocalRandom.current().nextInt(0, roomTypes.length);
         ArrayList<Door> doors = levelMap.getNodeDoors(coordinate);
         Room room = roomTypes[index].apply(doors);
