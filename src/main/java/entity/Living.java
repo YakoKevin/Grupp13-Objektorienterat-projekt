@@ -32,6 +32,30 @@ public abstract class Living extends Entity implements Attackable{
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
     public abstract void attack();
 
+    public boolean checkCollision(){
+        for (Coordinate obsCoord : obstructionCoordinates){
+            if(this.hitbox.contains(obsCoord.getX(),obsCoord.getY()) ){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkIfInScreen(){
+        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()-this.width){
+            return true;
+        }
+        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-this.height){
+            return true;
+        }
+        if(finePositionX<0){
+            return true;
+        }
+        if(finePositionY<0){
+            return true;
+        }
+        return false;
+    }
+
     public void getHit(Rectangle atkRect, double atkP) {
         if(isAlive && atkRect.intersects(this.hitbox)){
             this.setHealthPoints(this.healthPoints-atkP);
@@ -40,6 +64,7 @@ public abstract class Living extends Entity implements Attackable{
             this.setAlive(false); //ska kanske ändras till ett state som sagt
         }
     }
+    
 
     public void setMovementSpeed(double speed){
         this.movementSpeed=speed;
