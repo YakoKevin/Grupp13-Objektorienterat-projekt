@@ -33,7 +33,7 @@ public enum ImageServer {
 
     public enum AnimationIds{
         PLAYER("player_sprites_Knightver.png"),
-        ENEMY("skeleton_sprites.png");
+        ENEMY("skeleton_sprites_Knightver.png");
         private BufferedImage[][] imageGrid;
 
         AnimationIds(String path){
