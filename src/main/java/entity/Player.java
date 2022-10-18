@@ -19,7 +19,7 @@ public class Player extends Living implements Friendly{
         super(startCoordinate, width, height, new Movement(), new AttackModel(20, 100));
         this.setHealthPoints(100);
         this.setAttackPoints(20);
-        this.setMovementSpeed(8);
+        this.setMovementSpeed(5);
     }
 
     @Override
@@ -55,11 +55,11 @@ public class Player extends Living implements Friendly{
         updateHitbox();
         finePositionX+=velX;
         finePositionY+=velY;
-        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()){
-            finePositionX = GameConstants.GameSizes.WIDTH.getSize();
+        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()-this.width){
+            finePositionX = GameConstants.GameSizes.WIDTH.getSize()-this.width;
         }
-        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-50){
-            finePositionY =GameConstants.GameSizes.HEIGHT.getSize()-50;
+        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-this.height+30){
+            finePositionY =GameConstants.GameSizes.HEIGHT.getSize()-this.height+30;
         }
         if(finePositionX<0){
             finePositionX =0;
