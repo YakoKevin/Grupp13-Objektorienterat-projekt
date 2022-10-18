@@ -34,6 +34,10 @@ public abstract class Enemy extends Living implements Hostile {
         brain.giveFriendlyCoordinates(x, y);
     }
 
+    public void givePlayer(Player player) {
+        brain.givePlayer(player);
+    }
+
     private class Brain {
         private Friendly friendly;
         private float friendlyLastSeenX = Float.MIN_VALUE;
@@ -41,9 +45,14 @@ public abstract class Enemy extends Living implements Hostile {
         private final float sightRange;
         private boolean readyToAttack;
         private LocalTime lastRenderTime = LocalTime.now();
+        private Player player;
 
         public Brain(float sightRange){
             this.sightRange = sightRange;
+        }
+
+        public void givePlayer(Player player) {
+            this.player = player;
         }
 
         public void think() {
@@ -56,6 +65,12 @@ public abstract class Enemy extends Living implements Hostile {
                 moveRandomly();
             }
             readyToAttack = attack.coolDown();
+        }
+
+        private void calculateScore(){
+            if(Math.abs(finePositionX - friendlyLastSeenX) < 20 && Math.abs(finePositionY - friendlyLastSeenY) < 20) {
+                player.setHealthPoints(player.getHealthPoints() - 10);
+            }
         }
 
         private void moveRandomly(){
@@ -84,6 +99,7 @@ public abstract class Enemy extends Living implements Hostile {
                 }else if(dir == CardinalDirection.WEST) {
                     setVelX(-1);
                 }
+                calculateScore();
             }
         }
 
@@ -116,6 +132,7 @@ public abstract class Enemy extends Living implements Hostile {
                 }else if(dir == CardinalDirection.WEST) {
                     setVelX(-1);
                 }
+                calculateScore();
             }
         }
 

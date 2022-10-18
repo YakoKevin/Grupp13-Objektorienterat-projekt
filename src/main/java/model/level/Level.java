@@ -163,6 +163,7 @@ public abstract class Level{
     private void updateEnemies(){
         for (Enemy enemy : currentRoom.getEnemies()) {
             enemy.giveFriendlyCoordinates(player.getX(), player.getY());
+            enemy.givePlayer(player);
             enemy.tick();
         }
     }
