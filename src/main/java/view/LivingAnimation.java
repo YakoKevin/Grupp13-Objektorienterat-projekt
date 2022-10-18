@@ -12,6 +12,7 @@ public class LivingAnimation {
     private Living living;
     private int animationIndex;
     private int animationTick;
+    private int flip;
 
     LivingAnimation(Living living){
         this.living = living;
@@ -64,5 +65,17 @@ public class LivingAnimation {
 
     public BufferedImage[][] getImageGrid() {
         return imageGrid;
+    }
+
+    public int getFlip() {
+        if(living.getDirection().getXOffset() == 0)
+            return flip;
+        return this.flip = living.getDirection().getXOffset();
+    }
+
+    public int getFlipAddition() {
+        if(getFlip() < 0)
+            return 70;
+        return 0;
     }
 }
