@@ -42,6 +42,16 @@ public enum ImageServer {
         }
     }
 
+    public enum DeathId{
+        PLAYER("death.png"),
+        ENEMY("death.png");
+        private BufferedImage deathImage;
+
+        DeathId(String path){
+            this.deathImage = getSprite(path);
+        }
+    }
+
     private static BufferedImage[][] loadAnimations(String path) {
         BufferedImage[][] animations = new BufferedImage[3][10]; //TODO: add into a constant instead to avoid miss-match errors
         for (int row = 0; row < animations.length; row++) {
@@ -58,5 +68,9 @@ public enum ImageServer {
 
     public static BufferedImage getImage(Ids ids){
         return getSprite(ids.path);
+    }
+
+    public static BufferedImage getImage(DeathId ids){
+        return ids.deathImage;
     }
 }

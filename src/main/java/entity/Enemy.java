@@ -16,8 +16,10 @@ public abstract class Enemy extends Living implements Hostile {
 
 
     public void tick() {
-        updateHitbox();
-        brain.think();
+        if(isAlive) {
+            updateHitbox();
+            brain.think();
+        }
     }
 
     public void addFriendly(Friendly friendly) {

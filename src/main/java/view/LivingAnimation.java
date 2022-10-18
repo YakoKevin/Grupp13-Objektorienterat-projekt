@@ -5,10 +5,12 @@ import entity.Living;
 import utilz.EntityStates;
 import utilz.ImageServer;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class LivingAnimation {
     private BufferedImage[][] imageGrid;
+    private BufferedImage imageDead;
     private Living living;
     private int animationIndex;
     private int animationTick;
@@ -17,6 +19,11 @@ public class LivingAnimation {
     LivingAnimation(Living living){
         this.living = living;
         setImageGrid(living.getAnimationId());
+        setDeathImage(living.getDeadId());
+    }
+
+    private void setDeathImage(ImageServer.DeathId deadId) {
+        this.imageDead = ImageServer.getImage(deadId);
     }
 
     private void setImageGrid(ImageServer.AnimationIds id){
@@ -77,5 +84,9 @@ public class LivingAnimation {
         if(getFlip() < 0)
             return 53;
         return -12;
+    }
+
+    public BufferedImage getDeadImage() {
+        return imageDead;
     }
 }

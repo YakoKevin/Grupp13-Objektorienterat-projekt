@@ -37,14 +37,19 @@ public class Animation {
     public static void render(Graphics g) {
         if (livingEntites != null) {
                 for (LivingAnimation livingAnimation : livingEntites) {
-                    updateAnimationTick(livingAnimation);
-                    g.drawImage(livingAnimation.getImageGrid()[livingAnimation.getEntityState().ordinal()][livingAnimation.getAnimationIndex()],
-                            livingAnimation.getX() + livingAnimation.getFlipAddition(), livingAnimation.getY()-30, livingAnimation.getFlip()*140, 150, null);
+                    if(livingAnimation.getEntity().isAlive()) {
+                        updateAnimationTick(livingAnimation);
+                        g.drawImage(livingAnimation.getImageGrid()[livingAnimation.getEntityState().ordinal()][livingAnimation.getAnimationIndex()],
+                                livingAnimation.getX() + livingAnimation.getFlipAddition(), livingAnimation.getY() - 30, livingAnimation.getFlip() * 140, 150, null);
+                    } else
+                        g.drawImage(livingAnimation.getDeadImage(), livingAnimation.getX() - 10, livingAnimation.getY() + 20, 50, 50, null);
+                    /*
+                    //TODO: Remove debugging info below
                     if(livingAnimation.getEntityState() == EntityStates.ATTACK){
                         Rectangle rec = livingAnimation.getEntity().getAttackRec();
                         g.drawRect(rec.x, rec.y, rec.width, rec.height);
                     }
-                    g.drawRect(livingAnimation.getX(), livingAnimation.getY(), livingAnimation.getEntity().getWidth(), livingAnimation.getEntity().getHeight());
+                    g.drawRect(livingAnimation.getX(), livingAnimation.getY(), livingAnimation.getEntity().getWidth(), livingAnimation.getEntity().getHeight());*/
             }
         }
 

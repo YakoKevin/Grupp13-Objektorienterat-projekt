@@ -8,6 +8,7 @@ import utilz.ImageServer;
 
 public class Skeleton extends Enemy{
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.ENEMY;
+    private ImageServer.DeathId deathIdentification = ImageServer.DeathId.ENEMY;
 
     public Skeleton(Coordinate startPosition){
         super(startPosition, EntitySetup.ENEMY.getHitBoxWidth(), EntitySetup.ENEMY.getHitBoxHeight(), 120, new Movement(), new AttackModel(10,20));
@@ -17,5 +18,10 @@ public class Skeleton extends Enemy{
     @Override
     public ImageServer.AnimationIds getAnimationId() {
         return identification;
+    }
+
+    @Override
+    public ImageServer.DeathId getDeadId() {
+        return deathIdentification;
     }
 }

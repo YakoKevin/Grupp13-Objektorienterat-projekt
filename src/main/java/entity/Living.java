@@ -57,10 +57,8 @@ public abstract class Living extends Entity implements Attackable{
     public void getHit(Rectangle atkRect, double atkP) {
         if(isAlive && atkRect.intersects(this.hitbox)){
             this.setHealthPoints(this.healthPoints-atkP);
-            System.out.println(this + "HIT");
         }
         if(this.healthPoints<=0){
-            System.out.println(this + "DEAD");
             this.setAlive(false); //ska kanske ändras till ett state som sagt
             this.state = EntityStates.DEAD;
         }
@@ -111,8 +109,13 @@ public abstract class Living extends Entity implements Attackable{
         return attack.getAttackRange();
     }
     public abstract ImageServer.AnimationIds getAnimationId();
+    public abstract ImageServer.DeathId getDeadId();
 
     public Rectangle getAttackRec(){
         return attack.getAttackRectangle(hitbox,dir);
+    }
+
+    public boolean isAlive(){
+        return isAlive;
     }
 }

@@ -120,7 +120,9 @@ public class GamePanel extends JPanel {
     private void drawDoors(Graphics g) {
         if(!level.getCurrentRoomDoors().isEmpty()) {
             for (Door door : level.getCurrentRoomDoors()) {
-                g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR), 50 +door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
+                g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR), 50+door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+                        door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+                        2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
             }
         }
     }
