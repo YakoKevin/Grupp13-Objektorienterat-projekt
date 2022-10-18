@@ -46,13 +46,16 @@ public abstract class Enemy extends Living implements Hostile {
             this.sightRange = sightRange;
         }
 
-        public void think() { //går kanske att ha ett mer beskrivande namn :)
-            if(Math.abs(friendlyLastSeenX - finePositionX) < 150 && Math.abs(friendlyLastSeenY - finePositionY) < 150) {
+        public void think() {
+            if(readyToAttack && isCloseToFriendly(attack.getAttackRange())) {
+                attackFriendly();
+            }
+            else if(isCloseToFriendly(sightRange)) {
                 moveTowardsFriendly();
             }else {
                 moveRandomly();
             }
-//        	System.out.println(friendlyLastSeenX + " : " + finePositionX + " : " + finePositionX + velX);
+            readyToAttack = attack.coolDown();
         }
 
         private void moveRandomly(){
@@ -130,6 +133,10 @@ public abstract class Enemy extends Living implements Hostile {
 
         public void addFriendly(Friendly friendly) {
             this.friendly = friendly;
+        }
+
+        private boolean isCloseToFriendly(float range){
+            return (Math.abs(friendlyLastSeenX - finePositionX) < range && Math.abs(friendlyLastSeenY - finePositionY) <  range);
         }
     }
 }
