@@ -16,10 +16,9 @@ public class Player extends Living implements Friendly{
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.PLAYER;
 
     public Player(Coordinate startCoordinate, int width, int height) {
-        super(startCoordinate, width, height, new Movement(), new AttackModel(20, 100));
+        super(startCoordinate, width, height, new Movement(), new AttackModel(100, 100));
         this.setHealthPoints(100);
-        this.setAttackPoints(20);
-        this.setMovementSpeed(5);
+        this.setMovementSpeed(8);
     }
 
     @Override
@@ -27,18 +26,12 @@ public class Player extends Living implements Friendly{
         return identification;
     }
 
-    //Denna är ju den som ActionController ska anropar på.
     public void attack(){
-        //attack.getAttackCoordinate(finePositionX, finePositionY, this.dir, this.width ,this.height);
-        Rectangle r = attack.getAttackRectangle(finePositionX, finePositionY, dir); //width är samma som attackRange just nu, så att det blir hyfsat symmetriskt åt alla riktningar
+        Rectangle attackRectangle = attack.getAttackRectangle(hitbox, dir);
         for(Hostile hostile : hostiles){
-            hostile.getHit(r, this.getAttackPoints());
+            hostile.getHit(attackRectangle, attack.getAttackDamage());
         }
     }
-
-
-
-    //Denna metod anropar enemy (som har en lista med Friendlies), för att slå Player (Friendly).
 
     public boolean getAttackMode() { // ska kanske vara state
         return this.attackMode;
@@ -55,11 +48,11 @@ public class Player extends Living implements Friendly{
         updateHitbox();
         finePositionX+=velX;
         finePositionY+=velY;
-        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()-this.width){
-            finePositionX = GameConstants.GameSizes.WIDTH.getSize()-this.width;
+        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()){
+            finePositionX = GameConstants.GameSizes.WIDTH.getSize();
         }
-        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-this.height+30){
-            finePositionY =GameConstants.GameSizes.HEIGHT.getSize()-this.height+30;
+        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-50){
+            finePositionY =GameConstants.GameSizes.HEIGHT.getSize()-50;
         }
         if(finePositionX<0){
             finePositionX =0;
@@ -67,8 +60,6 @@ public class Player extends Living implements Friendly{
         if(finePositionY<0){
             finePositionY = 0;
         }
-
-        //System.out.println("x, y och velx och vely " + finePositionX + finePositionY + velX + velY);
     }
 
 

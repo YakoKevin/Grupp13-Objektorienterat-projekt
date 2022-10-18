@@ -8,7 +8,6 @@ import java.awt.*;
 
 public abstract class Enemy extends Living implements Hostile {
     private Brain brain;
-    //private EnemyStates enemyState = IDLE;
 
     public Enemy(Coordinate startPosition, int width, int height, float sightRange, Movement movement, AttackModel attack) {
         super(startPosition, width, height, movement, attack);
@@ -17,6 +16,7 @@ public abstract class Enemy extends Living implements Hostile {
 
 
     public void tick() {
+        updateHitbox();
         brain.think();
     }
 
@@ -63,10 +63,9 @@ public abstract class Enemy extends Living implements Hostile {
 
         private void attackFriendly(){
             //TODO: make enemy rotate towards friendly
-            Rectangle attackRectangle = attack.getAttackRectangle(finePositionX, finePositionY, dir);
+            Rectangle attackRectangle = attack.getAttackRectangle(hitbox, dir);
             friendly.getHit(attackRectangle, attack.getAttackDamage());
             attack.coolDownReset();
-            System.out.println("ATTACK");
         }
 
         public void giveFriendlyCoordinates(float x, float y){

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Entity class for all "living" entities.
  */
 public abstract class Living extends Entity implements Attackable{
-    protected boolean isAlive; //TODO: borde vara en EntityState?
+    protected boolean isAlive = true;
     protected EntityStates state;
     protected Movement movement;
     protected AttackModel attack;
@@ -30,8 +30,6 @@ public abstract class Living extends Entity implements Attackable{
     }
 
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
-    public abstract void attack();
-
     public boolean checkCollision(){
         for (Coordinate obsCoord : obstructionCoordinates){
             if(this.hitbox.contains(obsCoord.getX(),obsCoord.getY()) ){
@@ -59,9 +57,12 @@ public abstract class Living extends Entity implements Attackable{
     public void getHit(Rectangle atkRect, double atkP) {
         if(isAlive && atkRect.intersects(this.hitbox)){
             this.setHealthPoints(this.healthPoints-atkP);
+            System.out.println(this + "HIT");
         }
         if(this.healthPoints<=0){
+            System.out.println(this + "DEAD");
             this.setAlive(false); //ska kanske ändras till ett state som sagt
+            this.state = EntityStates.DEAD;
         }
     }
     
@@ -112,6 +113,6 @@ public abstract class Living extends Entity implements Attackable{
     public abstract ImageServer.AnimationIds getAnimationId();
 
     public Rectangle getAttackRec(){
-        return attack.getAttackRectangle(finePositionX,finePositionY,dir);
+        return attack.getAttackRectangle(hitbox,dir);
     }
 }

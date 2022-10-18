@@ -31,34 +31,10 @@ public abstract class Entity {
 
     public void tick(){
         updateHitbox();
-        /*if((velX>8||velY>8)){
-            velX = 8;velY=8;
 
-
-        }*/
-        /*
-        finePositionX+=velX;
-        finePositionY+=velY;
-        if(finePositionX>GameConstants.GameSizes.WIDTH.getSize()){
-            finePositionX = GameConstants.GameSizes.WIDTH.getSize();
-        }
-        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()){
-            finePositionY =GameConstants.GameSizes.HEIGHT.getSize();
-        }
-        if(finePositionX<0){
-            finePositionX =0;
-        }
-        if(finePositionY<0){
-            finePositionY = 0;
-        }
-
-        System.out.println("x ar" + finePositionX);
-
-
-        //System.out.println("x, y och velx och vely " + finePositionX + finePositionY + velX + velY);*/
     }
 
-    protected void updateHitbox(){ //TODO: Viktigt - måste göra varje update() för att undvika fel.
+    protected void updateHitbox(){
         hitbox.x = (int)finePositionX;
         hitbox.y = (int)finePositionY;
     }
@@ -69,7 +45,6 @@ public abstract class Entity {
 
     //private double x,y;
     public double healthPoints;
-    private double attackPoints; //TODO: borde vara i Attack inte i entity
 
     public float getVelX() {
         return velX;
@@ -99,7 +74,6 @@ public abstract class Entity {
                 (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
     }
 
-    //TODO: fix some float-to-coordinate algorithm instead that all classes can use
     public void setX(float x) {
         this.finePositionX = x;
     }
@@ -120,13 +94,6 @@ public abstract class Entity {
     public int getHeight()
     {
         return (int)height;
-    }
-
-    public double getAttackPoints() {
-        return attackPoints;
-    }
-    public void setAttackPoints(double atkP){
-        this.attackPoints=atkP;
     }
 
     public void setHealthPoints(double hp){

@@ -10,15 +10,13 @@ import java.awt.*;
 public class AttackModel { //
 
     private int attackDamage;
-    private float attackRange;
+    private int attackRange;
     private int coolDown;
     private final int COOL_DOWN_TIME = 15;
 
-    public AttackModel(int attackDamage, float attackRange){
+    public AttackModel(int attackDamage, int attackRange){
         this.attackDamage = attackDamage;
         this.attackRange = attackRange;
-    }
-    public AttackModel(){
     }
     public Coordinate getAttackCoordinate(float atkOffSetX, float atkOffSetY, CardinalDirection dir, int width, int height){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
 
@@ -50,8 +48,8 @@ public class AttackModel { //
         //notifyObservers();
         return new Coordinate(0,0);
     }
-    public Rectangle getAttackRectangle (float x, float y, CardinalDirection direction) {
-        return new Rectangle((int)x + 60*direction.getXOffset(), (int)y+30*direction.getYOffset(),(int)attackRange, (int)attackRange);
+    public Rectangle getAttackRectangle (Rectangle hitbox, CardinalDirection direction) {
+        return new Rectangle(hitbox.x - hitbox.width + hitbox.width*direction.getXOffset(), hitbox.y - 15 + 30*direction.getYOffset(),attackRange, attackRange);
     }
 
     public float getAttackRange() {
