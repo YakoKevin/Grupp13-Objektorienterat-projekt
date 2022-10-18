@@ -9,10 +9,11 @@ import java.awt.image.BufferedImage;
 // TEMPORÄRT !
 public class LevelManager {
     private BufferedImage levelSprite;
+    private BufferedImage doorSprite;
     private int[][] levelData;
 
     public LevelManager(){
-        this.levelSprite = ImageServer.getImage(ImageServer.Ids.LEVEL);
+        this.doorSprite = ImageServer.getImage(ImageServer.Ids.DOOR);
         //importOutsideSprites();
     }
 
@@ -35,7 +36,7 @@ public class LevelManager {
         return levelData[y][x];
     }
     public void draw(Graphics g){
-        g.drawImage(levelSprite, 0, 0, null);
+        g.drawImage(doorSprite, 0, 0, null);
     }
 
     public void update(){

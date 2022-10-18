@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Animation {
-    private static int animationSpeed = 30;
+    private static int animationSpeed = 5;
 
     private static ArrayList<LivingAnimation> livingEntites = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class Animation {
                 for (LivingAnimation entityAnimation : livingEntites) {
                     updateAnimationTick(entityAnimation);
                     g.drawImage(entityAnimation.getImageGrid()[entityAnimation.getEntityState().ordinal()][entityAnimation.getAnimationIndex()],
-                            entityAnimation.getX(), entityAnimation.getY(), null);
+                            entityAnimation.getX(), entityAnimation.getY(), 50, 150, null);
             }
         }
 

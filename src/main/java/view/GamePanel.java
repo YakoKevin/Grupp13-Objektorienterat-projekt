@@ -5,6 +5,7 @@ import general.GameApp;
 import model.level.Level;
 import model.level.room.Door;
 import utilz.GameConstants;
+import utilz.ImageServer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -154,7 +155,8 @@ public class GamePanel extends JPanel {
     private void drawDoors(Graphics g) {
         if(!level.getCurrentRoomDoors().isEmpty()) {
             for (Door door : level.getCurrentRoomDoors()) {
-                g.fillRect(door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
+                //g.fillRect(door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
+                g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR), door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), 2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
             }
         }
     }
