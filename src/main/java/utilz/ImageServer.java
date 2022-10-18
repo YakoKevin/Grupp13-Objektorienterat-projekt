@@ -11,7 +11,8 @@ import java.io.InputStream;
 public enum ImageServer {
     ;
     public enum Ids {
-        PLAYER("player_sprites3.png"),
+        PLAYER("player_sprites_Knightver.png"),
+        KNIGHT("_Run.png"),
         ENEMY("skeleton_sprites.png"),
         LEVEL("bg_sprite2.png"),
         KEY("key_sprite.png");

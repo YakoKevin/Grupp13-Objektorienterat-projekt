@@ -3,8 +3,8 @@ package utilz;
 public enum EntityStates {
     ;
     public enum PlayerStates{
-        IDLE(3),
-        RUNNING(1),
+        IDLE(10),
+        RUNNING(10),
         ATTACK(1);
         int animationSpriteAmount;
 
