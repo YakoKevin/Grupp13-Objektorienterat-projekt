@@ -10,6 +10,11 @@ public class GameMain {
 
     public static void main(String[] args) {
 
+        //game = new GameApp();
+        //GameView gameView = new GameView();
+
+        //ActionController actionController = new ActionController(gameView);
+
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
