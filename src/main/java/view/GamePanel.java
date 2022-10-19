@@ -114,18 +114,33 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         drawUI(g);
         drawDoors(g);
-        //drawWalls(g);
         render(g);
+        //drawWalls(g); // behöver nån tråd alternativt göra fyra stora väggar som omsluter rutan.
+        //drawObstacles(g);
+    }
+
+    private void drawObstacles(Graphics g) {
+        int c = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+        if(!level.getCurrentRoomObstacles().isEmpty()) {
+            for (Coordinate obstacleCoord : level.getCurrentRoomObstacles()) {
+                g.drawImage(ImageServer.getImage(ImageServer.Ids.WALL), // temporärt wall, ska byta till nån passande bild
+                        obstacleCoord.getX() * c , // x och y är kanske feltransponerade
+                        obstacleCoord.getY() * c,
+                        c,
+                        c, null);
+            }
+        }
     }
 
     private void drawWalls(Graphics g) {
+        int c = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
         if(!level.getCurrentRoomWalls().isEmpty()) {
             for (Coordinate wallCoord : level.getCurrentRoomWalls()) {
                 g.drawImage(ImageServer.getImage(ImageServer.Ids.WALL),
-                        wallCoord.getY() * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), // x och y är kanske feltransponerade
-                        wallCoord.getX() * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
-                        GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
-                        GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
+                        wallCoord.getY() * c , // x och y är kanske feltransponerade
+                        wallCoord.getX() * c,
+                        c,
+                        c, null);
             }
         }
     }
