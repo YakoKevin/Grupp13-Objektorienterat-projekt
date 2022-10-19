@@ -7,6 +7,7 @@ import model.level.LevelFactory;
 import utilz.GameConstants;
 import view.*;
 
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,7 +18,7 @@ public class GameApp implements RoomChangeObserver{
     Timer timer = new Timer();
 
 
-    private GameView gameView;
+    public GameView gameView;
     private FPSUpdater fpsUpdater;
 
     // SKAPA EN KLASS MED DESSA
@@ -33,14 +34,15 @@ public class GameApp implements RoomChangeObserver{
     public GameApp(){
         firstSetup();
         fpsUpdater.startGameLoop();
-        timer.schedule(new GameTicker(), 15, 15);
+        timer.schedule(new GameTicker(this), 15, 15);
     }
 
     /**
      * The main logic updater.
+     * * @param gameApp
      */
-    public void gameTick(){
-        currentLevel.tick();
+    public void gameTick(GameApp gameApp){
+        currentLevel.tick(gameApp);
     }
 
     public void roomChangeUpdate() {
@@ -72,10 +74,26 @@ public class GameApp implements RoomChangeObserver{
         currentLevel = levelFactory.simpleLevel(GameConstants.LevelSizes.MEDIUM.getSize(), player);
     }
 
+    public void stopGame(){
+        timer.cancel();
+        for (Iterator<Living> iterator = currentLevel.getCurrentLiving().iterator(); iterator.hasNext();) {
+            iterator.next();
+            iterator.remove();
+        }
+        fpsUpdater.pauseGameLoop();
+    }
+
     public class GameTicker extends TimerTask {
+
+        private GameApp gameApp;
+
+        public GameTicker(GameApp gameApp) {
+            this.gameApp = gameApp;
+        }
+
         @Override
         public void run() {
-            gameTick();
+            gameTick(gameApp);
         }
     }
 }

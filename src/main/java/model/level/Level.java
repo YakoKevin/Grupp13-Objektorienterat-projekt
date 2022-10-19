@@ -3,6 +3,7 @@ package model.level;
 import entity.Enemy;
 import entity.Living;
 import entity.Player;
+import general.GameApp;
 import general.RoomChangeObserver;
 import model.level.room.Door;
 import model.level.room.Room;
@@ -10,8 +11,11 @@ import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
 
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.swing.JOptionPane;
 
 
 /**
@@ -141,8 +145,9 @@ public abstract class Level{
     /**
      * A method that updates all the logic in the {@code level}. When called {@code level} will tick any entities in it.
      * Should not be called too often since all logic in level depends on its frequency.
+     * @param gameApp
      */
-    public void tick(){
+    public void tick(GameApp gameApp){
         if(canGoThroughDoor)
             checkDoorCollision();
         else
@@ -150,6 +155,7 @@ public abstract class Level{
 
         updateEnemies();
         updatePlayer();
+        checkGameStatus(gameApp);
     }
 
     private void doorTimer(){
@@ -211,6 +217,21 @@ public abstract class Level{
     private void updateRoomChangeObservers(){
         for (RoomChangeObserver observer : observers)
             observer.roomChangeUpdate();
+    }
+
+    private void checkGameStatus(GameApp gameApp){
+        if(player.getHealthPoints() <= 0) {
+            int result = 1;
+            JOptionPane.showMessageDialog(null, "Game has finished");
+            // No  - 1
+            // Yes - 0
+            gameApp.stopGame();
+            if(result == 1) {
+                gameApp.gameView.jFrame.dispatchEvent(new WindowEvent(gameApp.gameView.jFrame, WindowEvent.WINDOW_CLOSING));
+            }else {
+                gameApp = new GameApp();
+            }
+        }
     }
 
 }
