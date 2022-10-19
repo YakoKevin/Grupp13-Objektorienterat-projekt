@@ -10,6 +10,7 @@ import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
 import utilz.CardinalDirection;
 import utilz.Coordinate;
+import utilz.LivingStates;
 
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -166,6 +167,13 @@ public abstract class Level{
         }
     }
 
+    private void stopEnemies(){
+        for (Enemy enemy : currentRoom.getEnemies()) {
+            enemy.setState(LivingStates.IDLE);
+//            enemy.tick();
+        }
+    }
+
     private void updateEnemies(){
         for (Enemy enemy : currentRoom.getEnemies()) {
             enemy.giveFriendlyCoordinates(player.getX(), player.getY());
@@ -221,6 +229,7 @@ public abstract class Level{
 
     private void checkGameStatus(GameApp gameApp){
         if(player.getHealthPoints() <= 0) {
+            stopEnemies();
             int result = 1;
             JOptionPane.showMessageDialog(null, "Game has finished");
             // No  - 1

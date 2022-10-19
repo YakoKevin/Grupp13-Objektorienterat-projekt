@@ -7,7 +7,6 @@ import model.level.LevelFactory;
 import utilz.GameConstants;
 import view.*;
 
-import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -76,10 +75,8 @@ public class GameApp implements RoomChangeObserver{
 
     public void stopGame(){
         timer.cancel();
-        for (Iterator<Living> iterator = currentLevel.getCurrentLiving().iterator(); iterator.hasNext();) {
-            iterator.next();
-            iterator.remove();
-        }
+        currentLevel.getCurrentLiving().clear();
+        Animation.clearEntities();
         fpsUpdater.pauseGameLoop();
     }
 
