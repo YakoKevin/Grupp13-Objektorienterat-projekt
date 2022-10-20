@@ -101,7 +101,7 @@ public abstract class Level{
     /**
      * @return a boolean if the argument {@code coordinate} is equal to any wall or obstacle {@code coordinate}.
      */
-    public boolean isCoordinateInWallOrObstacle(Coordinate coordinate){
+    public boolean isCoordinateInWallOrObstacle(Coordinate coordinate) {
         return currentRoom.isCoordinateInWallOrObstacle(coordinate);
     }
 
@@ -193,10 +193,11 @@ public abstract class Level{
       }
     }
 
-    private void doCollisions(){
+    private boolean doCollisions(){
         if(isCoordinateInWallOrObstacle(player.getPosition())){
-
+            return true;
         }
+        return false;
     }
 
     /**

@@ -14,7 +14,6 @@ import java.awt.event.KeyListener;
 public class Engine {
 
     private static GameStateManager gameStateManager;
-
     private static WindowManager windowManager;
     private static Timer timer;
 
@@ -41,7 +40,7 @@ public class Engine {
 
     }
 
-    private static class GameScreen extends JPanel {
+    public static class GameScreen extends JPanel {
 
         private static final long serialVersionUID = 1L;
 

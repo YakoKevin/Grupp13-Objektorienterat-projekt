@@ -124,7 +124,7 @@ public enum SquareMapGenerator {
         levelMap.addCoordinatePath(nodePath);
     }
 
-    private static void placeEdgesForSortedPath(LevelMap levelMap){
+    private static void placeEdgesForSortedPath(LevelMap levelMap) {
         for(int i = 0; i < levelMap.getMainNodePathCoordinates().length - 1; i++) {
             Coordinate[] coordinates = levelMap.getMainNodePathCoordinates();
             if(coordinates[i].getX() + 1 == levelMap.getMainNodePathCoordinates()[i+1].getX()){
