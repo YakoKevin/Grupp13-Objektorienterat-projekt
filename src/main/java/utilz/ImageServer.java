@@ -17,7 +17,7 @@ public enum ImageServer {
         KEY("key_sprite.png"),
         DOOR("door_sprite.png"),
         WALL("brick_wall.png"),
-        FLOOR("floor_floor.png"),
+        FLOOR("floor.png"),
         BACKGROUND("background.png");
         private String path;
 

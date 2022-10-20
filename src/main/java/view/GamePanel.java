@@ -44,7 +44,7 @@ public class GamePanel extends JPanel {
     //TODO: Se till att ha LEVEL ist. -> hämta där fienderna och player och loopa genom dem alla för att hämta animation och sådant
     public GamePanel(GameApp gameApp, FPSUpdater fpsUpdater, Level level){
         addKeyListener(new ActionController(this, level.getPlayer()));
-        setBackground(Color.ORANGE);
+        setBackground(Color.GREEN);
         setPanelSize();
         int width = 50;
         this.level = level;
@@ -113,57 +113,74 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        drawUI(g);
+        drawMap(g);
+        drawWalls(g);
         drawDoors(g);
+        drawUI(g);
+        drawObstacles(g);
         render(g);
-        //drawWalls(g); // behöver nån tråd alternativt göra fyra stora väggar som omsluter rutan.
-        //drawObstacles(g);
     }
 
+    public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
+    public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
 
     private void drawObstacles(Graphics g) {
-        int c = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
         if(!level.getCurrentRoomObstacles().isEmpty()) {
-            for (Coordinate obstacleCoord : level.getCurrentRoomObstacles()) {
-                g.drawImage(ImageServer.getImage(ImageServer.Ids.WALL), // temporärt wall, ska byta till nån passande bild
-                        obstacleCoord.getX() * c, // x och y är kanske feltransponerade
-                        obstacleCoord.getY() * c,
-                        c,
-                        c, null);
+            for (Coordinate obsCoord : level.getCurrentRoomObstacles()) {
+                g.drawImage(wall,
+                        obsCoord.getY() * scaling, // x och y är kanske feltransponerade
+                        obsCoord.getX() * scaling,
+                        scaling, scaling, null);
             }
         }
 
     }
 
     private void drawWalls(Graphics g) {
-        int c = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+
         if(!level.getCurrentRoomWalls().isEmpty()) {
             for (Coordinate wallCoord : level.getCurrentRoomWalls()) {
-                g.drawImage(ImageServer.getImage(ImageServer.Ids.WALL),
-                        wallCoord.getY() * c , // x och y är kanske feltransponerade
-                        wallCoord.getX() * c,
-                        c,
-                        c, null);
+                g.drawImage(wall,
+                        wallCoord.getY() * scaling, // x och y är kanske feltransponerade
+                        wallCoord.getX() * scaling,
+                        scaling, scaling, null);
             }
         }
+
     }
 
     private void drawDoors(Graphics g) {
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+
         if(!level.getCurrentRoomDoors().isEmpty()) {
             for (Door door : level.getCurrentRoomDoors()) {
+
                 g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR),
-                        50 +door.getCoordinate().getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
-                        door.getCoordinate().getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
-                        2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
-                        2 * GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(), null);
+                        50 + door.getCoordinate().getX() * scaling,
+                        + door.getCoordinate().getY() * scaling,
+                        2 * scaling, 2 * scaling, null);
+
             }
         }
     }
 
 
     private void drawMap(Graphics g) {
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
+        int h = GameConstants.RoomMapSizes.HEIGHT.getSize();
+        int w = GameConstants.RoomMapSizes.WIDTH.getSize();
+
+        for(int i = 0; i< h; i++) {
+            for(int j = 0; j < w; j++) {
+                g.drawImage(floor ,
+                        j * scaling,i * scaling,
+                        scaling, scaling, null);
+            }
+        }
     }
 
     protected void render(Graphics g){
@@ -173,7 +190,7 @@ public class GamePanel extends JPanel {
     public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
         g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(new Color(255, 0, 70));
+        g.setColor(new Color(255, 255, 70));
         g.drawString("HP: " + hpStr,10,10);
         g.setColor(Color.YELLOW);
         g.setColor(Color.WHITE);
