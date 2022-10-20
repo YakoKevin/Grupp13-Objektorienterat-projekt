@@ -10,32 +10,19 @@ public class GameMain {
 
     public static void main(String[] args) {
 
-        //game = new GameApp();
+        game = new GameApp();
         //GameView gameView = new GameView();
 
         //ActionController actionController = new ActionController(gameView);
 
-        SwingUtilities.invokeLater(new Runnable() {
+        //SwingUtilities.invokeLater(new Runnable() {
 
-            @Override
-            public void run() {
-                Engine.init();
-                Engine.start();
-            }
-        });
+        //    @Override
+        //    public void run() {
+        //        Engine.init();
+        //        Engine.start();
+        //    }
+       // });
 
-    }
-
-    public static void reset() {
-        game=null;
-        game= new GameApp();
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                Engine.init();
-                Engine.start();
-            }
-        });
     }
 }
