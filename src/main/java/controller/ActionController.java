@@ -39,6 +39,12 @@ public class ActionController implements KeyListener {
         /*if(player.getX()<0 || player.getY()<0) {
             return;
         }*/
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            player.setState(LivingStates.ATTACK);
+            player.attack();
+            player.setAttackMode(true);
+            return;
+        }
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=true;
             //movement.setUp(true);
@@ -97,11 +103,7 @@ public class ActionController implements KeyListener {
         }
 
 
-        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            player.setState(LivingStates.ATTACK);
-            player.attack();
-            player.setAttackMode(true);
-        }
+
     }
 
 
