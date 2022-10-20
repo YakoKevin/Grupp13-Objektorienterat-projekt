@@ -3,13 +3,16 @@ package view;
 import controller.gamestates.GameState;
 import controller.gamestates.GameStateManager;
 import general.GameApp;
+import utilz.ImageServer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class MainMenu extends GameState {
 
+    public static BufferedImage background = ImageServer.getImage(ImageServer.Ids.BACKGROUND);
     private String[] optionsMenu;
     private static final String START_GAME = "Start Game!";
     private static final String SCORE = "Score";
@@ -29,8 +32,13 @@ public class MainMenu extends GameState {
 
     @Override
     protected void render(Graphics graphics) {
-        graphics.setColor(new Color(30, 30, 70));
-        graphics.fillRect(0, 0, WindowManager.WIDTH, WindowManager.HEIGHT);
+        //graphics.setColor(new Color(30, 30, 70));
+        //graphics.fillRect(0, 0, WindowManager.WIDTH, WindowManager.HEIGHT);
+
+        graphics.drawImage(background,
+                0,
+                0,
+                512, 512, null);
 
         graphics.setFont(new Font("Araial", Font.PLAIN, 25));
         for(int i=0;i<this.optionsMenu.length;i++) {

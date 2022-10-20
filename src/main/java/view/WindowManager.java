@@ -9,8 +9,8 @@ public class WindowManager {
     private JFrame frame;
     private JPanel panel;
 
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 450;
+    public static final int WIDTH = 512;
+    public static final int HEIGHT = 512;
 
     public WindowManager() {
         this.frame = new JFrame("Dungeon Crawler");
