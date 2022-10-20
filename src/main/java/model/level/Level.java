@@ -118,7 +118,7 @@ public abstract class Level{
             currentRoom = createRoom(newRoomCoordinate);
             updateRoomChangeObservers();
             giveObstructionCoordinatesToLiving();
-            System.out.println(newRoomCoordinate.getX() + ", " + newRoomCoordinate.getY());
+            //System.out.println(newRoomCoordinate.getX() + ", " + newRoomCoordinate.getY());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

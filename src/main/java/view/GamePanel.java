@@ -124,14 +124,15 @@ public class GamePanel extends JPanel {
     public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
     public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
 
+
     private void drawObstacles(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
         if(!level.getCurrentRoomObstacles().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomObstacles()) {
                 g.drawImage(wall,
-                        obsCoord.getY() * scaling, // x och y är kanske feltransponerade
-                        obsCoord.getX() * scaling,
+                        obsCoord.getX() * scaling, // x och y är kanske feltransponerade
+                        obsCoord.getY() * scaling,
                         scaling, scaling, null);
             }
         }

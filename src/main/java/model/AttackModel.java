@@ -20,7 +20,7 @@ public class AttackModel { //
     }
     public Coordinate getAttackCoordinate(float atkOffSetX, float atkOffSetY, CardinalDirection dir, int width, int height){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
 
-        //TODO: ska ta lägga till för fyra andra riktningar
+        //TODO: ska lägga till för fyra andra riktningar
         if(dir == CardinalDirection.WEST) { //left
             atkOffSetX -= height;
         }

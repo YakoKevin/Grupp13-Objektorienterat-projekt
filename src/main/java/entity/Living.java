@@ -30,26 +30,32 @@ public abstract class Living extends Entity implements Attackable{
     //Denna ska ActionController kalla på (och i Playerklassen finns koden sedan.)
     public boolean checkCollision(){
         for (Coordinate obsCoord : obstructionCoordinates){
-            if(this.hitbox.contains(obsCoord.getX(),obsCoord.getY()) ){
+            Rectangle r = new Rectangle(obsCoord.getX(),obsCoord.getY(),42,42);
+            if(this.hitbox.contains(r)){
+                System.out.println("Collision");
                 return true;
             }
         }
         return false;
     }
-    public boolean checkIfInScreen(){
-        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()-this.width){
-            return true;
-        }
-        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-this.height){
-            return true;
+    public boolean checkIfInScreenX(){
+        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()){
+            return false;
         }
         if(finePositionX<0){
-            return true;
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkIfInScreenY(){
+        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-this.height){
+            return false;
         }
         if(finePositionY<0){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public void getHit(Rectangle atkRect, double atkP) {
