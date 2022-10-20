@@ -102,5 +102,11 @@ public class Coordinate {
     public Coordinate add(Coordinate offset, int multiplier) {
         return new Coordinate(this.x + offset.getX()* multiplier, this.y  + offset.getY()* multiplier);
     }
+
+    @Override
+    public String toString() {
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+        return "X:"+ this.x*scaling + " -- Y:"+ this.y*scaling;
+    }
 }
 

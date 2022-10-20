@@ -39,12 +39,6 @@ public class ActionController implements KeyListener {
         /*if(player.getX()<0 || player.getY()<0) {
             return;
         }*/
-        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            player.setState(LivingStates.ATTACK);
-            player.attack();
-            player.setAttackMode(true);
-            return;
-        }
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=true;
             //movement.setUp(true);
@@ -92,6 +86,7 @@ public class ActionController implements KeyListener {
             dir = CardinalDirection.SOUTHEAST;
         }
         if(up||right||down||left){
+            System.out.println(player.getX()  + "-" + player.getY());
             player.setDirection(dir);
             player.setState(LivingStates.RUNNING);
             //player.updateMovement();
@@ -103,7 +98,11 @@ public class ActionController implements KeyListener {
         }
 
 
-
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+            player.setState(LivingStates.ATTACK);
+            player.attack();
+            player.setAttackMode(true);
+        }
     }
 
 
@@ -147,7 +146,7 @@ public class ActionController implements KeyListener {
         }
         if(up||right||down||left){
             if(up&&!down){
-            player.setVelY(-(float)player.getMovementSpeed());
+                player.setVelY(-(float)player.getMovementSpeed());
             }
             if(!up&&down){
                 player.setVelY((float)player.getMovementSpeed());

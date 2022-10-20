@@ -46,6 +46,8 @@ public abstract class Level{
         this.roomTypes = roomTypeFunctions;
         this.player = player;
         this.currentRoom = createRoom(levelMap.getStartCoordinate());
+        updateRoomChangeObservers();
+        giveObstructionCoordinatesToLiving();
     }
 
 
@@ -118,7 +120,7 @@ public abstract class Level{
             currentRoom = createRoom(newRoomCoordinate);
             updateRoomChangeObservers();
             giveObstructionCoordinatesToLiving();
-            //System.out.println(newRoomCoordinate.getX() + ", " + newRoomCoordinate.getY());
+            System.out.println(newRoomCoordinate.getX() + ", " + newRoomCoordinate.getY());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -126,6 +128,7 @@ public abstract class Level{
 
     private void giveObstructionCoordinatesToLiving(){
         ArrayList<Coordinate> list = new ArrayList<>(getCurrentRoomWalls());
+//        ArrayList<Coordinate> list = new ArrayList<>(getCurrentRoomObstacles());
         list.addAll(getCurrentRoomObstacles());
         player.giveObstructionList(list);
         for(Enemy enemy : currentRoom.getEnemies()){
@@ -187,10 +190,10 @@ public abstract class Level{
     }
 
     private void checkDoorCollision(){
-      if(isCoordinateInDoor(player.getPosition())){
-          canGoThroughDoor = false;
-          changeRoom();
-      }
+        if(isCoordinateInDoor(player.getPosition())){
+            canGoThroughDoor = false;
+            changeRoom();
+        }
     }
 
     private void doCollisions(){

@@ -17,7 +17,7 @@ public class Player extends Living implements Friendly{
     private ImageServer.DeathId deathIdentification = ImageServer.DeathId.PLAYER;
 
     public Player(Coordinate startCoordinate, int width, int height) {
-        super(startCoordinate, width, height, new Movement(), new AttackModel(25, 100));
+        super(startCoordinate, width, height, new Movement(), new AttackModel(100, 100));
         this.setHealthPoints(100);
         this.setMovementSpeed(8);
     }
@@ -47,37 +47,7 @@ public class Player extends Living implements Friendly{
     @Override
     public void tick(){
         updateHitbox();
-
-        float tempX=finePositionX,tempY = finePositionY;
-        finePositionX += velX;
-        finePositionY += velY;
-
-        if(!checkIfInScreenX()){
-            finePositionX = tempX;
-        }
-        if(!checkIfInScreenY()){
-            finePositionY=tempY;
-        }
-        /*
-        if(checkCollision()){
-            finePositionX = tempX;
-            finePositionY = tempY;
-            //System.out.println("Collision at (x,y)" +this.finePositionX+ " "+ this.finePositionY );
-        }*/
-
-        /*
-        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()){
-            finePositionX = GameConstants.GameSizes.WIDTH.getSize();
-        }
-        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-50){
-            finePositionY =GameConstants.GameSizes.HEIGHT.getSize()-50;
-        }
-        if(finePositionX<0){
-            finePositionX =0;
-        }
-        if(finePositionY<0){
-            finePositionY = 0;
-        }*/
+        checkEntityMovement();
     }
 
     @Override

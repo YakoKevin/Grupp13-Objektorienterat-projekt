@@ -131,8 +131,8 @@ public class GamePanel extends JPanel {
         if(!level.getCurrentRoomObstacles().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomObstacles()) {
                 g.drawImage(wall,
-                        obsCoord.getX() * scaling, // x och y är kanske feltransponerade
-                        obsCoord.getY() * scaling,
+                        obsCoord.getY() * scaling, // x och y är kanske feltransponerade
+                        obsCoord.getX() * scaling,
                         scaling, scaling, null);
             }
         }

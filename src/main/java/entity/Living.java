@@ -3,6 +3,7 @@ package entity;
 import model.AttackModel;
 import model.Movement;
 import utilz.*;
+import utilz.GameConstants.GameScalingFactors;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -38,24 +39,20 @@ public abstract class Living extends Entity implements Attackable{
         }
         return false;
     }
-    public boolean checkIfInScreenX(){
-        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()){
-            return false;
+    public boolean checkIfInScreen(){
+        if(finePositionX> GameConstants.GameSizes.WIDTH.getSize()-this.width){
+            return true;
+        }
+        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-this.height){
+            return true;
         }
         if(finePositionX<0){
-            return false;
-        }
-        return true;
-    }
-
-    public boolean checkIfInScreenY(){
-        if(finePositionY>GameConstants.GameSizes.HEIGHT.getSize()-this.height){
-            return false;
+            return true;
         }
         if(finePositionY<0){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void getHit(Rectangle atkRect, double atkP) {
@@ -67,7 +64,7 @@ public abstract class Living extends Entity implements Attackable{
             this.state = LivingStates.DEAD;
         }
     }
-    
+
 
     public void setMovementSpeed(double speed){
         this.movementSpeed=speed;
@@ -122,4 +119,36 @@ public abstract class Living extends Entity implements Attackable{
     public boolean isAlive(){
         return isAlive;
     }
+
+    protected void checkEntityMovement() {
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+
+        float tmpX = finePositionX + velX;
+        float tmpY = finePositionY + velY;
+        boolean intersect = false;
+        Rectangle playerPosition = new Rectangle((int)tmpX, (int)tmpY, width, height);
+        for (Coordinate coordinate : obstructionCoordinates) {
+            Rectangle obsCoordinate = new Rectangle(coordinate.getY()*scaling, coordinate.getX()*scaling, scaling, scaling);
+            if(playerPosition.intersects(obsCoordinate)) {
+                intersect = true;
+                break;
+            }
+        }
+
+        if(tmpX> GameConstants.GameSizes.WIDTH.getSize()){
+            finePositionX = GameConstants.GameSizes.WIDTH.getSize();
+        }else if(tmpY>GameConstants.GameSizes.HEIGHT.getSize()-50){
+            finePositionY =GameConstants.GameSizes.HEIGHT.getSize()-50;
+        }else if(tmpX<0){
+            finePositionX =0;
+        }else if(tmpY<0){
+            finePositionY = 0;
+        }else if(intersect){
+
+        }else{
+            finePositionX = tmpX;
+            finePositionY = tmpY;
+        }
+    }
+
 }
