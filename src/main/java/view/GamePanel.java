@@ -106,7 +106,7 @@ public class GamePanel extends JPanel {
         //setMinimumSize(size);
         setPreferredSize(size);
         //setMaximumSize(size);
-        //System.out.println("Size : " + GAME_WIDTH + " : " + GAME_HEIGHT);
+        System.out.println("Size : " + GAME_WIDTH + " : " + GAME_HEIGHT);
     }
 
 
@@ -117,21 +117,20 @@ public class GamePanel extends JPanel {
         drawDoors(g);
         render(g);
         //drawWalls(g); // behöver nån tråd alternativt göra fyra stora väggar som omsluter rutan.
-        drawObstacles(g);
+        //drawObstacles(g);
     }
 
-    public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
-    public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
 
     private void drawObstacles(Graphics g) {
-        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+        int c = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
         if(!level.getCurrentRoomObstacles().isEmpty()) {
-            for (Coordinate obsCoord : level.getCurrentRoomObstacles()) {
-                g.drawImage(wall,
-                        obsCoord.getY() * scaling, // x och y är kanske feltransponerade
-                        obsCoord.getX() * scaling,
-                        scaling, scaling, null);
+            for (Coordinate obstacleCoord : level.getCurrentRoomObstacles()) {
+                g.drawImage(ImageServer.getImage(ImageServer.Ids.WALL), // temporärt wall, ska byta till nån passande bild
+                        obstacleCoord.getX() * c, // x och y är kanske feltransponerade
+                        obstacleCoord.getY() * c,
+                        c,
+                        c, null);
             }
         }
 

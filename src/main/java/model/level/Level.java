@@ -193,11 +193,9 @@ public abstract class Level{
       }
     }
 
-    private boolean doCollisions(){
+    private void doCollisions(){
         if(isCoordinateInWallOrObstacle(player.getPosition())){
-            return true;
         }
-        return false;
     }
 
     /**

@@ -40,7 +40,7 @@ public class Engine {
 
     }
 
-    public static class GameScreen extends JPanel {
+    private static class GameScreen extends JPanel {
 
         private static final long serialVersionUID = 1L;
 
