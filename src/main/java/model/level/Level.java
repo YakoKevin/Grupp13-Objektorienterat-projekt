@@ -38,6 +38,8 @@ public abstract class Level{
     protected final LevelMap levelMap;
     protected final RoomTypeFunction[] roomTypes;
     private final ArrayList<RoomChangeObserver> observers = new ArrayList<>();
+    private final ArrayList<RoomChangeObserver> Deffobservers = new ArrayList<>();
+
     private boolean canGoThroughDoor = true;
     private int doorTimer;
 
@@ -157,9 +159,12 @@ public abstract class Level{
         else
             doorTimer();
 
+        if (!player.isAlive() )
+            updatePlayerDeffObservers();
+
         updateEnemies();
         updatePlayer();
-        checkGameStatus(gameApp);
+        //checkGameStatus(gameApp);
     }
 
     private void doorTimer(){
@@ -170,7 +175,7 @@ public abstract class Level{
         }
     }
 
-    private void stopEnemies(){
+    public void stopEnemies(){
         for (Enemy enemy : currentRoom.getEnemies()) {
             enemy.setState(LivingStates.IDLE);
 //            enemy.tick();
@@ -229,20 +234,13 @@ public abstract class Level{
             observer.roomChangeUpdate();
     }
 
-    private void checkGameStatus(GameApp gameApp){
-        if(player.getHealthPoints() <= 0) {
-            stopEnemies();
-            int result = 1;
-            JOptionPane.showMessageDialog(null, "Game has finished");
-            // No  - 1
-            // Yes - 0
-            gameApp.stopGame();
-            if(result == 1) {
-                gameApp.gameView.jFrame.dispatchEvent(new WindowEvent(gameApp.gameView.jFrame, WindowEvent.WINDOW_CLOSING));
-            }else {
-                gameApp = new GameApp();
-            }
-        }
+    public void addPlayerDeffObserver(RoomChangeObserver observer){
+        Deffobservers.add(observer);
+    }
+
+    private void updatePlayerDeffObservers(){
+        for (RoomChangeObserver observer : Deffobservers)
+            observer.roomChangeUpdate();
     }
 
 }

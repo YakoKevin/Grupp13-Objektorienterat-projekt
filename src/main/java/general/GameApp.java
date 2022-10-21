@@ -7,10 +7,12 @@ import model.level.LevelFactory;
 import utilz.GameConstants;
 import view.*;
 
+import javax.swing.*;
+import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameApp implements RoomChangeObserver{
+public class GameApp implements RoomChangeObserver, PlayerDeffUpserver{
 
     private final LevelFactory levelFactory = new LevelFactory();
     private Level currentLevel;
@@ -80,6 +82,11 @@ public class GameApp implements RoomChangeObserver{
         fpsUpdater.pauseGameLoop();
     }
 
+    @Override
+    public void updatePlayerDeffObservers() {
+        checkGameStatus();
+    }
+
     public class GameTicker extends TimerTask {
 
         private GameApp gameApp;
@@ -91,6 +98,22 @@ public class GameApp implements RoomChangeObserver{
         @Override
         public void run() {
             gameTick(gameApp);
+        }
+    }
+
+    private void checkGameStatus(){
+        if(currentLevel.getPlayer().getHealthPoints() <= 0) {
+            currentLevel.stopEnemies();
+            int result = 1;
+            JOptionPane.showMessageDialog(null, "Game has finished");
+            // No  - 1
+            // Yes - 0
+            stopGame();
+            if(result == 1) {
+                gameView.jFrame.dispatchEvent(new WindowEvent(gameView.jFrame, WindowEvent.WINDOW_CLOSING));
+            }else {
+                //gameApp = new GameApp();
+            }
         }
     }
 }
