@@ -7,11 +7,11 @@ package view;
 public class FPSUpdater implements Runnable {
     private final int MAX_FPS = 120;
     private final int MAX_UPS = 200;
-    private GamePanel gamePanel;
+    private IRepaint repaint;
     private Thread gameThread;
 
-    public FPSUpdater(GamePanel gamePanel){
-        this.gamePanel = gamePanel;
+    public FPSUpdater(IRepaint repaint){
+        this.repaint = repaint;
     }
 
     public void startGameLoop(){
@@ -56,7 +56,7 @@ public class FPSUpdater implements Runnable {
             }
 
             if (deltaF >= 1){
-                this.gamePanel.repaint();
+                this.repaint.repaint();
                 fps++;
                 deltaF--;
             }
