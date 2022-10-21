@@ -4,6 +4,7 @@ import entity.Enemy;
 import entity.Living;
 import entity.Player;
 import general.GameApp;
+import general.PlayerDeathObserver;
 import general.RoomChangeObserver;
 import model.level.room.Door;
 import model.level.room.Room;
@@ -12,11 +13,8 @@ import utilz.CardinalDirection;
 import utilz.Coordinate;
 import utilz.LivingStates;
 
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-
-import javax.swing.JOptionPane;
 
 
 /**
@@ -38,7 +36,7 @@ public abstract class Level{
     protected final LevelMap levelMap;
     protected final RoomTypeFunction[] roomTypes;
     private final ArrayList<RoomChangeObserver> observers = new ArrayList<>();
-    private final ArrayList<RoomChangeObserver> Deffobservers = new ArrayList<>();
+    private final ArrayList<PlayerDeathObserver> deathObservers = new ArrayList<>();
 
     private boolean canGoThroughDoor = true;
     private int doorTimer;
@@ -151,16 +149,15 @@ public abstract class Level{
     /**
      * A method that updates all the logic in the {@code level}. When called {@code level} will tick any entities in it.
      * Should not be called too often since all logic in level depends on its frequency.
-     * @param gameApp
      */
-    public void tick(GameApp gameApp){
+    public void tick(){
         if(canGoThroughDoor)
             checkDoorCollision();
         else
             doorTimer();
 
         if (!player.isAlive() )
-            updatePlayerDeffObservers();
+            updatePlayerDeathObserver();
 
         updateEnemies();
         updatePlayer();
@@ -225,22 +222,22 @@ public abstract class Level{
     /**
      * To add a new observer, listening to whenever a new room is created.
      */
-    public void addRoomChangeObserver(RoomChangeObserver observer){
-        observers.add(observer);
-    }
-
     private void updateRoomChangeObservers(){
         for (RoomChangeObserver observer : observers)
             observer.roomChangeUpdate();
     }
 
-    public void addPlayerDeffObserver(RoomChangeObserver observer){
-        Deffobservers.add(observer);
+    public void addRoomChangeObserver(RoomChangeObserver observer){
+        observers.add(observer);
     }
 
-    private void updatePlayerDeffObservers(){
-        for (RoomChangeObserver observer : Deffobservers)
-            observer.roomChangeUpdate();
+    public void addPlayerDeathObserver(PlayerDeathObserver observer){
+        deathObservers.add(observer);
+    }
+
+    private void updatePlayerDeathObserver(){
+        for (PlayerDeathObserver observer : deathObservers)
+            observer.updatePlayerDeathObserver();
     }
 
 }

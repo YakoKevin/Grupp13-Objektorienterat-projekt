@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameApp implements RoomChangeObserver, PlayerDeffUpserver{
+public class GameApp implements RoomChangeObserver, PlayerDeathObserver {
 
     private final LevelFactory levelFactory = new LevelFactory();
     private Level currentLevel;
@@ -35,15 +35,15 @@ public class GameApp implements RoomChangeObserver, PlayerDeffUpserver{
     public GameApp(){
         firstSetup();
         fpsUpdater.startGameLoop();
-        timer.schedule(new GameTicker(this), 15, 15);
+        timer.schedule(new GameTicker(), 15, 15);
     }
 
     /**
      * The main logic updater.
      * * @param gameApp
      */
-    public void gameTick(GameApp gameApp){
-        currentLevel.tick(gameApp);
+    public void gameTick(){
+        currentLevel.tick();
     }
 
     public void roomChangeUpdate() {
@@ -57,6 +57,7 @@ public class GameApp implements RoomChangeObserver, PlayerDeffUpserver{
         setupLevel(player);
         setupView();
         currentLevel.addRoomChangeObserver(this);
+        currentLevel.addPlayerDeathObserver(this);
         for(Living living : currentLevel.getCurrentLiving())
             Animation.addEntity(living);
     }
@@ -78,26 +79,24 @@ public class GameApp implements RoomChangeObserver, PlayerDeffUpserver{
     public void stopGame(){
         timer.cancel();
         currentLevel.getCurrentLiving().clear();
-        Animation.clearEntities();
         fpsUpdater.pauseGameLoop();
+        Animation.clearEntities();
     }
 
     @Override
-    public void updatePlayerDeffObservers() {
+    public void updatePlayerDeathObserver() {
         checkGameStatus();
     }
 
     public class GameTicker extends TimerTask {
 
-        private GameApp gameApp;
 
-        public GameTicker(GameApp gameApp) {
-            this.gameApp = gameApp;
+        public GameTicker() {
         }
 
         @Override
         public void run() {
-            gameTick(gameApp);
+            gameTick();
         }
     }
 
