@@ -1,6 +1,6 @@
-package entity;
+package model.entity;
 
-import static utilz.EntitySetup.ENEMY;
+import static model.entity.EntitySetup.ENEMY;
 
 public class EnemyFactory {
 

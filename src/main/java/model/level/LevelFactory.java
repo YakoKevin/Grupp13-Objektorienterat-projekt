@@ -1,6 +1,6 @@
 package model.level;
 
-import entity.Player;
+import model.entity.Player;
 
 /**
  * Factory class for levels. Contains all the different types of levels available to create. Is a facade tp the level module.

@@ -1,4 +1,4 @@
-package utilz;
+package model.entity;
 
 /**
  * Contains the different states that a Living can be in and its amount of sprites for the animation.

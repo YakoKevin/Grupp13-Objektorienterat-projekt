@@ -3,14 +3,11 @@ package model.level.room;
 //TODO: Make sure all the game logic has the same references to height and length so that no errors occur because of mis-
 // matched numbers!
 
-import entity.*;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.GameConstants.*;
-import view.Animation;
+import model.entity.*;
+import model.Coordinate;
+import model.GameConstants.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A class representing a Rooms main construction: walls and obstacles and doors. Also keeps and creates the enemies.

@@ -1,11 +1,11 @@
 package controller;
 
-import entity.Player;
-import model.AttackModel;
-import model.Movement;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.LivingStates;
+import model.entity.Player;
+import model.entity.AttackModel;
+import model.entity.Movement;
+import model.CardinalDirection;
+import model.Coordinate;
+import model.entity.LivingStates;
 import view.GamePanel;
 
 import java.awt.event.KeyEvent;

@@ -1,8 +1,8 @@
 package model.level.room;
 
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.GameConstants;
+import model.CardinalDirection;
+import model.Coordinate;
+import model.GameConstants;
 
 /**
  * Enum with the four different door types. Doors contain coordinate and a direction.

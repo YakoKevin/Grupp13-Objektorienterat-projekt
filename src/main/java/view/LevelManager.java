@@ -1,8 +1,5 @@
 package view;
 
-import general.GameApp;
-import utilz.ImageServer;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

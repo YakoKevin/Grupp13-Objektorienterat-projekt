@@ -1,17 +1,16 @@
 package model.level;
 
-import entity.Enemy;
-import entity.Living;
-import entity.Player;
-import general.GameApp;
-import general.PlayerDeathObserver;
-import general.RoomChangeObserver;
+import model.entity.Enemy;
+import model.entity.Living;
+import model.entity.Player;
+import model.PlayerDeathObserver;
+import model.RoomChangeObserver;
 import model.level.room.Door;
 import model.level.room.Room;
 import model.level.room.RoomTypeFunction;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.LivingStates;
+import model.CardinalDirection;
+import model.Coordinate;
+import model.entity.LivingStates;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;

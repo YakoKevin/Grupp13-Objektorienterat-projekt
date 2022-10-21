@@ -1,9 +1,8 @@
-package model;
+package model.entity;
 
 
-import entity.Player;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
+import model.CardinalDirection;
+import model.Coordinate;
 
 import java.awt.*;
 

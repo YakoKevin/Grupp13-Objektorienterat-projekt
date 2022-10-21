@@ -1,13 +1,8 @@
-import entity.Player;
+import model.entity.Player;
 import model.level.*;
-import model.level.room.Door;
 import org.junit.Test;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.GameConstants;
-
-import java.util.ArrayList;
-import java.util.Iterator;
+import model.Coordinate;
+import model.GameConstants;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

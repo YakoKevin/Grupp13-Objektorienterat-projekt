@@ -1,7 +1,5 @@
-package entity;
+package model.entity;
 
-
-import utilz.Coordinate;
 
 public interface Hostile extends Attackable {
 

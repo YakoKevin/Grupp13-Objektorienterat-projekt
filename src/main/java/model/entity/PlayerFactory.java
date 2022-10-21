@@ -1,10 +1,8 @@
-package entity;
+package model.entity;
 
-import utilz.Coordinate;
-import utilz.ImageServer;
-import view.Animation;
+import model.Coordinate;
 
-import static utilz.EntitySetup.PLAYER;
+import static model.entity.EntitySetup.PLAYER;
 
 public class PlayerFactory {
 

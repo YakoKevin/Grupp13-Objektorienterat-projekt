@@ -1,11 +1,6 @@
-package model;
+package model.entity;
 
-import entity.Entity;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.GameConstants;
-import view.Animation;
-import view.WindowManager;
+import model.CardinalDirection;
 
 public class Movement {
    /* private boolean moving = false;
@@ -15,7 +10,7 @@ public class Movement {
     private boolean up;
     private boolean down;
     private float playerSpeed = 2.0f;
-    private Entity entity;
+    private Entity model.entity;
     private float x;
     private float y;*/
 
@@ -48,7 +43,7 @@ public class Movement {
         if(y < 0) {
             y = 300;
         }
-        //else if(x > 50 + GameConstants.GameSizes.WIDTH.getSize()) { // +30 eftersom entity har 30 i width, kanske att man ska ta in player.width hit också. Dock verkar skärmen inte gå så långt som den borde.
+        //else if(x > 50 + GameConstants.GameSizes.WIDTH.getSize()) { // +30 eftersom model.entity har 30 i width, kanske att man ska ta in player.width hit också. Dock verkar skärmen inte gå så långt som den borde.
        //     x = 50 + GameConstants.GameSizes.WIDTH.getSize();
         //}
         //else if(y > GameConstants.GameSizes.HEIGHT.getSize()) {

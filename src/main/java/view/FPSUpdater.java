@@ -1,10 +1,5 @@
 package view;
 
-import entity.Entity;
-
-import java.awt.*;
-import java.util.Random;
-
 /***
  * This class handles the amount of times the game will update per second.
  * If set to N times per second, the game will repaint itself N times.

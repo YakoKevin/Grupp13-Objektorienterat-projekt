@@ -3,7 +3,6 @@ package view;
 import controller.gamestates.GameState;
 import controller.gamestates.GameStateManager;
 import general.GameApp;
-import utilz.ImageServer;
 
 import javax.swing.*;
 import java.awt.*;

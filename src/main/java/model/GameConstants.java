@@ -1,4 +1,4 @@
-package utilz;
+package model;
 
 /**
  * Constants used throughout the game.

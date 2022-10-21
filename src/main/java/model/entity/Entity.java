@@ -1,6 +1,8 @@
-package entity;
+package model.entity;
 
-import utilz.*;
+import model.CardinalDirection;
+import model.Coordinate;
+import model.GameConstants;
 
 import java.awt.*;
 
@@ -69,7 +71,7 @@ public abstract class Entity {
     }
 
     public Coordinate getPosition() {
-        return new Coordinate((int)finePositionX/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
+        return new Coordinate((int)finePositionX/ GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
                 (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
     }
 

@@ -1,7 +1,5 @@
 package view;
 
-import utilz.ImageServer;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

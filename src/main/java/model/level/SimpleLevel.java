@@ -1,6 +1,6 @@
 package model.level;
 
-import entity.Player;
+import model.entity.Player;
 import model.level.room.Cavern;
 import model.level.room.RoomTypeFunction;
 

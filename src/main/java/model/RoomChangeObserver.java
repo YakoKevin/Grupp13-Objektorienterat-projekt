@@ -1,4 +1,4 @@
-package general;
+package model;
 
 public interface RoomChangeObserver {
     void roomChangeUpdate();

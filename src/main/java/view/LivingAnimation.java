@@ -1,8 +1,7 @@
 package view;
 
-import entity.Living;
-import utilz.LivingStates;
-import utilz.ImageServer;
+import model.entity.Living;
+import model.entity.LivingStates;
 
 import java.awt.image.BufferedImage;
 

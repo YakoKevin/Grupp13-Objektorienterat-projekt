@@ -1,6 +1,6 @@
 package view;
 
-import entity.Living;
+import model.entity.Living;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Animation {
 
     /***
      * This method updates what frame to use next of a Living.
-     * @param entityAnimation The entity to get the next frame of.
+     * @param entityAnimation The model.entity to get the next frame of.
      */
     public static void updateAnimationTick(LivingAnimation entityAnimation) {
         if (entityAnimation.getAnimationTick() >= animationSpeed) {

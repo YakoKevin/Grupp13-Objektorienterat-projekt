@@ -1,10 +1,7 @@
-package entity;
+package model.entity;
 
-import model.AttackModel;
-import model.Movement;
-import utilz.Coordinate;
-import utilz.GameConstants;
-import utilz.ImageServer;
+import model.Coordinate;
+import view.ImageServer;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,10 +1,7 @@
-package entity;
+package model.entity;
 
-import model.AttackModel;
-import model.Movement;
-import utilz.Coordinate;
-import utilz.EntitySetup;
-import utilz.ImageServer;
+import model.Coordinate;
+import view.ImageServer;
 
 public class Skeleton extends Enemy{
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.ENEMY;

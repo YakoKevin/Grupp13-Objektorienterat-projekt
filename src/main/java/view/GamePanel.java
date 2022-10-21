@@ -4,9 +4,8 @@ import controller.ActionController;
 import general.GameApp;
 import model.level.Level;
 import model.level.room.Door;
-import utilz.Coordinate;
-import utilz.GameConstants;
-import utilz.ImageServer;
+import model.Coordinate;
+import model.GameConstants;
 
 import javax.swing.*;
 import java.awt.*;

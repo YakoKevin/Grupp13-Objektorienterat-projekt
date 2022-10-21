@@ -1,4 +1,6 @@
-package utilz;
+package model.entity;
+
+import model.Coordinate;
 
 /**
  * Constants used for the initialization of entities.

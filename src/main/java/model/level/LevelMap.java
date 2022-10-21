@@ -1,12 +1,10 @@
 package model.level;
 
 import model.level.room.Door;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
+import model.CardinalDirection;
+import model.Coordinate;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 //TODO: Fix so that we have an coordinate object instead of int[]?

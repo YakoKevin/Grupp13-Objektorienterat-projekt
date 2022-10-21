@@ -1,10 +1,7 @@
-package entity;
+package model.entity;
 
-import model.AttackModel;
-import model.Movement;
-import utilz.CardinalDirection;
-import utilz.Coordinate;
-import utilz.LivingStates;
+import model.CardinalDirection;
+import model.Coordinate;
 
 import java.awt.*;
 import java.time.LocalTime;

@@ -1,9 +1,9 @@
-package entity;
+package model.entity;
 
 import java.awt.image.BufferedImage;
 
-import utilz.Coordinate;
-import utilz.ImageServer;
+import model.Coordinate;
+import view.ImageServer;
 
 public class KeyItem extends Entity {
 

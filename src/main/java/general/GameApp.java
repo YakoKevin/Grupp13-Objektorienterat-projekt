@@ -1,10 +1,12 @@
 package general;
 
-import entity.*;
-import entity.Player;
+import model.PlayerDeathObserver;
+import model.RoomChangeObserver;
+import model.entity.*;
+import model.entity.Player;
 import model.level.Level;
 import model.level.LevelFactory;
-import utilz.GameConstants;
+import model.GameConstants;
 import view.*;
 
 import javax.swing.*;
@@ -81,11 +83,23 @@ public class GameApp implements RoomChangeObserver, PlayerDeathObserver {
         currentLevel.getCurrentLiving().clear();
         fpsUpdater.pauseGameLoop();
         Animation.clearEntities();
+        if(currentLevel.getPlayer().getHealthPoints() <= 0) {
+            currentLevel.stopEnemies();
+            int result = 1;
+            JOptionPane.showMessageDialog(null, "Game has finished");
+            // No  - 1
+            // Yes - 0
+            stopGame();
+            if(result == 1) {
+                gameView.jFrame.dispatchEvent(new WindowEvent(gameView.jFrame, WindowEvent.WINDOW_CLOSING));
+            }else {
+            }
+        }
     }
 
     @Override
     public void updatePlayerDeathObserver() {
-        checkGameStatus();
+        stopGame();
     }
 
     public class GameTicker extends TimerTask {
@@ -97,22 +111,6 @@ public class GameApp implements RoomChangeObserver, PlayerDeathObserver {
         @Override
         public void run() {
             gameTick();
-        }
-    }
-
-    private void checkGameStatus(){
-        if(currentLevel.getPlayer().getHealthPoints() <= 0) {
-            currentLevel.stopEnemies();
-            int result = 1;
-            JOptionPane.showMessageDialog(null, "Game has finished");
-            // No  - 1
-            // Yes - 0
-            stopGame();
-            if(result == 1) {
-                gameView.jFrame.dispatchEvent(new WindowEvent(gameView.jFrame, WindowEvent.WINDOW_CLOSING));
-            }else {
-                //gameApp = new GameApp();
-            }
         }
     }
 }

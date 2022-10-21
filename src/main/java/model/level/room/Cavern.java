@@ -1,9 +1,9 @@
 package model.level.room;
 
-import entity.Enemy;
-import entity.EnemyFactory;
-import utilz.Coordinate;
-import utilz.GameConstants;
+import model.entity.Enemy;
+import model.entity.EnemyFactory;
+import model.Coordinate;
+import model.GameConstants;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
