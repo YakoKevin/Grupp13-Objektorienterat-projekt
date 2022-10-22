@@ -30,7 +30,7 @@ class Pause extends SwingWorker<Void,String> {
 
 }
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements IRepaint{
 
     public FPSUpdater fpsUpdater;
 
