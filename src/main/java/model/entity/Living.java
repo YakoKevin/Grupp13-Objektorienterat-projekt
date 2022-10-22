@@ -6,6 +6,7 @@ import view.ImageServer;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Entity class for all "living" entities.
@@ -18,6 +19,7 @@ public abstract class Living extends Entity implements Attackable{
     protected double movementSpeed;
     private double maximumHealthPoints;
     private ArrayList<Coordinate> obstructionCoordinates = new ArrayList<>();
+    private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
 
     public Living(Coordinate startCoordinate, int width, int height, Movement movement, AttackModel attackModel) {
         super(startCoordinate, width, height);
@@ -102,6 +104,10 @@ public abstract class Living extends Entity implements Attackable{
     public void giveObstructionList(ArrayList<Coordinate> obstructionCoordinates){
         this.obstructionCoordinates = obstructionCoordinates;
     }
+
+    public void giveKeyList(ArrayList<Coordinate> keyCoordinates){
+        this.keysCoordinates = keyCoordinates;
+    }
     public AttackModel getAttack(){
         return attack;
     }
@@ -148,6 +154,16 @@ public abstract class Living extends Entity implements Attackable{
             finePositionX = tmpX;
             finePositionY = tmpY;
         }
+
+        for (Iterator<Coordinate> iterator = keysCoordinates.iterator(); iterator.hasNext();) {
+            Coordinate coordinate = (Coordinate) iterator.next();
+            Rectangle keyCoordinate = new Rectangle(coordinate.getY()*scaling, coordinate.getX()*scaling, scaling, scaling);
+            if(playerPosition.intersects(keyCoordinate)) {
+                iterator.remove();
+                break;
+            }
+        }
+
     }
 
 }

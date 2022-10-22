@@ -117,12 +117,27 @@ public class GamePanel extends JPanel implements IRepaint{
         drawDoors(g);
         drawUI(g);
         drawObstacles(g);
+        drawKeys(g);
         render(g);
     }
 
     public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
     public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
+    public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
 
+    private void drawKeys(Graphics g) {
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+
+        if(!level.getCurrentRoomKeys().isEmpty()) {
+            for (Coordinate obsCoord : level.getCurrentRoomKeys()) {
+                g.drawImage(key,
+                        obsCoord.getY() * scaling,
+                        obsCoord.getX() * scaling,
+                        scaling, scaling, null);
+            }
+        }
+
+    }
 
     private void drawObstacles(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();

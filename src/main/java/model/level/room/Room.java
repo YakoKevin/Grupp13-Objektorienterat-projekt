@@ -18,6 +18,7 @@ public abstract class Room{
     protected Coordinate coordinate = new Coordinate(0,0);
     protected ArrayList<Coordinate> wallCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> obstaclesCoordinates = new ArrayList<>();
+    protected ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
     protected ArrayList<Door> doors = new ArrayList<>();
     protected ArrayList<Enemy> enemies = new ArrayList<>();
     protected EnemyFactory enemyFactory;
@@ -82,6 +83,10 @@ public abstract class Room{
             matrix[door.coordinate.getY()][door.coordinate.getX()] = 8;
         }
 
+        for (Coordinate coordinate : keysCoordinates) {
+            matrix[coordinate.getY()][coordinate.getX()] = 2;
+        }
+
         return matrix;
     }
 
@@ -95,6 +100,10 @@ public abstract class Room{
 
     public ArrayList<Coordinate> getObstacles(){
         return new ArrayList<>(obstaclesCoordinates);
+    }
+
+    public ArrayList<Coordinate> getKeys(){
+        return keysCoordinates;
     }
 
     public ArrayList<Door> getDoors(){
