@@ -11,7 +11,7 @@ public class KeyItem extends Entity {
 
     public KeyItem(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate, width, height);
-        keySprite = ImageServer.getImage(ImageServer.Ids.KEY);
+        //keySprite = ImageServer.getImage(ImageServer.Ids.KEY);
     }
 
     public BufferedImage getKey() {
