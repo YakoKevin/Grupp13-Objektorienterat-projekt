@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Player extends Living implements Friendly{
-    private int keyCount;
+    private int keyCount =0;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.PLAYER;
@@ -59,9 +59,13 @@ public class Player extends Living implements Friendly{
             Rectangle keyCoordinate = new Rectangle(coordinate.getY()*scaling, coordinate.getX()*scaling, scaling, scaling);
             if(this.hitbox.intersects(keyCoordinate)) {
                 iterator.remove();
+                keyCount++;
                 break;
             }
         }
+    }
+    public int getKeyCount(){
+        return this.keyCount;
     }
 
 }

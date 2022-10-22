@@ -204,10 +204,13 @@ public class GamePanel extends JPanel implements IRepaint{
 
     public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
+        String keyStr = String.valueOf(level.getPlayer().getKeyCount());
+
         g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(new Color(255, 255, 70));
+        g.setColor(new Color(255, 50, 30));
         g.drawString("HP: " + hpStr,10,10);
         g.setColor(Color.YELLOW);
+        g.drawString("Keys: " + keyStr, 100,10);
         g.setColor(Color.WHITE);
     }
 }
