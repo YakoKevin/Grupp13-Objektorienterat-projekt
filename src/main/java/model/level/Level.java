@@ -119,7 +119,6 @@ public abstract class Level{
             currentRoom = createRoom(newRoomCoordinate);
             updateRoomChangeObservers();
             giveObstructionCoordinatesToLiving();
-            System.out.println(newRoomCoordinate.getX() + ", " + newRoomCoordinate.getY());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -155,12 +154,11 @@ public abstract class Level{
         else
             doorTimer();
 
-        if (!player.isAlive() )
-            updatePlayerDeathObserver();
-
         updateEnemies();
         updatePlayer();
-        //checkGameStatus(gameApp);
+
+        if (!player.isAlive() )
+            updatePlayerDeathObserver();
     }
 
     private void doorTimer(){
@@ -197,11 +195,6 @@ public abstract class Level{
         }
     }
 
-    private void doCollisions(){
-        if(isCoordinateInWallOrObstacle(player.getPosition())){
-        }
-    }
-
     /**
      * @return all {@code living} in {@code level} in the form of an {@code ArrayList<Living>}. Defencive copying is used.
      */
@@ -212,7 +205,7 @@ public abstract class Level{
     }
 
     /**
-     * @return return the {@code player} referens. Note that this is the same referens used in {@code level}, not a new objekt!
+     * @return return the {@code player} referens. Note that this is the same referens used in {@code level}, not a new object!
      */
     public Player getPlayer() {
         return this.player;

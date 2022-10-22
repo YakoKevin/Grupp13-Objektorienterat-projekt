@@ -8,8 +8,6 @@ import model.GameConstants;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-//TODO: add method to remove obstacles in the way of doors
-
 /**
  * A simple rectangular room with doors and obstacles and enemies.
  *
@@ -28,24 +26,42 @@ public class Cavern extends Room {
 
     private void createWalls(){
         int y = 0;
+        ArrayList<Coordinate> doorCoordinates = new ArrayList<>();
+
+        for (Door door : doors){
+            doorCoordinates.add(door.coordinate);
+        }
+
         for (int x = 0; x < HEIGHT; x++)
-            wallCoordinates.add(new Coordinate(x,y));
+            for (Coordinate coordinate : doorCoordinates) {
+                Coordinate wallCoordinate = new Coordinate(x, y);
+                if (!coordinate.equals(wallCoordinate))
+                    wallCoordinates.add(wallCoordinate);
+            }
 
         y = WIDTH -1;
         for (int x = 0; x < HEIGHT; x++)
-            wallCoordinates.add(new Coordinate(x,y));
+            for (Coordinate coordinate : doorCoordinates) {
+                Coordinate wallCoordinate = new Coordinate(x, y);
+                if (!coordinate.equals(wallCoordinate))
+                    wallCoordinates.add(new Coordinate(x, y));
+            }
 
         int x = 0;
         for (y = 0; y < WIDTH; y++)
-            wallCoordinates.add(new Coordinate(x,y));
+            for (Coordinate coordinate : doorCoordinates) {
+                Coordinate wallCoordinate = new Coordinate(x, y);
+                if (!coordinate.equals(wallCoordinate))
+                    wallCoordinates.add(new Coordinate(x, y));
+            }
 
         x = HEIGHT -1;
         for (y = 0; y < WIDTH; y++)
-            wallCoordinates.add(new Coordinate(x,y));
-    }
-
-    private void removeWalls(){
-
+            for (Coordinate coordinate : doorCoordinates) {
+                Coordinate wallCoordinate = new Coordinate(x, y);
+                if (!coordinate.equals(wallCoordinate))
+                    wallCoordinates.add(new Coordinate(x, y));
+            }
     }
 
     private void addEnemies(EnemyFactory enemyFactory) {

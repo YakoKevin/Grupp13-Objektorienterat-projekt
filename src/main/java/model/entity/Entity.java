@@ -40,20 +40,8 @@ public abstract class Entity {
         hitbox.y = (int)finePositionY;
     }
 
-    public Rectangle getHitbox() {
-        return this.hitbox;
-    } //TODO: OBS borde inte returnera referensen till rectangle, borde kopiera ist!
-
     //private double x,y;
     public double healthPoints;
-
-    public float getVelX() {
-        return velX;
-    }
-
-    public float getVelY() {
-        return velY;
-    }
 
     public void setVelX(float velX) {
         this.velX = velX;

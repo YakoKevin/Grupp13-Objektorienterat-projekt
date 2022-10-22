@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Player extends Living implements Friendly{
     private int keys;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
-    private boolean attackMode = false;
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.PLAYER;
     private ImageServer.DeathId deathIdentification = ImageServer.DeathId.PLAYER;
 
@@ -31,12 +30,6 @@ public class Player extends Living implements Friendly{
         }
     }
 
-    public boolean getAttackMode() { // ska kanske vara state
-        return this.attackMode;
-    }
-    public void setAttackMode(boolean atkM){
-        this.attackMode=atkM;
-    }
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;
     }

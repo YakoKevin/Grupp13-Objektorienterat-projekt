@@ -1,7 +1,7 @@
 package view;
 
 import controller.ActionController;
-import general.GameApp;
+import application.GameApp;
 import model.level.Level;
 import model.level.room.Door;
 import model.Coordinate;
@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import static general.GameApp.GAME_HEIGHT;
-import static general.GameApp.GAME_WIDTH;
+import static application.GameApp.GAME_HEIGHT;
+import static application.GameApp.GAME_WIDTH;
 
 class Pause extends SwingWorker<Void,String> {
 
@@ -42,7 +42,7 @@ public class GamePanel extends JPanel {
 
     //TODO: Se till att ha LEVEL ist. -> hämta där fienderna och player och loopa genom dem alla för att hämta animation och sådant
     public GamePanel(GameApp gameApp, FPSUpdater fpsUpdater, Level level){
-        addKeyListener(new ActionController(this, level.getPlayer()));
+        addKeyListener(new ActionController(level.getPlayer()));
         setBackground(Color.GREEN);
         setPanelSize();
         int width = 50;
