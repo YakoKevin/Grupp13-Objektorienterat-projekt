@@ -1,7 +1,4 @@
-package general;
-
-import model.Engine;
-import javax.swing.*;
+package application;
 
 // TEMPORÄRT KLASS NAMN
 public class GameMain {

@@ -2,7 +2,7 @@ package view;
 
 import controller.gamestates.GameState;
 import controller.gamestates.GameStateManager;
-import general.GameApp;
+import application.GameApp;
 
 import javax.swing.*;
 import java.awt.*;

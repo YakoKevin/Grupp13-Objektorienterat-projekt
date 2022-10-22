@@ -1,4 +1,4 @@
-package general;
+package application;
 
 import model.PlayerDeathObserver;
 import model.RoomChangeObserver;

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 /**
  * A class representing a Rooms main construction: walls and obstacles and doors. Also keeps and creates the enemies.
+ *
+ * @see Coordinate
+ * @see EnemyFactory
  */
 public abstract class Room{
     protected final int HEIGHT;
