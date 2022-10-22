@@ -3,13 +3,14 @@ package model.entity;
 import model.Coordinate;
 import model.GameConstants;
 import view.ImageServer;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Player extends Living implements Friendly{
     private int keyCount =0;
+    private int scoreCount=0;
+    private int slainEnemies;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.PLAYER;
@@ -48,6 +49,7 @@ public class Player extends Living implements Friendly{
     public ImageServer.DeathId getDeadId() {
         return deathIdentification;
     }
+
     public void giveKeyList(ArrayList<Coordinate> keyCoordinates){
         this.keysCoordinates = keyCoordinates;
     }
@@ -66,6 +68,15 @@ public class Player extends Living implements Friendly{
     }
     public int getKeyCount(){
         return this.keyCount;
+    }
+    public int getSlainEnemiesCount(){
+        return this.slainEnemies;
+    }
+    public int getScoreCount(){
+        return this.scoreCount;
+    }
+    public void incrementScoreCount(int score){
+        this.scoreCount+=score;
     }
 
 }

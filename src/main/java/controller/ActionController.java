@@ -59,7 +59,6 @@ public class ActionController implements KeyListener {
             dir = CardinalDirection.SOUTHEAST;
         }
         if(up||right||down||left){
-            System.out.println(player.getX()  + "-" + player.getY());
             player.setDirection(dir);
             player.setState(LivingStates.RUNNING);
 
