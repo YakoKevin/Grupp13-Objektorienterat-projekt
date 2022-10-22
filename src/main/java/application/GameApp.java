@@ -20,6 +20,9 @@ public class GameApp implements RoomChangeObserver, PlayerDeathObserver {
     private Level currentLevel;
     Timer timer = new Timer();
 
+    public static void main(String[] args) {
+        new GameApp();
+    }
 
     public GameView gameView;
     private FPSUpdater fpsUpdater;
