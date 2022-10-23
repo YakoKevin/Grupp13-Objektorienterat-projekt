@@ -1,6 +1,7 @@
 package model.level;
 
 import model.entity.Player;
+import model.level.mapgenerator.SquareMapGenerator;
 
 /**
  * Factory class for levels. Contains all the different types of levels available to create. Is a facade tp the level module.

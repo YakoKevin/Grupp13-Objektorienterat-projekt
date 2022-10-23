@@ -1,11 +1,10 @@
 package view;
 
 import controller.ActionController;
-import application.GameApp;
-import model.level.Level;
-import model.level.room.Door;
 import model.Coordinate;
 import model.GameConstants;
+import model.level.Level;
+import model.level.room.Door;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,12 +39,10 @@ public class GamePanel extends JPanel implements IRepaint{
     private Level level;
 
 
-    //TODO: Se till att ha LEVEL ist. -> hämta där fienderna och player och loopa genom dem alla för att hämta animation och sådant
-    public GamePanel(GameApp gameApp, FPSUpdater fpsUpdater, Level level){
+    public GamePanel(FPSUpdater fpsUpdater, Level level){
         addKeyListener(new ActionController(level.getPlayer()));
         setBackground(Color.GREEN);
         setPanelSize();
-        int width = 50;
         this.level = level;
         //inititateHitbox();
         JButton jb=new JButton("Pause");
@@ -145,8 +142,8 @@ public class GamePanel extends JPanel implements IRepaint{
         if(!level.getCurrentRoomObstacles().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomObstacles()) {
                 g.drawImage(wall,
-                        obsCoord.getY() * scaling, // x och y är kanske feltransponerade
-                        obsCoord.getX() * scaling,
+                        obsCoord.getX() * scaling, // x och y är kanske feltransponerade
+                        obsCoord.getY() * scaling,
                         scaling, scaling, null);
             }
         }
@@ -159,8 +156,8 @@ public class GamePanel extends JPanel implements IRepaint{
         if(!level.getCurrentRoomWalls().isEmpty()) {
             for (Coordinate wallCoord : level.getCurrentRoomWalls()) {
                 g.drawImage(wall,
-                        wallCoord.getY() * scaling, // x och y är kanske feltransponerade
-                        wallCoord.getX() * scaling,
+                        wallCoord.getX() * scaling, // x och y är kanske feltransponerade
+                        wallCoord.getY() * scaling,
                         scaling, scaling, null);
             }
         }

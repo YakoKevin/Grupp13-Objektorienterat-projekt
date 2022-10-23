@@ -33,15 +33,15 @@ public class Cavern extends Room {
             doorCoordinates.add(door.coordinate);
         }
 
-        for (int x = 0; x < HEIGHT; x++)
+        for (int x = 0; x < WIDTH; x++)
             for (Coordinate coordinate : doorCoordinates) {
                 Coordinate wallCoordinate = new Coordinate(x, y);
                 if (!coordinate.equals(wallCoordinate))
                     wallCoordinates.add(wallCoordinate);
             }
 
-        y = WIDTH -1;
-        for (int x = 0; x < HEIGHT; x++)
+        y = HEIGHT -1;
+        for (int x = 0; x < WIDTH; x++)
             for (Coordinate coordinate : doorCoordinates) {
                 Coordinate wallCoordinate = new Coordinate(x, y);
                 if (!coordinate.equals(wallCoordinate))
@@ -49,15 +49,15 @@ public class Cavern extends Room {
             }
 
         int x = 0;
-        for (y = 0; y < WIDTH; y++)
+        for (y = 0; y < HEIGHT; y++)
             for (Coordinate coordinate : doorCoordinates) {
                 Coordinate wallCoordinate = new Coordinate(x, y);
                 if (!coordinate.equals(wallCoordinate))
                     wallCoordinates.add(new Coordinate(x, y));
             }
 
-        x = HEIGHT -1;
-        for (y = 0; y < WIDTH; y++)
+        x = WIDTH -1;
+        for (y = 0; y < HEIGHT; y++)
             for (Coordinate coordinate : doorCoordinates) {
                 Coordinate wallCoordinate = new Coordinate(x, y);
                 if (!coordinate.equals(wallCoordinate))

@@ -1,7 +1,8 @@
-package model.level;
+package model.level.mapgenerator;
 
 import model.CardinalDirection;
 import model.Coordinate;
+import model.level.LevelMap;
 
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
@@ -109,6 +110,7 @@ public enum SquareMapGenerator {
 
         return  Arrays.copyOf(mainPath, i); //Trunking of the array to only have length of the path length.
     }
+
     private static void placeBranchingNodesInLevelMap(LevelMap levelMap) {
         int size = levelMap.getMapSize();
 

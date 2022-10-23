@@ -69,7 +69,7 @@ public class GameApp implements RoomChangeObserver, PlayerDeathObserver {
 
 
     private void setupView(){
-        GamePanel gamePanel = new GamePanel(this, fpsUpdater, currentLevel);
+        GamePanel gamePanel = new GamePanel(fpsUpdater, currentLevel);
         fpsUpdater = new FPSUpdater(gamePanel);
         gameView = new GameView(gamePanel);
         gamePanel.setFocusable(true);

@@ -131,7 +131,7 @@ public abstract class Living extends Entity implements Attackable{
         boolean intersect = false;
         Rectangle playerPosition = new Rectangle((int)tmpX, (int)tmpY, width, height);
         for (Coordinate coordinate : obstructionCoordinates) {
-            Rectangle obsCoordinate = new Rectangle(coordinate.getY()*scaling, coordinate.getX()*scaling, scaling, scaling);
+            Rectangle obsCoordinate = new Rectangle(coordinate.getX()*scaling, coordinate.getY()*scaling, scaling, scaling);
             if(playerPosition.intersects(obsCoordinate)) {
                 intersect = true;
                 break;
