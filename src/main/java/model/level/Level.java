@@ -85,6 +85,10 @@ public abstract class Level{
         return currentRoom.getCoins();
     }
 
+    public Coordinate getCurrentRoomHeart(){
+        return currentRoom.getHeart();
+    }
+
     /**
      * @return an {@code ArrayList} of the {@code Coordinates} of all the {@code door} pieces.
      */
@@ -145,6 +149,7 @@ public abstract class Level{
         player.giveObstructionList(list);
         player.giveKeyList(getCurrentRoomKeys());
         player.giveCoinList(getCurrentRoomCoins());
+        player.giveHeartObject(getCurrentRoomHeart());
         for(Enemy enemy : currentRoom.getEnemies()){
             enemy.giveObstructionList(list);
         }

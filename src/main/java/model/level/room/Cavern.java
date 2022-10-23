@@ -24,6 +24,7 @@ public class Cavern extends Room {
         addEnemies(enemyFactory);
         addKeys();
         addCoins();
+        addHeart();
     }
 
     private void createWalls(){
@@ -95,6 +96,9 @@ public class Cavern extends Room {
             Coordinate randomCoordinate = Coordinate.randomCoordinate(1,1, WIDTH-1, HEIGHT-1);
             coinsCoordinates.add(randomCoordinate);
         }
+    }
+    private void addHeart(){
+        heartCoordinate = Coordinate.randomCoordinate(1,1,WIDTH-1,HEIGHT-1);
     }
 
 
