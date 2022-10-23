@@ -20,7 +20,8 @@ public abstract class Living extends Entity implements Attackable{
     private double maximumHealthPoints;
     private ArrayList<Coordinate> obstructionCoordinates = new ArrayList<>();
     private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
-    private ArrayList<Coordinate> coinCoordinates = new ArrayList<>();
+    protected double healthPoints;
+
 
     public Living(Coordinate startCoordinate, int width, int height, Movement movement, AttackModel attackModel) {
         super(startCoordinate, width, height);
@@ -90,6 +91,12 @@ public abstract class Living extends Entity implements Attackable{
         //System.out.println("x och y efter: " + this.x + this.y);
     }
 
+    public void setHealthPoints(double hp){
+        this.healthPoints=hp;
+    }
+    public double getHealthPoints() {
+        return healthPoints;
+    }
     public double getMaximumHealthPoints(){
         return this.maximumHealthPoints;
     }
@@ -111,9 +118,6 @@ public abstract class Living extends Entity implements Attackable{
 
     public void giveKeyList(ArrayList<Coordinate> keyCoordinates){
         this.keysCoordinates = keyCoordinates;
-    }
-    public void giveCoinList(ArrayList<Coordinate> coinCoordinates){
-        this.coinCoordinates = coinCoordinates;
     }
     public AttackModel getAttack(){
         return attack;
@@ -160,24 +164,6 @@ public abstract class Living extends Entity implements Attackable{
         }else{
             finePositionX = tmpX;
             finePositionY = tmpY;
-        }
-
-        for (Iterator<Coordinate> iterator = keysCoordinates.iterator(); iterator.hasNext();) {
-            Coordinate coordinate = (Coordinate) iterator.next();
-            Rectangle keyCoordinate = new Rectangle(coordinate.getY()*scaling, coordinate.getX()*scaling, scaling, scaling);
-            if(playerPosition.intersects(keyCoordinate)) {
-                iterator.remove();
-                break;
-            }
-        }
-        for (Iterator<Coordinate> iterator = coinCoordinates.iterator(); iterator.hasNext();) {
-            Coordinate coordinate = (Coordinate) iterator.next();
-            Rectangle coinCoordinate = new Rectangle(coordinate.getY()*scaling, coordinate.getX()*scaling, scaling, scaling);
-            if(playerPosition.intersects(coinCoordinate)) {
-                iterator.remove();
-                this.score +=1;
-                break;
-            }
         }
 
     }

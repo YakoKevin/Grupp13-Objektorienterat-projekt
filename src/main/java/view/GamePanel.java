@@ -219,12 +219,13 @@ public class GamePanel extends JPanel implements IRepaint{
 
     public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
-        String score = Double.toString(level.getPlayer().getScore());
+        String score = Double.toString(level.getPlayer().getScoreCount());
         g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(new Color(255, 255, 70));
+        g.setColor(new Color(255, 5, 50));
+        g.setColor(Color.YELLOW);
         g.drawString("HP: " + hpStr,10,10);
         g.drawString("SCORE: " + score,10,25);
-        g.setColor(Color.YELLOW);
+
         g.setColor(Color.WHITE);
     }
 }

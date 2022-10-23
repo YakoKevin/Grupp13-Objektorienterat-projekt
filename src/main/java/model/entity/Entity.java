@@ -14,8 +14,8 @@ public abstract class Entity {
     protected Rectangle hitbox;
     protected CardinalDirection dir;
     protected LivingStates state = LivingStates.IDLE;
-    protected double healthPoints;
-    protected double score;
+
+
 
 
     public Entity(Coordinate startCoordinate, int width, int height){
@@ -87,12 +87,7 @@ public abstract class Entity {
         return (int)height;
     }
 
-    public void setHealthPoints(double hp){
-        this.healthPoints=hp;
-    }
-    public double getHealthPoints() {
-        return healthPoints;
-    }
+
 
     public void setDirection(CardinalDirection d){
         this.dir = d;
@@ -107,13 +102,4 @@ public abstract class Entity {
     public LivingStates getState() {
         return state;
     }
-
-    public void setScore(double score){
-        this.score=score;
-    }
-    public double getScore() {
-        return score;
-    }
-
-
 }
