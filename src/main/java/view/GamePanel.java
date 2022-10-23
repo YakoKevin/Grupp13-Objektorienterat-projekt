@@ -140,8 +140,8 @@ public class GamePanel extends JPanel implements IRepaint{
         if(!level.getCurrentRoomCoins().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomCoins()) {
                 g.drawImage(coin,
-                        obsCoord.getY() * scaling, // x och y är kanske feltransponerade
-                        obsCoord.getX() * scaling,
+                        obsCoord.getX() * scaling, // x och y är kanske feltransponerade
+                        obsCoord.getY() * scaling,
                         scaling, scaling, null);
             }
         }
@@ -153,8 +153,8 @@ public class GamePanel extends JPanel implements IRepaint{
         if(!level.getCurrentRoomKeys().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomKeys()) {
                 g.drawImage(key,
-                        obsCoord.getY() * scaling,
                         obsCoord.getX() * scaling,
+                        obsCoord.getY() * scaling,
                         scaling, scaling, null);
             }
         }
@@ -196,9 +196,9 @@ public class GamePanel extends JPanel implements IRepaint{
             for (Door door : level.getCurrentRoomDoors()) {
 
                 g.drawImage(ImageServer.getImage(ImageServer.Ids.DOOR),
-                        50 + door.getCoordinate().getX() * scaling,
-                        + door.getCoordinate().getY() * scaling,
-                        2 * scaling, 2 * scaling, null);
+                        door.getCoordinate().getX() * scaling,
+                        door.getCoordinate().getY() * scaling,
+                        scaling, scaling, null);
 
             }
         }
