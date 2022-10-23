@@ -57,9 +57,9 @@ public abstract class Room{
         return isCoordinateInObstacle(coordinate) || isCoordinateInWall(coordinate);
     }
 
-    public boolean isCoordinateInDoor(Coordinate coordinate){
+    public boolean isCoordinateInDoor(float x, float y){
         for(Door door : doors){
-            if (coordinate.equals(door.coordinate))
+            if (Math.abs((float)door.coordinate.getX() - x*GameScalingFactors.TILE_SCALE_FACTOR.getSize()) <= 1 && Math.abs((float)door.coordinate.getY() - y*GameScalingFactors.TILE_SCALE_FACTOR.getSize()) <= 1)
                 return true;
         }
         return false;
@@ -74,26 +74,26 @@ public abstract class Room{
     }
 
     public int[][] getRoomAsMatrix() {
-        int[][] matrix = new int[HEIGHT][WIDTH];
+        int[][] matrix = new int[WIDTH][HEIGHT];
 
         for (Coordinate coordinate : wallCoordinates) {
             matrix[coordinate.getX()][coordinate.getY()] = 2;
         }
 
         for (Coordinate coordinate : obstaclesCoordinates) {
-            matrix[coordinate.getY()][coordinate.getX()] = 2;
+            matrix[coordinate.getX()][coordinate.getY()] = 2;
         }
 
         for (Door door : doors) {
-            matrix[door.coordinate.getY()][door.coordinate.getX()] = 8;
+            matrix[door.coordinate.getX()][door.coordinate.getY()] = 8;
         }
 
         for (Coordinate coordinate : keysCoordinates) {
-            matrix[coordinate.getY()][coordinate.getX()] = 2;
+            matrix[coordinate.getX()][coordinate.getY()] = 2;
         }
 
         for (Coordinate coordinate : coinsCoordinates) {
-            matrix[coordinate.getY()][coordinate.getX()] = 2;
+            matrix[coordinate.getX()][coordinate.getY()] = 2;
         }
         return matrix;
     }
