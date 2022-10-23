@@ -54,10 +54,19 @@ public class Animation {
 
     }
 
+    /***
+     * This method clears all the entities by using the
+     * method defined in LivingAnimation.
+     */
     public static void clearEntities() {
         livingEntites.clear();
     }
 
+    /***
+     * This method adds an entity by using the
+     * method defind in LivingAnimation.
+     * @param living The entity to spawn, has to be a Living.
+     */
     public static void addEntity(Living living) {
         livingEntites.add(new LivingAnimation(living));
     }

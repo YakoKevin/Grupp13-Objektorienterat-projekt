@@ -84,7 +84,6 @@ public class GameApp implements RoomChangeObserver, PlayerDeathObserver {
     public void stopGame(){
         timer.cancel();
         currentLevel.getCurrentLiving().clear();
-        fpsUpdater.pauseGameLoop();
         Animation.clearEntities();
         if(currentLevel.getPlayer().getHealthPoints() <= 0) {
             currentLevel.stopEnemies();

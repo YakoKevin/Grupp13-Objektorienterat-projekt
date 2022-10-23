@@ -5,6 +5,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
 
+/***
+ * This class handles the representation of a framed window.
+ */
 public class GameView extends JFrame {
 
     public JFrame jFrame;

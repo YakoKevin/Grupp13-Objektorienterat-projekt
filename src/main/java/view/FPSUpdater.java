@@ -14,22 +14,23 @@ public class FPSUpdater implements Runnable {
         this.repaint = repaint;
     }
 
+    /***
+     * This method creates a thread, and then calls the run method by .start().
+     */
     public void startGameLoop(){
         gameThread = new Thread(this);
         gameThread.start();
     }
 
-    public void pauseGameLoop(){
-        gameThread.suspend();
-    } //TODO: ska den vara kvar? Är deprecated.
-
-    public void continueGameLoop(){
-        gameThread.resume();
-    } //TODO: ska den vara kvar? Är deprecated.
-
     /***
      * This is the gameloop for the game, run on a separate thread.
      * It will repaint the game N times per second.
+     *
+     * This method contains both UPS and FPS handling.
+     * FPS takes care of render/frames, in example, Draws the player, enemies, room, etc...
+     * UPS takes care of update/tick, in example takes care of logic as player movement and events.
+     * This is just to take care of no matter how good computer you have, the UPS will be the same
+     * for all computers. The game will not run faster just because you want to have higher framerate.
      */
     @Override
     public void run() {
@@ -66,7 +67,6 @@ public class FPSUpdater implements Runnable {
                 fps = 0;
                 updates = 0;
             }
-
         }
     }
 }

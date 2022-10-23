@@ -5,6 +5,9 @@ import model.entity.LivingStates;
 
 import java.awt.image.BufferedImage;
 
+/***
+ * This class handles the animation of all Living.
+ */
 public class LivingAnimation {
     private BufferedImage[][] imageGrid;
     private BufferedImage imageDead;
@@ -19,6 +22,10 @@ public class LivingAnimation {
         setDeathImage(living.getDeadId());
     }
 
+    /***
+     * Sets the image of Living when HP reaches 0.
+     * @param deadId
+     */
     private void setDeathImage(ImageServer.DeathId deadId) {
         this.imageDead = ImageServer.getImage(deadId);
     }
@@ -27,18 +34,30 @@ public class LivingAnimation {
         this.imageGrid = ImageServer.getImageGrid(id);
     }
 
+    /***
+     * Increments the animationTick variable.
+     */
     public void addAnimationTick(){
         this.animationTick++;
     }
 
+    /***
+     * Increments the animationIndex variable.
+     */
     public void addAnimationIndex(){
         this.animationIndex++;
     }
 
+    /***
+     * Sets the animationIndex variable to 0.
+     */
     public void resetAnimationIndex(){
         this.animationIndex = 0;
     }
 
+    /***
+     * Sets the animationTick variable to 0.
+     */
     public void resetAnimationTick() {
         this.animationTick = 0;
     }

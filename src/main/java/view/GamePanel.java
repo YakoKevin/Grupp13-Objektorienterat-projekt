@@ -16,28 +16,20 @@ import java.util.Random;
 import static application.GameApp.GAME_HEIGHT;
 import static application.GameApp.GAME_WIDTH;
 
-class Pause extends SwingWorker<Void,String> {
-
-    @Override
-    protected Void doInBackground() throws Exception {
-        while(!isCancelled()) {
-            publish(String.format(null, (new Random()).nextInt(99999)));
-            Thread.sleep(100);
-        }
-        return null;
-    }
-
-}
-
+/***
+ * This class takes care of all the JPanel related code.
+ * Like adding a keylistener and, setting the panel size,
+ * and drawing the UI.
+ */
 public class GamePanel extends JPanel implements IRepaint{
 
     public FPSUpdater fpsUpdater;
-
-    protected Animation animation;
-    protected Animation animationEnemy;
-    private Pause pause;
-    private Level level;
-
+    private final Level level;
+    public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
+    public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
+    public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
+    public static BufferedImage coin = ImageServer.getImage(ImageServer.Ids.COIN);
+    public static BufferedImage heart = ImageServer.getImage(ImageServer.Ids.HEART);
 
     public GamePanel(FPSUpdater fpsUpdater, Level level){
         addKeyListener(new ActionController(level.getPlayer()));
@@ -57,27 +49,16 @@ public class GamePanel extends JPanel implements IRepaint{
         jb.addActionListener(new ActionListener() { // TODO: fixa variabel namnen jb och jb1
             @Override
             public void actionPerformed(ActionEvent e) {
-                (pause = new Pause()).execute();
-                try {
-                    pauseThread();
-                    jb.setEnabled(false);
-                    jb1.setEnabled(true);
-                } catch (InterruptedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+                jb.setEnabled(false);
+                jb1.setEnabled(true);
             }
         });
         jb1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(pause != null) {
-                        pause.cancel(true);
-                        jb.setEnabled(true);
-                        jb1.setEnabled(false);
-                        resumeThread();
-                    }
+                    jb.setEnabled(true);
+                    jb1.setEnabled(false);
                 } catch (Exception e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -87,16 +68,10 @@ public class GamePanel extends JPanel implements IRepaint{
 
         this.fpsUpdater = fpsUpdater;
     }
-    public  void pauseThread() throws InterruptedException
-    {
-        fpsUpdater.pauseGameLoop();
-    }
 
-    public  void resumeThread()
-    {
-        fpsUpdater.continueGameLoop();
-    }
-    // Sets here, instead of view since it includes the border as well.
+    /***
+     * Sets the panel size of the game. Does not include the border.
+     */
     private void setPanelSize() {
         Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
         //setMinimumSize(size);
@@ -106,6 +81,12 @@ public class GamePanel extends JPanel implements IRepaint{
     }
 
 
+    /***
+     * Overriden method from JPanel.
+     * This takes care of drawing the images of the game.
+     * It is called by .repaint().
+     * @param g The graphics of the game.
+     */
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -122,12 +103,11 @@ public class GamePanel extends JPanel implements IRepaint{
         render(g);
     }
 
-    public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
-    public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
-    public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
-    public static BufferedImage coin = ImageServer.getImage(ImageServer.Ids.COIN);
-    public static BufferedImage heart = ImageServer.getImage(ImageServer.Ids.HEART);
 
+    /***
+     * This draws the hearts in the game.
+     * @param g The graphics of the game.
+     */
     private void drawHeart(Graphics g){
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
         g.drawImage(heart,level.getCurrentRoomHeart().getX() * scaling, // x och y är kanske feltransponerade
@@ -135,6 +115,10 @@ public class GamePanel extends JPanel implements IRepaint{
                 scaling, scaling, null);
     }
 
+    /***
+     * This draws the coins in the game.
+     * @param g The graphics of the game.
+     */
     private void drawCoins(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
         if(!level.getCurrentRoomCoins().isEmpty()) {
@@ -147,6 +131,10 @@ public class GamePanel extends JPanel implements IRepaint{
         }
     }
 
+    /***
+     * This draws the keys in the game.
+     * @param g The graphics of the game.
+     */
     private void drawKeys(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
@@ -161,6 +149,10 @@ public class GamePanel extends JPanel implements IRepaint{
 
     }
 
+    /***
+     * This draws the obstacles in the game.
+     * @param g The graphics in the game.
+     */
     private void drawObstacles(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
@@ -175,6 +167,10 @@ public class GamePanel extends JPanel implements IRepaint{
 
     }
 
+    /***
+     * This draws the walls in the game.
+     * @param g The graphics in the game.
+     */
     private void drawWalls(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
@@ -189,6 +185,10 @@ public class GamePanel extends JPanel implements IRepaint{
 
     }
 
+    /***
+     * This draws the doors in the game.
+     * @param g The graphics in the game.
+     */
     private void drawDoors(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
@@ -204,7 +204,10 @@ public class GamePanel extends JPanel implements IRepaint{
         }
     }
 
-
+    /***
+     * This draws the map in the game.
+     * @param g The graphics in the game.
+     */
     private void drawMap(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
@@ -220,11 +223,19 @@ public class GamePanel extends JPanel implements IRepaint{
         }
     }
 
+    /***
+     * This renders the animation in the game.
+     * @param g The graphics in the game.
+     */
     protected void render(Graphics g){
         Animation.render(g);
     }
 
-    public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
+    /***
+     * This draws the UI in the game. Such as HP, Score, Keys, and how many slain enemies.
+     * @param g The graphics in the game.
+     */
+    public void drawUI(Graphics g) {
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
         String scoreStr = String.valueOf(level.getPlayer().getScoreCount());
         String keyStr = String.valueOf(level.getPlayer().getKeyCount());

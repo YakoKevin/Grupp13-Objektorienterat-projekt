@@ -12,6 +12,10 @@ import java.io.InputStream;
  */
 public enum ImageServer {
     ;
+
+    /***
+     * This enum has image path values that is not an animation sprite.
+     */
     public enum Ids {
         LEVEL("bg_sprite2.png"),
         KEY("key.png"),
@@ -32,6 +36,11 @@ public enum ImageServer {
         }
     }
 
+    /***
+     * This getter takes a path and returns the image found at that path.
+     * @param filePath The path to the image.
+     * @return Returns the image if it's found.
+     */
     private static BufferedImage getSprite(String filePath) {
         BufferedImage image = null;
 
@@ -43,6 +52,9 @@ public enum ImageServer {
         return image;
     }
 
+    /***
+     * This enum has image path values that is an animation sprite.
+     */
     public enum AnimationIds{
         PLAYER("player_sprites_Knightver.png"),
         ENEMY("skeleton_sprites_Knightver.png");
@@ -53,6 +65,9 @@ public enum ImageServer {
         }
     }
 
+    /***
+     * This enum is solely for the death images.
+     */
     public enum DeathId{
         PLAYER("death.png"),
         ENEMY("death.png");
@@ -63,6 +78,14 @@ public enum ImageServer {
         }
     }
 
+    /***
+     * This method loads the animation from an animation sprite.
+     * The sprite must have three rows and ten columns.
+     * The sprite must have a spacing of 80 in the rows,
+     * and a spacing of 120 in the columns.
+     * @param path The path of the animation sprite.
+     * @return Returns the animation sprite as a BufferedImage[][].
+     */
     private static BufferedImage[][] loadAnimations(String path) {
         BufferedImage[][] animations = new BufferedImage[3][10]; //TODO: add into a constant instead to avoid miss-match errors
         for (int row = 0; row < animations.length; row++) {
