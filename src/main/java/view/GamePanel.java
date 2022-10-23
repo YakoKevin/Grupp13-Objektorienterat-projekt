@@ -242,26 +242,9 @@ public class GamePanel extends JPanel implements IRepaint{
      */
     public void drawUI(Graphics g) {
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
-        String scoreStr = String.valueOf(level.getPlayer().getScoreCount());
-        String keyStr = String.valueOf(level.getPlayer().getKeyCount());
-        //String slainStr = String.valueOf(level.getPlayer().getSlainEnemies());
         String slainStr = String.valueOf(level.getPlayer().getSlainEnemies());
         String score = Double.toString(level.getPlayer().getScoreCount());
         String keyScore = Double.toString(level.getPlayer().getKeyCount());
-
-
-        /*
-        g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(Color.RED);
-        g.drawString("HP: " + hpStr,10,10);
-        g.setColor(Color.WHITE);
-        g.drawString("Score: " + scoreStr,100,10);
-        g.setColor(Color.YELLOW);
-        g.drawString("Keys: " + keyStr,190,10);
-        g.setColor(Color.BLACK);
-        g.drawString("Slain: " + slainStr, 280,10);
-
-         */
 
         g.setFont(new Font("Araial", Font.BOLD, 14));
         g.drawImage(iconHp, 10, 8, null);
