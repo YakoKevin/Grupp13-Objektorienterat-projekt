@@ -10,6 +10,7 @@ import java.util.Iterator;
 public class Player extends Living implements Friendly{
     private int keyCount =0;
     private int scoreCount=0;
+    private int roomScore = 0;
     private int slainEnemies;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
@@ -19,7 +20,7 @@ public class Player extends Living implements Friendly{
     public Player(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate, width, height, new Movement(), new AttackModel(50, 100));
         this.setHealthPoints(100);
-        this.setMovementSpeed(7);
+        this.setMovementSpeed(6);
     }
 
     @Override
@@ -73,10 +74,16 @@ public class Player extends Living implements Friendly{
         return this.slainEnemies;
     }
     public int getScoreCount(){
-        return this.scoreCount;
+        return this.scoreCount+this.roomScore;
     }
-    public void incrementScoreCount(int score){
-        this.scoreCount+=score;
+    public void setRoomScoreCount(int score){
+        this.roomScore = score;
+    }
+    public int getRoomScoreCount(){
+        return this.roomScore;
+    }
+    public void setScoreCount(int totalScore){
+        this.scoreCount=totalScore;
     }
 
 }
