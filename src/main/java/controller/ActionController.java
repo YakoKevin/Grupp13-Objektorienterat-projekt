@@ -11,6 +11,9 @@ import view.GamePanel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/***
+ * This class handles Key Listening.
+ */
 public class ActionController implements KeyListener {
     private CardinalDirection dir = CardinalDirection.EAST;
     private Player player;
@@ -26,6 +29,10 @@ public class ActionController implements KeyListener {
 
     }
 
+    /***
+     * This is called when a key is pressed.
+     * @param event The pressed key.
+     */
     @Override
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -69,16 +76,15 @@ public class ActionController implements KeyListener {
             player.setVelX((float)player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getXOffset());
             player.setVelY((float) player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getYOffset());
         }
-
-
-
     }
 
 
+    /***
+     * This is called when a key is released.
+     * @param event The released key.
+     */
     @Override
     public void keyReleased(KeyEvent event) {
-        float tempVelX,tempVelY;
-
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=false;
         }

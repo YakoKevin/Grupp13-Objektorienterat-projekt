@@ -42,13 +42,6 @@ public class Animation {
                                 livingAnimation.getX() + livingAnimation.getFlipAddition(), livingAnimation.getY() - 30, livingAnimation.getFlip() * 140, 150, null);
                     } else
                         g.drawImage(livingAnimation.getDeadImage(), livingAnimation.getX() - 10, livingAnimation.getY() + 20, 50, 50, null);
-                    /*
-                    //TODO: Remove debugging info below
-                    if(livingAnimation.getEntityState() == EntityStates.ATTACK){
-                        Rectangle rec = livingAnimation.getEntity().getAttackRec();
-                        g.drawRect(rec.x, rec.y, rec.width, rec.height);
-                    }
-                    g.drawRect(livingAnimation.getX(), livingAnimation.getY(), livingAnimation.getEntity().getWidth(), livingAnimation.getEntity().getHeight());*/
             }
         }
 
