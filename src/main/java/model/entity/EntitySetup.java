@@ -6,8 +6,8 @@ import model.Coordinate;
  * Constants used for the initialization of entities.
  */
 public enum EntitySetup {
-    PLAYER(500, 250, 40, 40),
-    ENEMY(60, 60, 40, 40);
+    PLAYER(500, 250, 30, 30),
+    ENEMY(60, 60, 30, 30);
     Coordinate startingCoordinate;
     int hitBoxWidth;
     int hitBoxHeight;
