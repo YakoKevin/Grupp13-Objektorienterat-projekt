@@ -23,20 +23,6 @@ public abstract class Enemy extends Living implements Hostile {
         }
     }
 
-    @Override
-    public void getHit(Rectangle atkRect, double atkP) {
-        if(this.state==LivingStates.DEAD){
-            return;
-        }
-        if(isAlive && atkRect.intersects(this.hitbox)){
-            this.setHealthPoints(this.healthPoints-atkP);
-        }
-        if(this.healthPoints<=0){
-            this.setAlive(false); //ska kanske ändras till ett state som sagt
-            this.state = LivingStates.DEAD;
-        }
-    }
-
     public void addFriendly(Friendly friendly) {
         brain.addFriendly(friendly);
     }
