@@ -126,6 +126,10 @@ public class GamePanel extends JPanel implements IRepaint{
     public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
     public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
     public static BufferedImage coin = ImageServer.getImage(ImageServer.Ids.COIN);
+    public static BufferedImage iconKey = ImageServer.getImage(ImageServer.Ids.ICON_KEY);
+    public static BufferedImage iconHp = ImageServer.getImage(ImageServer.Ids.ICON_HP);
+    public static BufferedImage iconCoin = ImageServer.getImage(ImageServer.Ids.ICON_COIN);
+
 
     private void drawCoins(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
@@ -220,11 +224,19 @@ public class GamePanel extends JPanel implements IRepaint{
     public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
         String score = Double.toString(level.getPlayer().getScoreCount());
+        String keyScore = Double.toString(level.getPlayer().getKeyCount());
         g.setFont(new Font("Araial", Font.BOLD, 12));
         g.setColor(new Color(255, 5, 50));
         g.setColor(Color.YELLOW);
-        g.drawString("HP: " + hpStr,10,10);
-        g.drawString("SCORE: " + score,10,25);
+
+        g.drawImage(iconHp, 10, 0, null);
+        g.drawString(hpStr, 28, 12);
+
+        g.drawImage(iconCoin, 10, 13, null);
+        g.drawString(score, 28, 25);
+
+        g.drawImage(iconKey, 10, 26, null);
+        g.drawString(keyScore, 28, 38);
 
         g.setColor(Color.WHITE);
     }
