@@ -28,7 +28,8 @@ public enum ImageServer {
         MAINMENU("mainmenu.png"),
         ICON_HP("Heart_heart_full.png"),
         ICON_KEY("key.png"),
-        ICON_COIN("coin_coin_blue.png");
+        ICON_COIN("coin_coin_blue.png"),
+        ICON_SLAIN("death.png");
         private String path;
 
         Ids(String path){

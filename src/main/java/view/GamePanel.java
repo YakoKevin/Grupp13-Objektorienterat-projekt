@@ -30,6 +30,11 @@ public class GamePanel extends JPanel implements IRepaint{
     public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
     public static BufferedImage coin = ImageServer.getImage(ImageServer.Ids.COIN);
     public static BufferedImage heart = ImageServer.getImage(ImageServer.Ids.HEART);
+    public static BufferedImage iconKey = ImageServer.getImage(ImageServer.Ids.ICON_KEY);
+    public static BufferedImage iconHp = ImageServer.getImage(ImageServer.Ids.ICON_HP);
+    public static BufferedImage iconCoin = ImageServer.getImage(ImageServer.Ids.ICON_COIN);
+    public static BufferedImage iconSlain = ImageServer.getImage(ImageServer.Ids.ICON_SLAIN);
+
 
     public GamePanel(FPSUpdater fpsUpdater, Level level){
         addKeyListener(new ActionController(level.getPlayer()));
@@ -239,8 +244,13 @@ public class GamePanel extends JPanel implements IRepaint{
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
         String scoreStr = String.valueOf(level.getPlayer().getScoreCount());
         String keyStr = String.valueOf(level.getPlayer().getKeyCount());
+        //String slainStr = String.valueOf(level.getPlayer().getSlainEnemies());
         String slainStr = String.valueOf(level.getPlayer().getSlainEnemies());
+        String score = Double.toString(level.getPlayer().getScoreCount());
+        String keyScore = Double.toString(level.getPlayer().getKeyCount());
 
+
+        /*
         g.setFont(new Font("Araial", Font.BOLD, 12));
         g.setColor(Color.RED);
         g.drawString("HP: " + hpStr,10,10);
@@ -251,5 +261,23 @@ public class GamePanel extends JPanel implements IRepaint{
         g.setColor(Color.BLACK);
         g.drawString("Slain: " + slainStr, 280,10);
 
+         */
+
+        g.setFont(new Font("Araial", Font.BOLD, 14));
+        g.drawImage(iconHp, 10, 8, null);
+        g.setColor(Color.RED);
+        g.drawString(hpStr, 30, 20);
+
+        g.drawImage(iconCoin, 100, 8, null);
+        g.setColor(Color.BLUE);
+        g.drawString(score, 120, 20);
+
+        g.drawImage(iconKey, 190, 8, null);
+        g.setColor(Color.YELLOW);
+        g.drawString(keyScore, 210, 20);
+
+        g.drawImage(iconSlain, 280, 3, null);
+        g.setColor(Color.WHITE);
+        g.drawString(slainStr, 320,20);
     }
 }
