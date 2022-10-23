@@ -46,11 +46,11 @@ public class GamePanel extends JPanel implements IRepaint{
         this.level = level;
         //inititateHitbox();
         JButton jb=new JButton("Pause");
-        jb.setBackground(Color.BLUE);
+        jb.setBackground(Color.WHITE);
         jb.setBounds(515, 300, 80, 30);
         this.add(jb);
         JButton jb1=new JButton("Resume");
-        jb1.setBackground(Color.BLUE);
+        jb1.setBackground(Color.WHITE);
         jb1.setBounds(600, 300, 80, 30);
         this.add(jb1);
 
@@ -116,6 +116,9 @@ public class GamePanel extends JPanel implements IRepaint{
         drawObstacles(g);
         drawKeys(g);
         drawCoins(g);
+        if(!level.getPlayer().takenHeart()){
+            drawHeart(g);
+        }
         render(g);
     }
 
@@ -123,10 +126,17 @@ public class GamePanel extends JPanel implements IRepaint{
     public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
     public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
     public static BufferedImage coin = ImageServer.getImage(ImageServer.Ids.COIN);
+    public static BufferedImage heart = ImageServer.getImage(ImageServer.Ids.HEART);
+
+    private void drawHeart(Graphics g){
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+        g.drawImage(heart,level.getCurrentRoomHeart().getX() * scaling, // x och y är kanske feltransponerade
+                level.getCurrentRoomHeart().getY() * scaling,
+                scaling, scaling, null);
+    }
 
     private void drawCoins(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
-
         if(!level.getCurrentRoomCoins().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomCoins()) {
                 g.drawImage(coin,
@@ -216,13 +226,19 @@ public class GamePanel extends JPanel implements IRepaint{
 
     public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
-        String score = Double.toString(level.getPlayer().getScoreCount());
-        g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(new Color(255, 5, 50));
-        g.setColor(Color.YELLOW);
-        g.drawString("HP: " + hpStr,10,10);
-        g.drawString("SCORE: " + score,10,25);
+        String scoreStr = String.valueOf(level.getPlayer().getScoreCount());
+        String keyStr = String.valueOf(level.getPlayer().getKeyCount());
+        String slainStr = String.valueOf(level.getPlayer().getSlainEnemies());
 
+        g.setFont(new Font("Araial", Font.BOLD, 12));
+        g.setColor(Color.RED);
+        g.drawString("HP: " + hpStr,10,10);
         g.setColor(Color.WHITE);
+        g.drawString("Score: " + scoreStr,100,10);
+        g.setColor(Color.YELLOW);
+        g.drawString("Keys: " + keyStr,190,10);
+        g.setColor(Color.BLACK);
+        g.drawString("Slain: " + slainStr, 280,10);
+
     }
 }
