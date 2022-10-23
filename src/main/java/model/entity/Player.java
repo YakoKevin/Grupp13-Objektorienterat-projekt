@@ -96,7 +96,6 @@ public class Player extends Living implements Friendly {
             Rectangle coinCoordinate = new Rectangle(heartCoordinate.getX() * scaling, heartCoordinate.getY() * scaling, scaling, scaling);
             if (this.hitbox.intersects(coinCoordinate)) {
                 if(this.healthPoints<=this.getMaximumHealthPoints()-10) {
-                    System.out.println("dfsfds");
                     this.healthPoints += 10;
                     takenHeart = true;
                 }

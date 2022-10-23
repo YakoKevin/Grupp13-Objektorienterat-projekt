@@ -232,7 +232,7 @@ public class GamePanel extends JPanel implements IRepaint{
         String scoreStr = String.valueOf(level.getPlayer().getScoreCount());
         String keyStr = String.valueOf(level.getPlayer().getKeyCount());
         g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(new Color(255, 5, 50));
+        g.setColor(Color.RED);
         g.drawString("HP: " + hpStr,10,10);
         g.setColor(Color.WHITE);
         g.drawString("Score: " + scoreStr,100,10);
