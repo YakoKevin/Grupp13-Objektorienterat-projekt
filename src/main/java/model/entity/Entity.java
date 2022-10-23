@@ -32,10 +32,12 @@ public abstract class Entity {
         hitbox = new Rectangle((int)finePositionX, (int)finePositionY, width, height);
     }
 
-    public void tick(){
+    public final void tick(){
         updateHitbox();
-
+        tickExtra();
     }
+
+    protected abstract void tickExtra();
 
     protected void updateHitbox(){
         hitbox.x = (int)finePositionX;

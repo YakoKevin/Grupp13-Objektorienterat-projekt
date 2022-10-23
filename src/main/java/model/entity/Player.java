@@ -45,8 +45,7 @@ public class Player extends Living implements Friendly {
     }
 
     @Override
-    public void tick() {
-        updateHitbox();
+    public void tickExtra() {
         checkEntityMovement();
         checkKeys();
         checkCoins();

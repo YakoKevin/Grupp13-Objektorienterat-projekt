@@ -16,9 +16,8 @@ public abstract class Enemy extends Living implements Hostile {
     }
 
 
-    public void tick() {
+    public void tickExtra() {
         if(isAlive) {
-            updateHitbox();
             brain.think();
         }
     }
