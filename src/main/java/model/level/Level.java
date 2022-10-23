@@ -165,6 +165,8 @@ public abstract class Level{
         room.setPlayerTotalScore(player);
         player.setScoreCount(player.getRoomScoreCount());
         player.setRoomScoreCount(0);
+        player.setSlainEnemies(player.getRoomSlainEnemies());
+        player.setRoomSlainEnemies(0);
         return room;
     }
 
@@ -213,10 +215,12 @@ public abstract class Level{
             int score=0;
             for (Enemy enemy : currentRoom.getEnemies()) {
                 if (enemy.isAlive() == false) {
-                    score+=10;
+                    score++;
                 }
             }
-            player.setRoomScoreCount(score);
+            player.setRoomScoreCount(score*10);
+            player.setRoomSlainEnemies(score);
+
         }
     }
 

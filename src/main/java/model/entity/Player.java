@@ -12,6 +12,7 @@ public class Player extends Living implements Friendly {
     private int scoreCount = 0;
     private int roomScore = 0;
     private int slainEnemies;
+    private int roomSlainEnemies;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
     private ArrayList<Coordinate> coinCoordinates = new ArrayList<>();
@@ -110,8 +111,17 @@ public class Player extends Living implements Friendly {
     public int getKeyCount(){
         return this.keyCount;
     }
-    public int getSlainEnemiesCount(){
-        return this.slainEnemies;
+    public int getSlainEnemies(){
+        return this.slainEnemies+this.roomSlainEnemies;
+    }
+    public void setSlainEnemies(int totalSlainEnemies){
+        this.slainEnemies = totalSlainEnemies;
+    }
+    public void setRoomSlainEnemies(int slainEnemies){
+        this.roomSlainEnemies = slainEnemies;
+    }
+    public int getRoomSlainEnemies(){
+        return this.roomSlainEnemies;
     }
     public int getScoreCount(){
         return this.scoreCount+this.roomScore;
