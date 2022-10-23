@@ -49,11 +49,11 @@ public class GamePanel extends JPanel implements IRepaint{
         this.level = level;
         //inititateHitbox();
         JButton jb=new JButton("Pause");
-        jb.setBackground(Color.BLUE);
+        jb.setBackground(Color.WHITE);
         jb.setBounds(515, 300, 80, 30);
         this.add(jb);
         JButton jb1=new JButton("Resume");
-        jb1.setBackground(Color.BLUE);
+        jb1.setBackground(Color.WHITE);
         jb1.setBounds(600, 300, 80, 30);
         this.add(jb1);
 
