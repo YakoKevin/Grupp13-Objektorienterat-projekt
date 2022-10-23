@@ -7,6 +7,15 @@ import java.awt.*;
 import java.time.LocalTime;
 import java.util.Random;
 
+/**
+ * Enemy is the abstract class of all enemies. Extends {@code Living} since it has various states and can die. Implements {@code Hostile}
+ * and can therefore hit friendlies. Has a {@code Brain} which it uses to do calculations on what to do and when to do them.
+ *
+ * @see Living
+ * @see Hostile
+ * @see Friendly
+ * @see Brain
+ */
 public abstract class Enemy extends Living implements Hostile {
     private Brain brain;
 

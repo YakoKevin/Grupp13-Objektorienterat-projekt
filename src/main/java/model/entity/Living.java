@@ -13,7 +13,7 @@ import java.util.Iterator;
  */
 public abstract class Living extends Entity implements Attackable{
     protected boolean isAlive = true;
-    protected LivingStates state;
+    protected LivingStates state = LivingStates.IDLE;
     protected Movement movement;
     protected AttackModel attack;
     protected double movementSpeed;
@@ -166,6 +166,14 @@ public abstract class Living extends Entity implements Attackable{
             finePositionY = tmpY;
         }
 
+    }
+
+
+    public void setState(LivingStates state){
+        this.state = state;
+    }
+    public LivingStates getState() {
+        return state;
     }
 
 }

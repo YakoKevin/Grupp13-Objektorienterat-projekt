@@ -7,6 +7,17 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Player is the player of the game. It holds all the score-, key- and enemy slain count. Implements Friendly and can therefore
+ * attack {@code Hostiles}. Extends Living since Player is a living entity and can thus have various states,
+ * including being dead.
+ *
+ * @see Friendly
+ * @see Hostile
+ * @see Living
+ * @see ImageServer
+ * @see GameConstants
+ */
 public class Player extends Living implements Friendly {
     private int keyCount = 0;
     private int scoreCount = 0;

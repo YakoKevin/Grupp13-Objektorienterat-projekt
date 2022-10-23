@@ -4,6 +4,9 @@ import model.Coordinate;
 
 import static model.entity.EntitySetup.PLAYER;
 
+/**
+ * Factory for creating a {@code Player} object.
+ */
 public class PlayerFactory {
 
     public static  Player createPlayer(){

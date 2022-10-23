@@ -2,6 +2,9 @@ package model.entity;
 
 import static model.entity.EntitySetup.ENEMY;
 
+/**
+ * Factory for creating the enemies.
+ */
 public class EnemyFactory {
 
     public Enemy createSkeleton(){

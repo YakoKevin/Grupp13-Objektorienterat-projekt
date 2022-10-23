@@ -6,6 +6,15 @@ import model.GameConstants;
 
 import java.awt.*;
 
+/**
+ * General Entity. Objects that can move and have a position, hit box and direction. Updates logic with the {@link #tick() tick()}
+ * function, specifically the hitbox position. To extend this function, use {@link #tickExtra() tickExtra()} instead.
+ *
+ * @see CardinalDirection
+ * @see Coordinate
+ * @see Living
+ * @see Enemy
+ */
 public abstract class Entity {
     protected float velX,velY;
     protected float finePositionX;
@@ -13,10 +22,6 @@ public abstract class Entity {
     protected int width, height;
     protected Rectangle hitbox;
     protected CardinalDirection dir;
-    protected LivingStates state = LivingStates.IDLE;
-
-
-
 
     public Entity(Coordinate startCoordinate, int width, int height){
         this.width = width;
@@ -43,9 +48,6 @@ public abstract class Entity {
         hitbox.x = (int)finePositionX;
         hitbox.y = (int)finePositionY;
     }
-
-    //private double x,y;
-    //public double healthPoints;
 
     public void setVelX(float velX) {
         this.velX = velX;
@@ -80,8 +82,6 @@ public abstract class Entity {
         this.finePositionY = coordinate.getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
     }
 
-
-
     public int getWidth() { return (int)width; }
 
     public int getHeight()
@@ -89,19 +89,10 @@ public abstract class Entity {
         return (int)height;
     }
 
-
-
     public void setDirection(CardinalDirection d){
         this.dir = d;
     }
     public CardinalDirection getDirection(){
         return this.dir;
-    }
-
-    public void setState(LivingStates state){
-        this.state = state;
-    }
-    public LivingStates getState() {
-        return state;
     }
 }
