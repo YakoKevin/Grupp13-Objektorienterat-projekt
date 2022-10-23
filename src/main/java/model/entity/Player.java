@@ -15,9 +15,11 @@ public class Player extends Living implements Friendly {
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
     private ArrayList<Coordinate> coinCoordinates = new ArrayList<>();
+    private Coordinate heartCoordinate;
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.PLAYER;
     private ImageServer.DeathId deathIdentification = ImageServer.DeathId.PLAYER;
     private final int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+    private boolean takenHeart = false;
 
     public Player(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate, width, height, new Movement(), new AttackModel(50, 100));
@@ -47,6 +49,9 @@ public class Player extends Living implements Friendly {
         checkEntityMovement();
         checkKeys();
         checkCoins();
+        if(!takenHeart){
+            checkHeart();
+        }
     }
 
     @Override
@@ -57,9 +62,11 @@ public class Player extends Living implements Friendly {
     public void giveKeyList(ArrayList<Coordinate> keyCoordinates) {
         this.keysCoordinates = keyCoordinates;
     }
-
     public void giveCoinList(ArrayList<Coordinate> coinCoordinates){
         this.coinCoordinates = coinCoordinates;
+    }
+    public void giveHeartObject(Coordinate hpCoord){
+        this.heartCoordinate = hpCoord;
     }
 
     protected void checkKeys() {
@@ -75,18 +82,29 @@ public class Player extends Living implements Friendly {
     }
 
     protected void checkCoins() {
-        for(Iterator<Coordinate> iterator = coinCoordinates.iterator(); iterator.hasNext();)
-        {
-        Coordinate coordinate = (Coordinate) iterator.next();
-        Rectangle coinCoordinate = new Rectangle(coordinate.getY() * scaling, coordinate.getX() * scaling, scaling, scaling);
-        if (this.hitbox.intersects(coinCoordinate)) {
-            iterator.remove();
-            this.roomScore += 10;
-            break;
+        for(Iterator<Coordinate> iterator = coinCoordinates.iterator(); iterator.hasNext();) {
+            Coordinate coordinate = (Coordinate) iterator.next();
+            Rectangle coinCoordinate = new Rectangle(coordinate.getY() * scaling, coordinate.getX() * scaling, scaling, scaling);
+            if (this.hitbox.intersects(coinCoordinate)) {
+                iterator.remove();
+                this.scoreCount += 10;
+                break;
+            }
         }
     }
+    protected void checkHeart() {
+            Rectangle coinCoordinate = new Rectangle(heartCoordinate.getX() * scaling, heartCoordinate.getY() * scaling, scaling, scaling);
+            if (this.hitbox.intersects(coinCoordinate)) {
+                if(this.healthPoints<=this.getMaximumHealthPoints()-10) {
+                    this.healthPoints += 10;
+                    takenHeart = true;
+                }
+            }
+    }
 
-}
+    public boolean takenHeart(){
+        return this.takenHeart;
+    }
 
 
     public int getKeyCount(){

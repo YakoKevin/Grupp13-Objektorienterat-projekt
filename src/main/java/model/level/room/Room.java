@@ -23,6 +23,7 @@ public abstract class Room{
     protected ArrayList<Coordinate> obstaclesCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
     protected ArrayList<Coordinate> coinsCoordinates = new ArrayList<>();
+    protected Coordinate heartCoordinate;
     protected ArrayList<Door> doors = new ArrayList<>();
     protected ArrayList<Enemy> enemies = new ArrayList<>();
     protected EnemyFactory enemyFactory;
@@ -94,7 +95,6 @@ public abstract class Room{
         for (Coordinate coordinate : coinsCoordinates) {
             matrix[coordinate.getY()][coordinate.getX()] = 2;
         }
-
         return matrix;
     }
 
@@ -118,6 +118,9 @@ public abstract class Room{
         return coinsCoordinates;
     }
 
+    public Coordinate getHeart(){
+        return heartCoordinate;
+    }
     public ArrayList<Door> getDoors(){
         return new ArrayList<>(doors);
     }
