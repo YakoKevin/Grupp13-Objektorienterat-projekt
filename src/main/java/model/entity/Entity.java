@@ -14,6 +14,8 @@ public abstract class Entity {
     protected Rectangle hitbox;
     protected CardinalDirection dir;
     protected LivingStates state = LivingStates.IDLE;
+    protected double healthPoints;
+    protected double score;
 
 
     public Entity(Coordinate startCoordinate, int width, int height){
@@ -41,7 +43,7 @@ public abstract class Entity {
     }
 
     //private double x,y;
-    public double healthPoints;
+    //public double healthPoints;
 
     public void setVelX(float velX) {
         this.velX = velX;
@@ -104,6 +106,13 @@ public abstract class Entity {
     }
     public LivingStates getState() {
         return state;
+    }
+
+    public void setScore(double score){
+        this.score=score;
+    }
+    public double getScore() {
+        return score;
     }
 
 

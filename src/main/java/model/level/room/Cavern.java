@@ -23,6 +23,7 @@ public class Cavern extends Room {
         addObstacles();
         addEnemies(enemyFactory);
         addKeys();
+        addCoins();
     }
 
     private void createWalls(){
@@ -89,13 +90,23 @@ public class Cavern extends Room {
         }
     }
 
+    private void addCoins() {
+        for (int i = 0; i < Constants.getRandomKeysAmount(); i++){
+            Coordinate randomCoordinate = Coordinate.randomCoordinate(1,1, WIDTH-1, HEIGHT-1);
+            coinsCoordinates.add(randomCoordinate);
+        }
+    }
+
+
     private enum Constants{
         MIN_NUMBER_OF_ENEMIES(0),
         MAX_NUMBER_OF_ENEMIES(4),
         MIN_NUMBER_OF_OBSTACLES(5),
         MAX_NUMBER_OF_OBSTACLES(10),
         MIN_NUMBER_OF_KEYS(2),
-        MAX_NUMBER_OF_KEYS(5);
+        MAX_NUMBER_OF_KEYS(5),
+        MIN_NUMBER_OF_COINS(3),
+        MAX_NUMBER_OF_COINS(6);
         int amount;
 
         Constants(int amount){
@@ -112,6 +123,10 @@ public class Cavern extends Room {
 
         static int getRandomKeysAmount(){
             return ThreadLocalRandom.current().nextInt(Constants.MIN_NUMBER_OF_KEYS.amount,Constants.MAX_NUMBER_OF_KEYS.amount+1);
+        }
+
+        static int getRandomCoinsAmount(){
+            return ThreadLocalRandom.current().nextInt(Constants.MIN_NUMBER_OF_COINS.amount,Constants.MAX_NUMBER_OF_COINS.amount+1);
         }
     }
 }
