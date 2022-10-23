@@ -163,9 +163,9 @@ public abstract class Level{
         room.givePlayerHostiles(player);
         room.giveEnemiesFriendly(player);
         room.setPlayerTotalScore(player);
-        player.setScoreCount(player.getRoomScoreCount());
+        //player.setScoreCount(player.getRoomScoreCount()+player.getScoreCount());
         player.setRoomScoreCount(0);
-        player.setSlainEnemies(player.getRoomSlainEnemies());
+        player.setSlainEnemies(player.getRoomSlainEnemies()+player.getSlainEnemies());
         player.setRoomSlainEnemies(0);
         return room;
     }
@@ -211,16 +211,19 @@ public abstract class Level{
 
     private void updatePlayer(){
         player.tick();
+
         if(player.getState()==LivingStates.ATTACK) {
-            int score=0;
+            int score=0; boolean anyEnemyDead=false;
             for (Enemy enemy : currentRoom.getEnemies()) {
-                if (enemy.isAlive() == false) {
+                if (!enemy.isAlive()) {
                     score++;
+                    anyEnemyDead =true;
                 }
             }
-            player.setRoomScoreCount(score*10);
-            player.setRoomSlainEnemies(score);
-
+            if(anyEnemyDead){
+                player.setRoomScoreCount(score*10);
+                player.setRoomSlainEnemies(score);
+            }
         }
     }
 

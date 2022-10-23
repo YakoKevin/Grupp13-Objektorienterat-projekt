@@ -115,7 +115,7 @@ public class GamePanel extends JPanel implements IRepaint{
      */
     private void drawHeart(Graphics g){
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
-        g.drawImage(heart,level.getCurrentRoomHeart().getX() * scaling, // x och y är kanske feltransponerade
+        g.drawImage(heart,level.getCurrentRoomHeart().getX() * scaling,
                 level.getCurrentRoomHeart().getY() * scaling,
                 scaling, scaling, null);
     }
@@ -129,7 +129,7 @@ public class GamePanel extends JPanel implements IRepaint{
         if(!level.getCurrentRoomCoins().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomCoins()) {
                 g.drawImage(coin,
-                        obsCoord.getX() * scaling, // x och y är kanske feltransponerade
+                        obsCoord.getX() * scaling,
                         obsCoord.getY() * scaling,
                         scaling, scaling, null);
             }
@@ -242,26 +242,9 @@ public class GamePanel extends JPanel implements IRepaint{
      */
     public void drawUI(Graphics g) {
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
-        String scoreStr = String.valueOf(level.getPlayer().getScoreCount());
+        String scoreStr = String.valueOf(level.getPlayer().getScoreCount() + level.getPlayer().getRoomScoreCount());
         String keyStr = String.valueOf(level.getPlayer().getKeyCount());
-        //String slainStr = String.valueOf(level.getPlayer().getSlainEnemies());
-        String slainStr = String.valueOf(level.getPlayer().getSlainEnemies());
-        String score = Double.toString(level.getPlayer().getScoreCount());
-        String keyScore = Double.toString(level.getPlayer().getKeyCount());
-
-
-        /*
-        g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(Color.RED);
-        g.drawString("HP: " + hpStr,10,10);
-        g.setColor(Color.WHITE);
-        g.drawString("Score: " + scoreStr,100,10);
-        g.setColor(Color.YELLOW);
-        g.drawString("Keys: " + keyStr,190,10);
-        g.setColor(Color.BLACK);
-        g.drawString("Slain: " + slainStr, 280,10);
-
-         */
+        String slainStr = String.valueOf(level.getPlayer().getSlainEnemies() +level.getPlayer().getRoomSlainEnemies());
 
         g.setFont(new Font("Araial", Font.BOLD, 14));
         g.drawImage(iconHp, 10, 8, null);
@@ -270,11 +253,11 @@ public class GamePanel extends JPanel implements IRepaint{
 
         g.drawImage(iconCoin, 100, 8, null);
         g.setColor(Color.BLUE);
-        g.drawString(score, 120, 20);
+        g.drawString(scoreStr, 120, 20);
 
         g.drawImage(iconKey, 190, 8, null);
         g.setColor(Color.YELLOW);
-        g.drawString(keyScore, 210, 20);
+        g.drawString(keyStr, 210, 20);
 
         g.drawImage(iconSlain, 280, 3, null);
         g.setColor(Color.WHITE);

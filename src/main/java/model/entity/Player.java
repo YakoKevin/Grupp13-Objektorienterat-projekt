@@ -63,6 +63,7 @@ public class Player extends Living implements Friendly {
         if(!takenHeart){
             checkHeart();
         }
+
     }
 
     @Override
@@ -98,7 +99,7 @@ public class Player extends Living implements Friendly {
             Rectangle coinCoordinate = new Rectangle(coordinate.getX() * scaling, coordinate.getY() * scaling, scaling, scaling);
             if (this.hitbox.intersects(coinCoordinate)) {
                 iterator.remove();
-                this.scoreCount += 10;
+                scoreCount += 10;
                 break;
             }
         }
@@ -122,7 +123,7 @@ public class Player extends Living implements Friendly {
         return this.keyCount;
     }
     public int getSlainEnemies(){
-        return this.slainEnemies+this.roomSlainEnemies;
+        return this.slainEnemies;
     }
     public void setSlainEnemies(int totalSlainEnemies){
         this.slainEnemies = totalSlainEnemies;
@@ -134,7 +135,7 @@ public class Player extends Living implements Friendly {
         return this.roomSlainEnemies;
     }
     public int getScoreCount(){
-        return this.scoreCount+this.roomScore;
+        return this.scoreCount;
     }
     public void setRoomScoreCount(int score){
         this.roomScore = score;
@@ -143,7 +144,8 @@ public class Player extends Living implements Friendly {
         return this.roomScore;
     }
     public void setScoreCount(int totalScore){
-        this.scoreCount=totalScore;
+        this.scoreCount = totalScore;
     }
+
 
 }
