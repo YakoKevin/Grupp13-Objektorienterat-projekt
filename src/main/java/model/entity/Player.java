@@ -73,7 +73,7 @@ public class Player extends Living implements Friendly {
     protected void checkKeys() {
         for (Iterator<Coordinate> iterator = keysCoordinates.iterator(); iterator.hasNext();) {
             Coordinate coordinate = (Coordinate) iterator.next();
-            Rectangle keyCoordinate = new Rectangle(coordinate.getY() * scaling, coordinate.getX() * scaling, scaling, scaling);
+            Rectangle keyCoordinate = new Rectangle(coordinate.getX() * scaling, coordinate.getY() * scaling, scaling, scaling);
             if (this.hitbox.intersects(keyCoordinate)) {
                 iterator.remove();
                 keyCount++;
@@ -85,7 +85,7 @@ public class Player extends Living implements Friendly {
     protected void checkCoins() {
         for(Iterator<Coordinate> iterator = coinCoordinates.iterator(); iterator.hasNext();) {
             Coordinate coordinate = (Coordinate) iterator.next();
-            Rectangle coinCoordinate = new Rectangle(coordinate.getY() * scaling, coordinate.getX() * scaling, scaling, scaling);
+            Rectangle coinCoordinate = new Rectangle(coordinate.getX() * scaling, coordinate.getY() * scaling, scaling, scaling);
             if (this.hitbox.intersects(coinCoordinate)) {
                 iterator.remove();
                 this.scoreCount += 10;

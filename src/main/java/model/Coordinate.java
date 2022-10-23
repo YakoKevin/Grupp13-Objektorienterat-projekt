@@ -80,7 +80,7 @@ public class Coordinate {
      * @param yBoundLower the lower y-value.
      * @param xBoundUpper the upper x-value.
      * @param yBoundUpper the upper y-value.
-     * @return a {@code coordinate} with ranom x,y-values depending on the parameters.
+     * @return a {@code coordinate} with random x,y-values depending on the parameters.
      */
     public static Coordinate randomCoordinate(int xBoundLower, int yBoundLower, int xBoundUpper, int yBoundUpper){
         return new Coordinate(ThreadLocalRandom.current().nextInt(xBoundLower,xBoundUpper+1), ThreadLocalRandom.current().nextInt(yBoundLower,yBoundUpper+1));
