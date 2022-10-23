@@ -81,7 +81,7 @@ public class Player extends Living implements Friendly {
         Rectangle coinCoordinate = new Rectangle(coordinate.getY() * scaling, coordinate.getX() * scaling, scaling, scaling);
         if (this.hitbox.intersects(coinCoordinate)) {
             iterator.remove();
-            this.roomScore += 10;
+            this.scoreCount += 10;
             break;
         }
     }
