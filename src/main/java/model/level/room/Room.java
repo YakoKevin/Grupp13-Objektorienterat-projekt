@@ -130,6 +130,10 @@ public abstract class Room{
         ArrayList<Hostile> hostiles = new ArrayList<>(enemies);
         player.addHostilesList(hostiles);
     }
+    public void setPlayerTotalScore(Player player){
+        player.setScoreCount(player.getRoomScoreCount()+player.getScoreCount());
+    }
+
 
     public void giveEnemiesFriendly(Friendly friendly){
         for(Enemy enemy : enemies){

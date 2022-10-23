@@ -157,6 +157,9 @@ public abstract class Level{
         room.setCoordinate(coordinate);
         room.givePlayerHostiles(player);
         room.giveEnemiesFriendly(player);
+        room.setPlayerTotalScore(player);
+        player.setScoreCount(player.getRoomScoreCount());
+        player.setRoomScoreCount(0);
         return room;
     }
 
@@ -195,13 +198,21 @@ public abstract class Level{
     private void updateEnemies(){
         for (Enemy enemy : currentRoom.getEnemies()) {
             enemy.giveFriendlyCoordinates(player.getX(), player.getY());
-            enemy.givePlayer(player);
             enemy.tick();
         }
     }
 
     private void updatePlayer(){
         player.tick();
+        if(player.getState()==LivingStates.ATTACK) {
+            int score=0;
+            for (Enemy enemy : currentRoom.getEnemies()) {
+                if (enemy.isAlive() == false) {
+                    score+=10;
+                }
+            }
+            player.setRoomScoreCount(score);
+        }
     }
 
     private void checkDoorCollision(){
@@ -221,7 +232,7 @@ public abstract class Level{
     }
 
     /**
-     * @return return the {@code player} referens. Note that this is the same referens used in {@code level}, not a new object!
+     * @return return the {@code player} referens. Note that this is the same reference used in {@code level}, not a new object!
      */
     public Player getPlayer() {
         return this.player;

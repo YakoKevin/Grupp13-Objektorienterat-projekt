@@ -23,6 +23,20 @@ public abstract class Enemy extends Living implements Hostile {
         }
     }
 
+    @Override
+    public void getHit(Rectangle atkRect, double atkP) {
+        if(this.state==LivingStates.DEAD){
+            return;
+        }
+        if(isAlive && atkRect.intersects(this.hitbox)){
+            this.setHealthPoints(this.healthPoints-atkP);
+        }
+        if(this.healthPoints<=0){
+            this.setAlive(false); //ska kanske ändras till ett state som sagt
+            this.state = LivingStates.DEAD;
+        }
+    }
+
     public void addFriendly(Friendly friendly) {
         brain.addFriendly(friendly);
     }
@@ -31,9 +45,6 @@ public abstract class Enemy extends Living implements Hostile {
         brain.giveFriendlyCoordinates(x, y);
     }
 
-    public void givePlayer(Player player) {
-        brain.givePlayer(player);
-    }
 
     private class Brain {
         private Friendly friendly;
@@ -42,14 +53,9 @@ public abstract class Enemy extends Living implements Hostile {
         private final float sightRange;
         private boolean readyToAttack;
         private LocalTime lastRenderTime = LocalTime.now();
-        private Player player;
 
         public Brain(float sightRange){
             this.sightRange = sightRange;
-        }
-
-        public void givePlayer(Player player) {
-            this.player = player;
         }
 
         public void think() {
@@ -62,12 +68,6 @@ public abstract class Enemy extends Living implements Hostile {
                 moveRandomly();
             }
             readyToAttack = attack.coolDown();
-        }
-
-        private void calculateScore(){
-            if(Math.abs(finePositionX - friendlyLastSeenX) < 20 && Math.abs(finePositionY - friendlyLastSeenY) < 20) {
-                player.setHealthPoints(player.getHealthPoints() - 10);
-            }
         }
 
         private void moveRandomly(){
@@ -96,7 +96,7 @@ public abstract class Enemy extends Living implements Hostile {
                 }else if(dir == CardinalDirection.WEST) {
                     setVelX(-1);
                 }
-                calculateScore();
+                attackFriendly();
             }
         }
 
@@ -129,7 +129,7 @@ public abstract class Enemy extends Living implements Hostile {
                 }else if(dir == CardinalDirection.WEST) {
                     setVelX(-1);
                 }
-                calculateScore();
+                attackFriendly();
             }
         }
 
@@ -152,5 +152,7 @@ public abstract class Enemy extends Living implements Hostile {
         private boolean isCloseToFriendly(float range){
             return (Math.abs(friendlyLastSeenX - finePositionX) < range && Math.abs(friendlyLastSeenY - finePositionY) <  range);
         }
+
+
     }
 }

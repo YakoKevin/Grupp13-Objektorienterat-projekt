@@ -28,6 +28,11 @@ public class ActionController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+        player.setState(LivingStates.ATTACK);
+        player.attack();
+        return;
+    }
         if (event.getKeyCode() == KeyEvent.VK_W) {
             up=true;
             dir=CardinalDirection.NORTH;
@@ -59,20 +64,14 @@ public class ActionController implements KeyListener {
             dir = CardinalDirection.SOUTHEAST;
         }
         if(up||right||down||left){
-            System.out.println(player.getX()  + "-" + player.getY());
             player.setDirection(dir);
             player.setState(LivingStates.RUNNING);
-
             player.setVelX((float)player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getXOffset());
-
             player.setVelY((float) player.getMovementSpeed() * (float) dir.getHypothenuseReciprocal() * dir.getYOffset());
         }
 
 
-        if (event.getKeyCode() == KeyEvent.VK_SPACE) {
-            player.setState(LivingStates.ATTACK);
-            player.attack();
-        }
+
     }
 
 
@@ -104,9 +103,11 @@ public class ActionController implements KeyListener {
         if(up||right||down||left){
             if(up&&!down){
                 player.setVelY(-(float)player.getMovementSpeed());
+                //dir = CardinalDirection.NORTH;
             }
             if(!up&&down){
                 player.setVelY((float)player.getMovementSpeed());
+                //dir = CardinalDirection.SOUTH;
             }
             if(!right&&left){
                 player.setVelX(-(float)player.getMovementSpeed());
