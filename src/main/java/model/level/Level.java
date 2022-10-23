@@ -106,8 +106,8 @@ public abstract class Level{
     /**
      * @return a boolean if the argument {@code coordinate} is equal to any {@code door} {@code coordinate}.
      */
-    public boolean isCoordinateInDoor(Coordinate coordinate){
-        return currentRoom.isCoordinateInDoor(coordinate);
+    public boolean isCoordinateInDoor(float x, float y){
+        return currentRoom.isCoordinateInDoor(x, y);
     }
 
     /**
@@ -225,7 +225,7 @@ public abstract class Level{
     }
 
     private void checkDoorCollision(){
-        if(isCoordinateInDoor(player.getPosition())){
+        if(isCoordinateInDoor(player.getX(), player.getY())){
             canGoThroughDoor = false;
             changeRoom();
         }

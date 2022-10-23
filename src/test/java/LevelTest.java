@@ -67,7 +67,7 @@ public class LevelTest {
         StringBuilder matrixString = new StringBuilder();
         for (int i = 0; i < GameConstants.RoomMapSizes.HEIGHT.getSize(); i++) {
             for (int j = 0; j < GameConstants.RoomMapSizes.WIDTH.getSize(); j++) {
-                matrixString.append(nodeMatrix[i][j]).append(" ");
+                matrixString.append(nodeMatrix[j][i]).append(" ");
             }
             matrixString.append("\n");
         }
