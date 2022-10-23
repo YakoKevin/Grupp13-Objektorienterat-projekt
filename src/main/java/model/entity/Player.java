@@ -7,15 +7,17 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Player extends Living implements Friendly{
-    private int keyCount =0;
-    private int scoreCount=0;
+public class Player extends Living implements Friendly {
+    private int keyCount = 0;
+    private int scoreCount = 0;
     private int roomScore = 0;
     private int slainEnemies;
     private ArrayList<Hostile> hostiles = new ArrayList<>();
     private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
+    private ArrayList<Coordinate> coinCoordinates = new ArrayList<>();
     private ImageServer.AnimationIds identification = ImageServer.AnimationIds.PLAYER;
     private ImageServer.DeathId deathIdentification = ImageServer.DeathId.PLAYER;
+    private final int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
 
     public Player(Coordinate startCoordinate, int width, int height) {
         super(startCoordinate, width, height, new Movement(), new AttackModel(50, 100));
@@ -28,9 +30,9 @@ public class Player extends Living implements Friendly{
         return identification;
     }
 
-    public void attack(){
+    public void attack() {
         Rectangle attackRectangle = attack.getAttackRectangle(hitbox, dir);
-        for(Hostile hostile : hostiles){
+        for (Hostile hostile : hostiles) {
             hostile.getHit(attackRectangle, attack.getAttackDamage());
         }
     }
@@ -40,10 +42,11 @@ public class Player extends Living implements Friendly{
     }
 
     @Override
-    public void tick(){
+    public void tick() {
         updateHitbox();
         checkEntityMovement();
         checkKeys();
+        checkCoins();
     }
 
     @Override
@@ -51,22 +54,41 @@ public class Player extends Living implements Friendly{
         return deathIdentification;
     }
 
-    public void giveKeyList(ArrayList<Coordinate> keyCoordinates){
+    public void giveKeyList(ArrayList<Coordinate> keyCoordinates) {
         this.keysCoordinates = keyCoordinates;
     }
+
+    public void giveCoinList(ArrayList<Coordinate> coinCoordinates){
+        this.coinCoordinates = coinCoordinates;
+    }
+
     protected void checkKeys() {
-        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
-        for (
-                Iterator<Coordinate> iterator = keysCoordinates.iterator(); iterator.hasNext();) {
+        for (Iterator<Coordinate> iterator = keysCoordinates.iterator(); iterator.hasNext();) {
             Coordinate coordinate = (Coordinate) iterator.next();
-            Rectangle keyCoordinate = new Rectangle(coordinate.getY()*scaling, coordinate.getX()*scaling, scaling, scaling);
-            if(this.hitbox.intersects(keyCoordinate)) {
+            Rectangle keyCoordinate = new Rectangle(coordinate.getY() * scaling, coordinate.getX() * scaling, scaling, scaling);
+            if (this.hitbox.intersects(keyCoordinate)) {
                 iterator.remove();
                 keyCount++;
                 break;
             }
         }
     }
+
+    protected void checkCoins() {
+        for(Iterator<Coordinate> iterator = coinCoordinates.iterator(); iterator.hasNext();)
+        {
+        Coordinate coordinate = (Coordinate) iterator.next();
+        Rectangle coinCoordinate = new Rectangle(coordinate.getY() * scaling, coordinate.getX() * scaling, scaling, scaling);
+        if (this.hitbox.intersects(coinCoordinate)) {
+            iterator.remove();
+            this.scoreCount += 10;
+            break;
+        }
+    }
+
+}
+
+
     public int getKeyCount(){
         return this.keyCount;
     }

@@ -115,12 +115,27 @@ public class GamePanel extends JPanel implements IRepaint{
         drawUI(g);
         drawObstacles(g);
         drawKeys(g);
+        drawCoins(g);
         render(g);
     }
 
     public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
     public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
     public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
+    public static BufferedImage coin = ImageServer.getImage(ImageServer.Ids.COIN);
+
+    private void drawCoins(Graphics g) {
+        int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+
+        if(!level.getCurrentRoomCoins().isEmpty()) {
+            for (Coordinate obsCoord : level.getCurrentRoomCoins()) {
+                g.drawImage(coin,
+                        obsCoord.getY() * scaling, // x och y är kanske feltransponerade
+                        obsCoord.getX() * scaling,
+                        scaling, scaling, null);
+            }
+        }
+    }
 
     private void drawKeys(Graphics g) {
         int scaling = GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
@@ -201,15 +216,13 @@ public class GamePanel extends JPanel implements IRepaint{
 
     public void drawUI(Graphics g) { //kanske kan separera dessa om man vill
         String hpStr = Double.toString(level.getPlayer().getHealthPoints());
-        String keyStr = String.valueOf(level.getPlayer().getKeyCount());
-        String scoreStr= String.valueOf(level.getPlayer().getScoreCount());
-
+        String score = Double.toString(level.getPlayer().getScoreCount());
         g.setFont(new Font("Araial", Font.BOLD, 12));
-        g.setColor(new Color(255, 50, 30));
-        g.drawString("HP: " + hpStr,10,10);
+        g.setColor(new Color(255, 5, 50));
         g.setColor(Color.YELLOW);
-        g.drawString("Keys: " + keyStr, 110,10);
+        g.drawString("HP: " + hpStr,10,10);
+        g.drawString("SCORE: " + score,10,25);
+
         g.setColor(Color.WHITE);
-        g.drawString("Score: " + scoreStr, 210,10);
     }
 }

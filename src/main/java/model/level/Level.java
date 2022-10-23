@@ -79,6 +79,13 @@ public abstract class Level{
     }
 
     /**
+     * @return an {@code ArrayList} of the {@code Coordinates} of all the Coin.
+     */
+    public ArrayList<Coordinate> getCurrentRoomCoins(){
+        return currentRoom.getCoins();
+    }
+
+    /**
      * @return an {@code ArrayList} of the {@code Coordinates} of all the {@code door} pieces.
      */
     public ArrayList<Door> getCurrentRoomDoors(){
@@ -137,6 +144,7 @@ public abstract class Level{
         list.addAll(getCurrentRoomObstacles());
         player.giveObstructionList(list);
         player.giveKeyList(getCurrentRoomKeys());
+        player.giveCoinList(getCurrentRoomCoins());
         for(Enemy enemy : currentRoom.getEnemies()){
             enemy.giveObstructionList(list);
         }

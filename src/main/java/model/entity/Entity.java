@@ -16,6 +16,8 @@ public abstract class Entity {
     protected LivingStates state = LivingStates.IDLE;
 
 
+
+
     public Entity(Coordinate startCoordinate, int width, int height){
         this.width = width;
         this.height = height;
@@ -41,7 +43,7 @@ public abstract class Entity {
     }
 
     //private double x,y;
-    public double healthPoints;
+    //public double healthPoints;
 
     public void setVelX(float velX) {
         this.velX = velX;
@@ -85,12 +87,7 @@ public abstract class Entity {
         return (int)height;
     }
 
-    public void setHealthPoints(double hp){
-        this.healthPoints=hp;
-    }
-    public double getHealthPoints() {
-        return healthPoints;
-    }
+
 
     public void setDirection(CardinalDirection d){
         this.dir = d;
@@ -105,6 +102,4 @@ public abstract class Entity {
     public LivingStates getState() {
         return state;
     }
-
-
 }

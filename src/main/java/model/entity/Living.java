@@ -19,6 +19,9 @@ public abstract class Living extends Entity implements Attackable{
     protected double movementSpeed;
     private double maximumHealthPoints;
     private ArrayList<Coordinate> obstructionCoordinates = new ArrayList<>();
+    private ArrayList<Coordinate> keysCoordinates = new ArrayList<>();
+    protected double healthPoints;
+
 
     public Living(Coordinate startCoordinate, int width, int height, Movement movement, AttackModel attackModel) {
         super(startCoordinate, width, height);
@@ -68,6 +71,7 @@ public abstract class Living extends Entity implements Attackable{
         }
     }
 
+
     public void setMovementSpeed(double speed){
         this.movementSpeed=speed;
     }
@@ -87,6 +91,12 @@ public abstract class Living extends Entity implements Attackable{
         //System.out.println("x och y efter: " + this.x + this.y);
     }
 
+    public void setHealthPoints(double hp){
+        this.healthPoints=hp;
+    }
+    public double getHealthPoints() {
+        return healthPoints;
+    }
     public double getMaximumHealthPoints(){
         return this.maximumHealthPoints;
     }
@@ -105,6 +115,10 @@ public abstract class Living extends Entity implements Attackable{
     public void giveObstructionList(ArrayList<Coordinate> obstructionCoordinates){
         this.obstructionCoordinates = obstructionCoordinates;
     }
+
+    public void giveKeyList(ArrayList<Coordinate> keyCoordinates){
+        this.keysCoordinates = keyCoordinates;
+    }
     public AttackModel getAttack(){
         return attack;
     }
@@ -117,7 +131,6 @@ public abstract class Living extends Entity implements Attackable{
     public Rectangle getAttackRec(){
         return attack.getAttackRectangle(hitbox,dir);
     }
-
 
     public boolean isAlive(){
         return isAlive;
