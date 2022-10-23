@@ -3,6 +3,8 @@ package view;
 import controller.ActionController;
 import model.Coordinate;
 import model.GameConstants;
+import model.entity.Living;
+import model.entity.LivingStates;
 import model.level.Level;
 import model.level.room.Door;
 
@@ -10,7 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static application.GameApp.GAME_HEIGHT;
@@ -105,9 +109,25 @@ public class GamePanel extends JPanel implements IRepaint{
         if(!level.getPlayer().takenHeart()){
             drawHeart(g);
         }
+        drawHealthBars(g,level.getCurrentLiving());
         render(g);
     }
 
+    private void drawHealthBars(Graphics g, ArrayList<Living> livings){
+        double percentageOfHealth;
+        Rectangle2D rect;
+        Graphics2D g2 =(Graphics2D)g;
+        for(Living living: livings){
+            if(living.getState()!= LivingStates.DEAD) {
+                percentageOfHealth = living.getHealthPoints() / living.getMaximumHealthPoints();
+                g.setColor(Color.BLACK);
+                g.drawRect((int) living.getX(), (int) living.getY() - 5, living.getWidth(), 10);
+                g.setColor(Color.RED);
+                rect = new Rectangle2D.Double(living.getX() + 1, living.getY() - 5, living.getWidth() * percentageOfHealth, 10);
+                g2.fill(rect);
+            }
+        }
+    }
 
     /***
      * This draws the hearts in the game.

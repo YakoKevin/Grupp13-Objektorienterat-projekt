@@ -10,6 +10,7 @@ public class Skeleton extends Enemy{
     public Skeleton(Coordinate startPosition){
         super(startPosition, EntitySetup.ENEMY.getHitBoxWidth(), EntitySetup.ENEMY.getHitBoxHeight(), 500, new Movement(), new AttackModel(10,50));
         this.setHealthPoints(50);
+        this.setMaximumHealthPoints(50);
     }
 
     @Override
