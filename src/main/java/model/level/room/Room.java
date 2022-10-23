@@ -27,7 +27,7 @@ public abstract class Room{
     protected ArrayList<Door> doors = new ArrayList<>();
     protected ArrayList<Enemy> enemies = new ArrayList<>();
     protected EnemyFactory enemyFactory;
-    private final int DOOR_DISTANCE = 2; //TODO: lägg i något annat ställe?
+    private final int DOOR_DISTANCE = 2;
 
 
     public Room(ArrayList<Door> doors, EnemyFactory enemyFactory) {
@@ -59,7 +59,9 @@ public abstract class Room{
 
     public boolean isCoordinateInDoor(float x, float y){
         for(Door door : doors){
-            if (Math.abs((float)door.coordinate.getX() - x*GameScalingFactors.TILE_SCALE_FACTOR.getSize()) <= 1 && Math.abs((float)door.coordinate.getY() - y*GameScalingFactors.TILE_SCALE_FACTOR.getSize()) <= 1)
+            float scale = GameScalingFactors.TILE_SCALE_FACTOR.getSize();
+
+            if (Math.abs((float)door.coordinate.getX()*scale - x) <= scale && Math.abs((float)door.coordinate.getY()*scale - y) <= scale)
                 return true;
         }
         return false;
