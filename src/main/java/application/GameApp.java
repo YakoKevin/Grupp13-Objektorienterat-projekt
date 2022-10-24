@@ -109,9 +109,9 @@ public class GameApp implements RoomChangeObserver, PlayerDeathObserver {
             JOptionPane.showMessageDialog(null, "Game has finished");
             // No  - 1
             // Yes - 0
-            stopGame();
             if(result == 1) {
                 gameView.jFrame.dispatchEvent(new WindowEvent(gameView.jFrame, WindowEvent.WINDOW_CLOSING));
+                System.exit(0);
             }else {
             }
         }
