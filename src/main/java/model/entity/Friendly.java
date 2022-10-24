@@ -9,6 +9,5 @@ import java.util.ArrayList;
  * @see Hostile
  */
 public interface Friendly extends Attackable {
-
     void addHostilesList(ArrayList<Hostile> hostile);
 }

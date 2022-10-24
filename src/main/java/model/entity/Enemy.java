@@ -19,12 +19,23 @@ import java.util.Random;
 public abstract class Enemy extends Living implements Hostile {
     private Brain brain;
 
+    /**
+     * Setting up enemy
+     * @param startPosition
+     * @param width
+     * @param height
+     * @param sightRange
+     * @param movement
+     * @param attack
+     */
     public Enemy(Coordinate startPosition, int width, int height, float sightRange, Movement movement, AttackModel attack) {
         super(startPosition, width, height, movement, attack);
         this.brain = new Brain(sightRange);
     }
 
-
+    /**
+     * Extra tick functionality. Checking if close to player every tick and acting accordingly.
+     */
     public void tickExtra() {
         if(isAlive) {
             brain.think();
@@ -48,7 +59,9 @@ public abstract class Enemy extends Living implements Hostile {
         brain.giveFriendlyCoordinates(x, y);
     }
 
-
+    /**
+     * Class for computing when and where to move and attack.
+     */
     private class Brain {
         private Friendly friendly;
         private float friendlyLastSeenX = Float.MIN_VALUE;
@@ -73,6 +86,9 @@ public abstract class Enemy extends Living implements Hostile {
             readyToAttack = attack.coolDown();
         }
 
+        /**
+         * If player is not nearby, enemy is moving randomly.
+         */
         private void moveRandomly(){
             LocalTime now = LocalTime.now();
             if(!(now.isAfter(lastRenderTime) && now.minusSeconds(1).isBefore(lastRenderTime))) {
@@ -103,6 +119,9 @@ public abstract class Enemy extends Living implements Hostile {
             }
         }
 
+        /**
+         * Moving towards friendly if in range of friendly.
+         */
         private void moveTowardsFriendly(){
             LocalTime now = LocalTime.now();
             if(!(now.isAfter(lastRenderTime) && now.minusSeconds(1).isBefore(lastRenderTime))) {
@@ -136,14 +155,21 @@ public abstract class Enemy extends Living implements Hostile {
             }
         }
 
+        /**
+         * Attacking friendly if close enough.
+         */
         private void attackFriendly(){
-            //TODO: make enemy rotate towards friendly
             Rectangle attackRectangle = attack.getAttackRectangle(hitbox, dir);
             setDirectionTowardFriendly(friendlyLastSeenX,friendlyLastSeenY);
             friendly.getHit(attackRectangle, attack.getAttackDamage());
             attack.coolDownReset();
         }
 
+        /**
+         * Turning enemy direction towards friendly.
+         * @param friendlyX
+         * @param friendlyY
+         */
         public void setDirectionTowardFriendly(float friendlyX,float friendlyY){
             if(finePositionX>friendlyX){
                 dir = CardinalDirection.WEST;
@@ -152,15 +178,30 @@ public abstract class Enemy extends Living implements Hostile {
                 dir = CardinalDirection.EAST;
             }
         }
+
+        /**
+         * Giving enemy the friendly's coordinates.
+         * @param x
+         * @param y
+         */
         public void giveFriendlyCoordinates(float x, float y){
             this.friendlyLastSeenX = x;
             this.friendlyLastSeenY = y;
         }
 
+        /**
+         * Getting the friendly from level.
+         * @param friendly
+         */
         public void addFriendly(Friendly friendly) {
             this.friendly = friendly;
         }
 
+        /**
+         * Computing if close enough to friendly
+         * @param range
+         * @return
+         */
         private boolean isCloseToFriendly(float range){
             return (Math.abs(friendlyLastSeenX - finePositionX) < range && Math.abs(friendlyLastSeenY - finePositionY) <  range);
         }
