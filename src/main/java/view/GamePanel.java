@@ -113,6 +113,12 @@ public class GamePanel extends JPanel implements IRepaint{
         render(g);
     }
 
+    /***
+     * This draws the health bars of the living objects, that are alive.
+     * @param g
+     * @param livings
+     */
+
     private void drawHealthBars(Graphics g, ArrayList<Living> livings){
         double percentageOfHealth;
         Rectangle2D rect;
@@ -121,9 +127,9 @@ public class GamePanel extends JPanel implements IRepaint{
             if(living.getState()!= LivingStates.DEAD) {
                 percentageOfHealth = living.getHealthPoints() / living.getMaximumHealthPoints();
                 g.setColor(Color.BLACK);
-                g.drawRect((int) living.getX(), (int) living.getY() - 5, living.getWidth(), 10);
+                g.drawRect((int) living.getX(), (int) living.getY() - 5, living.getWidth(), 5);
                 g.setColor(Color.RED);
-                rect = new Rectangle2D.Double(living.getX() + 1, living.getY() - 5, living.getWidth() * percentageOfHealth, 10);
+                rect = new Rectangle2D.Double(living.getX() + 1, living.getY() - 5, living.getWidth() * percentageOfHealth, 5);
                 g2.fill(rect);
             }
         }
