@@ -83,11 +83,8 @@ public class GamePanel extends JPanel implements IRepaint{
      * Sets the panel size of the game. Does not include the border.
      */
     private void setPanelSize() {
-        Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT);
-        //setMinimumSize(size);
+        Dimension size = new Dimension(GameConstants.GameSizes.WIDTH.getSize(), GameConstants.GameSizes.HEIGHT.getSize());
         setPreferredSize(size);
-        //setMaximumSize(size);
-        System.out.println("Size : " + GAME_WIDTH + " : " + GAME_HEIGHT);
     }
 
 
