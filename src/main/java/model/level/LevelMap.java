@@ -7,7 +7,6 @@ import model.Coordinate;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-//TODO: Fix so that we have an coordinate object instead of int[]?
 
 /**
  * An object for containing the map nodes and edges and the coordinates for a start and a finish node.

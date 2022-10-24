@@ -86,7 +86,7 @@ public enum ImageServer {
      * @return Returns the animation sprite as a BufferedImage[][].
      */
     private static BufferedImage[][] loadAnimations(String path) {
-        BufferedImage[][] animations = new BufferedImage[3][10]; //TODO: add into a constant instead to avoid miss-match errors
+        BufferedImage[][] animations = new BufferedImage[3][10]; 
         for (int row = 0; row < animations.length; row++) {
             for (int column = 0; column < animations[row].length; column++) {
                 animations[row][column] = ImageServer.getSprite(path).getSubimage(row * 80, column * 120, 80, 80);

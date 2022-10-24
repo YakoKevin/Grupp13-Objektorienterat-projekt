@@ -49,7 +49,6 @@ public class LevelTest {
 
     @Test
     public void doorTest(){
-        //TODO: fix issue with duplicate doors
         int size = 4;
         LevelFactory levelFactory = new LevelFactory();
         Level level = levelFactory.simpleLevel(size, new Player(new Coordinate(1, 1),0,0));

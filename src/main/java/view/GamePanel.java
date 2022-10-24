@@ -52,7 +52,7 @@ public class GamePanel extends JPanel implements IRepaint{
         jb1.setBounds(600, 300, 80, 30);
         this.add(jb1);
 
-        jb.addActionListener(new ActionListener() { // TODO: fixa variabel namnen jb och jb1
+        jb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jb.setEnabled(false);
@@ -66,7 +66,6 @@ public class GamePanel extends JPanel implements IRepaint{
                     jb.setEnabled(true);
                     jb1.setEnabled(false);
                 } catch (Exception e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

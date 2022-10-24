@@ -7,7 +7,6 @@ import model.level.LevelMap;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-//TODO: Fix so that the rest utilizes Coordinate instead of int[]. Fix why < 4 in size is problematic.
 
 /**
  * Functional class for generating a map with pseudo random amount of nodes in it. Takes a size parameter that represents
