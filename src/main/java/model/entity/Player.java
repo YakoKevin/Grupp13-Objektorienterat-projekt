@@ -39,11 +39,18 @@ public class Player extends Living implements Friendly {
         this.setMovementSpeed(6);
     }
 
+    /**
+     * Getting animation
+     * @return
+     */
     @Override
     public ImageServer.AnimationIds getAnimationId() {
         return identification;
     }
 
+    /**
+     * Attacking hostiles, if in range
+     */
     public void attack() {
         Rectangle attackRectangle = attack.getAttackRectangle(hitbox, dir);
         for (Hostile hostile : hostiles) {
@@ -51,10 +58,17 @@ public class Player extends Living implements Friendly {
         }
     }
 
+    /**
+     * Adding hostiles to player. Getting from level
+     * @param hostile
+     */
     public void addHostilesList(ArrayList<Hostile> hostile) {
         this.hostiles = hostile;
     }
 
+    /**
+     * Player checking if it can move, if it is close to keys, coins or a heart object.
+     */
     @Override
     public void tickExtra() {
         checkLivingMovement();
@@ -66,21 +80,43 @@ public class Player extends Living implements Friendly {
 
     }
 
+    /**
+     * Getting the death image.
+     * @return
+     */
     @Override
     public ImageServer.DeathId getDeadId() {
         return deathIdentification;
     }
 
+    /**
+     * Getting the key coordinates from level.
+     * @param keyCoordinates
+     */
     public void giveKeyList(ArrayList<Coordinate> keyCoordinates) {
         this.keysCoordinates = keyCoordinates;
     }
+
+    /**
+     * Getting coin coordinates from level.
+     * @param coinCoordinates
+     */
+
     public void giveCoinList(ArrayList<Coordinate> coinCoordinates){
         this.coinCoordinates = coinCoordinates;
     }
+
+    /**
+     * Getting heart object from level, one per room
+     * @param hpCoord
+     */
     public void giveHeartObject(Coordinate hpCoord){
         this.heartCoordinate = hpCoord;
     }
 
+    /**
+     * Checking if close to key, if so, key is added to key count and removed from key list.
+     */
     protected void checkKeys() {
         for (Iterator<Coordinate> iterator = keysCoordinates.iterator(); iterator.hasNext();) {
             Coordinate coordinate = (Coordinate) iterator.next();
@@ -92,7 +128,9 @@ public class Player extends Living implements Friendly {
             }
         }
     }
-
+    /**
+     * Checking if close to coin, if so, key is added to key count and removed from coin list.
+     */
     protected void checkCoins() {
         for(Iterator<Coordinate> iterator = coinCoordinates.iterator(); iterator.hasNext();) {
             Coordinate coordinate = (Coordinate) iterator.next();
@@ -104,6 +142,10 @@ public class Player extends Living implements Friendly {
             }
         }
     }
+
+    /**
+     * Cheking if heart is close to player.
+     */
     protected void checkHeart() {
             Rectangle coinCoordinate = new Rectangle(heartCoordinate.getX() * scaling, heartCoordinate.getY() * scaling, scaling, scaling);
             if (this.hitbox.intersects(coinCoordinate)) {
@@ -114,35 +156,81 @@ public class Player extends Living implements Friendly {
             }
     }
 
+    /**
+     * Heart taken
+     * @return
+     */
     public boolean takenHeart(){
         return this.takenHeart;
     }
 
-
+    /**
+     * Getting how many keys
+     * @return
+     */
     public int getKeyCount(){
         return this.keyCount;
     }
+    /**
+     * Getting how many enemies killed
+     * @return
+     */
     public int getSlainEnemies(){
         return this.slainEnemies;
     }
+
+    /**
+     * Setting total slain enemies
+     * @param totalSlainEnemies
+     */
     public void setSlainEnemies(int totalSlainEnemies){
         this.slainEnemies = totalSlainEnemies;
     }
+
+    /**
+     * Setting slain enemies in this room
+     * @param slainEnemies
+     */
     public void setRoomSlainEnemies(int slainEnemies){
         this.roomSlainEnemies = slainEnemies;
     }
+
+    /**
+     * Get slain enemies in this room
+     * @return
+     */
     public int getRoomSlainEnemies(){
         return this.roomSlainEnemies;
     }
+
+    /**
+     * Get total score count
+     * @return
+     */
     public int getScoreCount(){
         return this.scoreCount;
     }
+
+    /**
+     * Setting score count for this room
+     * @param score
+     */
     public void setRoomScoreCount(int score){
         this.roomScore = score;
     }
-    public int getRoomScoreCount(){
+
+    /**
+     * Getting room score count
+     * @return
+     */
+    public int getRoomScoreCount() {
         return this.roomScore;
     }
+
+    /**
+     * Set total score
+     * @param totalScore
+     */
     public void setScoreCount(int totalScore){
         this.scoreCount = totalScore;
     }
