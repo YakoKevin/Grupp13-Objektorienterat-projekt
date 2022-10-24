@@ -195,10 +195,12 @@ public abstract class Level{
         }
     }
 
+    /**
+     * Stopping enemies, setting their state to "idle".
+     */
     public void stopEnemies(){
         for (Enemy enemy : currentRoom.getEnemies()) {
             enemy.setState(LivingStates.IDLE);
-//            enemy.tick();
         }
     }
 

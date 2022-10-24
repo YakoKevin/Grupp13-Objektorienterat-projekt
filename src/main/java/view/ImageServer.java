@@ -98,14 +98,29 @@ public enum ImageServer {
         return animations;
     }
 
+    /**
+     * Get image as a grid
+     * @param id is type of image
+     * @return
+     */
     public static BufferedImage[][] getImageGrid(AnimationIds id) {
         return id.imageGrid;
     }
 
+    /**
+     * Getting image as a file path
+     * @param ids is type of image
+     * @return
+     */
     public static BufferedImage getImage(Ids ids){
         return getSprite(ids.path);
     }
 
+    /**
+     * Getting death image
+     * @param ids
+     * @return
+     */
     public static BufferedImage getImage(DeathId ids){
         return ids.deathImage;
     }

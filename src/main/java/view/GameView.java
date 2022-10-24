@@ -9,12 +9,9 @@ import java.awt.event.WindowFocusListener;
  * This class handles the representation of a framed window.
  */
 public class GameView extends JFrame {
-
     public JFrame jFrame;
-
     public GameView(GamePanel gamePanel){
         jFrame = new JFrame();
-
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(gamePanel);
         jFrame.setLocationRelativeTo(null);

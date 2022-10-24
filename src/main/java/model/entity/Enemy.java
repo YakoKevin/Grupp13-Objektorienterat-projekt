@@ -44,7 +44,7 @@ public abstract class Enemy extends Living implements Hostile {
 
     /**
      * Adding friendly to enemy
-     * @param friendly
+     * @param friendly is the player of the game
      */
     public void addFriendly(Friendly friendly) {
         brain.addFriendly(friendly);
