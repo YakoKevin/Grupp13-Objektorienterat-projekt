@@ -2,7 +2,6 @@ package controller;
 
 import model.entity.Player;
 import model.entity.AttackModel;
-import model.entity.Movement;
 import model.CardinalDirection;
 import model.Coordinate;
 import model.entity.LivingStates;
@@ -109,11 +108,9 @@ public class ActionController implements KeyListener {
         if(up||right||down||left){
             if(up&&!down){
                 player.setVelY(-(float)player.getMovementSpeed());
-                //dir = CardinalDirection.NORTH;
             }
             if(!up&&down){
                 player.setVelY((float)player.getMovementSpeed());
-                //dir = CardinalDirection.SOUTH;
             }
             if(!right&&left){
                 player.setVelX(-(float)player.getMovementSpeed());

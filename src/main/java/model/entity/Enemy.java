@@ -25,11 +25,10 @@ public abstract class Enemy extends Living implements Hostile {
      * @param width
      * @param height
      * @param sightRange
-     * @param movement
      * @param attack
      */
-    public Enemy(Coordinate startPosition, int width, int height, float sightRange, Movement movement, AttackModel attack) {
-        super(startPosition, width, height, movement, attack);
+    public Enemy(Coordinate startPosition, int width, int height, float sightRange, AttackModel attack) {
+        super(startPosition, width, height, attack);
         this.brain = new Brain(sightRange);
     }
 
