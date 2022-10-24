@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public abstract class Living extends Entity implements Attackable{
     protected boolean isAlive = true;
     protected LivingStates state = LivingStates.IDLE;
-    protected Movement movement;
     protected AttackModel attack;
     protected double movementSpeed;
     private double maximumHealthPoints;
@@ -26,12 +25,10 @@ public abstract class Living extends Entity implements Attackable{
      * @param startCoordinate
      * @param width
      * @param height
-     * @param movement
      * @param attackModel
      */
-    public Living(Coordinate startCoordinate, int width, int height, Movement movement, AttackModel attackModel) {
+    public Living(Coordinate startCoordinate, int width, int height, AttackModel attackModel) {
         super(startCoordinate, width, height);
-        this.movement = movement;
         this.attack = attackModel;
         this.healthPoints = 100;
         this.setMaximumHealthPoints(100);
@@ -84,7 +81,7 @@ public abstract class Living extends Entity implements Attackable{
             this.setHealthPoints(this.healthPoints-atkP);
         }
         if(this.healthPoints<=0){
-            this.setAlive(false); //ska kanske ändras till ett state som sagt
+            this.setAlive(false);
             this.state = LivingStates.DEAD;
         }
     }
@@ -98,23 +95,13 @@ public abstract class Living extends Entity implements Attackable{
     }
 
     /**
-     * Getting movement speed of linvg
+     * Getting movement speed of living.
      * @return
      */
     public double getMovementSpeed() {
         return movementSpeed;
     }
 
-    //TODO: fixa till vad som behövs. Ska ActionController kalla denna tro?
-    public void updateMovement(){
-        //System.out.println("x och y" + this.x + this.y);
-        //ystem.out.println("Riktningen: " + getDirection());
-
-        float newPosition[] = movement.updatePosition(finePositionX, finePositionY, movementSpeed,this.getDirection());
-        finePositionX = newPosition[0];
-        finePositionY = newPosition[1];
-        //System.out.println("x och y efter: " + this.x + this.y);
-    }
 
     /**
      * Setting health points
@@ -146,14 +133,6 @@ public abstract class Living extends Entity implements Attackable{
      */
     public void setMaximumHealthPoints(double maximumHealthPoints) {
         this.maximumHealthPoints = maximumHealthPoints;
-    }
-
-    /**
-     * Movement object
-     * @return
-     */
-    public Movement getMovement(){
-        return movement;
     }
 
     /**

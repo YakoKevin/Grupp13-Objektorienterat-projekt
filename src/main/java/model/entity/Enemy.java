@@ -25,11 +25,10 @@ public abstract class Enemy extends Living implements Hostile {
      * @param width
      * @param height
      * @param sightRange
-     * @param movement
      * @param attack
      */
-    public Enemy(Coordinate startPosition, int width, int height, float sightRange, Movement movement, AttackModel attack) {
-        super(startPosition, width, height, movement, attack);
+    public Enemy(Coordinate startPosition, int width, int height, float sightRange, AttackModel attack) {
+        super(startPosition, width, height, attack);
         this.brain = new Brain(sightRange);
     }
 
@@ -104,18 +103,7 @@ public abstract class Enemy extends Living implements Hostile {
                 }else if(random == 3) {
                     finePositionY -= enemyMoveDistance;
                 }
-                setDirection(CardinalDirection.values()[new Random().nextInt(CardinalDirection.values().length)]);
-                setState(LivingStates.RUNNING);
-                if(dir == CardinalDirection.EAST) {
-                    setVelX(-1);
-                }else if(dir == CardinalDirection.NORTH) {
-                    setVelY(1);
-                }else if(dir == CardinalDirection.SOUTH) {
-                    setVelY(-1);
-                }else if(dir == CardinalDirection.WEST) {
-                    setVelX(-1);
-                }
-                attackFriendly();
+                setRandomDirectionCoordinates();
             }
         }
 
@@ -140,19 +128,23 @@ public abstract class Enemy extends Living implements Hostile {
                         finePositionY += enemyMoveDistance;
                     }
                 }
-                setDirection(CardinalDirection.values()[new Random().nextInt(CardinalDirection.values().length)]);
-                setState(LivingStates.RUNNING);
-                if(dir == CardinalDirection.EAST) {
-                    setVelX(-1);
-                }else if(dir == CardinalDirection.NORTH) {
-                    setVelY(1);
-                }else if(dir == CardinalDirection.SOUTH) {
-                    setVelY(-1);
-                }else if(dir == CardinalDirection.WEST) {
-                    setVelX(-1);
-                }
-                attackFriendly();
+                setRandomDirectionCoordinates();
             }
+        }
+
+        private void setRandomDirectionCoordinates() {
+            setDirection(CardinalDirection.values()[new Random().nextInt(CardinalDirection.values().length)]);
+            setState(LivingStates.RUNNING);
+            if(dir == CardinalDirection.EAST) {
+                setVelX(-1);
+            }else if(dir == CardinalDirection.NORTH) {
+                setVelY(1);
+            }else if(dir == CardinalDirection.SOUTH) {
+                setVelY(-1);
+            }else if(dir == CardinalDirection.WEST) {
+                setVelX(-1);
+            }
+            attackFriendly();
         }
 
         /**

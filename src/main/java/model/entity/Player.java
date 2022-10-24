@@ -34,7 +34,7 @@ public class Player extends Living implements Friendly {
     private boolean takenHeart = false;
 
     public Player(Coordinate startCoordinate, int width, int height) {
-        super(startCoordinate, width, height, new Movement(), new AttackModel(25, 100));
+        super(startCoordinate, width, height, new AttackModel(25, 100));
         this.setHealthPoints(100);
         this.setMovementSpeed(6);
     }
