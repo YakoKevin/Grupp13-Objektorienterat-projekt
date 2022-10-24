@@ -31,10 +31,19 @@ public abstract class Enemy extends Living implements Hostile {
         }
     }
 
+    /**
+     * Adding friendly to enemy
+     * @param friendly
+     */
     public void addFriendly(Friendly friendly) {
         brain.addFriendly(friendly);
     }
 
+    /**
+     * Giving enemy the friendly's coordinates, x and y.
+     * @param x
+     * @param y
+     */
     public void giveFriendlyCoordinates(float x, float y){
         brain.giveFriendlyCoordinates(x, y);
     }

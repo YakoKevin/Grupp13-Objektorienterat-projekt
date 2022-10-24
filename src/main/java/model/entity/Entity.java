@@ -42,6 +42,9 @@ public abstract class Entity {
         tickExtra();
     }
 
+    /**
+     * Subclasses to entity implementing their own tick method.
+     */
     protected abstract void tickExtra();
 
     protected void updateHitbox(){
@@ -49,49 +52,99 @@ public abstract class Entity {
         hitbox.y = (int)finePositionY;
     }
 
+    /**
+     * Setting velocity to entity in x-direction
+     * @param velX
+     */
     public void setVelX(float velX) {
         this.velX = velX;
     }
 
+    /**
+     * Setting velocity to entity in y-direction
+     * @param velY
+     */
     public void setVelY(float velY) {
         this.velY = velY;
     }
 
+    /**
+     * Getting the x-position.
+     * @return
+     */
     public float getX(){
         return finePositionX;
     }
+
+    /**
+     * Getting the y-position.
+     * @return
+     */
     public float getY(){
         return finePositionY;
     }
 
+    /**
+     * Getting the position as a coordinate, which includes x and y.
+     * @return
+     */
     public Coordinate getPosition() {
         return new Coordinate((int)finePositionX/ GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize(),
                 (int)finePositionY/GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize());
     }
 
+    /**
+     * Setting position to x
+     * @param x
+     */
     public void setX(float x) {
         this.finePositionX = x;
     }
 
+    /**
+     * Setting position to y
+     * @param y
+     */
     public void setY(float y) {
         this.finePositionY = y;
     }
 
+    /**
+     * Setting x and y to a coordinate.
+     * @param coordinate
+     */
     public void setCoordinate(Coordinate coordinate){
         this.finePositionX = coordinate.getX()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
         this.finePositionY = coordinate.getY()*GameConstants.GameScalingFactors.TILE_SCALE_FACTOR.getSize();
     }
 
+    /**
+     * Get width of entity
+     * @return
+     */
     public int getWidth() { return (int)width; }
 
+    /**
+     * Get height of entity
+     * @return
+     */
     public int getHeight()
     {
         return (int)height;
     }
 
+    /**
+     * Setting the cardinal direction of entity.
+     * @param d
+     */
     public void setDirection(CardinalDirection d){
         this.dir = d;
     }
+
+    /**
+     * Setting the cardinal direction of entity.
+     * @return
+     */
     public CardinalDirection getDirection(){
         return this.dir;
     }
