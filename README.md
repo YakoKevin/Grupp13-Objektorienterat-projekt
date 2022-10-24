@@ -11,4 +11,4 @@ Space makes it so that the player attacks.
 
 SDD: https://docs.google.com/document/d/1lylmBQz4NrV_hetRiw-t7TP7RN8s3-wWv4ZLNZSZoTo/edit?usp=sharing
 
-RAD: https://1drv.ms/w/s!Ank4WFX38R5AhBmW_xEQV5ZJmogy
+RAD: https://chalmers-my.sharepoint.com/:w:/g/personal/hanraa_chalmers_se/ESY8t1zYR0BCiiOO4U9iv6kBvrRlzsevs8j3ui4DDpKg8w?e=AUvMfa
