@@ -57,7 +57,7 @@ public class Player extends Living implements Friendly {
 
     @Override
     public void tickExtra() {
-        checkEntityMovement();
+        checkLivingMovement();
         checkKeys();
         checkCoins();
         if(!takenHeart){
