@@ -164,6 +164,9 @@ public class Player extends Living implements Friendly {
         return this.takenHeart;
     }
 
+    public void setHeartTaken(boolean takenHeart){
+        this.takenHeart = takenHeart;
+    }
     /**
      * Getting how many keys
      * @return

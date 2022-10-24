@@ -167,6 +167,7 @@ public abstract class Level{
         player.setRoomScoreCount(0);
         player.setSlainEnemies(player.getRoomSlainEnemies()+player.getSlainEnemies());
         player.setRoomSlainEnemies(0);
+        player.setHeartTaken(false);
         return room;
     }
 
