@@ -1,13 +1,8 @@
 package controller;
 
 import model.entity.Player;
-import model.entity.AttackModel;
-import model.entity.Movement;
 import model.CardinalDirection;
-import model.Coordinate;
 import model.entity.LivingStates;
-import view.GamePanel;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -17,7 +12,7 @@ import java.awt.event.KeyListener;
 public class ActionController implements KeyListener {
     private CardinalDirection dir = CardinalDirection.EAST;
     private Player player;
-    private boolean up,down,left,right,space=false;
+    private boolean up,down,left,right=false;
 
 
     public ActionController(Player player){

@@ -59,18 +59,4 @@ public enum GameConstants {
             return size;
         }
     }
-
-    public enum RefreshRate {
-        MAX_FPS(120),
-        MAX_UPS(200);
-        int refreshRate;
-
-        RefreshRate(int refreshRate){
-            this.refreshRate = refreshRate;
-        }
-
-        public int getRate(){
-            return this.refreshRate;
-        }
-    }
 }

@@ -17,7 +17,6 @@ public enum ImageServer {
      * This enum has image path values that is not an animation sprite.
      */
     public enum Ids {
-        LEVEL("bg_sprite2.png"),
         KEY("key.png"),
         COIN("coin_coin_blue.png"),
         DOOR("door_sprite.png"),
@@ -25,8 +24,6 @@ public enum ImageServer {
         OBSTACLE("chest.png"),
         FLOOR("grass_floor.png"),
         HEART("heart.png"),
-        BACKGROUND("image_background.png"),
-        MAINMENU("mainmenu.png"),
         ICON_HP("Heart_heart_full.png"),
         ICON_KEY("key.png"),
         ICON_COIN("coin_coin_blue.png"),

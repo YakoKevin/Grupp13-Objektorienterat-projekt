@@ -15,10 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
-
-import static application.GameApp.GAME_HEIGHT;
-import static application.GameApp.GAME_WIDTH;
 
 /***
  * This class takes care of all the JPanel related code.

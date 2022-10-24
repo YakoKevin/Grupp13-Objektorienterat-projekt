@@ -7,7 +7,6 @@ public enum LivingStates {
         IDLE(10),
         RUNNING(10),
         ATTACK(10),
-        HIT(1),
         DEAD(1);
         int animationSpriteAmount;
 
