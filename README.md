@@ -2,11 +2,12 @@
 
 Dungeon Crawler
 
-The keys
+The key:
 A moves the player left
 W moves the player up
 D moves the player right
 S moves the player down
+Space makes it so that the player attacks. 
 
 SDD: https://docs.google.com/document/d/1lylmBQz4NrV_hetRiw-t7TP7RN8s3-wWv4ZLNZSZoTo/edit?usp=sharing
 
