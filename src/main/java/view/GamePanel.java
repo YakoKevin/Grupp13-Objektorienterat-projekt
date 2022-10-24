@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements IRepaint{
     public FPSUpdater fpsUpdater;
     private final Level level;
     public static BufferedImage wall = ImageServer.getImage(ImageServer.Ids.WALL);
+    public static BufferedImage obstacle = ImageServer.getImage(ImageServer.Ids.OBSTACLE);
     public static BufferedImage floor = ImageServer.getImage(ImageServer.Ids.FLOOR);
     public static BufferedImage key = ImageServer.getImage(ImageServer.Ids.KEY);
     public static BufferedImage coin = ImageServer.getImage(ImageServer.Ids.COIN);
@@ -189,7 +190,7 @@ public class GamePanel extends JPanel implements IRepaint{
 
         if(!level.getCurrentRoomObstacles().isEmpty()) {
             for (Coordinate obsCoord : level.getCurrentRoomObstacles()) {
-                g.drawImage(wall,
+                g.drawImage(obstacle,
                         obsCoord.getX() * scaling, // x och y är kanske feltransponerade
                         obsCoord.getY() * scaling,
                         scaling, scaling, null);
