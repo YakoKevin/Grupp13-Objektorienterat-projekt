@@ -27,42 +27,6 @@ public class AttackModel { //
     }
 
     /**
-     * This computes where to place the coordinate of the attack-rectangle.
-     * @param atkOffSetX
-     * @param atkOffSetY
-     * @param dir
-     * @param width
-     * @param height
-     * @return
-     */
-    public Coordinate getAttackCoordinate(float atkOffSetX, float atkOffSetY, CardinalDirection dir, int width, int height){ // man borde veta varifrån och åt vilken riktning man attackerar så att Enemy kan avgöra om den blir träffad
-
-        //TODO: ska lägga till för fyra andra riktningar
-        if(dir == CardinalDirection.WEST) { //left
-            atkOffSetX -= height;
-        }
-        else if(dir==CardinalDirection.NORTH){
-            atkOffSetX-=width;
-            atkOffSetY-=height;
-        }
-        else if(dir== CardinalDirection.SOUTH){
-            atkOffSetX-=width;
-            atkOffSetY+=height;
-        }
-        else if(dir==CardinalDirection.EAST){
-            atkOffSetX+=width;
-        }
-
-        if(atkOffSetX<0){
-            atkOffSetX=0;
-        }
-        if(atkOffSetY<0){
-            atkOffSetY=0;
-        }
-        return new Coordinate(0,0);
-    }
-
-    /**
      * Getting the attack rectangle.
      * @param hitbox
      * @param direction
